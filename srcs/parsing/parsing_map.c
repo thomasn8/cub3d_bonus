@@ -88,7 +88,8 @@ int	get_map(t_parse *parse, const char *map)
 	int		fd;
 	int		i;
 	char	*line;
-	int		l;
+	int		len;
+	int		diff;
 
 	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
@@ -102,22 +103,28 @@ int	get_map(t_parse *parse, const char *map)
 		{
 			check_map_close(parse, line);
 			line = replace_space_tab(line);
-			parse->map[i] = malloc(sizeof(char *) * (parse->m_width + 1));
+			parse->map[i] = malloc(sizeof(char *) * (parse->m_width + 2));
 			parse->map[i] = line;
-			l = ft_strlen(parse->map[i]) - 1;
-			if (l != parse->m_width)
+			len = ft_strlen(line) - 1;
+			if (len != parse->m_width)
 			{
-				ft_memset((void *)&parse->map[i][l], '1', parse->m_width - l);
+				diff = parse->m_width - len;
+				ft_memset((void *)&parse->map[i][len], '1', diff);
 				parse->map[i][parse->m_width] = '\n';
 				parse->map[i][parse->m_width + 1] = '\0';
 			}
+			printf("parse->map[i] = %s", parse->map[i]); // valeure correctes
 			i++;
 		}
 		line = get_next_line(fd);
 	}
-	i = -1;
-    while(parse->map[++i])
-        printf("%s", parse->map[i]);
+	/*problème avec les valeures récupérer dans la struct*/
+	i = 0;
+    while(parse->map[i] != NULL)
+	{
+	printf("parse->map[i]test = %s", parse->map[i]);
+		i++;
+	}
 	free(line);
 	return (0);
 }
