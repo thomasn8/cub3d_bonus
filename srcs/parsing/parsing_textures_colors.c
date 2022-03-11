@@ -1,0 +1,100 @@
+#include "../../includes/cub3d.h"
+
+void	check_texture(t_parse *parse, char *textures)
+{
+	int		i;
+
+	i = 0;
+	if (textures[i] != '.' && textures[i + 1] != '/')
+		ft_error(parse, "Is not a pass", NULL);
+}
+
+void	check_color(t_parse *parse, char *color)
+{
+	int		i;
+	int		sum;
+
+	sum = 0;
+	i = 0;
+	while (color[i] != '\0')
+	{
+		while (color[i] >= '0' && color[i] <= '9')
+		{
+			sum = (sum * 10) + (color[i] - 48);
+			if (sum > 255)
+				ft_error(parse, "Max R,G,B (255)", NULL);
+			i++;
+		}
+		sum = 0;
+		if (ft_isprint(color[i]))
+			i++;
+	}
+}
+
+char	*save_args(char *line)
+{
+	int		i;
+	int		len;
+	int		start;
+	char	*temp;
+
+	i = 2;
+	len = 0;
+	start = 2;
+	while (!ft_notblank(line[i]))
+	{
+		i++;
+		start++;
+	}
+	while (line[i] != '\n')
+	{
+		i++;
+		len++;
+	}
+	temp = ft_substr(line, start, len);
+	return (temp);
+}
+
+int	parse_textures(char *line, t_parse *parse)
+{
+	if (line[0] == 'N' && (line[1] == 'O' || line[1] == ' ') \
+		&& parse->no == NULL)
+		return (1);
+	else if (line[0] == 'S' && (line[1] == 'O' || line[1] == ' ') \
+			&& parse->so == NULL)
+		return (2);
+	else if (line[0] == 'W' && (line[1] == 'E' || line[1] == ' ') \
+			&& parse->we == NULL)
+		return (3);
+	else if (line[0] == 'E' && (line[1] == 'A' || line[1] == ' ') \
+			&& parse->ea == NULL)
+		return (4);
+	return (0);
+}
+
+// parsing des textures (images que l'on va afficher sur les murs)
+int	parse_textures_colors(char *line, t_parse *parse)
+{
+	int	i;
+
+	i = 0;
+	if (parse_textures(line, parse) == 1)
+		parse->no = save_args(line);
+	else if (parse_textures(line, parse) == 2)
+		parse->so = save_args(line);
+	else if (parse_textures(line, parse) == 3)
+		parse->we = save_args(line);
+	else if (parse_textures(line, parse) == 4)
+		parse->ea = save_args(line);
+	else if (line[i] == 'F' && parse->c_f == NULL)
+	{
+		parse->c_f = save_args(line);
+		check_color(parse, parse->c_f);
+	}
+	else if (line[i] == 'C' && parse->c_s == NULL)
+	{
+		parse->c_s = save_args(line);
+		check_color(parse, parse->c_s);
+	}
+	return (0);
+}
