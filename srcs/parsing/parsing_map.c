@@ -78,7 +78,7 @@ int	ft_map(char *line, t_parse *parse)
 			ssizeline = i;
 	}
 	parse->m_height = nblines;
-	parse->m_width = ssizeline;
+	parse->m_width = (ssizeline - 1);
 	return (0);
 }
 
