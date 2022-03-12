@@ -78,7 +78,7 @@ int	ft_map(char *line, t_parse *parse)
 			ssizeline = i;
 	}
 	parse->m_height = nblines;
-	parse->m_width = (ssizeline - 1);
+	parse->m_width = ssizeline - 1;
 	return (0);
 }
 
@@ -91,39 +91,32 @@ int	get_map(t_parse *parse, const char *map)
 	int		l;
 
 	fd = open(map, O_RDONLY);
+	line = get_next_line(fd);
 	parse->map = malloc(sizeof(char *) * (parse->m_height + 1));
 	if (!parse->map)
 		return (0);
 	parse->map[parse->m_height] = NULL;
-	line = get_next_line(fd);
 	i = 0;
-	while (line != NULL && ft_is_map(line) != 1)
+	while (line != NULL)
 	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	while (line != NULL && ft_is_map(line) == 1)
-	{
-		check_map_close(parse, line);
-		parse->map[i] = malloc((parse->m_width + 1) * sizeof(char));
-		l = ft_strlen(line);
-		ft_strlcpy(parse->map[i], line, l + 1);
-		free(line);
-		replace_space_tab(parse->map[i]);
-		if (l != parse->m_width)
+		if (ft_is_map(line) == 1)
 		{
-			printf("line before: %s", parse->map[i]);
-			printf("line n°%d, Memset à partir de index %d d'une longueur de %d, /n en index %d, /0 en index %d\n", i + 1, l - 1, parse->m_width - l, parse->m_width - 1, parse->m_width);
-			ft_memset((void *)&parse->map[i][l - 1], '1', parse->m_width - l);
-			parse->map[i][parse->m_width - 1] = '\n';
-			parse->map[i][parse->m_width] = '\0';
-			printf(" line after: %s", parse->map[i]);
-			printf("\n\n");
+			check_map_close(parse, line);
+			parse->map[i] = malloc((parse->m_width + 2) * sizeof(char));
+			l = ft_strlen(line);
+			ft_strlcpy(parse->map[i], line, l + 1);
+			replace_space_tab(parse->map[i]);
+			if (l != parse->m_width + 1)
+			{
+				ft_memset((void *)&parse->map[i][l - 1], '1', parse->m_width + 1 - l);
+				parse->map[i][parse->m_width] = '\n';
+				parse->map[i][parse->m_width + 1] = '\0';
+			}
+			i++;
 		}
-		i++;
+		free(line);
 		line = get_next_line(fd);
 	}
-	printf("\n\n");
 	print_map(parse->map);
 	return (0);
 }
