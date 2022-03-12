@@ -39,13 +39,12 @@ void	save_map(const char *map, t_parse *parse)
 {
 	int	fd;
 
-	initialization(parse);
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
 	{
 		write_errors("The file is not open\n");
 		exit (0);
 	}
-	else
-		parsing(fd, map, parse);
+	initialization(parse);
+	parsing(fd, map, parse);
 }
