@@ -39,6 +39,7 @@ void	save_map(const char *map, t_parse *parse)
 {
 	int	fd;
 
+	initialization(parse);
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
 	{
