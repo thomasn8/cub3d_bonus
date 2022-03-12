@@ -10,13 +10,14 @@ int	main(int ac, char **av)
 	initialization(parse);
 	if (ac != 2)
 		write_errors("Missing arguments [.cub]");
-	if (check_map_name(av[1]) != 1)
+	if (!check_map_name(av[1]))
 		ft_error(parse, "Nom de la map invalid\n ext == [.cub]\n", NULL);
 	save_map(av[1], parse);
 	params_init(&game);
 	menu_init(&game);
 	world_init(&game);
 	minimap_init(&game, parse);
+	printf("TEST\n");
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_press, &game);
 	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 0, key_release, &game);
 	mlx_hook(game.win, X_EVENT_EXIT, 0, quit_prog, &game);

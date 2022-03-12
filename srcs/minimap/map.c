@@ -118,8 +118,9 @@ void	minimap_init(t_game *game, t_parse *parse)
 	// dimensions
 	game->m.w = parse->m_width * M_SIZE;
 	game->m.h = parse->m_height * M_SIZE;
-	game->m.cols = game->m.w;
-	game->m.rows = game->m.h;
+	game->m.cols = parse->m_width;
+	game->m.rows =  parse->m_height;
+	printf("Dimensions:\n%d * %d | %d rows * %d cols\n", game->m.w, game->m.h, game->m.rows, game->m.cols);
 	// player position
 	game->m.prev_x = START_X;
 	game->m.prev_y = START_Y;
