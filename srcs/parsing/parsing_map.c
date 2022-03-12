@@ -93,8 +93,6 @@ int	get_map(t_parse *parse, const char *map)
 	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
 	parse->map = malloc(sizeof(char *) * (parse->m_height + 1));
-	if (!parse->map)
-		return (0);
 	parse->map[parse->m_height] = NULL;
 	i = 0;
 	while (line != NULL)
@@ -117,6 +115,5 @@ int	get_map(t_parse *parse, const char *map)
 		free(line);
 		line = get_next_line(fd);
 	}
-	print_map(parse->map);
 	return (0);
 }

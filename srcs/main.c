@@ -17,7 +17,6 @@ int	main(int ac, char **av)
 	menu_init(&game);
 	world_init(&game);
 	minimap_init(&game, parse);
-	printf("TEST\n");
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_press, &game);
 	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 0, key_release, &game);
 	mlx_hook(game.win, X_EVENT_EXIT, 0, quit_prog, &game);
