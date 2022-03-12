@@ -119,6 +119,8 @@ typedef struct s_game
 }	t_game;
 
 // parsing
+int				check_map_name(char *map);
+void			save_map(const char *map, t_parse *parse);
 int				parsing(int fd, const char *map, t_parse *parse);
 void			initialization(t_parse *parse);
 int				check_map(void);

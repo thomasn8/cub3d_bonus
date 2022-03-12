@@ -20,3 +20,31 @@ int	ft_error(t_parse *parse, char *str, char *line)
 		free(line);
 	exit(0);
 }
+
+int	check_map_name(char *map)
+{
+	char	*ext;
+	char	*correct_ext;
+
+	correct_ext = ".cub";
+	ext = ft_strrchr(map, '.');
+	if (ext == NULL)
+		return (0);
+	if ((ft_strncmp(ext, correct_ext, ft_strlen(ext)) == 0))
+		return (1);
+	return (0);
+}
+
+void	save_map(const char *map, t_parse *parse)
+{
+	int	fd;
+
+	fd = open(map, O_RDONLY);
+	if (fd == -1)
+	{
+		write_errors("The file is not open\n");
+		exit (0);
+	}
+	else
+		parsing(fd, map, parse);
+}
