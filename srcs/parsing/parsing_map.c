@@ -115,5 +115,6 @@ int	get_map(t_parse *parse, const char *map)
 		free(line);
 		line = get_next_line(fd);
 	}
+	print_map(parse->map);
 	return (0);
 }
