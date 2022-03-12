@@ -88,43 +88,42 @@ int	get_map(t_parse *parse, const char *map)
 	int		fd;
 	int		i;
 	char	*line;
-	int		len;
-	int		diff;
+	int		l;
 
 	fd = open(map, O_RDONLY);
-	line = get_next_line(fd);
-	parse->map = malloc(sizeof(char *) * parse->m_height);
+	parse->map = malloc(sizeof(char *) * (parse->m_height + 1));
 	if (!parse->map)
 		return (0);
+	parse->map[parse->m_height] = NULL;
+	line = get_next_line(fd);
 	i = 0;
-	while (line != NULL)
+	while (line != NULL && ft_is_map(line) != 1)
 	{
-		if (ft_is_map(line) == 1)
-		{
-			check_map_close(parse, line);
-			line = replace_space_tab(line);
-			parse->map[i] = malloc(sizeof(char *) * (parse->m_width + 2));
-			parse->map[i] = line;
-			len = ft_strlen(line) - 1;
-			if (len != parse->m_width)
-			{
-				diff = parse->m_width - len;
-				ft_memset((void *)&parse->map[i][len], '1', diff);
-				parse->map[i][parse->m_width] = '\n';
-				parse->map[i][parse->m_width + 1] = '\0';
-			}
-			printf("parse->map[i] = %s", parse->map[i]); // valeure correctes
-			i++;
-		}
+		free(line);
 		line = get_next_line(fd);
 	}
-	/*problème avec les valeures récupérer dans la struct*/
-	i = 0;
-    while(parse->map[i] != NULL)
+	while (line != NULL && ft_is_map(line) == 1)
 	{
-	printf("parse->map[i]test = %s", parse->map[i]);
+		check_map_close(parse, line);
+		parse->map[i] = malloc((parse->m_width + 1) * sizeof(char));
+		l = ft_strlen(line);
+		ft_strlcpy(parse->map[i], line, l + 1);
+		free(line);
+		replace_space_tab(parse->map[i]);
+		if (l != parse->m_width)
+		{
+			printf("line before: %s", parse->map[i]);
+			printf("line n°%d, Memset à partir de index %d d'une longueur de %d, /n en index %d, /0 en index %d\n", i + 1, l - 1, parse->m_width - l, parse->m_width - 1, parse->m_width);
+			ft_memset((void *)&parse->map[i][l - 1], '1', parse->m_width - l);
+			parse->map[i][parse->m_width - 1] = '\n';
+			parse->map[i][parse->m_width] = '\0';
+			printf(" line after: %s", parse->map[i]);
+			printf("\n\n");
+		}
 		i++;
+		line = get_next_line(fd);
 	}
-	free(line);
+	printf("\n\n");
+	print_map(parse->map);
 	return (0);
 }

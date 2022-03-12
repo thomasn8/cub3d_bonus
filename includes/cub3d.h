@@ -124,7 +124,7 @@ void			initialization(t_parse *parse);
 int				check_map(void);
 int				parse_textures_colors(char *line, t_parse *parse);
 char			*save_args(char *line);
-char			*replace_space_tab(char *str);
+void			replace_space_tab(char *str);
 int				get_map(t_parse *parse, const char *map);
 int				ft_map(char *line, t_parse *parse);
 int				ft_is_map(char *line);
@@ -134,6 +134,7 @@ int				parse_textures(char *line, t_parse *parse);
 int				check_missing(t_parse *parse);
 void			check_color(t_parse *parse, char *color);
 void			check_texture(t_parse *parse, char *textures);
+void			print_map(char **grid);
 
 // init
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);

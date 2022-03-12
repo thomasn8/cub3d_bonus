@@ -15,7 +15,7 @@ void	initialization(t_parse *parse)
 	parse->error = 0;
 }
 
-char	*replace_space_tab(char *str)
+void	replace_space_tab(char *str)
 {
 	int		i;
 
@@ -28,7 +28,6 @@ char	*replace_space_tab(char *str)
 			str[i] = '1';
 		i++;
 	}
-	return (str);
 }
 
 void	free_all(t_parse *parse)
@@ -49,4 +48,18 @@ void	free_all(t_parse *parse)
 		free(parse->c_s);
 	if (parse)
 		free(parse);
+}
+
+void	print_map(char **grid)
+{
+	int	y;
+	int x;
+
+	y = -1;
+	while (grid[++y])
+	{
+		x = -1;
+		while (grid[y][++x])
+			write(1, &grid[y][x], 1);
+	}
 }
