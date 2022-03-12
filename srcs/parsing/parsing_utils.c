@@ -50,16 +50,16 @@ void	free_all(t_parse *parse)
 		free(parse);
 }
 
-void	print_map(char **grid)
+void	print_map(char **map)
 {
 	int	y;
 	int x;
 
 	y = -1;
-	while (grid[++y])
+	while (map[++y])
 	{
 		x = -1;
-		while (grid[y][++x])
-			write(1, &grid[y][x], 1);
+		while (map[y][++x])
+			write(1, &map[y][x], 1);
 	}
 }

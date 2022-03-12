@@ -80,11 +80,13 @@ void	minimap_init(t_game *game, t_parse *parse)
 	game->m.rows =  parse->m_height;
 	printf("Dimensions:\n%d rows / %d cols (%d * %d pixels)\n",game->m.rows, game->m.cols, game->m.w, game->m.h);
 	// player position
+	// printf("Player position: %d,%d\n", parse->start_x, parse->start_y);
 	game->m.prev_x = START_X;
 	game->m.prev_y = START_Y;
 	game->m.pos_x = START_X;
 	game->m.pos_y = START_Y;
 	// player orientation
+	printf("Player orientation: %c\n", parse->start_player);
 	game->m.a_rad = M_RAD_0;
 	game->m.a_deg = M_EAST;
 	game->m.prev_delta_x = cos(game->m.a_rad * 5);
