@@ -39,7 +39,7 @@ int	miniplayer_move(t_game *game, t_image *map, char move, t_map *m)
 	return (-1);
 }
 
-int	miniplayer_move2(t_game *game, t_image *map, char move, t_map *m)
+int	miniplayer_move2(t_game *game, t_image *map, char move, t_map *m)			// for 'A' + 'S' keys
 {
 	(void) game;
 	(void) map;

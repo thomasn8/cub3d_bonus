@@ -79,7 +79,6 @@ int	calc_m_size(int cols, int rows)
 
 void	minimap_init(t_game *game, t_parse *parse)
 {
-	
 	// A COMPLETER GRACE AU PARSING
 	// map
 	game->m.map = parse->map;
@@ -87,7 +86,6 @@ void	minimap_init(t_game *game, t_parse *parse)
 	game->m.cols = parse->m_width;
 	game->m.rows =  parse->m_height;
 	game->m.m_size = calc_m_size(game->m.cols, game->m.rows);
-	printf("m_size: %d\n",game->m.m_size );
 	game->m.w = parse->m_width * game->m.m_size;
 	game->m.h = parse->m_height * game->m.m_size;
 	game->m.offset = game->world_h + MARGIN + ((MENU_HEIGTH - (2 * MARGIN)) - game->m.h) / 2;
