@@ -14,9 +14,9 @@ int rad_to_deg(float angle)
 void	check_angle(float angle, int *deg)
 {
 	if (angle < 0)
-		angle += 2 * PI;
-	if (angle > 2 * PI)
-		angle -= 2 * PI;
+		angle += PI2;
+	if (angle > PI2)
+		angle -= PI2;
 	*deg= rad_to_deg(angle);
 }
 

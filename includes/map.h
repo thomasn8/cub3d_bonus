@@ -20,6 +20,7 @@
 # define M_HALF_PLAYER (M_PLAYER_SIZE / 2)
 # define M_DISTANCE 1
 # define PI 3.1415926535
+# define PI2 6.2831853071
 # define M_1_DEG_RAD 0.0174533
 # define M_RAYS 60
 # define M_HALF_RAYS (M_RAYS / 2)
@@ -28,9 +29,9 @@
 # define M_WEST 180
 # define M_SOUTH 270
 # define M_RAD_0 0
-# define M_RAD_90 PI / 2
-# define M_RAD_180 PI
-# define M_RAD_270 (3 * PI / 2)
+# define M_RAD_90 1.57079632679		// = pi/2
+# define M_RAD_180 3.1415926535		// = pi
+# define M_RAD_270 4.71238898038	// = 3 * pi / 2
 
 typedef struct s_rays
 {

@@ -51,13 +51,13 @@ int	events_loop(t_game *game)
 
 	map_offset = ((MENU_HEIGTH - 2 * MARGIN) - game->m.h) / 2;
 	if (game->w == 1)
-		ws_move(game, &game->map, 'w', &game->m);
+		move(game, &game->map, 'w', &game->m);
 	if (game->s == 1)
-		ws_move(game, &game->map, 's', &game->m);
+		move(game, &game->map, 's', &game->m);
 	if (game->a == 1)
-		ad_move(game, &game->map, 'a', &game->m);
+		move(game, &game->map, 'a', &game->m);
 	if (game->d == 1)
-		ad_move(game, &game->map, 'd', &game->m);
+		move(game, &game->map, 'd', &game->m);
 	if (game->left == 1)
 		rotation(game, &game->map, 'l', &game->m);
 	if (game->right == 1)

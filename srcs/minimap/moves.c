@@ -20,10 +20,44 @@ int	move_check(t_map *m)
 	return (0);
 }
 
-int	ws_move(t_game *game, t_image *map, char move, t_map *m)
+void	a_move(t_map *m)
 {
-	m->prev_x = m->pos_x;
-	m->prev_y = m->pos_y;
+	m->a_rad += M_RAD_90;
+	if (m->a_rad > PI2)
+		m->a_rad -= PI2;
+	m->a_deg = rad_to_deg(m->a_rad);
+	m->delta_x = cos(-m->a_rad);
+	m->delta_y = sin(-m->a_rad);
+	m->pos_x += m->delta_x;
+	m->pos_y += m->delta_y;
+	m->a_rad -= M_RAD_90;
+	if (m->a_rad < 0)
+		m->a_rad += PI2;
+	m->a_deg = rad_to_deg(m->a_rad);
+	m->delta_x = cos(-m->a_rad);
+	m->delta_y = sin(-m->a_rad);
+}
+
+void	d_move(t_map *m)
+{
+	m->a_rad -= M_RAD_90;
+	if (m->a_rad < 0)
+		m->a_rad += PI2;
+	m->a_deg = rad_to_deg(m->a_rad);
+	m->delta_x = cos(-m->a_rad);
+	m->delta_y = sin(-m->a_rad);
+	m->pos_x += m->delta_x;
+	m->pos_y += m->delta_y;
+	m->a_rad += M_RAD_90;
+	if (m->a_rad > PI2)
+		m->a_rad -= PI2;
+	m->a_deg = rad_to_deg(m->a_rad);
+	m->delta_x = cos(-m->a_rad);
+	m->delta_y = sin(-m->a_rad);
+}
+
+void	wsad(t_map *m, char move)
+{
 	if (move == 'w')
 	{
 		m->pos_x += m->delta_x;
@@ -34,6 +68,17 @@ int	ws_move(t_game *game, t_image *map, char move, t_map *m)
 		m->pos_x -= m->delta_x;
 		m->pos_y -= m->delta_y;
 	}
+	else if (move == 'a')
+		a_move(m);
+	else if (move == 'd')
+		d_move(m);
+}
+
+int	move(t_game *game, t_image *map, char move, t_map *m)
+{
+	m->prev_x = m->pos_x;
+	m->prev_y = m->pos_y;
+	wsad(m, move);
 	if (move_check(m))
 	{
 		// remove_prev_pos(map, m);	// à réutiliser lorsqu'on n'affiche plus le FOV
@@ -48,28 +93,19 @@ int	ws_move(t_game *game, t_image *map, char move, t_map *m)
 	return (-1);
 }
 
-int	ad_move(t_game *game, t_image *map, char move, t_map *m)			// for 'A' + 'S' keys
-{
-	(void) game;
-	(void) map;
-	(void) move;
-	(void) m;
-	return (0);
-}
-
 int	rotation(t_game *game, t_image *map, char dir, t_map *m)
 {
 	if (dir == 'l')
 	{
 		m->a_rad -= 5 * M_1_DEG_RAD;
 		if (m->a_rad < 0)
-			m->a_rad += 2 * PI;
+			m->a_rad += PI2;
 	}
 	else if (dir == 'r')
 	{
 		m->a_rad += 5 * M_1_DEG_RAD;
-		if (m->a_rad > 2 * PI)
-			m->a_rad -= 2 * PI;
+		if (m->a_rad > PI2)
+			m->a_rad -= PI2;
 	}
 	m->a_deg = rad_to_deg(m->a_rad);
 	m->delta_x = cos(-m->a_rad);

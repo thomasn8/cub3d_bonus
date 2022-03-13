@@ -146,10 +146,9 @@ void			params_init(t_game *game);
 void			menu_init(t_game *game);
 void			world_init(t_game *game);
 
-// map
+// minimap
 void			minimap_init(t_game *game, t_parse *parse);
-int				ws_move(t_game *game, t_image *map, char move, t_map *m);
-int				ad_move(t_game *game, t_image *map, char move, t_map *m);
+int				move(t_game *game, t_image *map, char move, t_map *m);
 int				rotation(t_game *game, t_image *map, char dir, t_map *m);
 
 // events
