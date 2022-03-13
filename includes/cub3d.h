@@ -148,8 +148,8 @@ void			world_init(t_game *game);
 
 // minimap
 void			minimap_init(t_game *game, t_parse *parse);
-int				move(t_game *game, t_image *map, char move, t_map *m);
-int				rotation(t_game *game, t_image *map, char dir, t_map *m);
+int				move(t_game *game, char move);
+int				rotation(t_game *game, char dir);
 
 // events
 int				quit_prog(t_game *game);
