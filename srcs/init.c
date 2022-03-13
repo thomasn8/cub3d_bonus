@@ -13,13 +13,13 @@ void	world_init(t_game *game)
 	int x;
 	int y;
 
-	game->world.image = mlx_new_image(game->mlx, WIDTH, HEIGTH - MENU_HEIGTH);
+	game->world.image = mlx_new_image(game->mlx, game->width, game->world_h);
 	game->world.addr = mlx_get_data_addr(game->world.image, &game->world.bits_per_pixel, &game->world.line_length, &game->world.endian);
 	y = -1;
-	while (++y < HEIGTH - MENU_HEIGTH)
+	while (++y < game->world_h)
 	{
 		x = -1;
-		while (++x < WIDTH)
+		while (++x < game->width)
 			my_mlx_pixel_put(&game->world, x, y, WORLD_COLOR);
 	}
 }
@@ -29,11 +29,11 @@ void	menu_init(t_game *game)
 	int 	x;
 	int 	y;
 
-	y = -1 + HEIGTH - MENU_HEIGTH;
-	while (++y < HEIGTH)
+	y = -1 + game->world_h;
+	while (++y < game->heigth)
 	{
 		x = -1;
-		while (++x < WIDTH)
+		while (++x < game->width)
 			mlx_pixel_put(game->mlx, game->win, x, y, MENU_COLOR);
 	}
 	game->menu.image = mlx_xpm_file_to_image(game->mlx, "./images/keyboard_w", &game->menu.width, &game->menu.heigth);
@@ -55,6 +55,7 @@ void	params_init(t_game *game)
 	game->mlx = mlx_init();
 	game->width = WIDTH;
 	game->heigth = HEIGTH;
+	game->world_h = HEIGTH - MENU_HEIGTH;
 	game->win = mlx_new_window(game->mlx, game->width, game->heigth, "cub3d");
 	game->w = 0;
 	game->s = 0;
@@ -62,5 +63,4 @@ void	params_init(t_game *game)
 	game->d = 0;
 	game->left = 0;
 	game->right = 0;
-	game->minimap = 1;
 }

@@ -23,10 +23,6 @@ int	key_press(int keycode, t_game *game)
 		game->left = 1;
 	else if (keycode == K_RIGHT)
 		game->right = 1;
-	else if (keycode == K_M && game->minimap == 0)
-		game->minimap = 1;
-	else if (keycode == K_M && game->minimap == 1)
-		game->minimap = 0;
 	return (0);
 }
 
@@ -51,6 +47,9 @@ int	key_release(int keycode, t_game *game)
 
 int	events_loop(t_game *game)
 {
+	int map_offset;
+
+	map_offset = ((MENU_HEIGTH - 2 * MARGIN) - game->m.h) / 2;
 	if (game->w == 1)
 		miniplayer_move(game, &game->map, 'w', &game->m);
 	if (game->s == 1)
@@ -63,12 +62,7 @@ int	events_loop(t_game *game)
 		miniplayer_rotation(game, &game->map, 'l', &game->m);
 	if (game->right == 1)
 		miniplayer_rotation(game, &game->map, 'r', &game->m);
-	if (game->minimap == 1)
-	{
-		mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);
-		mlx_put_image_to_window(game->mlx, game->win, game->map.image, MARGIN, MARGIN);
-	}
-	else
-		mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->map.image, MARGIN, game->m.offset);
 	return (0);
 }

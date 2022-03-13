@@ -9,13 +9,13 @@ void	remove_prev_fov(t_image *map, t_map *m)
 	int y;
 
 	height = -2;
-	while (++height < M_FOV_SIZE * 2 + 1)
+	while (++height < m->m_size * 2 + 1)
 	{
 		width = -2;
-		while (++width < M_FOV_SIZE * 2 + 1)
+		while (++width < m->m_size * 2 + 1)
 		{
-			x = m->prev_x + width - M_FOV_SIZE + M_HALF_PLAYER;
-			y = m->prev_y + height - M_FOV_SIZE + M_HALF_PLAYER;
+			x = m->prev_x + width - m->m_size + M_HALF_PLAYER;
+			y = m->prev_y + height - m->m_size + M_HALF_PLAYER;
 			my_mlx_pixel_put(map, x, y, m->clean_map[y][x]);
 		}
 	}
@@ -49,7 +49,7 @@ void	new_player_fov(t_image *map, t_map *m)
 	
 	pixel_x = m->pos_x;
 	pixel_y = m->pos_y;
-	pixels = M_FOV_SIZE;
+	pixels = m->m_size;
 	while (pixels)
 	{
 		my_mlx_pixel_put(map, pixel_x + M_HALF_PLAYER, pixel_y + M_HALF_PLAYER, M_FOV_COLOR);

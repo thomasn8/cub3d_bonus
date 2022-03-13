@@ -5,9 +5,6 @@
 # define S_X 9
 # define S_Y 1
 # define S_ANGLE 0
-// A CALCULER A PARTIR DU PARSING
-# define START_X  (S_X * M_SIZE) + (0.5 * M_SIZE) - (0.5 * M_PLAYER_SIZE)
-# define START_Y  (S_Y * M_SIZE) + (0.5 * M_SIZE) - (0.5 * M_PLAYER_SIZE)
 //////////////////////////////////////
 
 static unsigned int	**copy_map(t_image *map, int width, int heigth)
@@ -46,13 +43,13 @@ static void	color_map(t_image *map, t_map *m)
 				m->color = M_WALL_COLOR;
 			else
 				m->color = M_SPACE_COLOR;
-			m->yo = (m->y + 1) * M_SIZE;
-			while (m->yo-- > m->y * M_SIZE)
+			m->yo = (m->y + 1) * m->m_size;
+			while (m->yo-- > m->y * m->m_size)
 			{
-				m->xo = (m->x + 1) * M_SIZE;
-				while (m->xo-- > m->x * M_SIZE)
+				m->xo = (m->x + 1) * m->m_size;
+				while (m->xo-- > m->x * m->m_size)
 				{
-					if (m->xo % M_SIZE == 0 || m->yo % M_SIZE == 0
+					if (m->xo % m->m_size == 0 || m->yo % m->m_size == 0
 						|| m->xo == m->w - 1
 						|| m->yo == m->h - 1)
 						my_mlx_pixel_put(map, m->xo, m->yo, M_GRID_COLOR);
@@ -64,27 +61,46 @@ static void	color_map(t_image *map, t_map *m)
 	}
 }
 
+int	calc_m_size(int cols, int rows)
+{
+	int max_w;
+	int max_h;
+	int	m_size1;
+	int	m_size2;
+
+	max_w = (WIDTH / 2) - (2 * MARGIN);
+	max_h = MENU_HEIGTH - (2 * MARGIN);
+	m_size1 = max_w / cols;
+	m_size2 = max_h / rows;
+	if (m_size1 > m_size2)
+		return (m_size2);
+	return (m_size1);
+}
+
 void	minimap_init(t_game *game, t_parse *parse)
 {
-	game->map.image = mlx_new_image(game->mlx, parse->m_width * M_SIZE, parse->m_height * M_SIZE);
-	game->map.addr = mlx_get_data_addr(game->map.image, &game->map.bits_per_pixel,
-			&game->map.line_length, &game->map.endian);
 	
 	// A COMPLETER GRACE AU PARSING
 	// map
 	game->m.map = parse->map;
 	// dimensions
-	game->m.w = parse->m_width * M_SIZE;
-	game->m.h = parse->m_height * M_SIZE;
 	game->m.cols = parse->m_width;
 	game->m.rows =  parse->m_height;
+	game->m.m_size = calc_m_size(game->m.cols, game->m.rows);
+	printf("m_size: %d\n",game->m.m_size );
+	game->m.w = parse->m_width * game->m.m_size;
+	game->m.h = parse->m_height * game->m.m_size;
+	game->m.offset = game->world_h + MARGIN + ((MENU_HEIGTH - (2 * MARGIN)) - game->m.h) / 2;
+	game->map.image = mlx_new_image(game->mlx, game->m.w, game->m.h);
+	game->map.addr = mlx_get_data_addr(game->map.image, &game->map.bits_per_pixel,
+			&game->map.line_length, &game->map.endian);
 	printf("Dimensions:\n%d rows / %d cols (%d * %d pixels)\n",game->m.rows, game->m.cols, game->m.w, game->m.h);
 	// player position
 	// printf("Player position: %d,%d\n", parse->start_x, parse->start_y);
-	game->m.prev_x = START_X;
-	game->m.prev_y = START_Y;
-	game->m.pos_x = START_X;
-	game->m.pos_y = START_Y;
+	game->m.pos_x = (S_X * game->m.m_size) + (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+	game->m.pos_y = (S_Y * game->m.m_size) + (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+	game->m.prev_x = game->m.pos_x;
+	game->m.prev_y = game->m.pos_y;
 	// player orientation
 	// printf("Player orientation: %c\n", parse->start_player);
 	game->m.a_rad = M_RAD_0;

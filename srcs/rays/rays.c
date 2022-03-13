@@ -5,8 +5,8 @@ static void	horizontal_loop(t_map *m, t_rays *r, int offset)
 {
 	while (++r->i < m->rows - 2)
 	{
-		r->mx = ((int)r->x) / M_SIZE;
-		r->my = ((int)r->y) / M_SIZE;
+		r->mx = ((int)r->x) / m->m_size;
+		r->my = ((int)r->y) / m->m_size;
 		if(r->x >= 0 && r->x < m->w && r->y >= 0 && r->y < m->h 
 			&& m->map[r->my + offset][r->mx] == '1')
 		{
@@ -27,8 +27,8 @@ static void	vertical_loop(t_map *m, t_rays *r, int offset)
 {
 	while (++r->i < m->cols - 2)
 	{
-		r->mx = ((int)r->x) / M_SIZE;
-		r->my = ((int)r->y) / M_SIZE;
+		r->mx = ((int)r->x) / m->m_size;
+		r->my = ((int)r->y) / m->m_size;
 		if(r->x >= 0 && r->x < m->w && r->y >= 0 && r->y < m->h
 			&& m->map[r->my][r->mx + offset] == '1')
 		{
@@ -52,17 +52,17 @@ void	horizontal_wall_intersection(t_map *m, t_rays *r)
 	offset = 0;
 	if (m->a_deg > 0 && m->a_deg < 180) 							// player regarde en haut
 	{
-		r->y = ((int)(m->pos_y / M_SIZE)) * M_SIZE;
+		r->y = ((int)(m->pos_y / m->m_size)) * m->m_size;
 		r->x = (m->pos_y - r->y) * r->atan + m->pos_x;
-		r->yo = -M_SIZE;
+		r->yo = -m->m_size;
 		r->xo = -r->yo * r->atan;
 		offset = -1;
 	}
 	else if (m->a_deg > 180) 										// player regarde en bas
 	{
-		r->y = ((int)(m->pos_y / M_SIZE)) * M_SIZE + M_SIZE;
+		r->y = ((int)(m->pos_y / m->m_size)) * m->m_size + m->m_size;
 		r->x = (m->pos_y - r->y) * r->atan + m->pos_x;
-		r->yo = M_SIZE;
+		r->yo = m->m_size;
 		r->xo = -r->yo * r->atan;
 	}
 	else															// player regarde en horizontal
@@ -81,17 +81,17 @@ void	vertical_wall_intersection(t_map *m, t_rays *r)
 	offset = 0;
 	if (m->a_deg > 90 && m->a_deg < 270) 							// player regarde à gauche
 	{
-		r->x = ((int)(m->pos_x / M_SIZE)) * M_SIZE;
+		r->x = ((int)(m->pos_x / m->m_size)) * m->m_size;
 		r->y = (m->pos_x - r->x) * r->ntan + m->pos_y;
-		r->xo = -M_SIZE;
+		r->xo = -m->m_size;
 		r->yo = -r->xo * r->ntan;
 		offset = -1;
 	}
 	else if (m->a_deg < 90 || m->a_deg > 270) 						// player regarde à droite
 	{
-		r->x = ((int)(m->pos_x / M_SIZE)) * M_SIZE + M_SIZE;
+		r->x = ((int)(m->pos_x / m->m_size)) * m->m_size + m->m_size;
 		r->y = (m->pos_x - r->x) * r->ntan + m->pos_y;
-		r->xo = M_SIZE;
+		r->xo = m->m_size;
 		r->yo = -r->xo * r->ntan;
 	}
 	else															// player regarde en vertical
@@ -106,24 +106,26 @@ void	vertical_wall_intersection(t_map *m, t_rays *r)
 void	draw_3d_map(t_game *game, t_image *map, t_map *m, t_rays *r)
 {
 	float		line_h;
-	int			line_w;
+	int			lines;
 	static int	start_x = 0;
+	int			ray_w;
 	(void) map;
 	(void) m;
 
-	line_h = game->heigth * M_SIZE / r->dist;
-	if (line_h > game->heigth)
-		line_h = game->heigth;
+	line_h = game->world_h * m->m_size / r->dist;
+	if (line_h > game->world_h)
+		line_h = game->world_h;
 	printf("lineH: %f\n", line_h);
 
-	line_w = -1;
-	while (++line_w < 10)
+	lines = -1;
+	ray_w = 15;
+	while (++lines < ray_w)
 	{
-		draw_line(&game->world, start_x + line_w, 0, start_x + line_w, line_h);
+		draw_line(&game->world, start_x + lines, 0, start_x + lines, line_h);
 	}
 	printf("r->rays: %d\n", r->rays);
 	if (r->rays > 1)
-		start_x += 10;
+		start_x += 15;
 	else
 		start_x = 0;
 }
@@ -148,8 +150,8 @@ void	cast_rays(t_game *game, t_image *map, t_map *m)
 		vertical_wall_intersection(m, &r);
 		compare_dist(&r);
 		// printf("Ray #%d, distance: %f\n", r.rays, r.dist);
+		draw_3d_map(game, map, m, &r);
 		draw_ray(map, m, &r, RED);				// à enlever plus tard
-		// draw_3d_map(game, map, m, &r);
 		m->a_rad +=  M_1_DEG_RAD;
 		check_angle(m->a_rad, &m->a_deg);
 	}

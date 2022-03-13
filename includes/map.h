@@ -13,7 +13,7 @@
 
 // small
 # define M_SIZE 16
-# define M_PLAYER_SIZE 5
+# define M_PLAYER_SIZE 3
 // big
 // # define M_SIZE 64
 // # define M_PLAYER_SIZE 9
@@ -23,7 +23,6 @@
 # define M_GRID_COLOR PURPLE
 # define M_PLAYER_COLOR YELLOW
 # define M_FOV_COLOR GREEN
-# define M_FOV_SIZE (3 * M_PLAYER_SIZE)
 # define M_HALF_PLAYER (M_PLAYER_SIZE / 2)
 # define M_DISTANCE 1
 # define PI 3.1415926535

@@ -9,9 +9,9 @@
 # include <fcntl.h>
 
 /* dimensions */
-# define WIDTH 1024
-# define HEIGTH 768
-# define MARGIN 10
+# define WIDTH 900
+# define HEIGTH 868
+# define MARGIN 5
 # define MENU_HEIGTH 100
 # define CUBE_SIZE 256
 
@@ -77,6 +77,7 @@ typedef struct	s_img {
 // update minimap
 typedef struct s_map
 {
+	int				m_size;
 	int				cols;
 	int				rows;
 	int				x;
@@ -86,6 +87,7 @@ typedef struct s_map
 	int 			color;
 	int 			w;
 	int				h;
+	int				offset;
 	float			prev_x;
 	float			prev_y;
 	float			pos_x;
@@ -103,8 +105,9 @@ typedef struct s_game
 {
 	void			*mlx;
 	void			*win;
-	size_t			width;
-	size_t			heigth;
+	int				width;
+	int				heigth;
+	int				world_h;
 	t_image			world;
 	t_image			map;
 	t_map			m;
@@ -115,7 +118,6 @@ typedef struct s_game
 	int				d;
 	int				left;
 	int				right;
-	int				minimap;
 }	t_game;
 
 // parsing
