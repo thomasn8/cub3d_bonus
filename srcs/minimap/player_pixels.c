@@ -20,6 +20,9 @@
 // 		}
 // 	}
 // }
+
+// provisoire, pour mettre à jour visuellement le field of view
+// plus tard réutiliser la fonction du dessus (+ rapide car redessine le minium nécessaire)
 void	remove_prev_fov(t_image *map, t_map *m)
 {
 	int	width;

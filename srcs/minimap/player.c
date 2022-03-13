@@ -27,7 +27,7 @@ int	miniplayer_move(t_game *game, t_image *map, char move, t_map *m)
 	}
 	if (move_north(m) && move_south(m) && move_west(m) && move_east(m))
 	{
-		remove_prev_pos(map, m);
+		// remove_prev_pos(map, m);	// à réutiliser lorsqu'on affiche plus le FOV
 		remove_prev_fov(map, m);
 		new_player_pos(map, m, M_PLAYER_COLOR);
 		new_player_fov(map, m);
