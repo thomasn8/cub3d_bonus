@@ -1,45 +1,41 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-// void	remove_prev_fov(t_image *map, t_map *m)
-// {
-// 	int	width;
-// 	int	height;
-// 	int x;
-// 	int y;
-
-// 	height = -2;
-// 	while (++height < m->m_size * 2 + 1)
-// 	{
-// 		width = -2;
-// 		while (++width < m->m_size * 2 + 1)
-// 		{
-// 			x = m->prev_x + width - m->m_size + M_HALF_PLAYER;
-// 			y = m->prev_y + height - m->m_size + M_HALF_PLAYER;
-// 			my_mlx_pixel_put(map, x, y, m->clean_map[y][x]);
-// 		}
-// 	}
-// }
-
-// provisoire, pour mettre à jour visuellement le field of view
-// plus tard réutiliser la fonction du dessus (+ rapide car redessine le minium nécessaire)
+/*
 void	remove_prev_fov(t_image *map, t_map *m)
 {
 	int	width;
 	int	height;
-	// int x;
-	// int y;
+	int x;
+	int y;
+
+	height = -2;
+	while (++height < m->m_size * 2 + 1)
+	{
+		width = -2;
+		while (++width < m->m_size * 2 + 1)
+		{
+			x = m->prev_x + width - m->m_size + M_HALF_PLAYER;
+			y = m->prev_y + height - m->m_size + M_HALF_PLAYER;
+			my_mlx_pixel_put(map, x, y, m->clean_map[y][x]);
+		}
+	}
+}
+*/
+
+/* provisoire, pour mettre à jour visuellement le field of view
+plus tard réutiliser la fonction du dessus (+ rapide car redessine le minium nécessaire)*/
+void	remove_prev_fov(t_image *map, t_map *m)
+{
+	int	width;
+	int	height;
 
 	height = -1;
 	while (++height < m->h)
 	{
 		width = -1;
 		while (++width < m->w)
-		{
-			// x = m->prev_x + width - m->m_size + M_HALF_PLAYER;
-			// y = m->prev_y + height - m->m_size + M_HALF_PLAYER;
 			my_mlx_pixel_put(map, width, height, m->clean_map[height][width]);
-		}
 	}
 }
 

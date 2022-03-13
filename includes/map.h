@@ -11,13 +11,9 @@
 # define BLUE 0x000000FF
 # define YELLOW 0x00FFFF00
 
-// small
-# define M_SIZE 16
-# define M_PLAYER_SIZE 3
-// big
-// # define M_SIZE 64
-// # define M_PLAYER_SIZE 9
 
+
+# define M_PLAYER_SIZE 3
 # define M_WALL_COLOR GRAY_LIGHT
 # define M_SPACE_COLOR BLACK
 # define M_GRID_COLOR PURPLE
@@ -59,26 +55,36 @@ typedef struct s_rays
 	float	dist_h;
 	float	dist_v;
 	float	dist;
+	int		ray_angle;
 }	t_rays;
 
-float		deg_to_rad(int angle);
-int			rad_to_deg(float angle);
-
-void		check_angle(float angle, int *deg);
-void		init_casting(t_rays *r, float angle);
-float		distance(t_map *m, t_rays *r);
-void		compare_dist(t_rays	*r);
-void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
-void		draw_line(t_image *image, int x1, int y1, int x2, int y2, int color);
-
+/* MINIMAP */
+// pixels
 void		new_player_pos(t_image *map, t_map *m, int color);
 void		new_player_fov(t_image *map, t_map *m);
 void		remove_prev_pos(t_image *map, t_map *m);
 void		remove_prev_fov(t_image *map, t_map *m);
 
+// moves
 int			move_north(t_map *m);
 int			move_south(t_map *m);
 int			move_east(t_map *m);
 int			move_west(t_map *m);
+
+/* RAYCASTING */
+// utils
+float		deg_to_rad(int angle);
+int			rad_to_deg(float angle);
+void		check_angle(float angle, int *deg);
+void		init_casting(t_rays *r, float angle);
+void		compare_dist(t_rays	*r);
+void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
+
+// rays
+void		horizontal_wall_intersection(t_map *m, t_rays *r);
+void		vertical_wall_intersection(t_map *m, t_rays *r);
+
+// three_D
+void		cast_rays(t_game *game, t_image *map, t_map *m);
 
 #endif

@@ -1,17 +1,7 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-float deg_to_rad(int angle)
-{
-	return (angle * PI / 180.0);
-}
-
-int rad_to_deg(float angle)
-{
-	return (angle / PI * 180);
-}
-
-int	miniplayer_move(t_game *game, t_image *map, char move, t_map *m)
+int	player_move(t_game *game, t_image *map, char move, t_map *m)
 {
 	m->prev_x = m->pos_x;
 	m->prev_y = m->pos_y;
@@ -27,11 +17,11 @@ int	miniplayer_move(t_game *game, t_image *map, char move, t_map *m)
 	}
 	if (move_north(m) && move_south(m) && move_west(m) && move_east(m))
 	{
-		// remove_prev_pos(map, m);	// à réutiliser lorsqu'on affiche plus le FOV
+		// remove_prev_pos(map, m);	// à réutiliser lorsqu'on n'affiche plus le FOV
 		remove_prev_fov(map, m);
 		new_player_pos(map, m, M_PLAYER_COLOR);
-		new_player_fov(map, m);
 		cast_rays(game, map, m);
+		new_player_fov(map, m);
 		return (0);
 	}
 	m->pos_x = m->prev_x;
@@ -39,7 +29,7 @@ int	miniplayer_move(t_game *game, t_image *map, char move, t_map *m)
 	return (-1);
 }
 
-int	miniplayer_move2(t_game *game, t_image *map, char move, t_map *m)			// for 'A' + 'S' keys
+int	player_move2(t_game *game, t_image *map, char move, t_map *m)			// for 'A' + 'S' keys
 {
 	(void) game;
 	(void) map;
@@ -48,7 +38,7 @@ int	miniplayer_move2(t_game *game, t_image *map, char move, t_map *m)			// for '
 	return (0);
 }
 
-int	miniplayer_rotation(t_game *game, t_image *map, char dir, t_map *m)
+int	player_rotation(t_game *game, t_image *map, char dir, t_map *m)
 {
 	if (dir == 'l')
 	{
@@ -67,7 +57,7 @@ int	miniplayer_rotation(t_game *game, t_image *map, char dir, t_map *m)
 	m->delta_y = sin(-m->a_rad);
 	remove_prev_fov(map, m);
 	new_player_pos(map, m, M_PLAYER_COLOR);
-	new_player_fov(map, m);
 	cast_rays(game, map, m);
+	new_player_fov(map, m);
 	return (0);
 }

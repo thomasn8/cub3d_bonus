@@ -1,6 +1,17 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
+static float distance(t_map *m, t_rays *r)
+{
+	float dist;
+
+	dist = cos(deg_to_rad(m->a_rad)) * (r->x - m->pos_x)
+		- sin(deg_to_rad(m->a_rad)) * (r->y - m->pos_y);
+	if (dist < 0)
+		dist *= -1;
+	return (dist);
+}
+
 static void	horizontal_loop(t_map *m, t_rays *r, int offset)
 {
 	while (++r->i < m->rows - 2)
@@ -101,65 +112,4 @@ void	vertical_wall_intersection(t_map *m, t_rays *r)
 		r->i = m->cols;
 	}
 	vertical_loop(m, r, offset);
-}
-
-void	draw_3d(t_game *game, t_map *m, t_rays *r)
-{
-	float		line_h;
-	int			lines;
-	static int	start_x = 0;
-	int			ray_w;
-	// float			offset;
-	(void) m;
-
-	line_h = game->world_h * m->m_size / r->dist;
-	if (line_h > game->world_h)
-		line_h = game->world_h;
-	lines = -1;
-	ray_w = game->width / M_RAYS;
-	// offset = game->world_h - (line_h / 2);
-	// printf("lineH: %f\n", line_h);
-	while (++lines < ray_w)
-	{
-		draw_line(&game->world, start_x + lines, 0, start_x + lines, game->world_h, M_WALL_COLOR);
-		draw_line(&game->world, start_x + lines, 0, start_x + lines, line_h, BLUE);
-		// draw_line(&game->world, start_x + lines, offset, start_x + lines, line_h + offset);
-	}
-	if (r->rays > 1)
-		start_x += ray_w;
-	else
-		start_x = 0;
-}
-
-void	cast_rays(t_game *game, t_image *map, t_map *m)
-{
-	t_rays	r;
-	(void) game;
-	(void) map;
-
-	m->pos_x += M_HALF_PLAYER;
-	m->pos_y += M_HALF_PLAYER;
-	m->a_rad += M_HALF_RAYS * M_1_DEG_RAD;
-	check_angle(m->a_rad, &m->a_deg);
-	r.rays = -1;
-	while (++r.rays < M_RAYS)
-	{
-		init_casting(&r, m->a_rad);
-		r.i = -1;
-		horizontal_wall_intersection(m, &r);
-		r.i = -1;
-		vertical_wall_intersection(m, &r);
-		compare_dist(&r);
-		printf("Ray #%d, distance: %f\n", r.rays, r.dist);
-		draw_3d(game, m, &r);
-		draw_ray(map, m, &r, RED);				// à enlever plus tard
-		m->a_rad -=  M_1_DEG_RAD;
-		check_angle(m->a_rad, &m->a_deg);
-	}
-	// printf("\n");
-	m->pos_x -= M_HALF_PLAYER;
-	m->pos_y -= M_HALF_PLAYER;
-	m->a_rad += M_HALF_RAYS * M_1_DEG_RAD;
-	m->a_deg = rad_to_deg(m->a_rad);
-	
 }

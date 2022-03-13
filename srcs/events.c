@@ -51,17 +51,17 @@ int	events_loop(t_game *game)
 
 	map_offset = ((MENU_HEIGTH - 2 * MARGIN) - game->m.h) / 2;
 	if (game->w == 1)
-		miniplayer_move(game, &game->map, 'w', &game->m);
+		player_move(game, &game->map, 'w', &game->m);
 	if (game->s == 1)
-		miniplayer_move(game, &game->map, 's', &game->m);
+		player_move(game, &game->map, 's', &game->m);
 	if (game->a == 1)
-		miniplayer_move2(game, &game->map, 'a', &game->m);
+		player_move2(game, &game->map, 'a', &game->m);
 	if (game->d == 1)
-		miniplayer_move2(game, &game->map, 'd', &game->m);
+		player_move2(game, &game->map, 'd', &game->m);
 	if (game->left == 1)
-		miniplayer_rotation(game, &game->map, 'l', &game->m);
+		player_rotation(game, &game->map, 'l', &game->m);
 	if (game->right == 1)
-		miniplayer_rotation(game, &game->map, 'r', &game->m);
+		player_rotation(game, &game->map, 'r', &game->m);
 	mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win, game->map.image, MARGIN, game->m.offset);
 	return (0);

@@ -1,7 +1,7 @@
 SRCS		= 	${wildcard ./srcs/*.c} \
 				${wildcard ./srcs/minimap/*.c} \
 				${wildcard ./srcs/minilibft/*.c} \
-				${wildcard ./srcs/rays/*.c} \
+				${wildcard ./srcs/raycasting/*.c} \
 				${wildcard ./srcs/parsing/*.c} \
 
 OBJS		= ${SRCS:.c=.o}

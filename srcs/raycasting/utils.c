@@ -1,6 +1,16 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
+float deg_to_rad(int angle)
+{
+	return (angle * PI / 180.0);
+}
+
+int rad_to_deg(float angle)
+{
+	return (angle / PI * 180);
+}
+
 void	check_angle(float angle, int *deg)
 {
 	if (angle < 0)
@@ -16,17 +26,6 @@ void	init_casting(t_rays *r, float angle)
 	r->dist_h = 0;
 	r->atan = -1 / tan(-angle);
 	r->ntan = -tan(-angle);
-}
-
-float distance(t_map *m, t_rays *r)
-{
-	float dist;
-
-	dist = cos(deg_to_rad(m->a_rad)) * (r->x - m->pos_x)
-		- sin(deg_to_rad(m->a_rad)) * (r->y - m->pos_y);
-	if (dist < 0)
-		dist *= -1;
-	return (dist);
 }
 
 void	compare_dist(t_rays	*r)
@@ -60,30 +59,6 @@ void	draw_ray(t_image *image, t_map *m, t_rays *r, int color)
 	delta_y /= pixels;
 	pixel_x = m->pos_x;
 	pixel_y = m->pos_y;
-	while (pixels)
-	{
-		my_mlx_pixel_put(image, pixel_x, pixel_y, color);
-		pixel_x += delta_x;
-		pixel_y += delta_y;
-		--pixels;
-	}
-}
-
-void	draw_line(t_image *image, int x1, int y1, int x2, int y2, int color)
-{
-	double	delta_x;
-	double	delta_y;
-	int		pixels;
-	double	pixel_x;
-	double	pixel_y;
-
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
-	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-	delta_x /= pixels;
-	delta_y /= pixels;
-	pixel_x = x1;
-	pixel_y = y1;
 	while (pixels)
 	{
 		my_mlx_pixel_put(image, pixel_x, pixel_y, color);

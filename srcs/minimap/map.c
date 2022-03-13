@@ -61,7 +61,7 @@ static void	color_map(t_image *map, t_map *m)
 	}
 }
 
-int	calc_m_size(int cols, int rows)
+int	block_size(int cols, int rows)
 {
 	int max_w;
 	int max_h;
@@ -85,14 +85,13 @@ void	minimap_init(t_game *game, t_parse *parse)
 	// dimensions
 	game->m.cols = parse->m_width;
 	game->m.rows =  parse->m_height;
-	game->m.m_size = calc_m_size(game->m.cols, game->m.rows);
+	game->m.m_size = block_size(game->m.cols, game->m.rows);
 	game->m.w = parse->m_width * game->m.m_size;
 	game->m.h = parse->m_height * game->m.m_size;
 	game->m.offset = game->world_h + MARGIN + ((MENU_HEIGTH - (2 * MARGIN)) - game->m.h) / 2;
 	game->map.image = mlx_new_image(game->mlx, game->m.w, game->m.h);
 	game->map.addr = mlx_get_data_addr(game->map.image, &game->map.bits_per_pixel,
 			&game->map.line_length, &game->map.endian);
-	printf("Dimensions:\n%d rows / %d cols (%d * %d pixels)\n",game->m.rows, game->m.cols, game->m.w, game->m.h);
 	// player position
 	// printf("Player position: %d,%d\n", parse->start_x, parse->start_y);
 	game->m.pos_x = (S_X * game->m.m_size) + (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
@@ -111,6 +110,6 @@ void	minimap_init(t_game *game, t_parse *parse)
 	color_map(&game->map, &game->m);
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
 	new_player_pos(&game->map, &game->m, M_PLAYER_COLOR);
-	new_player_fov(&game->map, &game->m);
 	cast_rays(game, &game->map, &game->m);
+	new_player_fov(&game->map, &game->m);
 }
