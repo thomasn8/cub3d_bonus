@@ -95,7 +95,7 @@ typedef struct s_map
 	float			delta_x;
 	float			delta_y;
 	float			a_rad;
-	float			a_rad_cpy;
+	float			pa;
 	int				a_deg;
 	char			**map;
 	unsigned int	**clean_map;

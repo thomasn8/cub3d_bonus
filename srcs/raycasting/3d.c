@@ -43,9 +43,11 @@ void	draw_3d(t_game *game, t_map *m, t_rays *r)
 	float		offset;
 
 	// int angle;
-	// angle = fix_fisheye(rad_to_deg(m->a_rad_cpy - m->a_rad));
+	// angle = fix_fisheye(rad_to_deg(m->pa - m->a_rad));
 	// r->dist *= cos(deg_to_rad(angle));
-	printf("dist ray #%d: %f\n", r->rays, r->dist);
+
+	// printf("dist ray #%d: %f\n", r->rays, r->dist);
+
 	line_h = game->world_h * m->m_size / r->dist;
 	if (line_h > game->world_h)
 		line_h = game->world_h;
@@ -68,7 +70,7 @@ void	raycasting(t_game *game)
 
 	game->m.pos_x += M_HALF_PLAYER;
 	game->m.pos_y += M_HALF_PLAYER;
-	// game->m.a_rad_cpy = game->m.a_rad;
+	game->m.pa = game->m.a_rad;
 	game->m.a_rad += M_HALF_RAYS * M_1_DEG_RAD;
 	check_angle(game->m.a_rad, &game->m.a_deg);
 	r.rays = -1;

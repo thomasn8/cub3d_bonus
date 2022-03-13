@@ -22,6 +22,7 @@ void	check_angle(float angle, int *deg)
 
 void	compare_dist(t_rays	*r)
 {
+	// printf("R#%d: dist_v= %f |vs| dist_h= %f\n", r->rays, r->dist_v, r->dist_h);
 	if (r->dist_v != 0 && (r->dist_h == 0 || r->dist_v < r->dist_h))
 	{
 		r->x = r->vx;
