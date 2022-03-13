@@ -70,15 +70,16 @@ void		init_casting(t_rays *r, float angle);
 float		distance(t_map *m, t_rays *r);
 void		compare_dist(t_rays	*r);
 void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
+void		draw_line(t_image *image, int x1, int y1, int x2, int y2);
 
 void		new_player_pos(t_image *map, t_map *m, int color);
 void		new_player_fov(t_image *map, t_map *m);
 void		remove_prev_pos(t_image *map, t_map *m);
 void		remove_prev_fov(t_image *map, t_map *m);
 
-int			move_s(t_map *m);
-int			move_d(t_map *m);
-int			move_w(t_map *m);
-int			move_a(t_map *m);
+int			move_north(t_map *m);
+int			move_south(t_map *m);
+int			move_east(t_map *m);
+int			move_west(t_map *m);
 
 #endif

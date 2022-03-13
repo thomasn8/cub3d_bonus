@@ -86,11 +86,9 @@ void	minimap_init(t_game *game, t_parse *parse)
 	game->m.pos_x = START_X;
 	game->m.pos_y = START_Y;
 	// player orientation
-	printf("Player orientation: %c\n", parse->start_player);
+	// printf("Player orientation: %c\n", parse->start_player);
 	game->m.a_rad = M_RAD_0;
 	game->m.a_deg = M_EAST;
-	game->m.prev_delta_x = cos(game->m.a_rad * 5);
-	game->m.prev_delta_y = sin(game->m.a_rad * 5);
 	game->m.delta_x = cos(game->m.a_rad * 5);
 	game->m.delta_y = sin(game->m.a_rad * 5);
 	///////////////////////////////
@@ -100,5 +98,5 @@ void	minimap_init(t_game *game, t_parse *parse)
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
 	new_player_pos(&game->map, &game->m, M_PLAYER_COLOR);
 	new_player_fov(&game->map, &game->m);
-	cast_rays(&game->map, &game->m);
+	cast_rays(game, &game->map, &game->m);
 }

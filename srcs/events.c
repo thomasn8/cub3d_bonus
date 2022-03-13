@@ -52,17 +52,17 @@ int	key_release(int keycode, t_game *game)
 int	events_loop(t_game *game)
 {
 	if (game->w == 1)
-		miniplayer_move(&game->map, 'w', &game->m);
+		miniplayer_move(game, &game->map, 'w', &game->m);
 	if (game->s == 1)
-		miniplayer_move(&game->map, 's', &game->m);
+		miniplayer_move(game, &game->map, 's', &game->m);
 	if (game->a == 1)
-		miniplayer_move(&game->map, 'a', &game->m);
+		miniplayer_move2(game, &game->map, 'a', &game->m);
 	if (game->d == 1)
-		miniplayer_move(&game->map, 'd', &game->m);
+		miniplayer_move2(game, &game->map, 'd', &game->m);
 	if (game->left == 1)
-		miniplayer_rotation(&game->map, 'l', &game->m);
+		miniplayer_rotation(game, &game->map, 'l', &game->m);
 	if (game->right == 1)
-		miniplayer_rotation(&game->map, 'r', &game->m);
+		miniplayer_rotation(game, &game->map, 'r', &game->m);
 	if (game->minimap == 1)
 	{
 		mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);

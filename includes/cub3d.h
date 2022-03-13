@@ -74,7 +74,7 @@ typedef struct	s_img {
 	int				endian;
 } 	t_img;
 
-// update map
+// update minimap
 typedef struct s_map
 {
 	int				cols;
@@ -90,8 +90,6 @@ typedef struct s_map
 	float			prev_y;
 	float			pos_x;
 	float			pos_y;
-	float			prev_delta_x;
-	float			prev_delta_y;
 	float			delta_x;
 	float			delta_y;
 	float			a_rad;
@@ -148,13 +146,14 @@ void			world_init(t_game *game);
 
 // map
 void			minimap_init(t_game *game, t_parse *parse);
-int				miniplayer_move(t_image *map, char move, t_map *m);
-int				miniplayer_rotation(t_image *map, char dir, t_map *m);
+int				miniplayer_move(t_game *game, t_image *map, char move, t_map *m);
+int				miniplayer_move2(t_game *game, t_image *map, char move, t_map *m);
+int				miniplayer_rotation(t_game *game, t_image *map, char dir, t_map *m);
 void			new_player_pos(t_image *map, t_map *m, int color);
 void			new_player_fov(t_image *map, t_map *m);
 
 // rays
-void			cast_rays(t_image *map, t_map *m);
+void			cast_rays(t_game *game, t_image *map, t_map *m);
 
 // events
 int				quit_prog(t_game *game);

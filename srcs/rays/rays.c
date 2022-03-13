@@ -103,9 +103,36 @@ void	vertical_wall_intersection(t_map *m, t_rays *r)
 	vertical_loop(m, r, offset);
 }
 
-void	cast_rays(t_image *map, t_map *m)
+void	draw_3d_map(t_game *game, t_image *map, t_map *m, t_rays *r)
+{
+	float		line_h;
+	int			line_w;
+	static int	start_x = 0;
+	(void) map;
+	(void) m;
+
+	line_h = game->heigth * M_SIZE / r->dist;
+	if (line_h > game->heigth)
+		line_h = game->heigth;
+	printf("lineH: %f\n", line_h);
+
+	line_w = -1;
+	while (++line_w < 10)
+	{
+		draw_line(&game->world, start_x + line_w, 0, start_x + line_w, line_h);
+	}
+	printf("r->rays: %d\n", r->rays);
+	if (r->rays > 1)
+		start_x += 10;
+	else
+		start_x = 0;
+}
+
+void	cast_rays(t_game *game, t_image *map, t_map *m)
 {
 	t_rays	r;
+	(void) game;
+	(void) map;
 
 	m->pos_x += M_HALF_PLAYER;
 	m->pos_y += M_HALF_PLAYER;
@@ -122,6 +149,7 @@ void	cast_rays(t_image *map, t_map *m)
 		compare_dist(&r);
 		// printf("Ray #%d, distance: %f\n", r.rays, r.dist);
 		draw_ray(map, m, &r, RED);				// à enlever plus tard
+		// draw_3d_map(game, map, m, &r);
 		m->a_rad +=  M_1_DEG_RAD;
 		check_angle(m->a_rad, &m->a_deg);
 	}
@@ -130,4 +158,5 @@ void	cast_rays(t_image *map, t_map *m)
 	m->pos_y -= M_HALF_PLAYER;
 	m->a_rad -= M_HALF_RAYS * M_1_DEG_RAD;
 	m->a_deg = rad_to_deg(m->a_rad);
+	
 }
