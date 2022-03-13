@@ -11,8 +11,6 @@
 # define BLUE 0x000000FF
 # define YELLOW 0x00FFFF00
 
-
-
 # define M_PLAYER_SIZE 3
 # define M_WALL_COLOR GRAY_LIGHT
 # define M_SPACE_COLOR BLACK
@@ -65,12 +63,6 @@ void		new_player_fov(t_image *map, t_map *m);
 void		remove_prev_pos(t_image *map, t_map *m);
 void		remove_prev_fov(t_image *map, t_map *m);
 
-// moves
-int			move_north(t_map *m);
-int			move_south(t_map *m);
-int			move_east(t_map *m);
-int			move_west(t_map *m);
-
 /* RAYCASTING */
 // utils
 float		deg_to_rad(int angle);
@@ -84,7 +76,7 @@ void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 void		horizontal_wall_intersection(t_map *m, t_rays *r);
 void		vertical_wall_intersection(t_map *m, t_rays *r);
 
-// three_D
+// 3d
 void		cast_rays(t_game *game, t_image *map, t_map *m);
 
 #endif
