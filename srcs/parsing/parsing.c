@@ -6,8 +6,6 @@ static int	check_missing_in_map(t_parse *parse)
 		ft_error(parse, "Missing wall (1)\n", NULL);
 	else if (parse->free_space == 0)
 		ft_error(parse, "Missing free space (0)\n", NULL);
-	else if (parse->check_player > 1)
-		ft_error(parse, "To many player \n", NULL);
 	else if (parse->check_player == 0)
 		ft_error(parse, "Missing player (N or E or S or W)\n", NULL);
 	return (0);
@@ -30,7 +28,11 @@ static int	check_player(t_parse *parse)
 				parse->free_space = 1;
 			else if (parse->map[y][x] == 'E' || parse->map[y][x] == 'S' \
 					|| parse->map[y][x] == 'N' || parse->map[y][x] == 'W')
-				parse->check_player += 1;
+			{
+					if (parse->check_player == 1)
+						ft_error(parse, "To many player\n", NULL);
+				parse->check_player = 1;
+			}
 		}
 	}
 	check_missing_in_map(parse);
