@@ -77,6 +77,6 @@ void		horizontal_wall_intersection(t_map *m, t_rays *r);
 void		vertical_wall_intersection(t_map *m, t_rays *r);
 
 // 3d
-void		raycasting(t_game *game, t_image *map, t_map *m);
+void		raycasting(t_game *game);
 
 #endif

@@ -1,25 +1,6 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-int	move_ok(t_map *m)
-{
-	float			x1;
-	float			y1;
-	float			x2;
-	float			y2;
-
-	x1 = (m->pos_x - 1) / m->m_size;
-	y1 = (m->pos_y - 1) / m->m_size;
-	x2 = (m->pos_x + M_PLAYER_SIZE - 1) / m->m_size;
-	y2 = (m->pos_y + M_PLAYER_SIZE - 1) / m->m_size;
-	if (m->map[(int)y1][(int)x1] != '1' &&
-		m->map[(int)y2][(int)x2] != '1' &&
-		m->map[(int)y1][(int)x2] != '1' &&
-		m->map[(int)y2][(int)x1] != '1')
-		return (1);
-	return (0);
-}
-
 void	a_move(t_map *m)
 {
 	m->a_rad += M_RAD_90;
@@ -80,7 +61,7 @@ int	move(t_game *game, char dir)
 		// remove_prev_pos(map, m);	// à réutiliser lorsqu'on n'affiche plus le FOV
 		remove_prev_fov(&game->map, &game->m);
 		new_pos(&game->map, &game->m, M_PLAYER_COLOR);
-		raycasting(game, &game->map, &game->m);
+		raycasting(game);
 		new_fov(&game->map, &game->m);
 		return (0);
 	}
@@ -121,7 +102,7 @@ int	rotation(t_game *game, char dir)
 	game->m.delta_y = sin(-game->m.a_rad);
 	remove_prev_fov(&game->map, &game->m);
 	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
-	raycasting(game, &game->map, &game->m);
+	raycasting(game);
 	new_fov(&game->map, &game->m);
 	return (0);
 }
