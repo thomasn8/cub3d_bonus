@@ -13,9 +13,9 @@ void	check_color(t_parse *parse, char *color)
 {
 	int		i;
 	int		sum;
-	int		temp;
+	int		nbr;
 
-	temp = 0;
+	nbr = 0;
 	sum = 0;
 	i = 0;
 	while (color[i] != '\0')
@@ -24,11 +24,12 @@ void	check_color(t_parse *parse, char *color)
 		{
 			sum = (sum * 10) + (color[i] - 48);
 			if (sum > 255)
-				ft_error(parse, "Max int (255)", NULL);
+				ft_error(parse, "Max int colors (255)", NULL);
 			i++;
 		}
-		temp += sum;
-		if (temp > 765)
+		if (sum >= 0 && sum <= 255)
+			nbr++;
+		if (nbr > 3)
 			ft_error(parse, "Max 3 values R,G,B", NULL);
 		sum = 0;
 		if (ft_isprint(color[i]))
@@ -80,9 +81,6 @@ int	parse_textures(char *line, t_parse *parse)
 // parsing des textures (images que l'on va afficher sur les murs)
 int	parse_textures_colors(char *line, t_parse *parse)
 {
-	int	i;
-
-	i = 0;
 	if (parse_textures(line, parse) == 1)
 		parse->no = save_args(line);
 	else if (parse_textures(line, parse) == 2)
@@ -91,12 +89,12 @@ int	parse_textures_colors(char *line, t_parse *parse)
 		parse->we = save_args(line);
 	else if (parse_textures(line, parse) == 4)
 		parse->ea = save_args(line);
-	else if (line[i] == 'F' && parse->c_f == NULL)
+	else if (line[0] == 'F' && parse->c_f == NULL)
 	{
 		parse->c_f = save_args(line);
 		check_color(parse, parse->c_f);
 	}
-	else if (line[i] == 'C' && parse->c_s == NULL)
+	else if (line[0] == 'C' && parse->c_s == NULL)
 	{
 		parse->c_s = save_args(line);
 		check_color(parse, parse->c_s);
