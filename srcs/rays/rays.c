@@ -103,29 +103,30 @@ void	vertical_wall_intersection(t_map *m, t_rays *r)
 	vertical_loop(m, r, offset);
 }
 
-void	draw_3d_map(t_game *game, t_image *map, t_map *m, t_rays *r)
+void	draw_3d(t_game *game, t_map *m, t_rays *r)
 {
 	float		line_h;
 	int			lines;
 	static int	start_x = 0;
 	int			ray_w;
-	(void) map;
+	// float			offset;
 	(void) m;
 
 	line_h = game->world_h * m->m_size / r->dist;
 	if (line_h > game->world_h)
 		line_h = game->world_h;
-	printf("lineH: %f\n", line_h);
-
 	lines = -1;
-	ray_w = 15;
+	ray_w = game->width / M_RAYS;
+	// offset = game->world_h - (line_h / 2);
+	// printf("lineH: %f\n", line_h);
 	while (++lines < ray_w)
 	{
-		draw_line(&game->world, start_x + lines, 0, start_x + lines, line_h);
+		draw_line(&game->world, start_x + lines, 0, start_x + lines, game->world_h, M_WALL_COLOR);
+		draw_line(&game->world, start_x + lines, 0, start_x + lines, line_h, BLUE);
+		// draw_line(&game->world, start_x + lines, offset, start_x + lines, line_h + offset);
 	}
-	printf("r->rays: %d\n", r->rays);
 	if (r->rays > 1)
-		start_x += 15;
+		start_x += ray_w;
 	else
 		start_x = 0;
 }
@@ -138,10 +139,10 @@ void	cast_rays(t_game *game, t_image *map, t_map *m)
 
 	m->pos_x += M_HALF_PLAYER;
 	m->pos_y += M_HALF_PLAYER;
-	m->a_rad -= M_HALF_RAYS * M_1_DEG_RAD;
+	m->a_rad += M_HALF_RAYS * M_1_DEG_RAD;
 	check_angle(m->a_rad, &m->a_deg);
-	r.rays = M_RAYS + 1;
-	while (--r.rays)
+	r.rays = -1;
+	while (++r.rays < M_RAYS)
 	{
 		init_casting(&r, m->a_rad);
 		r.i = -1;
@@ -149,16 +150,16 @@ void	cast_rays(t_game *game, t_image *map, t_map *m)
 		r.i = -1;
 		vertical_wall_intersection(m, &r);
 		compare_dist(&r);
-		// printf("Ray #%d, distance: %f\n", r.rays, r.dist);
-		draw_3d_map(game, map, m, &r);
+		printf("Ray #%d, distance: %f\n", r.rays, r.dist);
+		draw_3d(game, m, &r);
 		draw_ray(map, m, &r, RED);				// à enlever plus tard
-		m->a_rad +=  M_1_DEG_RAD;
+		m->a_rad -=  M_1_DEG_RAD;
 		check_angle(m->a_rad, &m->a_deg);
 	}
 	// printf("\n");
 	m->pos_x -= M_HALF_PLAYER;
 	m->pos_y -= M_HALF_PLAYER;
-	m->a_rad -= M_HALF_RAYS * M_1_DEG_RAD;
+	m->a_rad += M_HALF_RAYS * M_1_DEG_RAD;
 	m->a_deg = rad_to_deg(m->a_rad);
 	
 }

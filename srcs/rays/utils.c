@@ -69,7 +69,7 @@ void	draw_ray(t_image *image, t_map *m, t_rays *r, int color)
 	}
 }
 
-void	draw_line(t_image *image, int x1, int y1, int x2, int y2)
+void	draw_line(t_image *image, int x1, int y1, int x2, int y2, int color)
 {
 	double	delta_x;
 	double	delta_y;
@@ -86,7 +86,7 @@ void	draw_line(t_image *image, int x1, int y1, int x2, int y2)
 	pixel_y = y1;
 	while (pixels)
 	{
-		my_mlx_pixel_put(image, pixel_x, pixel_y, BLUE);
+		my_mlx_pixel_put(image, pixel_x, pixel_y, color);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
 		--pixels;

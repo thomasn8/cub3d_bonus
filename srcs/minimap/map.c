@@ -2,9 +2,9 @@
 #include "../../includes/map.h"
 
 // A RECEVOIR DU PARSING
-# define S_X 9
+# define S_X 31
 # define S_Y 1
-# define S_ANGLE 0
+# define S_ANGLE 180
 //////////////////////////////////////
 
 static unsigned int	**copy_map(t_image *map, int width, int heigth)
@@ -101,8 +101,8 @@ void	minimap_init(t_game *game, t_parse *parse)
 	game->m.prev_y = game->m.pos_y;
 	// player orientation
 	// printf("Player orientation: %c\n", parse->start_player);
-	game->m.a_rad = M_RAD_0;
-	game->m.a_deg = M_EAST;
+	game->m.a_rad = deg_to_rad(S_ANGLE);
+	game->m.a_deg = S_ANGLE;
 	game->m.delta_x = cos(game->m.a_rad * 5);
 	game->m.delta_y = sin(game->m.a_rad * 5);
 	///////////////////////////////
