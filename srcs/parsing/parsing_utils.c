@@ -13,6 +13,9 @@ void	initialization(t_parse *parse)
 	parse->c_f = NULL;
 	parse->c_s = NULL;
 	parse->error = 0;
+	parse->check_player = 0;
+	parse->wall = 0;
+	parse->free_space = 0;
 }
 
 void	replace_space_tab(char *str)
