@@ -25,29 +25,24 @@ void	draw_lines(t_image *image, int x1, int y1, int x2, int y2, int color)
 	}
 }
 
-// int fix_fisheye(int a)
-// { 
-// 	if (a > 359)
-// 		a -= 360;
-// 	if (a < 0)
-// 		a += 360;
-// 	return (a);
-// }
+float fix_fisheye(float angle)
+{ 
+	if (angle < 0)
+		angle += PI2;
+	if (angle > PI2)
+		angle -= PI2;
+	return (cos(angle));
+}
 
 void	draw_3d(t_game *game, t_map *m, t_rays *r)
 {
 	int			line_h;
 	int			lines;
-	static int	start_x = 0;
 	int			ray_w;
 	float		offset;
+	static int	start_x = 0;
 
-	// int angle;
-	// angle = fix_fisheye(rad_to_deg(m->pa - m->a_rad));
-	// r->dist *= cos(deg_to_rad(angle));
-
-	// printf("dist ray #%d: %f\n", r->rays, r->dist);
-
+	r->dist *= fix_fisheye(m->pa - m->a_rad);
 	line_h = game->world_h * m->m_size / r->dist;
 	if (line_h > game->world_h)
 		line_h = game->world_h;
@@ -84,7 +79,7 @@ void	raycasting(t_game *game)
 		vertical_wall_intersection(&game->m, &r);
 		compare_dist(&r);
 		draw_3d(game, &game->m, &r);
-		draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
+		// draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
 		game->m.a_rad -=  M_1_DEG_RAD;
 		check_angle(game->m.a_rad, &game->m.a_deg);
 	}
