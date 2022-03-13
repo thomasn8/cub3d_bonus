@@ -1,17 +1,6 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-static float distance(t_map *m, t_rays *r)
-{
-	float dist;
-
-	dist = cos(deg_to_rad(m->a_rad)) * (r->x - m->pos_x)
-		- sin(deg_to_rad(m->a_rad)) * (r->y - m->pos_y);
-	if (dist < 0)
-		dist *= -1;
-	return (dist);
-}
-
 static void	horizontal_loop(t_map *m, t_rays *r)
 {
 	while (++r->i < m->rows - 2)
@@ -23,7 +12,7 @@ static void	horizontal_loop(t_map *m, t_rays *r)
 		{
 			r->hx = r->x;
 			r->hy = r->y;
-			r->dist_h = distance(m, r);
+			r->dist_h = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->rows;
 		}
 		else
@@ -45,7 +34,7 @@ static void	vertical_loop(t_map *m, t_rays *r)
 		{
 			r->vx = r->x;
 			r->vy = r->y;
-			r->dist_v = distance(m, r);
+			r->dist_v = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->cols;
 		}
 		else

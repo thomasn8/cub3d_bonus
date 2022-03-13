@@ -17,12 +17,11 @@ void	check_angle(float angle, int *deg)
 		angle += PI2;
 	if (angle > PI2)
 		angle -= PI2;
-	*deg= rad_to_deg(angle);
+	*deg = rad_to_deg(angle);
 }
 
 void	compare_dist(t_rays	*r)
 {
-	// printf("R#%d: dist_v= %f |vs| dist_h= %f\n", r->rays, r->dist_v, r->dist_h);
 	if (r->dist_v != 0 && (r->dist_h == 0 || r->dist_v < r->dist_h))
 	{
 		r->x = r->vx;
