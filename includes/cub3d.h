@@ -95,6 +95,7 @@ typedef struct s_map
 	float			delta_x;
 	float			delta_y;
 	float			a_rad;
+	float			pa;
 	int				a_deg;
 	char			**map;
 	unsigned int	**clean_map;
@@ -150,6 +151,7 @@ void			world_init(t_game *game);
 void			minimap_init(t_game *game, t_parse *parse);
 int				move(t_game *game, char move);
 int				rotation(t_game *game, char dir);
+int				move_ok(t_map *m);
 
 // events
 int				quit_prog(t_game *game);
