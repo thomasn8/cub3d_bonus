@@ -109,7 +109,7 @@ void	minimap_init(t_game *game, t_parse *parse)
 	game->m.y = -1;
 	color_map(&game->map, &game->m);
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
-	new_player_pos(&game->map, &game->m, M_PLAYER_COLOR);
+	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
 	cast_rays(game, &game->map, &game->m);
-	new_player_fov(&game->map, &game->m);
+	new_fov(&game->map, &game->m);
 }

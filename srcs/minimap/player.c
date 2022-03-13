@@ -20,7 +20,7 @@ int	move_check(t_map *m)
 	return (0);
 }
 
-int	player_move(t_game *game, t_image *map, char move, t_map *m)
+int	ws_move(t_game *game, t_image *map, char move, t_map *m)
 {
 	m->prev_x = m->pos_x;
 	m->prev_y = m->pos_y;
@@ -38,9 +38,9 @@ int	player_move(t_game *game, t_image *map, char move, t_map *m)
 	{
 		// remove_prev_pos(map, m);	// à réutiliser lorsqu'on n'affiche plus le FOV
 		remove_prev_fov(map, m);
-		new_player_pos(map, m, M_PLAYER_COLOR);
+		new_pos(map, m, M_PLAYER_COLOR);
 		cast_rays(game, map, m);
-		new_player_fov(map, m);
+		new_fov(map, m);
 		return (0);
 	}
 	m->pos_x = m->prev_x;
@@ -48,7 +48,7 @@ int	player_move(t_game *game, t_image *map, char move, t_map *m)
 	return (-1);
 }
 
-int	player_move2(t_game *game, t_image *map, char move, t_map *m)			// for 'A' + 'S' keys
+int	ad_move(t_game *game, t_image *map, char move, t_map *m)			// for 'A' + 'S' keys
 {
 	(void) game;
 	(void) map;
@@ -57,7 +57,7 @@ int	player_move2(t_game *game, t_image *map, char move, t_map *m)			// for 'A' +
 	return (0);
 }
 
-int	player_rotation(t_game *game, t_image *map, char dir, t_map *m)
+int	rotation(t_game *game, t_image *map, char dir, t_map *m)
 {
 	if (dir == 'l')
 	{
@@ -75,8 +75,8 @@ int	player_rotation(t_game *game, t_image *map, char dir, t_map *m)
 	m->delta_x = cos(-m->a_rad);
 	m->delta_y = sin(-m->a_rad);
 	remove_prev_fov(map, m);
-	new_player_pos(map, m, M_PLAYER_COLOR);
+	new_pos(map, m, M_PLAYER_COLOR);
 	cast_rays(game, map, m);
-	new_player_fov(map, m);
+	new_fov(map, m);
 	return (0);
 }

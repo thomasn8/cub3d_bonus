@@ -59,7 +59,7 @@ void	remove_prev_pos(t_image *map, t_map *m)
 	}
 }
 
-void	new_player_fov(t_image *map, t_map *m)
+void	new_fov(t_image *map, t_map *m)
 {
 	float	pixel_x;
 	float	pixel_y;
@@ -77,7 +77,7 @@ void	new_player_fov(t_image *map, t_map *m)
 	}
 }
 
-void	new_player_pos(t_image *map, t_map *m, int color)
+void	new_pos(t_image *map, t_map *m, int color)
 {
 	int	width;
 	int	height;

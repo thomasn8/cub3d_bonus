@@ -58,8 +58,8 @@ typedef struct s_rays
 
 /* MINIMAP */
 // pixels
-void		new_player_pos(t_image *map, t_map *m, int color);
-void		new_player_fov(t_image *map, t_map *m);
+void		new_pos(t_image *map, t_map *m, int color);
+void		new_fov(t_image *map, t_map *m);
 void		remove_prev_pos(t_image *map, t_map *m);
 void		remove_prev_fov(t_image *map, t_map *m);
 
