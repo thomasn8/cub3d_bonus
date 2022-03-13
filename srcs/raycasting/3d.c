@@ -1,15 +1,6 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-// int fix_fisheye(int a)
-// { 
-// 	if (a > 359)
-// 		a -= 360;
-// 	if (a < 0)
-// 		a += 360;
-// 	return (a);
-// }
-
 void	draw_lines(t_image *image, int x1, int y1, int x2, int y2, int color)
 {
 	double	delta_x;
@@ -34,6 +25,14 @@ void	draw_lines(t_image *image, int x1, int y1, int x2, int y2, int color)
 	}
 }
 
+// int fix_fisheye(int a)
+// { 
+// 	if (a > 359)
+// 		a -= 360;
+// 	if (a < 0)
+// 		a += 360;
+// 	return (a);
+// }
 
 void	draw_3d(t_game *game, t_map *m, t_rays *r)
 {
@@ -64,10 +63,10 @@ void	draw_3d(t_game *game, t_map *m, t_rays *r)
 		start_x = 0;
 }
 
-void	cast_rays(t_game *game, t_image *map, t_map *m)
+void	raycasting(t_game *game, t_image *map, t_map *m)
 {
 	t_rays	r;
-	(void) map;
+	(void) map;												// à enlever plus tard
 
 	m->pos_x += M_HALF_PLAYER;
 	m->pos_y += M_HALF_PLAYER;
@@ -76,13 +75,13 @@ void	cast_rays(t_game *game, t_image *map, t_map *m)
 	r.rays = -1;
 	while (++r.rays < M_RAYS)
 	{
-		init_casting(&r, m->a_rad);
-		r.i = -1;
+		r.dist_v = 0;
+		r.dist_h = 0;
+		r.atan = -1 / tan(-m->a_rad);
+		r.ntan = -tan(-m->a_rad);
 		horizontal_wall_intersection(m, &r);
-		r.i = -1;
 		vertical_wall_intersection(m, &r);
 		compare_dist(&r);
-		r.ray_angle = m->a_rad;
 		draw_3d(game, m, &r);
 		// draw_ray(map, m, &r, RED);						// à enlever plus tard
 		m->a_rad -=  M_1_DEG_RAD;

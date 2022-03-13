@@ -110,6 +110,6 @@ void	minimap_init(t_game *game, t_parse *parse)
 	color_map(&game->map, &game->m);
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
 	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
-	cast_rays(game, &game->map, &game->m);
+	raycasting(game, &game->map, &game->m);
 	new_fov(&game->map, &game->m);
 }

@@ -20,14 +20,6 @@ void	check_angle(float angle, int *deg)
 	*deg= rad_to_deg(angle);
 }
 
-void	init_casting(t_rays *r, float angle)
-{
-	r->dist_v = 0;
-	r->dist_h = 0;
-	r->atan = -1 / tan(-angle);
-	r->ntan = -tan(-angle);
-}
-
 void	compare_dist(t_rays	*r)
 {
 	if (r->dist_v != 0 && (r->dist_h == 0 || r->dist_v < r->dist_h))

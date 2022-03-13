@@ -1,82 +1,92 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-int	move_check(t_map *m)
+/*
+void	remove_prev_fov(t_image *map, t_map *m)
 {
-	float			x1;
-	float			y1;
-	float			x2;
-	float			y2;
+	int	width;
+	int	height;
+	int x;
+	int y;
 
-	x1 = (m->pos_x - 1) / m->m_size;
-	y1 = (m->pos_y - 1) / m->m_size;
-	x2 = (m->pos_x + M_PLAYER_SIZE - 1) / m->m_size;
-	y2 = (m->pos_y + M_PLAYER_SIZE - 1) / m->m_size;
-	if (m->map[(int)y1][(int)x1] != '1' &&
-		m->map[(int)y2][(int)x2] != '1' &&
-		m->map[(int)y1][(int)x2] != '1' &&
-		m->map[(int)y2][(int)x1] != '1')
-		return (1);
-	return (0);
+	height = -2;
+	while (++height < m->m_size * 2 + 1)
+	{
+		width = -2;
+		while (++width < m->m_size * 2 + 1)
+		{
+			x = m->prev_x + width - m->m_size + M_HALF_PLAYER;
+			y = m->prev_y + height - m->m_size + M_HALF_PLAYER;
+			my_mlx_pixel_put(map, x, y, m->clean_map[y][x]);
+		}
+	}
+}
+*/
+
+/* provisoire, pour mettre à jour visuellement le field of view
+plus tard réutiliser la fonction du dessus (+ rapide car redessine le minium nécessaire)*/
+void	remove_prev_fov(t_image *map, t_map *m)
+{
+	int	width;
+	int	height;
+
+	height = -1;
+	while (++height < m->h)
+	{
+		width = -1;
+		while (++width < m->w)
+			my_mlx_pixel_put(map, width, height, m->clean_map[height][width]);
+	}
 }
 
-int	ws_move(t_game *game, t_image *map, char move, t_map *m)
+void	remove_prev_pos(t_image *map, t_map *m)
 {
-	m->prev_x = m->pos_x;
-	m->prev_y = m->pos_y;
-	if (move == 'w')
+	int	width;
+	int	height;
+	int x;
+	int y;
+
+	height = -1;
+	while (++height < M_PLAYER_SIZE)
 	{
-		m->pos_x += m->delta_x;
-		m->pos_y += m->delta_y;
+		width = -1;
+		while (++width < M_PLAYER_SIZE)
+		{
+			x = m->prev_x + width;
+			y = m->prev_y + height;
+			my_mlx_pixel_put(map, x, y,  m->clean_map[y][x]);
+		}
 	}
-	else if (move == 's')
-	{
-		m->pos_x -= m->delta_x;
-		m->pos_y -= m->delta_y;
-	}
-	if (move_check(m))
-	{
-		// remove_prev_pos(map, m);	// à réutiliser lorsqu'on n'affiche plus le FOV
-		remove_prev_fov(map, m);
-		new_pos(map, m, M_PLAYER_COLOR);
-		cast_rays(game, map, m);
-		new_fov(map, m);
-		return (0);
-	}
-	m->pos_x = m->prev_x;
-	m->pos_y = m->prev_y;
-	return (-1);
 }
 
-int	ad_move(t_game *game, t_image *map, char move, t_map *m)			// for 'A' + 'S' keys
+void	new_fov(t_image *map, t_map *m)
 {
-	(void) game;
-	(void) map;
-	(void) move;
-	(void) m;
-	return (0);
+	float	pixel_x;
+	float	pixel_y;
+	int		pixels;
+	
+	pixel_x = m->pos_x;
+	pixel_y = m->pos_y;
+	pixels = m->m_size;
+	while (pixels)
+	{
+		my_mlx_pixel_put(map, pixel_x + M_HALF_PLAYER, pixel_y + M_HALF_PLAYER, M_FOV_COLOR);
+		pixel_x += m->delta_x;
+		pixel_y += m->delta_y;
+		pixels--;
+	}
 }
 
-int	rotation(t_game *game, t_image *map, char dir, t_map *m)
+void	new_pos(t_image *map, t_map *m, int color)
 {
-	if (dir == 'l')
+	int	width;
+	int	height;
+
+	height = -1;
+	while (++height < M_PLAYER_SIZE)
 	{
-		m->a_rad -= 5 * M_1_DEG_RAD;
-		if (m->a_rad < 0)
-			m->a_rad += 2 * PI;
+		width = -1;
+		while (++width < M_PLAYER_SIZE)
+			my_mlx_pixel_put(map, (int)m->pos_x + width, (int)m->pos_y + height, color);
 	}
-	else if (dir == 'r')
-	{
-		m->a_rad += 5 * M_1_DEG_RAD;
-		if (m->a_rad > 2 * PI)
-			m->a_rad -= 2 * PI;
-	}
-	m->a_deg = rad_to_deg(m->a_rad);
-	m->delta_x = cos(-m->a_rad);
-	m->delta_y = sin(-m->a_rad);
-	remove_prev_fov(map, m);
-	new_pos(map, m, M_PLAYER_COLOR);
-	cast_rays(game, map, m);
-	new_fov(map, m);
-	return (0);
 }

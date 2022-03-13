@@ -42,6 +42,7 @@ typedef struct s_rays
 	float	xo;
 	float	yo;
 	int		i;
+	int		shift;
 	int		rows;
 	int		cols;
 	int		mx;
@@ -53,7 +54,6 @@ typedef struct s_rays
 	float	dist_h;
 	float	dist_v;
 	float	dist;
-	int		ray_angle;
 }	t_rays;
 
 /* MINIMAP */
@@ -68,7 +68,6 @@ void		remove_prev_fov(t_image *map, t_map *m);
 float		deg_to_rad(int angle);
 int			rad_to_deg(float angle);
 void		check_angle(float angle, int *deg);
-void		init_casting(t_rays *r, float angle);
 void		compare_dist(t_rays	*r);
 void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 
@@ -77,6 +76,6 @@ void		horizontal_wall_intersection(t_map *m, t_rays *r);
 void		vertical_wall_intersection(t_map *m, t_rays *r);
 
 // 3d
-void		cast_rays(t_game *game, t_image *map, t_map *m);
+void		raycasting(t_game *game, t_image *map, t_map *m);
 
 #endif
