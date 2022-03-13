@@ -13,7 +13,9 @@ void	check_color(t_parse *parse, char *color)
 {
 	int		i;
 	int		sum;
+	int		temp;
 
+	temp = 0;
 	sum = 0;
 	i = 0;
 	while (color[i] != '\0')
@@ -22,9 +24,12 @@ void	check_color(t_parse *parse, char *color)
 		{
 			sum = (sum * 10) + (color[i] - 48);
 			if (sum > 255)
-				ft_error(parse, "Max R,G,B (255)", NULL);
+				ft_error(parse, "Max int (255)", NULL);
 			i++;
 		}
+		temp += sum;
+		if (temp > 765)
+			ft_error(parse, "Max 3 values R,G,B", NULL);
 		sum = 0;
 		if (ft_isprint(color[i]))
 			i++;
