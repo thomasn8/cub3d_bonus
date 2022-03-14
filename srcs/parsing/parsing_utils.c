@@ -1,13 +1,13 @@
 #include "../../includes/cub3d.h"
 
-void	initialization(t_parse *parse)
+void	initialisation(t_parse *parse)
 {
 	parse->map = NULL;
 	parse->no = NULL;
 	parse->so = NULL;
 	parse->we = NULL;
 	parse->ea = NULL;
-	parse->start_player = 0;
+	parse->view_player = 0;
 	parse->m_height = 0;
 	parse->m_width = 0;
 	parse->c_f = NULL;
@@ -16,6 +16,8 @@ void	initialization(t_parse *parse)
 	parse->check_player = 0;
 	parse->wall = 0;
 	parse->free_space = 0;
+	parse->start_x = 0;
+	parse->start_y = 0;
 }
 
 void	replace_space_tab(char *str)
@@ -35,7 +37,7 @@ void	replace_space_tab(char *str)
 
 void	free_all(t_parse *parse)
 {
-	if (parse->map)
+	if (parse->map != NULL)
 		ft_free_array(parse->map);
 	if (parse->no)
 		free(parse->no);
@@ -49,8 +51,6 @@ void	free_all(t_parse *parse)
 		free(parse->c_f);
 	if (parse->c_s)
 		free(parse->c_s);
-	if (parse)
-		free(parse);
 }
 
 void	print_map(char **map)
@@ -65,4 +65,24 @@ void	print_map(char **map)
 		while (map[y][++x])
 			write(1, &map[y][x], 1);
 	}
+}
+
+//permet de calculer la taille de la map pour la malloqué.
+int	ft_map(char *line, t_parse *parse)
+{
+	int			i;
+	static int	nblines = 0;
+	static int	ssizeline = 0;
+
+	i = 0;
+	if (ft_is_map(line) == 1 && check_missing(parse) == 0)
+	{
+		nblines += 1;
+		i = ft_strlen(line);
+		if (i > ssizeline)
+			ssizeline = i;
+	}
+	parse->m_height = nblines;
+	parse->m_width = ssizeline - 1;
+	return (0);
 }

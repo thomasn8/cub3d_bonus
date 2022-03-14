@@ -62,28 +62,18 @@ int	ft_is_map(char *line)
 	return (0);
 }
 
-//permet de calculer la taille de la map pour la malloqué.
-int	ft_map(char *line, t_parse *parse)
+void	get_map2(int l, int i, t_parse *parse)
 {
-	int			i;
-	static int	nblines = 0;
-	static int	ssizeline = 0;
-
-	i = 0;
-	if (ft_is_map(line) == 1 && check_missing(parse) == 0)
+	if (l != parse->m_width + 1)
 	{
-		nblines += 1;
-		i = ft_strlen(line);
-		if (i > ssizeline)
-			ssizeline = i;
+		ft_memset((void *)&parse->map[i][l - 1], '1', parse->m_width + 1 - l);
+		parse->map[i][parse->m_width] = '\n';
+		parse->map[i][parse->m_width + 1] = '\0';
 	}
-	parse->m_height = nblines;
-	parse->m_width = ssizeline - 1;
-	return (0);
 }
 
 //permet de malloqué la map et la save dans la struct (char **map)
-int	get_map(t_parse *parse, const char *map)
+void	get_map(t_parse *parse, const char *map)
 {
 	int		fd;
 	int		i;
@@ -97,24 +87,17 @@ int	get_map(t_parse *parse, const char *map)
 	i = 0;
 	while (line != NULL)
 	{
-		if (ft_is_map(line) == 1)
+		if (ft_is_map(line) == 1 && check_map_close(parse, line) == 1)
 		{
-			check_map_close(parse, line);
 			parse->map[i] = malloc((parse->m_width + 2) * sizeof(char));
 			l = ft_strlen(line);
 			ft_strlcpy(parse->map[i], line, l + 1);
 			replace_space_tab(parse->map[i]);
-			if (l != parse->m_width + 1)
-			{
-				ft_memset((void *)&parse->map[i][l - 1], '1', parse->m_width + 1 - l);
-				parse->map[i][parse->m_width] = '\n';
-				parse->map[i][parse->m_width + 1] = '\0';
-			}
+			get_map2(l, i, parse);
 			i++;
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
 	print_map(parse->map);
-	return (0);
 }
