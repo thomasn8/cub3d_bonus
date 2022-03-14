@@ -25,7 +25,6 @@ void	draw_lines(t_image *image, int x1, int y1, int x2, int y2, int color)
 	}
 }
 
-// faire en sorte de repeindre que les rayons PURPLE dans le 1er draw_lines
 void	draw_3d(t_game *game, t_rays *r)
 {
 	int			line_h;
