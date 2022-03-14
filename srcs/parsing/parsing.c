@@ -63,5 +63,6 @@ int	parsing(int fd, const char *map, t_parse *parse)
 	check_missing(parse);
 	get_map(parse, map);
 	check_player(parse);
+	// print_all(parse);
 	return (0);
 }

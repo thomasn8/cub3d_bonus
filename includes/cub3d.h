@@ -43,13 +43,19 @@ typedef struct s_parse
 	int				start_y;
 	int				m_height;
 	int				m_width;
+	unsigned long	hex_f;
+	unsigned long	hex_s;
+	//////////////////////////////
 	char			*c_f;
 	char			*c_s;
-	//////////////////////////////
 	int				error;
 	int				wall;
 	int				free_space;
 	int				check_player;
+	int				r;
+	int				g;
+	int				b;
+	unsigned long	rgb;
 }	t_parse;
 
 // image on game (world + minimap)
@@ -92,8 +98,8 @@ typedef struct s_map
 	int				w_offset;
 	float			prev_x;
 	float			prev_y;
-	float			pos_x;					// x position du player 
-	float			pos_y;					// y position du player 
+	float			pos_x;					// x position du player
+	float			pos_y;					// y position du player
 	float			delta_x;
 	float			delta_y;
 	float			a_rad;					// view_player (en radius)
@@ -146,9 +152,11 @@ void			free_all(t_parse *parse);
 int				ft_error(t_parse *parse, char *str, char *line);
 int				parse_textures(char *line, t_parse *parse);
 int				check_missing(t_parse *parse);
-void			check_color(t_parse *parse, char *color);
+void			check_color(t_parse *parse, char *color, char c);
 int				check_error_texture(t_parse *parse, char *textures);
 void			print_map(char **grid);
+unsigned long	create_rgb(int t, int r, int g, int b);
+void			print_all(t_parse *p);
 
 // init
 void			params_init(t_game *game);
