@@ -6,11 +6,12 @@
 # define GRAY_DARK 0x00202020
 # define GRAY_LIGHT 0x00505050
 # define PURPLE 0x006C0277
-# define BYZAN 0x00702963
-# define GLYCINE 0x00C9A0DC
-# define LIN 0x00D2CAEC
-# define PRUNE 0x00811453
-# define PERSAN 0x006600FF
+# define CV1 0x00702963
+# define CV2 0x00C9A0DC
+# define CH1 0x00D2CAEC
+# define CH2 0x00811453
+# define SKY 0x006600FF
+# define GROUND 0x00505050
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
 # define BLUE 0x000000FF
@@ -64,6 +65,15 @@ typedef struct s_rays
 	float	dist_v;
 	float	dist;
 	char	cross;
+	int		l;
+	float	top;
+	float	bot;
+	int		lpr;
+	int		color;
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
 }	t_rays;
 
 /* MINIMAP */
@@ -74,17 +84,18 @@ void		remove_prev_pos(t_image *map, t_map *m);
 void		remove_prev_fov(t_image *map, t_map *m);
 
 /* RAYCASTING */
-// utils
+// utils et rc_utils
 float		deg_to_rad(int angle);
 int			rad_to_deg(float angle);
+void		draw_lines(t_image *image, t_rays *r, int color);
 void		check_angle(float angle, int *deg);
 void		compare_dist(t_rays	*r);
 float		fix_fisheye(float angle);
+void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 
 // rays
 void		ray_horizontal_check(t_map *m, t_rays *r);
 void		ray_vertical_check(t_map *m, t_rays *r);
-void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 
 // 3d
 void		raycasting(t_game *game);

@@ -1,68 +1,63 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-void	draw_lines(t_image *image, int x1, int y1, int x2, int y2, int color)
+// FONCTION POUR METTRE LES TEXTURES SUR LES MURS				<-------
+void	walls_texture(float ray_a, t_rays *r)
 {
-	double	d_x;
-	double	d_y;
-	int		pix;
-	double	p_x;
-	double	p_y;
-
-	d_x = x2 - x1;
-	d_y = y2 - y1;
-	pix = sqrt((d_x * d_x) + (d_y * d_y));
-	d_x /= pix;
-	d_y /= pix;
-	p_x = x1;
-	p_y = y1;
-	while (pix)
+	if (r->cross == 'v')
 	{
-		my_mlx_pixel_put(image, p_x, p_y, color);
-		p_x += d_x;
-		p_y += d_y;
-		--pix;
+		if (ray_a > 90 && ray_a < 270)
+			r->color = CV1;
+		else
+			r->color = CV2;
 	}
+	else
+	{
+		if (ray_a > 0 && ray_a < 180)
+			r->color = CH1;
+		else
+			r->color = CH2;
+	}
+}
+
+void	ray_transfo(t_game *game, t_rays *r)
+{
+	r->dist *= fix_fisheye(game->m.player_angle - game->m.a_rad);
+	r->top = game->world_h * game->m.m_size / r->dist;
+	if (r->top > game->world_h)
+		r->top = game->world_h;
+	r->bot = (game->world_h / 2) - (r->top / 2);
+	r->lpr = game->width / M_2RAYS;
+	r->l = -1;
+	walls_texture(game->m.a_deg, r);
 }
 
 // l = line | lpr = lines per ray | bot = wall bottom | top = wall top
 void	draw_3d(t_game *game, t_rays *r)
 {
-	int			l;
-	int			top;
-	float		bot;
-	int			lpr;
 	static int	x = 0;
-	int			color;
 
-	r->dist *= fix_fisheye(game->m.player_angle - game->m.a_rad);
-	top = game->world_h * game->m.m_size / r->dist;
-	if (top > game->world_h)
-		top = game->world_h;
-	bot = (game->world_h / 2) - (top / 2);
-	lpr = game->width / M_2RAYS;
-	l = -1;
-	if (r->cross == 'v')
+	ray_transfo(game, r);
+	walls_texture(game->m.a_deg, r);
+	while (++r->l < r->lpr)
 	{
-		if (game->m.a_deg > 90 && game->m.a_deg < 270)
-			color = BYZAN;
-		else
-			color = GLYCINE;
+		r->x1 = x + r->l;
+		r->y1 = 0;
+		r->x2 = x + r->l;
+		r->y2 = r->bot;
+		draw_lines(&game->world, r, SKY);				// plafond
+		r->x1 = x + r->l;
+		r->y1 = r->bot;
+		r->x2 = x + r->l;
+		r->y2 = r->top + r->bot;
+		draw_lines(&game->world, r, r->color);			// walls
+		r->x1 = x + r->l;
+		r->y1 = r->top + r->bot;
+		r->x2 = x + r->l;
+		r->y2 = game->world_h;
+		draw_lines(&game->world, r, GROUND);			// sol
 	}
-	else
-	{
-		if (game->m.a_deg > 0 && game->m.a_deg < 180)
-			color = LIN;
-		else
-			color = PRUNE;
-	}
-	while (++l < lpr)
-	{
-		draw_lines(&game->world, x + l, 0, x + l, bot, PERSAN);								// c_s
-		draw_lines(&game->world, x + l, bot, x + l, top + bot, color);						// wall
-		draw_lines(&game->world, x + l, top + bot, x + l, game->world_h, M_WALL_COLOR);		// c_f
-	}
-	x += lpr;
+	x += r->lpr;
 	if (r->rays == M_2RAYS - 1)
 		x = 0;
 }
