@@ -90,8 +90,8 @@ typedef struct s_map
 	int				h;						// heigth de l'image world dans game
 	int				h_offset;
 	int				w_offset;
-	float			prev_x;					// x prev pos du player 
-	float			prev_y;					// x prev pos du player 
+	float			prev_x;
+	float			prev_y;
 	float			pos_x;					// x position du player 
 	float			pos_y;					// y position du player 
 	float			delta_x;
@@ -101,7 +101,7 @@ typedef struct s_map
 	int				a_deg;					// view_player (en degré)
 	char			**map;					// map
 	unsigned int	**clean_map;
-	char			*no;					// textures
+	char			*no;					// textures ...
 	char			*so;
 	char			*we;
 	char			*ea;

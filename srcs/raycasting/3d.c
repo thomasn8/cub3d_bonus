@@ -43,8 +43,8 @@ void	draw_3d(t_game *game, t_rays *r)
 	l = -1;
 	while (++l < lpr)
 	{
-		draw_lines(&game->world, x + l, 0, x + l, bot - 1, GREEN);							// c_s
-		draw_lines(&game->world, x + l, bot, x + l, top + bot, PURPLE);					// wall
+		draw_lines(&game->world, x + l, 0, x + l, bot - 1, GREEN);								// c_s
+		draw_lines(&game->world, x + l, bot, x + l, top + bot, PURPLE);							// wall
 		draw_lines(&game->world, x + l, top + bot + 1, x + l, game->world_h, M_WALL_COLOR);		// c_f
 	}
 	x += lpr;

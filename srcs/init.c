@@ -11,12 +11,6 @@ void	minimap_init(t_game *game, t_parse *parse)
 	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
 	raycasting(game);
 	new_fov(&game->map, &game->m);
-
-	// provisoir: pour corriger bug nord/sud au lancement
-	rotation(game, 'l');
-	rotation(game, 'r');
-	printf("orientation: %f / %d°\n", game->m.a_rad, game->m.a_deg);
-	////////////////////////////////////////////////////////////////
 }
 
 void	world_init(t_game *game)

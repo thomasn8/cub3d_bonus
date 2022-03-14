@@ -109,6 +109,6 @@ void	player_description(t_game *game, t_parse *parse)
 	else if (parse->view_player == 'S')
 		game->m.a_rad = deg_to_rad(M_SOUTH);
 	game->m.a_deg = rad_to_deg(game->m.a_rad);
-	game->m.delta_x = cos(game->m.a_rad);
-	game->m.delta_y = sin(game->m.a_rad);
+	game->m.delta_x = cos(-game->m.a_rad);
+	game->m.delta_y = sin(-game->m.a_rad);
 }
