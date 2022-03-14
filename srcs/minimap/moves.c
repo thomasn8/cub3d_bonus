@@ -87,13 +87,13 @@ int	rotation(t_game *game, char dir)
 {
 	if (dir == 'l')
 	{
-		game->m.a_rad -= 5 * M_1_DEG_RAD;
+		game->m.a_rad -= M_ROT_SPEED * M_1_DEG_RAD;
 		if (game->m.a_rad < 0)
 			game->m.a_rad += PI2;
 	}
 	else if (dir == 'r')
 	{
-		game->m.a_rad += 5 * M_1_DEG_RAD;
+		game->m.a_rad += M_ROT_SPEED * M_1_DEG_RAD;
 		if (game->m.a_rad > PI2)
 			game->m.a_rad -= PI2;
 	}

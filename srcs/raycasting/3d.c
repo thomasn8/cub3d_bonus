@@ -48,14 +48,14 @@ void	draw_3d(t_game *game, t_map *m, t_rays *r)
 		line_h = game->world_h;
 	offset = (game->world_h / 2) - (line_h / 2);
 	lines = -1;
-	ray_w = game->width / M_RAYS;
+	ray_w = game->width / M_2RAYS;
 	while (++lines < ray_w)
 	{
 		draw_lines(&game->world, start_x + lines, 0, start_x + lines, game->world_h, M_WALL_COLOR);
 		draw_lines(&game->world, start_x + lines, offset, start_x + lines, line_h + offset, PURPLE);
 	}
 	start_x += ray_w;
-	if (r->rays == M_RAYS - 1)
+	if (r->rays == M_2RAYS - 1)
 		start_x = 0;
 }
 
@@ -66,10 +66,10 @@ void	raycasting(t_game *game)
 	game->m.pos_x += M_HALF_PLAYER;
 	game->m.pos_y += M_HALF_PLAYER;
 	game->m.pa = game->m.a_rad;
-	game->m.a_rad += M_HALF_RAYS * M_1_DEG_RAD;
+	game->m.a_rad += M_RAYS * M_05_DEG_RAD;
 	check_angle(game->m.a_rad, &game->m.a_deg);
 	r.rays = -1;
-	while (++r.rays < M_RAYS)
+	while (++r.rays < M_2RAYS)
 	{
 		r.dist_v = 0;
 		r.dist_h = 0;
@@ -80,11 +80,11 @@ void	raycasting(t_game *game)
 		compare_dist(&r);
 		draw_3d(game, &game->m, &r);
 		// draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
-		game->m.a_rad -=  M_1_DEG_RAD;
+		game->m.a_rad -=  M_05_DEG_RAD;
 		check_angle(game->m.a_rad, &game->m.a_deg);
 	}
 	game->m.pos_x -= M_HALF_PLAYER;
 	game->m.pos_y -= M_HALF_PLAYER;
-	game->m.a_rad += M_HALF_RAYS * M_1_DEG_RAD;
+	game->m.a_rad += M_RAYS * M_05_DEG_RAD;
 	game->m.a_deg = rad_to_deg(game->m.a_rad);
 }
