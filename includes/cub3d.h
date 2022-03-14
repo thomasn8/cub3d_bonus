@@ -9,7 +9,7 @@
 # include <fcntl.h>
 
 /* dimensions */
-# define WIDTH 900
+# define WIDTH 960
 # define HEIGTH 868
 # define MARGIN 5
 # define MENU_HEIGTH 100
@@ -95,7 +95,7 @@ typedef struct s_map
 	float			delta_x;
 	float			delta_y;
 	float			a_rad;
-	float			pa;
+	float			player_angle;
 	int				a_deg;
 	char			**map;
 	unsigned int	**clean_map;

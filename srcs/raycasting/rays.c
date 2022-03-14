@@ -45,7 +45,7 @@ static void	vertical_loop(t_map *m, t_rays *r)
 	}
 }
 
-void	horizontal_wall_intersection(t_map *m, t_rays *r)
+void	ray_horizontal_check(t_map *m, t_rays *r)
 {
 	r->i = -1;
 	r->shift = 0;
@@ -73,7 +73,7 @@ void	horizontal_wall_intersection(t_map *m, t_rays *r)
 	horizontal_loop(m, r);
 }
 
-void	vertical_wall_intersection(t_map *m, t_rays *r)
+void	ray_vertical_check(t_map *m, t_rays *r)
 {
 	r->i = -1;
 	r->shift = 0;
@@ -99,4 +99,28 @@ void	vertical_wall_intersection(t_map *m, t_rays *r)
 		r->i = m->cols;
 	}
 	vertical_loop(m, r);
+}
+
+void	draw_ray(t_image *image, t_map *m, t_rays *r, int color)
+{
+	float	delta_x;
+	float	delta_y;
+	int		pixels;
+	float	pixel_x;
+	float	pixel_y;
+
+	delta_x = r->x - m->pos_x;
+	delta_y = r->y - m->pos_y;
+	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
+	delta_x /= pixels;
+	delta_y /= pixels;
+	pixel_x = m->pos_x;
+	pixel_y = m->pos_y;
+	while (pixels)
+	{
+		my_mlx_pixel_put(image, pixel_x, pixel_y, color);
+		pixel_x += delta_x;
+		pixel_y += delta_y;
+		--pixels;
+	}
 }

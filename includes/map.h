@@ -26,7 +26,7 @@
 # define M_05_DEG_RAD 0.00872665
 # define M_RAYS 60
 # define M_2RAYS 120
-# define M_HALF_RAYS (M_RAYS / 2)
+# define M_HALF_RAYS 30
 # define M_EAST 0
 # define M_NORTH 90
 # define M_WEST 180
@@ -73,11 +73,12 @@ float		deg_to_rad(int angle);
 int			rad_to_deg(float angle);
 void		check_angle(float angle, int *deg);
 void		compare_dist(t_rays	*r);
-void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
+float		fix_fisheye(float angle);
 
 // rays
-void		horizontal_wall_intersection(t_map *m, t_rays *r);
-void		vertical_wall_intersection(t_map *m, t_rays *r);
+void		ray_horizontal_check(t_map *m, t_rays *r);
+void		ray_vertical_check(t_map *m, t_rays *r);
+void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 
 // 3d
 void		raycasting(t_game *game);
