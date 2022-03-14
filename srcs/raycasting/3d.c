@@ -45,7 +45,7 @@ static void	draw_3d(t_game *game, t_rays *r)
 		r->y1 = 0;
 		r->x2 = x + r->l;
 		r->y2 = r->bot;
-		draw_lines(&game->world, r, SKY);				// plafond
+		draw_lines(&game->world, r, game->m.c_ceil);				// plafond
 		r->x1 = x + r->l;
 		r->y1 = r->bot;
 		r->x2 = x + r->l;
@@ -55,7 +55,7 @@ static void	draw_3d(t_game *game, t_rays *r)
 		r->y1 = r->top + r->bot;
 		r->x2 = x + r->l;
 		r->y2 = game->world_h;
-		draw_lines(&game->world, r, GROUND);			// sol
+		draw_lines(&game->world, r, game->m.c_floor);			// sol
 	}
 	x += r->lpr;
 	if (r->rays == M_2RAYS - 1)

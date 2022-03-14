@@ -4,7 +4,7 @@ WE ./path_to_the_west_texture3.xpm
 EA ./path_to_the_east_texture4.xpm
 
 F 80,80,80
-C 255,30,255
+C 102,0,255
 
 
         1111111111111111111111111
