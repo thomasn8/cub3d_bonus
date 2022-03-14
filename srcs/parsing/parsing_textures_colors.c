@@ -1,14 +1,5 @@
 #include "../../includes/cub3d.h"
 
-void	check_texture(t_parse *parse, char *textures)
-{
-	int		i;
-
-	i = 0;
-	if (textures[i] != '.' && textures[i + 1] != '/')
-		ft_error(parse, "Is not a pass", NULL);
-}
-
 void	check_color(t_parse *parse, char *color)
 {
 	int		i;
@@ -81,13 +72,17 @@ int	parse_textures(char *line, t_parse *parse)
 // parsing des textures (images que l'on va afficher sur les murs)
 int	parse_textures_colors(char *line, t_parse *parse)
 {
-	if (parse_textures(line, parse) == 1)
+	if (parse_textures(line, parse) == 1 && \
+		check_error_texture(parse, line) == 1)
 		parse->no = save_args(line);
-	else if (parse_textures(line, parse) == 2)
+	else if (parse_textures(line, parse) == 2 && \
+			check_error_texture(parse, line) == 1)
 		parse->so = save_args(line);
-	else if (parse_textures(line, parse) == 3)
+	else if (parse_textures(line, parse) == 3 && \
+			check_error_texture(parse, line) == 1)
 		parse->we = save_args(line);
-	else if (parse_textures(line, parse) == 4)
+	else if (parse_textures(line, parse) == 4 && \
+			check_error_texture(parse, line) == 1)
 		parse->ea = save_args(line);
 	else if (line[0] == 'F' && parse->c_f == NULL)
 	{

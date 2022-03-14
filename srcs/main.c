@@ -7,8 +7,8 @@ int	main(int ac, char **av)
 	t_parse	parse;
 
 	if (ac != 2)
-		write_errors(" argument");
-	if (!check_map_name(av[1]))
+		ft_error(NULL, " argument", NULL);
+	if (!check_name(av[1], ".cub"))
 		ft_error(&parse, "Nom de la map invalid\n ext == [.cub]\n", NULL);
 	save_map(av[1], &parse);
 	params_init(&game);

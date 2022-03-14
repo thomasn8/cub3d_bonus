@@ -10,6 +10,20 @@ int	check_missing(t_parse *parse)
 	return (0);
 }
 
+int	check_error_texture(t_parse *parse, char *textures)
+{
+	int		i;
+
+	i = 2;
+	while (!ft_notblank(textures[i]))
+		i++;
+	if (textures[i] != '.' && textures[i + 1] != '/')
+		ft_error(parse, "Is not a pass", NULL);
+	if (!check_name(textures, ".xpm\n"))
+		ft_error(parse, "Is not correct file (.xpm)", NULL);
+	return (1);
+}
+
 int	ft_error(t_parse *parse, char *str, char *line)
 {
 	if (str)
@@ -21,12 +35,10 @@ int	ft_error(t_parse *parse, char *str, char *line)
 	exit(0);
 }
 
-int	check_map_name(char *map)
+int	check_name(char *map, char *correct_ext)
 {
 	char	*ext;
-	char	*correct_ext;
 
-	correct_ext = ".cub";
 	ext = ft_strrchr(map, '.');
 	if (ext == NULL)
 		return (0);
@@ -45,6 +57,6 @@ void	save_map(const char *map, t_parse *parse)
 		write_errors("The file is not open\n");
 		exit (0);
 	}
-	initialization(parse);
+	initialisation(parse);
 	parsing(fd, map, parse);
 }

@@ -38,7 +38,7 @@ typedef struct s_parse
 	char			*so;
 	char			*we;
 	char			*ea;
-	char			start_player;
+	char			view_player;
 	// int				start_x;
 	// int				start_y;
 	int				m_height;
@@ -121,15 +121,16 @@ typedef struct s_game
 }	t_game;
 
 // parsing
-int				check_map_name(char *map);
+int				check_name(char *map, char *correct_ext);
 void			save_map(const char *map, t_parse *parse);
 int				parsing(int fd, const char *map, t_parse *parse);
-void			initialization(t_parse *parse);
+void			initialisation(t_parse *parse);
 int				check_map(void);
 int				parse_textures_colors(char *line, t_parse *parse);
 char			*save_args(char *line);
 void			replace_space_tab(char *str);
-int				get_map(t_parse *parse, const char *map);
+void			get_map(t_parse *parse, const char *map);
+void			get_map2(int l, int i, t_parse *parse);
 int				ft_map(char *line, t_parse *parse);
 int				ft_is_map(char *line);
 void			free_all(t_parse *parse);
@@ -137,7 +138,7 @@ int				ft_error(t_parse *parse, char *str, char *line);
 int				parse_textures(char *line, t_parse *parse);
 int				check_missing(t_parse *parse);
 void			check_color(t_parse *parse, char *color);
-void			check_texture(t_parse *parse, char *textures);
+int				check_error_texture(t_parse *parse, char *textures);
 void			print_map(char **grid);
 
 // init
