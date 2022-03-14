@@ -37,7 +37,7 @@ void	replace_space_tab(char *str)
 
 void	free_all(t_parse *parse)
 {
-	if (parse->map)
+	if (parse->map != NULL)
 		ft_free_array(parse->map);
 	if (parse->no)
 		free(parse->no);
@@ -51,8 +51,6 @@ void	free_all(t_parse *parse)
 		free(parse->c_f);
 	if (parse->c_s)
 		free(parse->c_s);
-	if (parse)
-		free(parse);
 }
 
 void	print_map(char **map)

@@ -63,8 +63,5 @@ int	parsing(int fd, const char *map, t_parse *parse)
 	check_missing(parse);
 	get_map(parse, map);
 	check_player(parse);
-	printf("start_x = %i\n", parse->start_x);
-	printf("start_y = %i\n", parse->start_y);
-	printf("start_view_player = %c\n", parse->view_player);
 	return (0);
 }
