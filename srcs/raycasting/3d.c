@@ -33,6 +33,7 @@ void	draw_3d(t_game *game, t_rays *r)
 	float		bot;
 	int			lpr;
 	static int	x = 0;
+	int			color;
 
 	r->dist *= fix_fisheye(game->m.player_angle - game->m.a_rad);
 	top = game->world_h * game->m.m_size / r->dist;
@@ -41,11 +42,25 @@ void	draw_3d(t_game *game, t_rays *r)
 	bot = (game->world_h / 2) - (top / 2);
 	lpr = game->width / M_2RAYS;
 	l = -1;
+	if (r->cross == 'v')
+	{
+		if (game->m.a_deg > 90 && game->m.a_deg < 270)
+			color = BYZAN;
+		else
+			color = GLYCINE;
+	}
+	else
+	{
+		if (game->m.a_deg > 0 && game->m.a_deg < 180)
+			color = LIN;
+		else
+			color = PRUNE;
+	}
 	while (++l < lpr)
 	{
-		draw_lines(&game->world, x + l, 0, x + l, bot - 1, GREEN);								// c_s
-		draw_lines(&game->world, x + l, bot, x + l, top + bot, PURPLE);							// wall
-		draw_lines(&game->world, x + l, top + bot + 1, x + l, game->world_h, M_WALL_COLOR);		// c_f
+		draw_lines(&game->world, x + l, 0, x + l, bot, PERSAN);								// c_s
+		draw_lines(&game->world, x + l, bot, x + l, top + bot, color);						// wall
+		draw_lines(&game->world, x + l, top + bot, x + l, game->world_h, M_WALL_COLOR);		// c_f
 	}
 	x += lpr;
 	if (r->rays == M_2RAYS - 1)
@@ -75,7 +90,7 @@ void	raycasting(t_game *game)
 		ray_vertical_check(&game->m, &r);
 		compare_dist(&r);
 		draw_3d(game, &r);
-		// draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
+		draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
 		game->m.a_rad -=  M_05_DEG_RAD;
 		check_angle(game->m.a_rad, &game->m.a_deg);
 	}

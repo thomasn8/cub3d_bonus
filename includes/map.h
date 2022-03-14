@@ -6,6 +6,11 @@
 # define GRAY_DARK 0x00202020
 # define GRAY_LIGHT 0x00505050
 # define PURPLE 0x006C0277
+# define BYZAN 0x00702963
+# define GLYCINE 0x00C9A0DC
+# define LIN 0x00D2CAEC
+# define PRUNE 0x00811453
+# define PERSAN 0x006600FF
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
 # define BLUE 0x000000FF
@@ -58,6 +63,7 @@ typedef struct s_rays
 	float	dist_h;
 	float	dist_v;
 	float	dist;
+	char	cross;
 }	t_rays;
 
 /* MINIMAP */
