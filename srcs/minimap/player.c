@@ -1,7 +1,6 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-/*
 void	remove_prev_fov(t_image *map, t_map *m)
 {
 	int	width;
@@ -21,10 +20,11 @@ void	remove_prev_fov(t_image *map, t_map *m)
 		}
 	}
 }
-*/
 
-/* provisoire, pour mettre à jour visuellement le field of view
-plus tard réutiliser la fonction du dessus (+ rapide car redessine le minium nécessaire)*/
+/* redessine entièrement la minimap
+à utiliser lorsqu'on projette les rayons dans la minimap
+la fonction du dessus est + rapide car redessine le minium nécessaire */
+/*
 void	remove_prev_fov(t_image *map, t_map *m)
 {
 	int	width;
@@ -38,6 +38,7 @@ void	remove_prev_fov(t_image *map, t_map *m)
 			my_mlx_pixel_put(map, width, height, m->clean_map[height][width]);
 	}
 }
+*/
 
 void	remove_prev_pos(t_image *map, t_map *m)
 {
