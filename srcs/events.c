@@ -63,6 +63,6 @@ int	events_loop(t_game *game)
 	if (game->right == 1)
 		rotation(game, 'r');
 	mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->win, game->map.image, MARGIN, game->m.offset);
+	mlx_put_image_to_window(game->mlx, game->win, game->map.image, game->m.w_offset, game->m.h_offset);
 	return (0);
 }
