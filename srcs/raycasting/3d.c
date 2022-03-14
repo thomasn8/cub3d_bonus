@@ -25,30 +25,31 @@ void	draw_lines(t_image *image, int x1, int y1, int x2, int y2, int color)
 	}
 }
 
+// l = line | lpr = lines per ray | bot = wall bottom | top = wall top
 void	draw_3d(t_game *game, t_rays *r)
 {
-	int			line_h;
-	int			lines;
-	int			ray_w;
-	float		offset;
-	static int	start_x = 0;
+	int			l;
+	int			top;
+	float		bot;
+	int			lpr;
+	static int	x = 0;
 
 	r->dist *= fix_fisheye(game->m.player_angle - game->m.a_rad);
-	line_h = game->world_h * game->m.m_size / r->dist;
-	if (line_h > game->world_h)
-		line_h = game->world_h;
-	offset = (game->world_h / 2) - (line_h / 2);
-	lines = -1;
-	ray_w = game->width / M_2RAYS;
-	while (++lines < ray_w)
+	top = game->world_h * game->m.m_size / r->dist;
+	if (top > game->world_h)
+		top = game->world_h;
+	bot = (game->world_h / 2) - (top / 2);
+	lpr = game->width / M_2RAYS;
+	l = -1;
+	while (++l < lpr)
 	{
-		draw_lines(&game->world, start_x + lines, 0, start_x + lines, offset - 1, GREEN);
-		draw_lines(&game->world, start_x + lines, offset, start_x + lines, line_h + offset - 1, PURPLE);
-		draw_lines(&game->world, start_x + lines, line_h + offset, start_x + lines, game->world_h, M_WALL_COLOR);
+		draw_lines(&game->world, x + l, 0, x + l, bot - 1, GREEN);
+		draw_lines(&game->world, x + l, bot, x + l, top + bot - 1, PURPLE);
+		draw_lines(&game->world, x + l, top + bot, x + l, game->world_h, M_WALL_COLOR);
 	}
-	start_x += ray_w;
+	x += lpr;
 	if (r->rays == M_2RAYS - 1)
-		start_x = 0;
+		x = 0;
 }
 
 // utiliser M_05_DEG_RAD pour projeter 120 rayons
