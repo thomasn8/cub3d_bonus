@@ -21,9 +21,11 @@
 // 	}
 // }
 
-/* redessine entièrement la minimap
-à utiliser lorsqu'on projette les rayons dans la minimap
-la fonction du dessus est + rapide car redessine le minium nécessaire */
+/* 
+redessine entièrement la minimap
+à utiliser lorsqu'on a besoin de projeter les rayons dans la minimap
+la fonction du dessus est + rapide car redessine le minium nécessaire 
+*/
 void	remove_prev_fov(t_image *map, t_map *m)
 {
 	int	width;
