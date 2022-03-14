@@ -1,17 +1,6 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-static float distance(t_map *m, t_rays *r)
-{
-	float dist;
-
-	dist = cos(deg_to_rad(m->a_rad)) * (r->x - m->pos_x)
-		- sin(deg_to_rad(m->a_rad)) * (r->y - m->pos_y);
-	if (dist < 0)
-		dist *= -1;
-	return (dist);
-}
-
 static void	horizontal_loop(t_map *m, t_rays *r)
 {
 	while (++r->i < m->rows - 2)
@@ -23,7 +12,7 @@ static void	horizontal_loop(t_map *m, t_rays *r)
 		{
 			r->hx = r->x;
 			r->hy = r->y;
-			r->dist_h = distance(m, r);
+			r->dist_h = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->rows;
 		}
 		else
@@ -45,7 +34,7 @@ static void	vertical_loop(t_map *m, t_rays *r)
 		{
 			r->vx = r->x;
 			r->vy = r->y;
-			r->dist_v = distance(m, r);
+			r->dist_v = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->cols;
 		}
 		else
@@ -56,7 +45,7 @@ static void	vertical_loop(t_map *m, t_rays *r)
 	}
 }
 
-void	horizontal_wall_intersection(t_map *m, t_rays *r)
+void	ray_horizontal_check(t_map *m, t_rays *r)
 {
 	r->i = -1;
 	r->shift = 0;
@@ -84,7 +73,7 @@ void	horizontal_wall_intersection(t_map *m, t_rays *r)
 	horizontal_loop(m, r);
 }
 
-void	vertical_wall_intersection(t_map *m, t_rays *r)
+void	ray_vertical_check(t_map *m, t_rays *r)
 {
 	r->i = -1;
 	r->shift = 0;
@@ -110,4 +99,28 @@ void	vertical_wall_intersection(t_map *m, t_rays *r)
 		r->i = m->cols;
 	}
 	vertical_loop(m, r);
+}
+
+void	draw_ray(t_image *image, t_map *m, t_rays *r, int color)
+{
+	float	delta_x;
+	float	delta_y;
+	int		pixels;
+	float	pixel_x;
+	float	pixel_y;
+
+	delta_x = r->x - m->pos_x;
+	delta_y = r->y - m->pos_y;
+	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
+	delta_x /= pixels;
+	delta_y /= pixels;
+	pixel_x = m->pos_x;
+	pixel_y = m->pos_y;
+	while (pixels)
+	{
+		my_mlx_pixel_put(image, pixel_x, pixel_y, color);
+		pixel_x += delta_x;
+		pixel_y += delta_y;
+		--pixels;
+	}
 }

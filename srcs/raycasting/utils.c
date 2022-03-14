@@ -3,7 +3,7 @@
 
 float deg_to_rad(int angle)
 {
-	return (angle * PI / 180.0);
+	return (angle * PI / 180);
 }
 
 int rad_to_deg(float angle)
@@ -17,7 +17,7 @@ void	check_angle(float angle, int *deg)
 		angle += PI2;
 	if (angle > PI2)
 		angle -= PI2;
-	*deg= rad_to_deg(angle);
+	*deg = rad_to_deg(angle);
 }
 
 void	compare_dist(t_rays	*r)
@@ -36,26 +36,11 @@ void	compare_dist(t_rays	*r)
 	}
 }
 
-void	draw_ray(t_image *image, t_map *m, t_rays *r, int color)
-{
-	float	delta_x;
-	float	delta_y;
-	int		pixels;
-	float	pixel_x;
-	float	pixel_y;
-
-	delta_x = r->x - m->pos_x;
-	delta_y = r->y - m->pos_y;
-	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-	delta_x /= pixels;
-	delta_y /= pixels;
-	pixel_x = m->pos_x;
-	pixel_y = m->pos_y;
-	while (pixels)
-	{
-		my_mlx_pixel_put(image, pixel_x, pixel_y, color);
-		pixel_x += delta_x;
-		pixel_y += delta_y;
-		--pixels;
-	}
+float fix_fisheye(float angle)
+{ 
+	if (angle < 0)
+		angle += PI2;
+	if (angle > PI2)
+		angle -= PI2;
+	return (cos(angle));
 }
