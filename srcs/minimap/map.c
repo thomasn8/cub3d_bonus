@@ -88,7 +88,8 @@ void	minimap_init(t_game *game, t_parse *parse)
 	game->m.m_size = block_size(game->m.cols, game->m.rows);
 	game->m.w = parse->m_width * game->m.m_size;
 	game->m.h = parse->m_height * game->m.m_size;
-	game->m.offset = game->world_h + MARGIN + ((MENU_HEIGTH - (2 * MARGIN)) - game->m.h) / 2;
+	game->m.h_offset = game->world_h + MARGIN + ((MENU_HEIGTH - (2 * MARGIN)) - game->m.h) / 2;
+	game->m.w_offset = (game->width - (2 * MARGIN) - game->m.w) / 2;
 	game->map.image = mlx_new_image(game->mlx, game->m.w, game->m.h);
 	game->map.addr = mlx_get_data_addr(game->map.image, &game->map.bits_per_pixel,
 			&game->map.line_length, &game->map.endian);

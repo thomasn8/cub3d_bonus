@@ -10,9 +10,9 @@
 
 /* dimensions */
 # define WIDTH 960
-# define HEIGTH 868
+# define HEIGTH 668
 # define MARGIN 5
-# define MENU_HEIGTH 100
+# define MENU_HEIGTH 120
 # define CUBE_SIZE 256
 
 /* colors */
@@ -87,7 +87,8 @@ typedef struct s_map
 	int 			color;
 	int 			w;
 	int				h;
-	int				offset;
+	int				h_offset;
+	int				w_offset;
 	float			prev_x;
 	float			prev_y;
 	float			pos_x;

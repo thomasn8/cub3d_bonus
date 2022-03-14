@@ -36,17 +36,17 @@ void	menu_init(t_game *game)
 		while (++x < game->width)
 			mlx_pixel_put(game->mlx, game->win, x, y, MENU_COLOR);
 	}
-	game->menu.image = mlx_xpm_file_to_image(game->mlx, "./images/keyboard_w", &game->menu.width, &game->menu.heigth);
-	if (game->menu.image)
-	{
-		game->menu.addr = mlx_get_data_addr(game->menu.image, &game->menu.bits_per_pixel, &game->menu.line_length, &game->menu.endian);
-		mlx_put_image_to_window(game->mlx, game->win, game->menu.image, 260, HEIGTH - 85);
-	}
-	mlx_string_put(game->mlx, game->win, 280 + 0, HEIGTH - 35, MENU_TEXT_COLOR, "move");
-	mlx_string_put(game->mlx, game->win, 280 + 140, HEIGTH - 35, MENU_TEXT_COLOR, "turn");
-	mlx_string_put(game->mlx, game->win, 280 + 257, HEIGTH - 35, MENU_TEXT_COLOR, "use");
-	mlx_string_put(game->mlx, game->win, 280 + 346, HEIGTH - 35, MENU_TEXT_COLOR, "map");
-	mlx_string_put(game->mlx, game->win, 280 + 439, HEIGTH - 35, MENU_TEXT_COLOR, "quit");
+	// game->menu.image = mlx_xpm_file_to_image(game->mlx, "./images/keyboard_w", &game->menu.width, &game->menu.heigth);
+	// if (game->menu.image)
+	// {
+	// 	game->menu.addr = mlx_get_data_addr(game->menu.image, &game->menu.bits_per_pixel, &game->menu.line_length, &game->menu.endian);
+	// 	mlx_put_image_to_window(game->mlx, game->win, game->menu.image, 260, HEIGTH - 85);
+	// }
+	// mlx_string_put(game->mlx, game->win, 280 + 0, HEIGTH - 35, MENU_TEXT_COLOR, "move");
+	// mlx_string_put(game->mlx, game->win, 280 + 140, HEIGTH - 35, MENU_TEXT_COLOR, "turn");
+	// mlx_string_put(game->mlx, game->win, 280 + 257, HEIGTH - 35, MENU_TEXT_COLOR, "use");
+	// mlx_string_put(game->mlx, game->win, 280 + 346, HEIGTH - 35, MENU_TEXT_COLOR, "map");
+	// mlx_string_put(game->mlx, game->win, 280 + 439, HEIGTH - 35, MENU_TEXT_COLOR, "quit");
 	mlx_string_put(game->mlx, game->win, WIDTH - 60, HEIGTH - 30, MENU_TEXT_COLOR, "CUB3D");
 }
 
