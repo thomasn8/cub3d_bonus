@@ -73,6 +73,10 @@ typedef struct s_parse
 	int				wall;
 	int				free_space;
 	int				check_player;
+	int				r;
+	int				g;
+	int				b;
+	unsigned long	rgb;
 }	t_parse;
 
 // update minimap
@@ -90,10 +94,10 @@ typedef struct s_map
 	int				h;						// heigth de l'image world dans game
 	int				h_offset;
 	int				w_offset;
-	float			prev_x;					// x prev pos du player 
-	float			prev_y;					// x prev pos du player 
-	float			pos_x;					// x position du player 
-	float			pos_y;					// y position du player 
+	float			prev_x;					// x prev pos du player
+	float			prev_y;					// x prev pos du player
+	float			pos_x;					// x position du player
+	float			pos_y;					// y position du player
 	float			delta_x;
 	float			delta_y;
 	float			a_rad;					// view_player (en radius)
@@ -149,6 +153,8 @@ int				check_missing(t_parse *parse);
 void			check_color(t_parse *parse, char *color);
 int				check_error_texture(t_parse *parse, char *textures);
 void			print_map(char **grid);
+unsigned long	create_rgb(int t, int r, int g, int b);
+int				get_r(int trgb);
 
 // init
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);

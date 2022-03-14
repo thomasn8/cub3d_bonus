@@ -18,6 +18,10 @@ void	initialisation(t_parse *parse)
 	parse->free_space = 0;
 	parse->start_x = 0;
 	parse->start_y = 0;
+	parse->r = -1;
+	parse->g = -1;
+	parse->b = -1;
+	parse->rgb = -1;
 }
 
 void	replace_space_tab(char *str)

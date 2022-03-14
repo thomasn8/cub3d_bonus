@@ -1,5 +1,17 @@
 #include "../../includes/cub3d.h"
 
+void	get_color(int nbr,int sum, t_parse *parse)
+{
+	if (nbr == 1)
+		parse->r = sum;
+	else if (nbr == 2)
+		parse->g = sum;
+	else if (nbr == 3)
+		parse->b = sum;
+	if (parse->r != -1 && parse->g -1 && parse->b != -1)
+		parse->rgb = create_rgb(0, parse->r, parse->g, parse->b);
+}
+
 void	check_color(t_parse *parse, char *color)
 {
 	int		i;
@@ -22,6 +34,7 @@ void	check_color(t_parse *parse, char *color)
 			nbr++;
 		if (nbr > 3)
 			ft_error(parse, "Max 3 values R,G,B", NULL);
+		get_color(nbr, sum, parse);
 		sum = 0;
 		if (ft_isprint(color[i]))
 			i++;
