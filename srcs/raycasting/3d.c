@@ -43,9 +43,9 @@ void	draw_3d(t_game *game, t_rays *r)
 	l = -1;
 	while (++l < lpr)
 	{
-		draw_lines(&game->world, x + l, 0, x + l, bot - 1, GREEN);
-		draw_lines(&game->world, x + l, bot, x + l, top + bot - 1, PURPLE);
-		draw_lines(&game->world, x + l, top + bot, x + l, game->world_h, M_WALL_COLOR);
+		draw_lines(&game->world, x + l, 0, x + l, bot - 1, GREEN);							// c_s
+		draw_lines(&game->world, x + l, bot, x + l, top + bot - 1, PURPLE);					// wall
+		draw_lines(&game->world, x + l, top + bot, x + l, game->world_h, M_WALL_COLOR);		// c_f
 	}
 	x += lpr;
 	if (r->rays == M_2RAYS - 1)
@@ -75,7 +75,7 @@ void	raycasting(t_game *game)
 		ray_vertical_check(&game->m, &r);
 		compare_dist(&r);
 		draw_3d(game, &r);
-		// draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
+		draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
 		game->m.a_rad -=  M_05_DEG_RAD;
 		check_angle(game->m.a_rad, &game->m.a_deg);
 	}
