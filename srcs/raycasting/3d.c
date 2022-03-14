@@ -43,9 +43,9 @@ void	draw_3d(t_game *game, t_rays *r)
 	l = -1;
 	while (++l < lpr)
 	{
-		draw_lines(&game->world, x + l, 0, x + l, bot - 1, GREEN);							// c_s
+		draw_lines(&game->world, x + l, 0, x + l, bot - 1, GREEN);							// hex_s
 		draw_lines(&game->world, x + l, bot, x + l, top + bot - 1, PURPLE);					// wall
-		draw_lines(&game->world, x + l, top + bot, x + l, game->world_h, M_WALL_COLOR);		// c_f
+		draw_lines(&game->world, x + l, top + bot, x + l, game->world_h, M_WALL_COLOR);		// hex_f
 	}
 	x += lpr;
 	if (r->rays == M_2RAYS - 1)

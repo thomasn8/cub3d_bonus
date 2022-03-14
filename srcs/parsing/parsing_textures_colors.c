@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-void	get_color(int nbr,int sum, t_parse *parse)
+static void	get_color(int nbr,int sum, t_parse *parse, char c)
 {
 	if (nbr == 1)
 		parse->r = sum;
@@ -8,11 +8,13 @@ void	get_color(int nbr,int sum, t_parse *parse)
 		parse->g = sum;
 	else if (nbr == 3)
 		parse->b = sum;
-	if (parse->r != -1 && parse->g -1 && parse->b != -1)
-		parse->rgb = create_rgb(0, parse->r, parse->g, parse->b);
+	if (parse->r != -1 && parse->g != -1 && parse->b != -1 && c == 'F')
+		parse->hex_f = create_rgb(0, parse->r, parse->g, parse->b);
+	else if (parse->r != -1 && parse->g != -1 && parse->b != -1 && c == 'S')
+		parse->hex_s = create_rgb(0, parse->r, parse->g, parse->b);
 }
 
-void	check_color(t_parse *parse, char *color)
+void	check_color(t_parse *parse, char *color, char c)
 {
 	int		i;
 	int		sum;
@@ -34,7 +36,7 @@ void	check_color(t_parse *parse, char *color)
 			nbr++;
 		if (nbr > 3)
 			ft_error(parse, "Max 3 values R,G,B", NULL);
-		get_color(nbr, sum, parse);
+		get_color(nbr, sum, parse, c);
 		sum = 0;
 		if (ft_isprint(color[i]))
 			i++;
@@ -100,12 +102,12 @@ int	parse_textures_colors(char *line, t_parse *parse)
 	else if (line[0] == 'F' && parse->c_f == NULL)
 	{
 		parse->c_f = save_args(line);
-		check_color(parse, parse->c_f);
+		check_color(parse, parse->c_f, 'F');
 	}
 	else if (line[0] == 'C' && parse->c_s == NULL)
 	{
 		parse->c_s = save_args(line);
-		check_color(parse, parse->c_s);
+		check_color(parse, parse->c_s, 'S');
 	}
 	return (0);
 }

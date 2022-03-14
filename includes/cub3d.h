@@ -66,9 +66,11 @@ typedef struct s_parse
 	int				start_y;
 	int				m_height;
 	int				m_width;
+	unsigned long	hex_f;
+	unsigned long	hex_s;
+	//////////////////////////////
 	char			*c_f;
 	char			*c_s;
-	//////////////////////////////
 	int				error;
 	int				wall;
 	int				free_space;
@@ -150,11 +152,11 @@ void			free_all(t_parse *parse);
 int				ft_error(t_parse *parse, char *str, char *line);
 int				parse_textures(char *line, t_parse *parse);
 int				check_missing(t_parse *parse);
-void			check_color(t_parse *parse, char *color);
+void			check_color(t_parse *parse, char *color, char c);
 int				check_error_texture(t_parse *parse, char *textures);
 void			print_map(char **grid);
 unsigned long	create_rgb(int t, int r, int g, int b);
-int				get_r(int trgb);
+void			print_all(t_parse *p);
 
 // init
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
