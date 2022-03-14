@@ -88,8 +88,8 @@ void	map_description(t_game *game, t_parse *parse)
 	game->m.so = parse->so;
 	game->m.we = parse->we;
 	game->m.ea = parse->ea;
-	// game->m.c_f = parse->c_f;
-	// game->m.c_s = parse->c_s;
+	// game->m.c_floor = parse->c_f;
+	// game->m.c_ceil = parse->c_s;
 }
 
 void	player_description(t_game *game, t_parse *parse)
