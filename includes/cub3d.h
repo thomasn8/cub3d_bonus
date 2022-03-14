@@ -39,8 +39,8 @@ typedef struct s_parse
 	char			*we;
 	char			*ea;
 	char			view_player;
-	// int				start_x;
-	// int				start_y;
+	int				start_x;
+	int				start_y;
 	int				m_height;
 	int				m_width;
 	char			*c_f;
