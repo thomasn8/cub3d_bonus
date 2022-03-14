@@ -10,9 +10,9 @@
 
 /* dimensions */
 # define WIDTH 960
-# define HEIGTH 868
+# define HEIGTH 668
 # define MARGIN 5
-# define MENU_HEIGTH 100
+# define MENU_HEIGTH 120
 # define CUBE_SIZE 256
 
 /* colors */
@@ -30,27 +30,6 @@
 /* world colors */
 # define WORLD_COLOR GRAY_LIGHT
 
-// parsing
-typedef struct s_parse
-{
-	char			**map;
-	char			*no;
-	char			*so;
-	char			*we;
-	char			*ea;
-	char			view_player;
-	int				start_x;
-	int				start_y;
-	int				m_height;
-	int				m_width;
-	char			*c_f;
-	char			*c_s;
-	//////////////////////////////
-	int				error;
-	int				wall;
-	int				free_space;
-	int				check_player;
-}	t_parse;
 
 // image on game
 typedef struct s_image
@@ -74,6 +53,28 @@ typedef struct	s_img {
 	int				endian;
 } 	t_img;
 
+// parsing
+typedef struct s_parse
+{
+	char			**map;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	char			view_player;
+	int				start_x;
+	int				start_y;
+	int				m_height;
+	int				m_width;
+	char			*c_f;
+	char			*c_s;
+	//////////////////////////////
+	int				error;
+	int				wall;
+	int				free_space;
+	int				check_player;
+}	t_parse;
+
 // update minimap
 typedef struct s_map
 {
@@ -85,20 +86,27 @@ typedef struct s_map
 	int 			xo;
 	int				yo;
 	int 			color;
-	int 			w;
-	int				h;
-	int				offset;
-	float			prev_x;
-	float			prev_y;
-	float			pos_x;
-	float			pos_y;
+	int 			w;						// width de l'image world dans game
+	int				h;						// heigth de l'image world dans game
+	int				h_offset;
+	int				w_offset;
+	float			prev_x;					// x prev pos du player 
+	float			prev_y;					// x prev pos du player 
+	float			pos_x;					// x position du player 
+	float			pos_y;					// y position du player 
 	float			delta_x;
 	float			delta_y;
-	float			a_rad;
+	float			a_rad;					// view_player (en radius)
 	float			player_angle;
-	int				a_deg;
-	char			**map;
+	int				a_deg;					// view_player (en degré)
+	char			**map;					// map
 	unsigned int	**clean_map;
+	char			*no;					// textures
+	char			*so;
+	char			*we;
+	char			*ea;
+	int				c_f;					// couleur sol
+	int				c_s;					// couleur plafond
 }	t_map;
 
 // game
