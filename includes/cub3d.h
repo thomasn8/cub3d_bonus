@@ -105,8 +105,8 @@ typedef struct s_map
 	char			*so;
 	char			*we;
 	char			*ea;
-	int				c_f;					// couleur sol
-	int				c_s;					// couleur plafond
+	int				c_floor;				// couleur sol
+	int				c_ceil;					// couleur plafond
 }	t_map;
 
 // game
