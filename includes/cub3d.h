@@ -30,29 +30,6 @@
 /* world colors */
 # define WORLD_COLOR GRAY_LIGHT
 
-
-// image on game
-typedef struct s_image
-{
-	void			*image;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-}	t_image;
-
-// xpm images
-typedef struct	s_img {
-	void			*image;
-	char			*addr;
-	char			*path;
-	int				width;
-	int				heigth;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-} 	t_img;
-
 // parsing
 typedef struct s_parse
 {
@@ -75,7 +52,30 @@ typedef struct s_parse
 	int				check_player;
 }	t_parse;
 
-// update minimap
+// image on game (world + minimap)
+typedef struct s_image
+{
+	void			*image;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}	t_image;
+
+// for xpm images
+typedef struct	s_img {
+	void			*image;
+	char			*addr;
+	char			*path;
+	int				width;
+	int				heigth;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+} 	t_img;
+
+
+// update map
 typedef struct s_map
 {
 	int				m_size;

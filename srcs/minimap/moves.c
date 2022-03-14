@@ -1,7 +1,7 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-void	a_move(t_map *m)
+static void	a_move(t_map *m)
 {
 	m->a_rad += M_RAD_90;
 	if (m->a_rad > PI2)
@@ -17,7 +17,7 @@ void	a_move(t_map *m)
 	m->delta_y = sin(-m->a_rad);
 }
 
-void	d_move(t_map *m)
+static void	d_move(t_map *m)
 {
 	m->a_rad -= M_RAD_90;
 	if (m->a_rad < 0)
@@ -33,7 +33,7 @@ void	d_move(t_map *m)
 	m->delta_y = sin(-m->a_rad);
 }
 
-void	wsad(t_map *m, char dir)
+static void	wsad(t_map *m, char dir)
 {
 	if (dir == 'w')
 	{

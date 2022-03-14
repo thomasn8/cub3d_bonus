@@ -2,25 +2,25 @@
 #include "../../includes/map.h"
 
 // FONCTION POUR METTRE LES TEXTURES SUR LES MURS				<-------
-void	walls_texture(float ray_a, t_rays *r)
+static void	walls_texture(float ray_a, t_rays *r)
 {
-	if (r->cross == 'v')
+	if (r->cross == 'v')					// faces W et E
 	{
-		if (ray_a > 90 && ray_a < 270)
+		if (ray_a > 90 && ray_a < 270)		// W
 			r->color = CV1;
-		else
+		else								// E
 			r->color = CV2;
 	}
-	else
+	else									// faces N et S
 	{
-		if (ray_a > 0 && ray_a < 180)
+		if (ray_a > 0 && ray_a < 180)		// N
 			r->color = CH1;
-		else
+		else								// S
 			r->color = CH2;
 	}
 }
 
-void	ray_transfo(t_game *game, t_rays *r)
+static void	ray_transfo(t_game *game, t_rays *r)
 {
 	r->dist *= fix_fisheye(game->m.player_angle - game->m.a_rad);
 	r->top = game->world_h * game->m.m_size / r->dist;
@@ -33,7 +33,7 @@ void	ray_transfo(t_game *game, t_rays *r)
 }
 
 // l = line | lpr = lines per ray | bot = wall bottom | top = wall top
-void	draw_3d(t_game *game, t_rays *r)
+static void	draw_3d(t_game *game, t_rays *r)
 {
 	static int	x = 0;
 
