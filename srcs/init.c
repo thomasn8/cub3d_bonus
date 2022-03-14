@@ -1,11 +1,22 @@
 #include "../includes/cub3d.h"
+#include "../includes/map.h"
 
-void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
+void	minimap_init(t_game *game, t_parse *parse)
 {
-	char	*pixel;
+	map_description(game, parse);
+	player_description(game, parse);
+	game->m.y = -1;
+	color_map(&game->map, &game->m);
+	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
+	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
+	raycasting(game);
+	new_fov(&game->map, &game->m);
 
-	pixel = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
-	*(unsigned int *)pixel = color;
+	// provisoir: pour corriger bug nord/sud au lancement
+	rotation(game, 'l');
+	rotation(game, 'r');
+	printf("orientation: %f / %d°\n", game->m.a_rad, game->m.a_deg);
+	////////////////////////////////////////////////////////////////
 }
 
 void	world_init(t_game *game)

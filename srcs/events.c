@@ -1,6 +1,14 @@
 #include "../includes/cub3d.h"
 #include "../includes/event.h"
 
+void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
+{
+	char	*pixel;
+
+	pixel = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
+	*(unsigned int *)pixel = color;
+}
+
 int	quit_prog(t_game *game)
 {
 	printf("Program left properly.\n");

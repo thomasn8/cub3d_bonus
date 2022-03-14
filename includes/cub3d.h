@@ -120,7 +120,7 @@ typedef struct s_game
 	t_image			world;
 	t_image			map;
 	t_map			m;
-	t_img			menu;
+	// t_img			menu;
 	int				w;
 	int				s;
 	int				a;
@@ -151,18 +151,22 @@ int				check_error_texture(t_parse *parse, char *textures);
 void			print_map(char **grid);
 
 // init
-void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
 void			params_init(t_game *game);
 void			menu_init(t_game *game);
 void			world_init(t_game *game);
+void			minimap_init(t_game *game, t_parse *parse);
 
 // minimap
-void			minimap_init(t_game *game, t_parse *parse);
+void			map_description(t_game *game, t_parse *parse);
+void			player_description(t_game *game, t_parse *parse);
+void			color_map(t_image *map, t_map *m);
+unsigned int	**copy_map(t_image *map, int width, int heigth);
 int				move(t_game *game, char move);
 int				rotation(t_game *game, char dir);
 int				move_ok(t_map *m);
 
 // events
+void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
 int				quit_prog(t_game *game);
 int				key_release(int keycode, t_game *game);
 int				key_press(int keycode, t_game *game);

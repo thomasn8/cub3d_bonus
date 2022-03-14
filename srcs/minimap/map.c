@@ -1,13 +1,7 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-// A RECEVOIR DU PARSING
-# define S_X 31
-# define S_Y 1
-# define S_ANGLE 180
-//////////////////////////////////////
-
-static unsigned int	**copy_map(t_image *map, int width, int heigth)
+unsigned int	**copy_map(t_image *map, int width, int heigth)
 {
 	int				x;
 	int				y;
@@ -32,7 +26,7 @@ static unsigned int	**copy_map(t_image *map, int width, int heigth)
 	return (copy);
 }
 
-static void	color_map(t_image *map, t_map *m)
+void	color_map(t_image *map, t_map *m)
 {
 	while (++m->y < m->rows)
 	{
@@ -61,7 +55,7 @@ static void	color_map(t_image *map, t_map *m)
 	}
 }
 
-int	block_size(int cols, int rows)
+static int	size(int cols, int rows)
 {
 	int max_w;
 	int max_h;
@@ -77,15 +71,12 @@ int	block_size(int cols, int rows)
 	return (m_size1);
 }
 
-void	minimap_init(t_game *game, t_parse *parse)
+void	map_description(t_game *game, t_parse *parse)
 {
-	// A COMPLETER GRACE AU PARSING
-	// map
 	game->m.map = parse->map;
-	// dimensions
 	game->m.cols = parse->m_width;
 	game->m.rows =  parse->m_height;
-	game->m.m_size = block_size(game->m.cols, game->m.rows);
+	game->m.m_size = size(game->m.cols, game->m.rows);
 	game->m.w = parse->m_width * game->m.m_size;
 	game->m.h = parse->m_height * game->m.m_size;
 	game->m.h_offset = game->world_h + MARGIN + ((MENU_HEIGTH - (2 * MARGIN)) - game->m.h) / 2;
@@ -93,24 +84,31 @@ void	minimap_init(t_game *game, t_parse *parse)
 	game->map.image = mlx_new_image(game->mlx, game->m.w, game->m.h);
 	game->map.addr = mlx_get_data_addr(game->map.image, &game->map.bits_per_pixel,
 			&game->map.line_length, &game->map.endian);
-	// player position
-	// printf("Player position: %d,%d\n", parse->start_x, parse->start_y);
-	game->m.pos_x = (S_X * game->m.m_size) + (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
-	game->m.pos_y = (S_Y * game->m.m_size) + (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+	game->m.no = parse->no;
+	game->m.so = parse->so;
+	game->m.we = parse->we;
+	game->m.ea = parse->ea;
+	// game->m.c_f = parse->c_f;
+	// game->m.c_s = parse->c_s;
+}
+
+void	player_description(t_game *game, t_parse *parse)
+{
+	game->m.pos_x = (parse->start_x * game->m.m_size)
+			+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+	game->m.pos_y = (parse->start_y * game->m.m_size)
+			+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
 	game->m.prev_x = game->m.pos_x;
 	game->m.prev_y = game->m.pos_y;
-	// player orientation
-	// printf("Player orientation: %c\n", parse->start_player);
-	game->m.a_rad = deg_to_rad(S_ANGLE);
-	game->m.a_deg = S_ANGLE;
-	game->m.delta_x = cos(game->m.a_rad * 5);
-	game->m.delta_y = sin(game->m.a_rad * 5);
-	///////////////////////////////
-
-	game->m.y = -1;
-	color_map(&game->map, &game->m);
-	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
-	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
-	raycasting(game);
-	new_fov(&game->map, &game->m);
+	if (parse->view_player == 'E')
+		game->m.a_rad = deg_to_rad(M_EAST);
+	else if (parse->view_player == 'N')
+		game->m.a_rad = deg_to_rad(M_NORTH);
+	else if (parse->view_player == 'W')
+		game->m.a_rad = deg_to_rad(M_WEST);
+	else if (parse->view_player == 'S')
+		game->m.a_rad = deg_to_rad(M_SOUTH);
+	game->m.a_deg = rad_to_deg(game->m.a_rad);
+	game->m.delta_x = cos(game->m.a_rad);
+	game->m.delta_y = sin(game->m.a_rad);
 }

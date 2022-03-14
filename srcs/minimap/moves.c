@@ -58,7 +58,6 @@ int	move(t_game *game, char dir)
 	wsad(&game->m, dir);
 	if (move_ok(&game->m))
 	{
-		// remove_prev_pos(map, m);	// à réutiliser lorsqu'on n'affiche plus le FOV
 		remove_prev_fov(&game->map, &game->m);
 		new_pos(&game->map, &game->m, M_PLAYER_COLOR);
 		raycasting(game);
