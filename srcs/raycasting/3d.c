@@ -42,8 +42,9 @@ void	draw_3d(t_game *game, t_rays *r)
 	ray_w = game->width / M_2RAYS;
 	while (++lines < ray_w)
 	{
-		draw_lines(&game->world, start_x + lines, 0, start_x + lines, game->world_h, M_WALL_COLOR);
-		draw_lines(&game->world, start_x + lines, offset, start_x + lines, line_h + offset, PURPLE);
+		draw_lines(&game->world, start_x + lines, 0, start_x + lines, offset - 1, GREEN);
+		draw_lines(&game->world, start_x + lines, offset, start_x + lines, line_h + offset - 1, PURPLE);
+		draw_lines(&game->world, start_x + lines, line_h + offset, start_x + lines, game->world_h, M_WALL_COLOR);
 	}
 	start_x += ray_w;
 	if (r->rays == M_2RAYS - 1)
