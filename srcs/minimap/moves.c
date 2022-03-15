@@ -1,18 +1,6 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-void	cast_single_ray(t_game *game)
-{
-	game->m.player_angle = game->m.a_rad;
-	game->r.dist_v = 0;
-	game->r.dist_h = 0;
-	game->r.atan = -1 / tan(-game->m.a_rad);
-	game->r.ntan = -tan(-game->m.a_rad);
-	ray_horizontal_check(&game->m, &game->r);
-	ray_vertical_check(&game->m, &game->r);
-	game->m.cross = compare_dist(&game->r);
-}
-
 static void	a_move(t_map *m)
 {
 	m->a_rad += M_RAD_90;
@@ -45,7 +33,7 @@ static void	d_move(t_map *m)
 	m->delta_y = sin(-m->a_rad);
 }
 
-int	move_check(t_game *game)
+int	move_ok(t_game *game)
 {
 	float			x1;
 	float			y1;
@@ -56,19 +44,13 @@ int	move_check(t_game *game)
 	y1 = (game->m.pos_y - 1) / game->m.m_size;
 	x2 = (game->m.pos_x + M_PLAYER_SIZE - 1) / game->m.m_size;
 	y2 = (game->m.pos_y + M_PLAYER_SIZE - 1) / game->m.m_size;
-	
 	if (game->m.map[(int)y1][(int)x1] != '1' &&
 		game->m.map[(int)y2][(int)x2] != '1' &&
 		game->m.map[(int)y1][(int)x2] != '1' &&
-		game->m.map[(int)y2][(int)x1] != '1')		// pas de wall a proximité
+		game->m.map[(int)y2][(int)x1] != '1')
 		return (1);
-	
-	cast_single_ray(game);							// wall a proximité -> check quelle face
-
-	if (game->m.cross == 'v') 						// player contre un mur vertical
-		game->m.pos_x = game->m.prev_x;
-	if (game->m.cross == 'h') 						// player contre un mur horizontal
-		game->m.pos_y = game->m.prev_y;
+	game->m.pos_x = game->m.prev_x;
+	game->m.pos_y = game->m.prev_y;
 	return (0);
 }
 
@@ -90,11 +72,13 @@ int	move(t_game *game, char dir)
 		a_move(&game->m);
 	else if (dir == 'd')
 		d_move(&game->m);
-	move_check(game);
-	remove_prev_fov(&game->map, &game->m);
-	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
-	raycasting(game);
-	new_fov(&game->map, &game->m);
+	if (move_ok(game))
+	{
+		remove_prev_fov(&game->map, &game->m);
+		new_pos(&game->map, &game->m, M_PLAYER_COLOR);
+		raycasting(game);
+		new_fov(&game->map, &game->m);
+	}
 	return (0);
 }
 

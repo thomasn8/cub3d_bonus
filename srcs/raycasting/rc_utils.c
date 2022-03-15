@@ -34,19 +34,22 @@ void	check_angle(float angle, int *deg)
 	*deg = rad_to_deg(angle);
 }
 
-char	compare_dist(t_rays	*r)
+void	compare_dist(t_rays	*r)
 {
 	if (r->dist_v != 0 && (r->dist_h == 0 || r->dist_v < r->dist_h))
 	{
 		r->x = r->vx;
 		r->y = r->vy;
 		r->dist = r->dist_v;
-		return ('v');
+		r->cross = 'v';
 	}
-	r->x = r->hx;
-	r->y = r->hy;
-	r->dist = r->dist_h;
-	return ('h');
+	else if (r->dist_h != 0 && (r->dist_v == 0 || r->dist_h < r->dist_v))
+	{
+		r->x = r->hx;
+		r->y = r->hy;
+		r->dist = r->dist_h;
+		r->cross = 'h';
+	}
 }
 
 float fix_fisheye(float angle)

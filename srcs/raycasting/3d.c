@@ -81,7 +81,7 @@ void	raycasting(t_game *game)
 		game->r.ntan = -tan(-game->m.a_rad);
 		ray_horizontal_check(&game->m, &game->r);
 		ray_vertical_check(&game->m, &game->r);
-		game->r.cross = compare_dist(&game->r);
+		compare_dist(&game->r);
 		draw_3d(game, &game->r);
 		// draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
 		game->m.a_rad -=  M_05_DEG_RAD;
