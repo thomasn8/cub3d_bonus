@@ -3,11 +3,11 @@
 
 void	draw_lines(t_image *image, t_rays *r, int color)
 {
-	double	d_x;
-	double	d_y;
+	float	d_x;
+	float	d_y;
 	int		pix;
-	double	p_x;
-	double	p_y;
+	float	p_x;
+	float	p_y;
 
 	d_x = r->x2 - r->x1;
 	d_y = r->y2 - r->y1;
