@@ -33,29 +33,54 @@ static void	d_move(t_map *m)
 	m->delta_y = sin(-m->a_rad);
 }
 
-static void	wsad(t_map *m, char dir)
+int	move_check(t_game *game, char move)
 {
-	if (dir == 'w')
-	{
-		m->pos_x += m->delta_x * m->ws_fps;
-		m->pos_y += m->delta_y * m->ws_fps;
-	}
-	else if (dir == 's')
-	{
-		m->pos_x -= m->delta_x * m->ws_fps;
-		m->pos_y -= m->delta_y * m->ws_fps;
-	}
-	else if (dir == 'a')
-		a_move(m);
-	else if (dir == 'd')
-		d_move(m);
+	float			x1;
+	float			y1;
+	float			x2;
+	float			y2;
+	(void)	move;
+
+	x1 = (game->m.pos_x - 1) / game->m.m_size;
+	y1 = (game->m.pos_y - 1) / game->m.m_size;
+	x2 = (game->m.pos_x + M_PLAYER_SIZE - 1) / game->m.m_size;
+	y2 = (game->m.pos_y + M_PLAYER_SIZE - 1) / game->m.m_size;
+	
+	if (game->m.map[(int)y1][(int)x1] != '1' &&
+		game->m.map[(int)y2][(int)x2] != '1' &&
+		game->m.map[(int)y1][(int)x2] != '1' &&
+		game->m.map[(int)y2][(int)x1] != '1')
+		return (1);
+
+	if (move == 'w' || move == 's') 						// et contre un mur vertical
+		game->m.pos_x = game->m.prev_x;
+	// if (move == 'w' || move == 's') 						// et contre un mur horizontal
+	// 	game->m.pos_y = game->m.prev_y;
+	return (1);
 }
 
 int	move(t_game *game, char dir)
 {
 	game->m.prev_x = game->m.pos_x;
 	game->m.prev_y = game->m.pos_y;
-	wsad(&game->m, dir);
+
+	if (dir == 'w')
+	{
+		game->m.pos_x += game->m.delta_x * game->m.ws_fps;
+		game->m.pos_y += game->m.delta_y * game->m.ws_fps;
+		move_check(game, 'w');
+	}
+	else if (dir == 's')
+	{
+		game->m.pos_x -= game->m.delta_x * game->m.ws_fps;
+		game->m.pos_y -= game->m.delta_y * game->m.ws_fps;
+		move_check(game, 'w');
+	}
+	else if (dir == 'a')
+		a_move(&game->m);
+	else if (dir == 'd')
+		d_move(&game->m);
+		
 	if (move_ok(&game->m))
 	{
 		remove_prev_fov(&game->map, &game->m);
@@ -64,19 +89,7 @@ int	move(t_game *game, char dir)
 		new_fov(&game->map, &game->m);
 		return (0);
 	}
-	// else
-	// {
-	// 	// if (game->m.a_deg > 0 && game->m.a_deg < 180) 							// appuyé contre mur en haut
-	// 	// {
-	// 	// 	if (game->m.a_deg < 90)
-	// 	// 		return (wall_d_move(game, &game->map, &game->m));
-	// 	// 	else if (game->m.a_deg > 90)
-	// 	// 		return (wall_a_move(game, &game->map, &game->m));
-	// 	// }
-	// 	// else if (game->m.a_deg > 180 && game->m.a_deg < 360) 						// appuyé contre mur en bas
-	// 	// else if (game->m.a_deg > 90 && game->m.a_deg < 270)						// appuyé contre mur à gauche
-	// 	// else if (game->m.a_deg != 0 && (game->m.a_deg < 90 || game->m.a_deg > 270)) 	// appuyé contre mur à droite
-	// }
+
 	game->m.pos_x = game->m.prev_x;
 	game->m.pos_y = game->m.prev_y;
 	return (-1);

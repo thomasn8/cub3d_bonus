@@ -67,24 +67,22 @@ static void	draw_3d(t_game *game, t_rays *r)
 // sans oublier d'adapter les M_HALF_RAYS / M_RAYS / M_2RAYS
 void	raycasting(t_game *game)
 {
-	t_rays	r;
-
 	game->m.pos_x += M_HALF_PLAYER;
 	game->m.pos_y += M_HALF_PLAYER;
 	game->m.player_angle = game->m.a_rad;
 	game->m.a_rad += M_RAYS * M_05_DEG_RAD;
 	check_angle(game->m.a_rad, &game->m.a_deg);
-	r.rays = -1;
-	while (++r.rays < M_2RAYS)
+	game->r.rays = -1;
+	while (++game->r.rays < M_2RAYS)
 	{
-		r.dist_v = 0;
-		r.dist_h = 0;
-		r.atan = -1 / tan(-game->m.a_rad);
-		r.ntan = -tan(-game->m.a_rad);
-		ray_horizontal_check(&game->m, &r);
-		ray_vertical_check(&game->m, &r);
-		compare_dist(&r);
-		draw_3d(game, &r);
+		game->r.dist_v = 0;
+		game->r.dist_h = 0;
+		game->r.atan = -1 / tan(-game->m.a_rad);
+		game->r.ntan = -tan(-game->m.a_rad);
+		ray_horizontal_check(&game->m, &game->r);
+		ray_vertical_check(&game->m, &game->r);
+		compare_dist(&game->r);
+		draw_3d(game, &game->r);
 		// draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
 		game->m.a_rad -=  M_05_DEG_RAD;
 		check_angle(game->m.a_rad, &game->m.a_deg);
