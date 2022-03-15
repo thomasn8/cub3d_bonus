@@ -24,8 +24,6 @@
 # define M_PLAYER_COLOR YELLOW
 # define M_FOV_COLOR GREEN
 # define M_HALF_PLAYER (M_PLAYER_SIZE / 2)
-# define M_DISTANCE 1
-# define M_ROT_SPEED 5
 # define PI 3.1415926535
 # define PI2 6.2831853071
 # define M_1_DEG_RAD 0.0174533

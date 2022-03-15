@@ -85,6 +85,9 @@ typedef struct	s_img {
 typedef struct s_map
 {
 	int				m_size;
+	float			ws_fps;					// vitesse de jeu (frames per second)
+	float			ad_fps;					//
+	float			rot_fps;				//
 	int				cols;
 	int				rows;
 	int				x;
@@ -108,9 +111,9 @@ typedef struct s_map
 	char			**map;					// map
 	unsigned int	**clean_map;
 	char			*no;					// textures ...
-	char			*so;
-	char			*we;
-	char			*ea;
+	char			*so;					//
+	char			*we;					//
+	char			*ea;					//
 	int				c_floor;				// couleur sol
 	int				c_ceil;					// couleur plafond
 }	t_map;

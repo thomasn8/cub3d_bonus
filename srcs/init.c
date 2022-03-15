@@ -3,6 +3,9 @@
 
 void	minimap_init(t_game *game, t_parse *parse)
 {
+	game->m.ws_fps = 1.5;
+	game->m.ad_fps = 1;
+	game->m.rot_fps = 7;
 	map_description(game, parse);
 	player_description(game, parse);
 	game->m.y = -1;

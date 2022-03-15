@@ -45,12 +45,12 @@ static void	draw_3d(t_game *game, t_rays *r)
 		r->y1 = 0;
 		r->x2 = x + r->l;
 		r->y2 = r->bot;
-		draw_lines(&game->world, r, game->m.c_ceil);				// plafond
+		draw_lines(&game->world, r, game->m.c_ceil);			// plafond
 		r->x1 = x + r->l;
 		r->y1 = r->bot;
 		r->x2 = x + r->l;
 		r->y2 = r->top + r->bot;
-		draw_lines(&game->world, r, r->color);			// walls
+		draw_lines(&game->world, r, r->color);					// walls
 		r->x1 = x + r->l;
 		r->y1 = r->top + r->bot;
 		r->x2 = x + r->l;
@@ -85,7 +85,7 @@ void	raycasting(t_game *game)
 		ray_vertical_check(&game->m, &r);
 		compare_dist(&r);
 		draw_3d(game, &r);
-		draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
+		// draw_ray(&game->map, &game->m, &r, RED);						// à enlever plus tard
 		game->m.a_rad -=  M_05_DEG_RAD;
 		check_angle(game->m.a_rad, &game->m.a_deg);
 	}
