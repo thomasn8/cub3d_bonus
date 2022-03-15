@@ -18,6 +18,7 @@
 # define YELLOW 0x00FFFF00
 
 # define M_PLAYER_SIZE 3
+# define M_PS 3
 # define M_WALL_COLOR GRAY_LIGHT
 # define M_SPACE_COLOR BLACK
 # define M_GRID_COLOR PURPLE
