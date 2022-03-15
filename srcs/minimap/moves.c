@@ -64,19 +64,6 @@ int	move(t_game *game, char dir)
 		new_fov(&game->map, &game->m);
 		return (0);
 	}
-	// else
-	// {
-	// 	// if (game->m.a_deg > 0 && game->m.a_deg < 180) 							// appuyé contre mur en haut
-	// 	// {
-	// 	// 	if (game->m.a_deg < 90)
-	// 	// 		return (wall_d_move(game, &game->map, &game->m));
-	// 	// 	else if (game->m.a_deg > 90)
-	// 	// 		return (wall_a_move(game, &game->map, &game->m));
-	// 	// }
-	// 	// else if (game->m.a_deg > 180 && game->m.a_deg < 360) 						// appuyé contre mur en bas
-	// 	// else if (game->m.a_deg > 90 && game->m.a_deg < 270)						// appuyé contre mur à gauche
-	// 	// else if (game->m.a_deg != 0 && (game->m.a_deg < 90 || game->m.a_deg > 270)) 	// appuyé contre mur à droite
-	// }
 	game->m.pos_x = game->m.prev_x;
 	game->m.pos_y = game->m.prev_y;
 	return (-1);
