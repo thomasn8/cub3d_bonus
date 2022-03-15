@@ -11,7 +11,6 @@ void	cast_single_ray(t_game *game)
 	ray_horizontal_check(&game->m, &game->r);
 	ray_vertical_check(&game->m, &game->r);
 	game->m.cross = compare_dist(&game->r);
-	// printf("cross = %c\n", game->m.cross);
 }
 
 static void	a_move(t_map *m)
@@ -46,13 +45,12 @@ static void	d_move(t_map *m)
 	m->delta_y = sin(-m->a_rad);
 }
 
-int	move_check(t_game *game, char move)
+int	move_check(t_game *game)
 {
 	float			x1;
 	float			y1;
 	float			x2;
 	float			y2;
-	(void)	move;
 
 	x1 = (game->m.pos_x - 1) / game->m.m_size;
 	y1 = (game->m.pos_y - 1) / game->m.m_size;
@@ -62,23 +60,22 @@ int	move_check(t_game *game, char move)
 	if (game->m.map[(int)y1][(int)x1] != '1' &&
 		game->m.map[(int)y2][(int)x2] != '1' &&
 		game->m.map[(int)y1][(int)x2] != '1' &&
-		game->m.map[(int)y2][(int)x1] != '1')
+		game->m.map[(int)y2][(int)x1] != '1')		// pas de wall a proximité
 		return (1);
-
-	if (game->m.cross == 'v') 						// et contre un mur vertical
-		game->m.pos_x = game->m.prev_x;
-	if (game->m.cross == 'h') 						// et contre un mur horizontal
-		game->m.pos_y = game->m.prev_y;
 	
-	return (1);
+	cast_single_ray(game);							// wall a proximité -> check quelle face
+
+	if (game->m.cross == 'v') 						// player contre un mur vertical
+		game->m.pos_x = game->m.prev_x;
+	if (game->m.cross == 'h') 						// player contre un mur horizontal
+		game->m.pos_y = game->m.prev_y;
+	return (0);
 }
 
 int	move(t_game *game, char dir)
 {
 	game->m.prev_x = game->m.pos_x;
 	game->m.prev_y = game->m.pos_y;
-
-	cast_single_ray(game);
 	if (dir == 'w')
 	{
 		game->m.pos_x += game->m.delta_x * game->m.ws_fps;
@@ -93,19 +90,12 @@ int	move(t_game *game, char dir)
 		a_move(&game->m);
 	else if (dir == 'd')
 		d_move(&game->m);
-	move_check(game, 'a');
-	if (move_ok(&game->m))
-	{
-		remove_prev_fov(&game->map, &game->m);
-		new_pos(&game->map, &game->m, M_PLAYER_COLOR);
-		raycasting(game);
-		new_fov(&game->map, &game->m);
-		return (0);
-	}
-
-	game->m.pos_x = game->m.prev_x;
-	game->m.pos_y = game->m.prev_y;
-	return (-1);
+	move_check(game);
+	remove_prev_fov(&game->map, &game->m);
+	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
+	raycasting(game);
+	new_fov(&game->map, &game->m);
+	return (0);
 }
 
 int	rotation(t_game *game, char dir)
