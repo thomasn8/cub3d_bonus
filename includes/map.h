@@ -53,7 +53,7 @@ float		deg_to_rad(int angle);
 int			rad_to_deg(float angle);
 void		draw_lines(t_image *image, t_rays *r, int color);
 void		check_angle(float angle, int *deg);
-void		compare_dist(t_rays	*r);
+char		compare_dist(t_rays	*r);
 float		fix_fisheye(float angle);
 void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 

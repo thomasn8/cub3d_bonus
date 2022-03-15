@@ -108,6 +108,7 @@ typedef struct s_map
 	float			a_rad;					// view_player (en radius)
 	float			player_angle;
 	int				a_deg;					// view_player (en degré)
+	char			cross;
 	char			**map;					// map
 	unsigned int	**clean_map;
 	char			*no;					// textures ...
