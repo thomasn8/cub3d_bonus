@@ -155,7 +155,7 @@ typedef struct s_rays
 
 typedef struct s_grid
 {
-	int		offset;
+	int		of;
 	int		xo;
 	int		yo;
 	int		vo;
@@ -224,8 +224,11 @@ void			map_description(t_game *game, t_parse *parse);
 void			player_description(t_game *game, t_parse *parse);
 void			color_map(t_image *map, t_map *m);
 unsigned int	**copy_map(t_image *map, int width, int heigth);
-void			move(t_game *game, char move);
 void			rotation(t_game *game, char dir);
+void			move(t_game *game, char move);
+void			draw_all(t_game *game, char t);
+
+
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);

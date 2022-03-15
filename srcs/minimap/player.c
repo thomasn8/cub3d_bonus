@@ -40,26 +40,6 @@ la fonction du dessus est + rapide car redessine le minium nécessaire
 // 	}
 // }
 
-void	remove_prev_pos(t_image *map, t_map *m)
-{
-	int	width;
-	int	height;
-	int x;
-	int y;
-
-	height = -1;
-	while (++height < M_PLAYER_SIZE)
-	{
-		width = -1;
-		while (++width < M_PLAYER_SIZE)
-		{
-			x = m->prev_x + width;
-			y = m->prev_y + height;
-			my_mlx_pixel_put(map, x, y,  m->clean_map[y][x]);
-		}
-	}
-}
-
 void	new_fov(t_image *map, t_map *m)
 {
 	float	pixel_x;
@@ -90,4 +70,33 @@ void	new_pos(t_image *map, t_map *m, int color)
 		while (++width < M_PLAYER_SIZE)
 			my_mlx_pixel_put(map, (int)m->pos_x + width, (int)m->pos_y + height, color);
 	}
+}
+
+void	collision_check(t_map *m, t_grid *g, char k)
+{
+	g->of = 4;
+	if (k == 'w')
+		g->of = 2;
+	g->xo = 0;
+	if (m->delta_x < 0)
+		g->xo = -g->of;
+	else
+		g->xo = g->of;
+	g->yo = 0;
+	if (m->delta_y < 0)
+		g->yo = -g->of;
+	else
+		g->yo = g->of;
+	g->vo = -1;
+	g->ho = -1;
+	if (m->a_deg > 180)
+		g->vo += M_PS;
+	if (m->a_deg < 90 || m->a_deg > 270)
+		g->ho += M_PS;
+	g->mx		 = (m->pos_x + g->ho) / m->m_size;
+	g->mx_add_xo = (m->pos_x + g->ho + g->xo) / m->m_size;
+	g->mx_sub_xo = (m->pos_x + g->ho - g->xo) / m->m_size;
+	g->my		 = (m->pos_y + g->vo) / m->m_size;
+	g->my_add_yo = (m->pos_y + g->vo + g->yo) / m->m_size;
+	g->my_sub_yo = (m->pos_y + g->vo - g->yo) / m->m_size;
 }

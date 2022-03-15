@@ -1,32 +1,13 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-static void	collision_check(t_map *m, t_grid *g)
+void	draw_all(t_game *game, char t)
 {
-	m->prev_x = m->pos_x;
-	m->prev_y = m->pos_y;
-	g->xo = 0;
-	if (m->delta_x < 0)
-		g->xo = -4;
-	else
-		g->xo = 4;
-	g->yo = 0;
-	if (m->delta_y < 0)
-		g->yo = -4;
-	else
-		g->yo = 4;
-	g->vo = -1;
-	g->ho = -1;
-	if (m->a_deg > 180)
-		g->vo += M_PS;
-	if (m->a_deg < 90 || m->a_deg > 270)
-		g->ho += M_PS;
-	g->mx		 = (m->pos_x + g->ho) / m->m_size;
-	g->mx_add_xo = (m->pos_x + g->ho + g->xo) / m->m_size;
-	g->mx_sub_xo = (m->pos_x + g->ho - g->xo) / m->m_size;
-	g->my		 = (m->pos_y + g->vo) / m->m_size;
-	g->my_add_yo = (m->pos_y + g->vo + g->yo) / m->m_size;
-	g->my_sub_yo = (m->pos_y + g->vo - g->yo) / m->m_size;
+	if (t == '2')
+		remove_prev_fov(&game->map, &game->m);
+	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
+	raycasting(game);
+	new_fov(&game->map, &game->m);
 }
 
 static void	a_move(t_game *game, t_map *m)
@@ -38,7 +19,7 @@ static void	a_move(t_game *game, t_map *m)
 		m->a_rad -= PI2;
 	m->delta_x = cos(-m->a_rad);
 	m->delta_y = sin(-m->a_rad);
-	collision_check(&game->m, &g);
+	collision_check(&game->m, &g, 'a');
 	if (game->m.map[g.my][g.mx_add_xo] != '1')
 		m->pos_x += m->delta_x * m->ad_fps;
 	if (game->m.map[g.my_add_yo][g.mx] != '1')
@@ -59,7 +40,7 @@ static void	d_move(t_game *game, t_map *m)
 		m->a_rad += PI2;
 	m->delta_x = cos(-m->a_rad);
 	m->delta_y = sin(-m->a_rad);
-	collision_check(&game->m, &g);
+	collision_check(&game->m, &g, 'd');
 	if (game->m.map[g.my][g.mx_add_xo] != '1')
 		m->pos_x += m->delta_x * m->ad_fps;
 	if (game->m.map[g.my_add_yo][g.mx] != '1')
@@ -73,9 +54,11 @@ static void	d_move(t_game *game, t_map *m)
 
 void	move(t_game *game, char dir)
 {
-	collision_check(&game->m, &game->g);
+	game->m.prev_x = game->m.pos_x;
+	game->m.prev_y = game->m.pos_y;
 	if (dir == 'w')
 	{
+		collision_check(&game->m, &game->g, 'w');
 		if (game->m.map[game->g.my][game->g.mx_add_xo] != '1')
 			game->m.pos_x += game->m.delta_x * game->m.ws_fps;
 		if (game->m.map[game->g.my_add_yo][game->g.mx] != '1')
@@ -83,6 +66,7 @@ void	move(t_game *game, char dir)
 	}
 	else if (dir == 's')
 	{
+		collision_check(&game->m, &game->g, 's');
 		if (game->m.map[game->g.my][game->g.mx_sub_xo] != '1')
 			game->m.pos_x -= game->m.delta_x * game->m.ws_fps;
 		if (game->m.map[game->g.my_sub_yo][game->g.mx] != '1')
@@ -92,10 +76,7 @@ void	move(t_game *game, char dir)
 		a_move(game, &game->m);
 	else if (dir == 'd')
 		d_move(game, &game->m);
-	remove_prev_fov(&game->map, &game->m);
-	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
-	raycasting(game);
-	new_fov(&game->map, &game->m);
+	draw_all(game, '2');
 }
 
 void	rotation(t_game *game, char dir)
@@ -115,8 +96,5 @@ void	rotation(t_game *game, char dir)
 	game->m.a_deg = rad_to_deg(game->m.a_rad);
 	game->m.delta_x = cos(-game->m.a_rad);
 	game->m.delta_y = sin(-game->m.a_rad);
-	remove_prev_fov(&game->map, &game->m);
-	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
-	raycasting(game);
-	new_fov(&game->map, &game->m);
+	draw_all(game, '2');
 }

@@ -3,17 +3,15 @@
 
 void	minimap_init(t_game *game, t_parse *parse)
 {
-	game->m.ws_fps = 1.25;
-	game->m.ad_fps = 1;
+	game->m.ws_fps = 1.2;
+	game->m.ad_fps = 0.75;
 	game->m.rot_fps = 7;
 	map_description(game, parse);
 	player_description(game, parse);
 	game->m.y = -1;
 	color_map(&game->map, &game->m);
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
-	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
-	raycasting(game);
-	new_fov(&game->map, &game->m);
+	draw_all(game, '1');
 }
 
 void	world_init(t_game *game)

@@ -10,7 +10,7 @@ void	cast_single_ray(t_game *game)
 	game->r.ntan = -tan(-game->m.a_rad);
 	ray_horizontal_check(&game->m, &game->r);
 	ray_vertical_check(&game->m, &game->r);
-	game->m.cross = compare_dist(&game->r);	
+	// game->m.cross = compare_dist(&game->r);	
 	// printf("%c\n", game->m.cross);
 }
 

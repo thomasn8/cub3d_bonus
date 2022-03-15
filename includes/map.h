@@ -42,11 +42,12 @@
 # define M_RAD_270 4.71238898038	// = 3 * pi / 2
 
 /* MINIMAP */
-// pixels
+// player
+void		collision_check(t_map *m, t_grid *g, char k);
 void		new_pos(t_image *map, t_map *m, int color);
 void		new_fov(t_image *map, t_map *m);
-void		remove_prev_pos(t_image *map, t_map *m);
 void		remove_prev_fov(t_image *map, t_map *m);
+
 
 /* RAYCASTING */
 // utils et rc_utils
