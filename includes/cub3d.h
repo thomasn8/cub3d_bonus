@@ -118,6 +118,40 @@ typedef struct s_map
 	int				c_ceil;					// couleur plafond
 }	t_map;
 
+typedef struct s_rays
+{
+	int		rays;
+	float	atan;
+	float	ntan;
+	float	x;
+	float	y;
+	float	xo;
+	float	yo;
+	int		i;
+	int		shift;
+	int		rows;
+	int		cols;
+	int		mx;
+	int		my;
+	float	hx;
+	float	hy;
+	float	vx;
+	float	vy;
+	float	dist_h;
+	float	dist_v;
+	float	dist;
+	char	cross;
+	int		l;
+	float	top;
+	float	bot;
+	int		lpr;
+	int		color;
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
+}	t_rays;
+
 // game
 typedef struct s_game
 {
@@ -129,6 +163,7 @@ typedef struct s_game
 	t_image			world;
 	t_image			map;
 	t_map			m;
+	t_rays			r;
 	// t_img			menu;
 	int				w;
 	int				s;

@@ -19,3 +19,4 @@ int	move_ok(t_map *m)
 		return (1);
 	return (0);
 }
+
