@@ -36,61 +36,28 @@ static void	ray_transfo(t_game *game, t_rays *r)
 static void	draw_3d(t_game *game, t_rays *r)
 {
 	static int	x = 0;
-	int y;
-	int shift;
 
 	ray_transfo(game, r);
 	walls_texture(game->m.a_deg, r);
 	while (++r->l < r->lpr)
 	{
-		y = -1;
-		while (++y < r->bot)
-			my_mlx_pixel_put(&game->world, x + r->l, y, game->m.c_ceil);			// plafond
-
-		y = -1;
-		while (++y < r->top)
+		r->p_y = -1;
+		while (++r->p_y < r->bot)
+			my_mlx_pixel_put(&game->world, x + r->l, r->p_y, game->m.c_ceil);				// plafond
+		r->p_y = -1;
+		while (++r->p_y < r->top)
 		{
-			my_mlx_pixel_put(&game->world, x + r->l, y + r->bot, r->color);			// walls
+			my_mlx_pixel_put(&game->world, x + r->l, r->p_y + r->bot, r->color);			// walls
 		}
-
-		y = -1;
-		shift = r->top + r->bot;
-		while (++y < game->world_h)
-			my_mlx_pixel_put(&game->world, x + r->l, y + shift, game->m.c_floor);	// sol
+		r->p_y = -1;
+		r->shift = r->top + r->bot;
+		while (++r->p_y < game->world_h)
+			my_mlx_pixel_put(&game->world, x + r->l, r->p_y + r->shift, game->m.c_floor);	// sol
 	}
 	x += r->lpr;
 	if (r->rays == M_2RAYS - 1)
 		x = 0;
 }
-// // l = line | lpr = lines per ray | bot = wall bottom | top = wall top
-// static void	draw_3d(t_game *game, t_rays *r)
-// {
-// 	static int	x = 0;
-
-// 	ray_transfo(game, r);
-// 	walls_texture(game->m.a_deg, r);
-// 	while (++r->l < r->lpr)
-// 	{
-// 		r->x1 = x + r->l;
-// 		r->y1 = 0;
-// 		r->x2 = x + r->l;
-// 		r->y2 = r->bot;
-// 		draw_lines(&game->world, r, game->m.c_ceil);			// plafond
-// 		r->x1 = x + r->l;
-// 		r->y1 = r->bot;
-// 		r->x2 = x + r->l;
-// 		r->y2 = r->top + r->bot;
-// 		draw_lines(&game->world, r, r->color);					// walls
-// 		r->x1 = x + r->l;
-// 		r->y1 = r->top + r->bot;
-// 		r->x2 = x + r->l;
-// 		r->y2 = game->world_h;
-// 		draw_lines(&game->world, r, game->m.c_floor);			// sol
-// 	}
-// 	x += r->lpr;
-// 	if (r->rays == M_2RAYS - 1)
-// 		x = 0;
-// }
 
 // utiliser M_05_DEG_RAD pour projeter 120 rayons
 // utiliser M_1_DEG_RAD pour projet 60 rayons

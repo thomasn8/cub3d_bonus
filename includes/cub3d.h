@@ -147,6 +147,7 @@ typedef struct s_rays
 	float	bot;
 	int		lpr;
 	int		color;
+	int		p_y;
 }	t_rays;
 
 typedef struct s_grid

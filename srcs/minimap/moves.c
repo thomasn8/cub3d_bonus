@@ -10,7 +10,7 @@ void	draw_all(t_game *game, char t)
 	new_fov(&game->map, &game->m);
 }
 
-static void	a_move(t_game *game, t_map *m)
+static void	a_move(t_map *m)
 {
 	t_grid g;
 
@@ -19,10 +19,10 @@ static void	a_move(t_game *game, t_map *m)
 		m->a_rad -= PI2;
 	m->delta_x = cos(-m->a_rad);
 	m->delta_y = sin(-m->a_rad);
-	collision_check(&game->m, &g, 'a');
-	if (game->m.map[g.my][g.mx_add_xo] != '1')
+	collision_check(m, &g, 'a');
+	if (m->map[g.my][g.mx_add_xo] != '1')
 		m->pos_x += m->delta_x * m->ad_fps;
-	if (game->m.map[g.my_add_yo][g.mx] != '1')
+	if (m->map[g.my_add_yo][g.mx] != '1')
 		m->pos_y += m->delta_y * m->ad_fps;
 	m->a_rad -= M_RAD_90;
 	if (m->a_rad < 0)
@@ -31,7 +31,7 @@ static void	a_move(t_game *game, t_map *m)
 	m->delta_y = sin(-m->a_rad);
 }
 
-static void	d_move(t_game *game, t_map *m)
+static void	d_move(t_map *m)
 {
 	t_grid g;
 
@@ -40,10 +40,10 @@ static void	d_move(t_game *game, t_map *m)
 		m->a_rad += PI2;
 	m->delta_x = cos(-m->a_rad);
 	m->delta_y = sin(-m->a_rad);
-	collision_check(&game->m, &g, 'd');
-	if (game->m.map[g.my][g.mx_add_xo] != '1')
+	collision_check(m, &g, 'd');
+	if (m->map[g.my][g.mx_add_xo] != '1')
 		m->pos_x += m->delta_x * m->ad_fps;
-	if (game->m.map[g.my_add_yo][g.mx] != '1')
+	if (m->map[g.my_add_yo][g.mx] != '1')
 		m->pos_y += m->delta_y * m->ad_fps;
 	m->a_rad += M_RAD_90;
 	if (m->a_rad > PI2)
@@ -73,9 +73,9 @@ void	move(t_game *game, char dir)
 			game->m.pos_y -= game->m.delta_y * game->m.ws_fps;
 	}
 	else if (dir == 'a')
-		a_move(game, &game->m);
+		a_move(&game->m);
 	else if (dir == 'd')
-		d_move(game, &game->m);
+		d_move(&game->m);
 	draw_all(game, '2');
 }
 

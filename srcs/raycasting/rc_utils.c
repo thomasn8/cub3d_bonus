@@ -1,30 +1,6 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-void	draw_lines(t_image *image, t_rays *r, int color)
-{
-	float	d_x;
-	float	d_y;
-	int		pix;
-	float	p_x;
-	float	p_y;
-
-	d_x = r->x2 - r->x1;
-	d_y = r->y2 - r->y1;
-	pix = sqrt((d_x * d_x) + (d_y * d_y));
-	d_x /= pix;
-	d_y /= pix;
-	p_x = r->x1;
-	p_y = r->y1;
-	while (pix)
-	{
-		my_mlx_pixel_put(image, p_x, p_y, color);
-		p_x += d_x;
-		p_y += d_y;
-		--pix;
-	}
-}
-
 void	check_angle(float angle, int *deg)
 {
 	if (angle < 0)
@@ -63,24 +39,24 @@ float fix_fisheye(float angle)
 
 void	draw_ray(t_image *image, t_map *m, t_rays *r, int color)
 {
-	float	delta_x;
-	float	delta_y;
-	int		pixels;
-	float	pixel_x;
-	float	pixel_y;
+	float	d_x;
+	float	d_y;
+	int		pix;
+	float	p_x;
+	float	p_y;
 
-	delta_x = r->x - m->pos_x;
-	delta_y = r->y - m->pos_y;
-	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-	delta_x /= pixels;
-	delta_y /= pixels;
-	pixel_x = m->pos_x;
-	pixel_y = m->pos_y;
-	while (pixels)
+	d_x = r->x - m->pos_x;
+	d_y = r->y - m->pos_y;
+	pix = sqrt((d_x * d_x) + (d_y * d_y));
+	d_x /= pix;
+	d_y /= pix;
+	p_x = m->pos_x;
+	p_y = m->pos_y;
+	while (pix)
 	{
-		my_mlx_pixel_put(image, pixel_x, pixel_y, color);
-		pixel_x += delta_x;
-		pixel_y += delta_y;
-		--pixels;
+		my_mlx_pixel_put(image, p_x, p_y, color);
+		p_x += d_x;
+		p_y += d_y;
+		--pix;
 	}
 }
