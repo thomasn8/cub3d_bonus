@@ -142,12 +142,17 @@ typedef struct s_rays
 	float	dist_v;
 	float	dist;
 	char	cross;
-	int		l;
 	float	w_bot;
 	float	w_top;
 	int		lpr;
+	int		lpr_cpy;
 	int		color;
-	int		p_y;
+	int		ix;
+	int		iy;
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
 }	t_rays;
 
 typedef struct s_grid

@@ -1,6 +1,30 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
+static void	draw_v_line(t_image *image, t_rays *r, int color)
+{
+	double	d_x;
+	double	d_y;
+	int		pix;
+	double	p_x;
+	double	p_y;
+
+	d_x = 0;
+	d_y = r->y2 - r->y1;
+	pix = sqrt((d_x * d_x) + (d_y * d_y));
+	d_x /= pix;
+	d_y /= pix;
+	p_x = r->ix;
+	p_y = r->y1;
+	while (pix)
+	{
+		my_mlx_pixel_put(image, p_x, p_y, color);
+		p_x += d_x;
+		p_y += d_y;
+		--pix;
+	}
+}
+
 // FONCTION POUR METTRE LES TEXTURES SUR LES MURS				<-------
 static void	walls_texture(float ray_a, t_rays *r)
 {
@@ -27,36 +51,32 @@ static void	ray_transfo(t_game *game, t_rays *r)
 	if (r->w_bot > game->world_h)
 		r->w_bot = game->world_h;
 	r->w_top = (game->world_h / 2) - (r->w_bot / 2);
-	r->lpr = game->width / M_2RAYS;
-	r->l = -1;
+	r->lpr_cpy = game->width / M_2RAYS + 1;
 	walls_texture(game->m.a_deg, r);
 }
 
-// l = line | lpr = lines per ray | w_top = wall top = plafond | w_bot = wall bottom = sol
+// lpr = ligne par rayon | ix = x pos. sur l'image 3d | iy = y décalage de pos. sur l'image 3d
+// w_top = wall top = plafond | w_bot = wall bottom = sol
 static void	draw_3d(t_game *game, t_rays *r)
 {
-	static int	x = 0;
-
 	ray_transfo(game, r);
 	walls_texture(game->m.a_deg, r);
-	while (++r->l < r->lpr)
+	r->lpr = r->lpr_cpy;
+	while (--r->lpr)
 	{
-		r->p_y = -1;
-		while (++r->p_y < r->w_top)															// plafond
-			my_mlx_pixel_put(&game->world, x + r->l, r->p_y, game->m.c_ceil);
-		r->p_y = -1;
-		while (++r->p_y < r->w_bot)															// walls
+		r->y1 = 0;
+		r->y2 = r->w_top;
+		draw_v_line(&game->world, r, game->m.c_ceil);			// plafond
+		r->iy = -1;
+		while (++r->iy < r->w_bot)								// walls
 		{
-			my_mlx_pixel_put(&game->world, x + r->l, r->p_y + r->w_top, r->color);
+			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->color);
 		}
-		r->p_y = -1;
-		r->shift = r->w_bot + r->w_top;
-		while (++r->p_y < game->world_h)													// sol
-			my_mlx_pixel_put(&game->world, x + r->l, r->p_y + r->shift, game->m.c_floor);
+		r->y1 =  r->w_bot + r->w_top;
+		r->y2 = game->world_h;
+		draw_v_line(&game->world, r, game->m.c_floor);			// sol
+		r->ix++;
 	}
-	x += r->lpr;
-	if (r->rays == M_2RAYS - 1)
-		x = 0;
 }
 
 // utiliser M_05_DEG_RAD pour projeter 120 rayons
@@ -70,6 +90,7 @@ void	raycasting(t_game *game)
 	game->m.a_rad += M_RAYS * M_05_DEG_RAD;
 	check_angle(game->m.a_rad, &game->m.a_deg);
 	game->r.rays = -1;
+	game->r.ix = 0;
 	while (++game->r.rays < M_2RAYS)
 	{
 		game->r.dist_v = 0;
