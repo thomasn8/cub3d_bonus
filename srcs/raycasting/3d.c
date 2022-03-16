@@ -23,16 +23,16 @@ static void	walls_texture(float ray_a, t_rays *r)
 static void	ray_transfo(t_game *game, t_rays *r)
 {
 	r->dist *= fix_fisheye(game->m.player_angle - game->m.a_rad);
-	r->top = game->world_h * game->m.m_size / r->dist;
-	if (r->top > game->world_h)
-		r->top = game->world_h;
-	r->bot = (game->world_h / 2) - (r->top / 2);
+	r->w_bot = game->world_h * game->m.m_size / r->dist;
+	if (r->w_bot > game->world_h)
+		r->w_bot = game->world_h;
+	r->w_top = (game->world_h / 2) - (r->w_bot / 2);
 	r->lpr = game->width / M_2RAYS;
 	r->l = -1;
 	walls_texture(game->m.a_deg, r);
 }
 
-// l = line | lpr = lines per ray | bot = wall bottom | top = wall top
+// l = line | lpr = lines per ray | w_top = wall top = plafond | w_bot = wall bottom = sol
 static void	draw_3d(t_game *game, t_rays *r)
 {
 	static int	x = 0;
@@ -42,17 +42,17 @@ static void	draw_3d(t_game *game, t_rays *r)
 	while (++r->l < r->lpr)
 	{
 		r->p_y = -1;
-		while (++r->p_y < r->bot)
-			my_mlx_pixel_put(&game->world, x + r->l, r->p_y, game->m.c_ceil);				// plafond
+		while (++r->p_y < r->w_top)															// plafond
+			my_mlx_pixel_put(&game->world, x + r->l, r->p_y, game->m.c_ceil);
 		r->p_y = -1;
-		while (++r->p_y < r->top)
+		while (++r->p_y < r->w_bot)															// walls
 		{
-			my_mlx_pixel_put(&game->world, x + r->l, r->p_y + r->bot, r->color);			// walls
+			my_mlx_pixel_put(&game->world, x + r->l, r->p_y + r->w_top, r->color);
 		}
 		r->p_y = -1;
-		r->shift = r->top + r->bot;
-		while (++r->p_y < game->world_h)
-			my_mlx_pixel_put(&game->world, x + r->l, r->p_y + r->shift, game->m.c_floor);	// sol
+		r->shift = r->w_bot + r->w_top;
+		while (++r->p_y < game->world_h)													// sol
+			my_mlx_pixel_put(&game->world, x + r->l, r->p_y + r->shift, game->m.c_floor);
 	}
 	x += r->lpr;
 	if (r->rays == M_2RAYS - 1)

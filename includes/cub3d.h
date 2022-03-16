@@ -143,8 +143,8 @@ typedef struct s_rays
 	float	dist;
 	char	cross;
 	int		l;
-	float	top;
-	float	bot;
+	float	w_bot;
+	float	w_top;
 	int		lpr;
 	int		color;
 	int		p_y;
