@@ -84,18 +84,22 @@ static void	draw_3d(t_game *game, t_rays *r)
 		// r->tx = (int)(r->x / 2) % r->tex_n.width;
 		// r->tx = (int)((r->x * r->lpr_cpy)/ 2) % r->tex_n.width;
 		r->tx = (int)(r->ix / 2) % r->tex_n.width;
+
 		// if (r->lpr == 1)
-		// 	printf("WALL (rayon #%d):	Début du mur (plafond) en	%d	||	Fin du mur (sol) en	%d	||	Hauteur du mur en pixel:	%d\n", r->rays, (int)r->w_top, (int)r->w_top + (int)r->w_bot, (int)r->w_bot);
+		// 	printf("WALL (rayon #%d):	Début du mur (plafond) en	%d	||	Fin du mur (sol) en	%d	||	Hauteur du mur en pixel:	%d\n", 
+		// 	r->rays, (int)r->w_top, (int)r->w_top + (int)r->w_bot, (int)r->w_bot);
+		
 		while (++r->iy < r->w_bot)						// walls
 		{
-			// r->ty = ...;																// déterminer quel pos.y utiliser dans la tex
-			// r->tx = ...;																// déterminer quel pos.x utiliser dans la tex
-			// r->tc = get_color_value(r->tex_n.image, r->tx, r->ty);					// choper la couleur de la tex à la bonne position
 			r->c = get_tex_color(&r->tex_n, (int)r->tx, (int)r->ty);
-			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);				// utiliser r->tc à la place de r->color
-			// if (r->lpr == 1 && r->rays > 116)			// affiche pour le dernier rayon, de haut en bas, la couleur de tous les pixel
+			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);
+			
+			// if (r->lpr == 1 && r->rays > 116)	// affiche pour les derniers rayons, de haut en bas, la couleur de tous les pixel
+			// {	
 			// 	printf("pix#%d: (%d,%d) | color: %d\n",wp++, (int)r->tx, (int)r->ty, r->c);
-				// my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, 16777215);
+			// 	my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, 16777215);
+			// }
+
 			r->ty += r->ty_step;						// incremente pour avancer sur la pos.y de la texture le long du mur
 		}
 		////////////////////////////////////////////////////////
