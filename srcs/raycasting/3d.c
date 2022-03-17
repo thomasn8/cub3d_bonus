@@ -57,24 +57,33 @@ static void	ray_transfo(t_game *game, t_rays *r)
 
 // lpr = ligne par rayon | ix = x pos. sur l'image 3d | iy = y décalage de pos. sur l'image 3d
 // w_top = wall top = plafond | w_bot = wall bottom = sol
+// ou aussi
+// w_top = offset pour le début du mur | w_bot = hauteur du mur
 static void	draw_3d(t_game *game, t_rays *r)
 {
 	ray_transfo(game, r);
-	walls_texture(game->m.a_deg, r);
 	r->lpr = r->lpr_cpy;
 	while (--r->lpr)
 	{
 		r->y1 = 0;
 		r->y2 = r->w_top;
-		draw_v_line(&game->world, r, game->m.c_ceil);			// plafond
+		draw_v_line(&game->world, r, game->m.c_ceil);	// plafond
+		
+		// //// POUR APPLIQUER LA TEXTURE NORD À TOUTES LES FACES :
+		// ptr sur l'image de la texture stocké dans r->tex_n.image
 		r->iy = -1;
-		while (++r->iy < r->w_bot)								// walls
+		while (++r->iy < r->w_bot)						// walls
 		{
-			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->color);
+			// r->ty = ...;																// déterminer quel pos.y utiliser dans la tex
+			// r->tx = ...;																// déterminer quel pos.x utiliser dans la tex
+			// r->tc = get_color_value(r->tex_n.image, r->tx, r->ty);					// choper la couleur de la tex à la bonne position
+			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->color);			// utiliser r->tc à la place de r->color
 		}
+		////////////////////////////////////////////////////////
+
 		r->y1 =  r->w_bot + r->w_top;
 		r->y2 = game->world_h;
-		draw_v_line(&game->world, r, game->m.c_floor);			// sol
+		draw_v_line(&game->world, r, game->m.c_floor);	// sol
 		r->ix++;
 	}
 }

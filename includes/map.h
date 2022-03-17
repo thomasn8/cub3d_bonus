@@ -43,26 +43,27 @@
 
 /* MINIMAP */
 // player
-void		collision_check(t_map *m, t_grid *g, char k);
-void		new_pos(t_image *map, t_map *m, int color);
-void		new_fov(t_image *map, t_map *m);
-void		remove_prev_fov(t_image *map, t_map *m);
+void			collision_check(t_map *m, t_grid *g, char k);
+void			new_pos(t_image *map, t_map *m, int color);
+void			new_fov(t_image *map, t_map *m);
+void			remove_prev_fov(t_image *map, t_map *m);
 
 
 /* RAYCASTING */
 // utils et rc_utils
-float		deg_to_rad(int angle);
-int			rad_to_deg(float angle);
-void		check_angle(float angle, int *deg);
-void		compare_dist(t_rays	*r);
-float		fix_fisheye(float angle);
-void		draw_ray(t_image *image, t_map *m, t_rays *r, int color);
+float			deg_to_rad(int angle);
+int				rad_to_deg(float angle);
+unsigned int	get_color_value(t_image *image, int x, int y);
+void			check_angle(float angle, int *deg);
+void			compare_dist(t_rays	*r);
+float			fix_fisheye(float angle);
+void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 
 // rays
-void		ray_horizontal_check(t_map *m, t_rays *r);
-void		ray_vertical_check(t_map *m, t_rays *r);
+void			ray_horizontal_check(t_map *m, t_rays *r);
+void			ray_vertical_check(t_map *m, t_rays *r);
 
 // 3d
-void		raycasting(t_game *game);
+void			raycasting(t_game *game);
 
 #endif

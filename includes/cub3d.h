@@ -153,6 +153,15 @@ typedef struct s_rays
 	int		y1;
 	int		x2;
 	int		y2;
+	
+	/////////// textures
+	t_img	tex_n;
+	t_img	tex_s;
+	t_img	tex_e;
+	t_img	tex_w;
+	int		tx;
+	int		ty;
+	int		tc;
 }	t_rays;
 
 typedef struct s_grid
@@ -183,7 +192,6 @@ typedef struct s_game
 	t_map			m;
 	t_rays			r;
 	t_grid			g;
-	// t_img			menu;
 	int				w;
 	int				s;
 	int				a;

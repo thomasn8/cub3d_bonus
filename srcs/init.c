@@ -1,12 +1,37 @@
 #include "../includes/cub3d.h"
 #include "../includes/map.h"
 
+void	textures_init(t_rays *r, t_game *game)
+{
+	r->tex_n.image = mlx_xpm_file_to_image(game->mlx, game->m.no, &r->tex_n.width, &r->tex_n.heigth);
+	if (r->tex_n.image)
+		r->tex_n.addr = mlx_get_data_addr(r->tex_n.image, &r->tex_n.bits_per_pixel, &r->tex_n.line_length, &r->tex_n.endian);
+	else
+		write(2, "Error: downloading NO_texture_xpm\n", 34);
+	r->tex_s.image = mlx_xpm_file_to_image(game->mlx, game->m.so, &r->tex_s.width, &r->tex_s.heigth);
+	if (r->tex_s.image)
+		r->tex_s.addr = mlx_get_data_addr(r->tex_s.image, &r->tex_s.bits_per_pixel, &r->tex_s.line_length, &r->tex_s.endian);
+	else
+		write(2, "Error: downloading SO_texture_xpm\n", 34);
+	r->tex_e.image = mlx_xpm_file_to_image(game->mlx, game->m.ea, &r->tex_e.width, &r->tex_e.heigth);
+	if (r->tex_e.image)
+		r->tex_e.addr = mlx_get_data_addr(r->tex_e.image, &r->tex_e.bits_per_pixel, &r->tex_e.line_length, &r->tex_e.endian);
+	else
+		write(2, "Error: downloading EA_texture_xpm\n", 34);
+	r->tex_w.image = mlx_xpm_file_to_image(game->mlx, game->m.we, &r->tex_w.width, &r->tex_w.heigth);
+	if (r->tex_w.image)
+		r->tex_w.addr = mlx_get_data_addr(r->tex_w.image, &r->tex_w.bits_per_pixel, &r->tex_w.line_length, &r->tex_w.endian);
+	else
+		write(2, "Error: downloading WE_texture_xpm\n", 34);
+}
+
 void	minimap_init(t_game *game, t_parse *parse)
 {
 	game->m.ws_fps = 1.2;
 	game->m.ad_fps = 0.75;
 	game->m.rot_fps = 7;
 	map_description(game, parse);
+	textures_init(&game->r, game);
 	player_description(game, parse);
 	game->m.y = -1;
 	color_map(&game->map, &game->m);
