@@ -155,13 +155,17 @@ typedef struct s_rays
 	int		y2;
 	
 	/////////// textures
-	t_img	tex_n;
-	t_img	tex_s;
-	t_img	tex_e;
-	t_img	tex_w;
-	int		tx;
-	int		ty;
-	int		tc;
+	t_img			tex_n;
+	t_img			tex_s;
+	t_img			tex_e;
+	t_img			tex_w;
+	float			tx;
+	float			ty;
+	float			tx_step;
+	float			ty_step;
+	float			to;
+	float			tc;
+	unsigned int	c;
 }	t_rays;
 
 typedef struct s_grid

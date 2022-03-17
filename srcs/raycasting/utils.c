@@ -11,7 +11,7 @@ int rad_to_deg(float angle)
 	return (angle / PI * 180);
 }
 
-// retourne la valeur la couleur en un int (valeur decimal !)
+// retourne un int (valeur decimal !) = la couleur de l'image en pos. (x,y)
 unsigned int get_color_value(t_image *image, int x, int y)
 {
 	char *ptr;

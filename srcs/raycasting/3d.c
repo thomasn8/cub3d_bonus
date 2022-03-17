@@ -25,7 +25,7 @@ static void	draw_v_line(t_image *image, t_rays *r, int color)
 	}
 }
 
-// FONCTION POUR METTRE LES TEXTURES SUR LES MURS				<-------
+// DIFFERENCIER LES MURS SELON LEUR ORIENTATION
 static void	walls_texture(float ray_a, t_rays *r)
 {
 	if (r->cross == 'v')					// faces W et E
@@ -48,8 +48,13 @@ static void	ray_transfo(t_game *game, t_rays *r)
 {
 	r->dist *= fix_fisheye(game->m.player_angle - game->m.a_rad);
 	r->w_bot = game->world_h * game->m.m_size / r->dist;
+	r->ty_step = r->tex_n.heigth / r->w_bot; 							//  tex.h = 64
+	r->to = 0;
 	if (r->w_bot > game->world_h)
+	{
+		r->to = (r->w_bot - game->world_h) / 2;
 		r->w_bot = game->world_h;
+	}
 	r->w_top = (game->world_h / 2) - (r->w_bot / 2);
 	r->lpr_cpy = game->width / M_2RAYS + 1;
 	walls_texture(game->m.a_deg, r);
@@ -61,6 +66,8 @@ static void	ray_transfo(t_game *game, t_rays *r)
 // w_top = offset pour le début du mur | w_bot = hauteur du mur
 static void	draw_3d(t_game *game, t_rays *r)
 {
+	int wp = 0;
+
 	ray_transfo(game, r);
 	r->lpr = r->lpr_cpy;
 	while (--r->lpr)
@@ -69,15 +76,31 @@ static void	draw_3d(t_game *game, t_rays *r)
 		r->y2 = r->w_top;
 		draw_v_line(&game->world, r, game->m.c_ceil);	// plafond
 		
-		// //// POUR APPLIQUER LA TEXTURE NORD À TOUTES LES FACES :
-		// ptr sur l'image de la texture stocké dans r->tex_n.image
+		////////////////////////////////////////////////////////
+		// POUR APPLIQUER LA TEXTURE NORD À TOUTES LES FACES
+		// (ptr sur l'image de la texture stocké dans r->tex_n.image)
 		r->iy = -1;
+		r->ty = r->to * r->ty_step;
+		r->tx = (int)(r->x / 2) % r->tex_n.width;
+		// r->tx = (int)((r->x * r->lpr_cpy)/ 2) % r->tex_n.width;
+		// r->tx = (int)(r->ix / 2) % r->tex_n.width;
+		if (r->lpr == 1)
+			printf("WALL (rayon #%d):	Début du mur (plafond) en	%d	||	Fin du mur (sol) en	%d	||	Hauteur du mur en pixel:	%d\n", r->rays, (int)r->w_top, (int)r->w_top + (int)r->w_bot, (int)r->w_bot);
 		while (++r->iy < r->w_bot)						// walls
 		{
 			// r->ty = ...;																// déterminer quel pos.y utiliser dans la tex
 			// r->tx = ...;																// déterminer quel pos.x utiliser dans la tex
 			// r->tc = get_color_value(r->tex_n.image, r->tx, r->ty);					// choper la couleur de la tex à la bonne position
-			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->color);			// utiliser r->tc à la place de r->color
+			
+
+			r->c = get_color_value(r->tex_n.image, (int)r->tx, (int)r->ty);
+			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);				// utiliser r->tc à la place de r->color
+			
+			if (r->lpr == 1 && r->rays > 116)			// affiche pour le dernier rayon, de haut en bas, la couleur de tous les pixel
+				printf("pix#%d: (%d,%d) | color: %d\n",wp++, (int)r->tx, (int)r->ty, r->c);
+				// my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, 16777215);
+			
+			r->ty += r->ty_step;						// incremente pour avancer sur la pos.y de la texture le long du mur
 		}
 		////////////////////////////////////////////////////////
 
