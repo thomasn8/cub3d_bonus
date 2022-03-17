@@ -66,7 +66,7 @@ static void	ray_transfo(t_game *game, t_rays *r)
 // w_top = offset pour le début du mur | w_bot = hauteur du mur
 static void	draw_3d(t_game *game, t_rays *r)
 {
-	int wp = 0;
+	// int wp = 0;
 
 	ray_transfo(game, r);
 	r->lpr = r->lpr_cpy;
@@ -91,15 +91,11 @@ static void	draw_3d(t_game *game, t_rays *r)
 			// r->ty = ...;																// déterminer quel pos.y utiliser dans la tex
 			// r->tx = ...;																// déterminer quel pos.x utiliser dans la tex
 			// r->tc = get_color_value(r->tex_n.image, r->tx, r->ty);					// choper la couleur de la tex à la bonne position
-			
-
-			r->c = get_color_value(r->tex_n.image, (int)r->tx, (int)r->ty);
+			r->c = get_tex_color(&r->tex_n, (int)r->tx, (int)r->ty);
 			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);				// utiliser r->tc à la place de r->color
-			
-			if (r->lpr == 1 && r->rays > 116)			// affiche pour le dernier rayon, de haut en bas, la couleur de tous les pixel
-				printf("pix#%d: (%d,%d) | color: %d\n",wp++, (int)r->tx, (int)r->ty, r->c);
+			// if (r->lpr == 1 && r->rays > 116)			// affiche pour le dernier rayon, de haut en bas, la couleur de tous les pixel
+			// 	printf("pix#%d: (%d,%d) | color: %d\n",wp++, (int)r->tx, (int)r->ty, r->c);
 				// my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, 16777215);
-			
 			r->ty += r->ty_step;						// incremente pour avancer sur la pos.y de la texture le long du mur
 		}
 		////////////////////////////////////////////////////////

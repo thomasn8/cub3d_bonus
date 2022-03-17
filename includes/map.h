@@ -54,6 +54,7 @@ void			remove_prev_fov(t_image *map, t_map *m);
 float			deg_to_rad(int angle);
 int				rad_to_deg(float angle);
 unsigned int	get_color_value(t_image *image, int x, int y);
+unsigned int	get_tex_color(t_img *tex, int x, int y);
 void			check_angle(float angle, int *deg);
 void			compare_dist(t_rays	*r);
 float			fix_fisheye(float angle);

@@ -19,3 +19,11 @@ unsigned int get_color_value(t_image *image, int x, int y)
 	ptr = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
 	return (*(unsigned int*)ptr);
 }
+
+unsigned int get_tex_color(t_img *tex, int x, int y)
+{
+	char *ptr;
+
+	ptr = tex->addr + (y * tex->line_length + x * (tex->bits_per_pixel / 8));
+	return (*(unsigned int*)ptr);
+}
