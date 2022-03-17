@@ -81,7 +81,10 @@ static void	draw_3d(t_game *game, t_rays *r)
 		r->iy = -1;
 		r->ty = r->to * r->ty_step;
 		// r->tx = (int)(r->x / 2) % r->tex_n.width;				// tout étiré 
-		r->tx = (int)((r->x * r->lpr_cpy)) % r->tex_n.width;		// correct pour faces N et S
+		if (r->cross == 'h')
+			r->tx = (int)((r->x * r->lpr_cpy)) % r->tex_n.width;		// correct pour faces N et S
+		else
+			r->tx = (int)((r->y * r->lpr_cpy)) % r->tex_n.width;		// correct pour faces N et S
 		// r->tx = (int)((r->x * r->lpr_cpy)/ 2) % r->tex_n.width;	// un peu étiré
 		// r->tx = (int)(r->ix / 2) % r->tex_n.width;				// nombre variable
 
