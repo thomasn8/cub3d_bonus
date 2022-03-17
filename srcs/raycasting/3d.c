@@ -80,13 +80,11 @@ static void	draw_3d(t_game *game, t_rays *r)
 		// POUR APPLIQUER LA TEXTURE NORD À TOUTES LES FACES
 		r->iy = -1;
 		r->ty = r->to * r->ty_step;
-		// r->tx = (int)(r->x / 2) % r->tex_n.width;				// tout étiré 
 		if (r->cross == 'h')
 			r->tx = (int)((r->x * r->lpr_cpy)) % r->tex_n.width;		// correct pour faces N et S
 		else
 			r->tx = (int)((r->y * r->lpr_cpy)) % r->tex_n.width;		// correct pour faces N et S
-		// r->tx = (int)((r->x * r->lpr_cpy)/ 2) % r->tex_n.width;	// un peu étiré
-		// r->tx = (int)(r->ix / 2) % r->tex_n.width;				// nombre variable
+		// r->tx = (int)(r->ix / 2) % r->tex_n.width;			// problèmes
 
 		// if (r->lpr == 1)
 		// 	printf("WALL (rayon #%d):	Début du mur (plafond) en	%d	||	Fin du mur (sol) en	%d	||	Hauteur du mur en pixel:	%d\n", 
