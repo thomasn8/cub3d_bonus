@@ -78,12 +78,12 @@ static void	draw_3d(t_game *game, t_rays *r)
 		
 		////////////////////////////////////////////////////////
 		// POUR APPLIQUER LA TEXTURE NORD À TOUTES LES FACES
-		// (ptr sur l'image de la texture stocké dans r->tex_n.image)
 		r->iy = -1;
 		r->ty = r->to * r->ty_step;
-		// r->tx = (int)(r->x / 2) % r->tex_n.width;
-		// r->tx = (int)((r->x * r->lpr_cpy)/ 2) % r->tex_n.width;
-		r->tx = (int)(r->ix / 2) % r->tex_n.width;
+		// r->tx = (int)(r->x / 2) % r->tex_n.width;				// tout étiré 
+		r->tx = (int)((r->x * r->lpr_cpy)) % r->tex_n.width;		// correct pour faces N et S
+		// r->tx = (int)((r->x * r->lpr_cpy)/ 2) % r->tex_n.width;	// un peu étiré
+		// r->tx = (int)(r->ix / 2) % r->tex_n.width;				// nombre variable
 
 		// if (r->lpr == 1)
 		// 	printf("WALL (rayon #%d):	Début du mur (plafond) en	%d	||	Fin du mur (sol) en	%d	||	Hauteur du mur en pixel:	%d\n", 
