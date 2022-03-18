@@ -25,7 +25,7 @@ static void wall_texture(t_game *game, t_rays *r)
 	}
 }
 
-static void	use_textures(t_game *game, t_rays *r)
+static void	use_texture(t_game *game, t_rays *r)
 {
 	while (--r->lpr)
 	{
@@ -79,7 +79,7 @@ static void	ray_to_3d(t_game *game, t_rays *r)
 	r->lpr_cpy = (game->width / r->r_1) + 1;
 	r->lpr = r->lpr_cpy;
 	if (r->tex)
-		use_textures(game, r);
+		use_texture(game, r);
 	else 
 		use_color(game, r);
 }
