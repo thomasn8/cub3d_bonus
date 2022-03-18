@@ -10,7 +10,7 @@
 
 /* dimensions */
 # define FOV 60
-# define M_RAY_FACTOR 2
+# define M_RAY_FACTOR 16
 // # define WIDTH FOV * 12
 # define WIDTH 960
 # define HEIGTH 668
@@ -86,9 +86,9 @@ typedef struct	s_img {
 typedef struct s_map
 {
 	int				m_size;
-	float			ws_fps;					// vitesse de jeu (frames per second)
-	float			ad_fps;					//
-	float			rot_fps;				//
+	float			ws_fps;
+	float			ad_fps;
+	float			rot_fps;
 	int				cols;
 	int				rows;
 	int				x;
@@ -96,28 +96,28 @@ typedef struct s_map
 	int 			xo;
 	int				yo;
 	int 			color;
-	int 			w;						// width de l'image world dans game
-	int				h;						// heigth de l'image world dans game
+	int 			w;
+	int				h;
 	int				h_offset;
 	int				w_offset;
 	float			prev_x;
 	float			prev_y;
-	float			pos_x;					// x position du player
-	float			pos_y;					// y position du player
+	float			pos_x;
+	float			pos_y;
 	float			delta_x;
 	float			delta_y;
-	float			a_rad;					// view_player (en radius)
+	float			a_rad;
 	float			player_angle;
-	int				a_deg;					// view_player (en degré)
+	int				a_deg;
 	char			cross;
-	char			**map;					// map
+	char			**map;
 	unsigned int	**clean_map;
-	char			*no;					// textures ...
-	char			*so;					//
-	char			*we;					//
-	char			*ea;					//
-	int				c_floor;				// couleur sol
-	int				c_ceil;					// couleur plafond
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	int				c_floor;
+	int				c_ceil;
 }	t_map;
 
 typedef struct s_rays
@@ -160,7 +160,6 @@ typedef struct s_rays
 	int				y1;
 	int				x2;
 	int				y2;
-	/////////// textures
 	t_img			tex_n;
 	t_img			tex_s;
 	t_img			tex_e;

@@ -55,6 +55,7 @@ void	color_map(t_image *map, t_map *m)
 	}
 }
 
+// centrer la map dans menu du bas
 static int	size(int cols, int rows)
 {
 	int max_w;
@@ -78,7 +79,6 @@ void	map_description(t_game *game, t_parse *parse)
 	game->m.rows =  parse->m_height;
 	game->m.m_size = size(game->m.cols, game->m.rows);
 	game->m.w = parse->m_width * game->m.m_size;
-	printf("minimap width: %d = %d * %d\n", game->m.w, parse->m_width, game->m.m_size);
 	game->m.h = parse->m_height * game->m.m_size;
 	game->m.h_offset = game->world_h + MARGIN + ((MENU_HEIGTH - (2 * MARGIN)) - game->m.h) / 2;
 	game->m.w_offset = (game->width - (2 * MARGIN) - game->m.w) / 2;

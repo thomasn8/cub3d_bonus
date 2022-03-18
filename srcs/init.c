@@ -16,6 +16,7 @@ void	minimap_init(t_game *game, t_parse *parse)
 	draw_all(game, '1');
 }
 
+// + on augmente ray_factor, + on lance de rayon, + on a des textures détaillées
 void	world_init(t_game *game)
 {
 	int x;
@@ -48,7 +49,8 @@ void	menu_init(t_game *game)
 		while (++x < game->width)
 			mlx_pixel_put(game->mlx, game->win, x, y, MENU_COLOR);
 	}
-	mlx_string_put(game->mlx, game->win, WIDTH - 60, HEIGTH - 30, MENU_TEXT_COLOR, "CUB3D");
+	// mlx_string_put(game->mlx, game->win, game->width - 60, HEIGTH - 30, MENU_TEXT_COLOR, "CUB3D");
+	mlx_string_put(game->mlx, game->win, game->width - 200, HEIGTH - 30, YELLOW, "by adrien et thomas");
 }
 
 void	params_init(t_game *game)
