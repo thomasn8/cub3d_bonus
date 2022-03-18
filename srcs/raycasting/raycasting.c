@@ -1,7 +1,46 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-static void	draw_color(t_game *game, t_rays *r)
+static void wall_texture(t_game *game, t_rays *r)
+{
+	r->iy = -1;
+	r->ty = r->to * r->ty_step;
+	if (r->cross == 'h')
+	{
+		r->tx = (int)((r->wx - (int)r->wx) * r->tex->width);
+		if(game->m.a_deg > 180)
+			r->tx = r->tex->width - r->tx - 1;
+	}
+	else
+	{
+		r->tx = (int)((r->wy - (int)r->wy) * r->tex->width);
+		if(game->m.a_deg > 90 && game->m.a_deg < 270)
+			r->tx = r->tex->width - r->tx - 1;
+	}
+	while (++r->iy < r->w_bot)
+	{
+		r->c = get_tex_color(r->tex, r->tx, r->ty);
+		my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);
+		r->ty += r->ty_step;
+	}
+}
+
+static void	use_textures(t_game *game, t_rays *r)
+{
+	while (--r->lpr)
+	{
+		r->y1 = 0;
+		r->y2 = r->w_top;
+		draw_v_line(&game->world, r, game->m.c_ceil);
+		wall_texture(game, r);
+		r->y1 = r->w_bot + r->w_top;
+		r->y2 = game->world_h;
+		draw_v_line(&game->world, r, game->m.c_floor);
+		r->ix++;
+	}
+}
+
+static void	use_color(t_game *game, t_rays *r)
 {
 	while (--r->lpr)
 	{
@@ -12,40 +51,6 @@ static void	draw_color(t_game *game, t_rays *r)
 		while (++r->iy < r->w_bot)
 			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);
 		r->y1 =  r->w_bot + r->w_top;
-		r->y2 = game->world_h;
-		draw_v_line(&game->world, r, game->m.c_floor);
-		r->ix++;
-	}
-}
-
-static void	draw_tex(t_game *game, t_rays *r)
-{
-	while (--r->lpr)
-	{
-		r->y1 = 0;
-		r->y2 = r->w_top;
-		draw_v_line(&game->world, r, game->m.c_ceil);
-		r->iy = -1;
-		r->ty = r->to * r->ty_step;
-		if (r->cross == 'h')
-		{
-			r->tx = (int)((r->wx - (int)r->wx) * r->tex->width);
-			if(game->m.a_deg > 180)
-				r->tx = r->tex->width - r->tx - 1;
-		}
-		else
-		{
-			r->tx = (int)((r->wy - (int)r->wy) * r->tex->width);
-			if(game->m.a_deg > 90 && game->m.a_deg < 270)
-				r->tx = r->tex->width - r->tx - 1;
-		}
-		while (++r->iy < r->w_bot)
-		{
-			r->c = get_tex_color(r->tex, r->tx, r->ty);
-			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);
-			r->ty += r->ty_step;
-		}
-		r->y1 = r->w_bot + r->w_top;
 		r->y2 = game->world_h;
 		draw_v_line(&game->world, r, game->m.c_floor);
 		r->ix++;
@@ -73,11 +78,10 @@ static void	ray_to_3d(t_game *game, t_rays *r)
 	r->w_top = (game->world_h / 2) - (r->w_bot / 2);
 	r->lpr_cpy = (game->width / r->r_1) + 1;
 	r->lpr = r->lpr_cpy;
-	// printf("Lpr: %d, r.x=%f | r.y= %f\n", r->lpr, r->x, r->y);
 	if (r->tex)
-		draw_tex(game, r);
+		use_textures(game, r);
 	else 
-		draw_color(game, r);
+		use_color(game, r);
 }
 
 // pour voir les rayons dans la minimap, ajouté après draw_3d() :
