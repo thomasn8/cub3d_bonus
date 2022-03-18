@@ -27,11 +27,7 @@
 # define M_HALF_PLAYER (M_PLAYER_SIZE / 2)
 # define PI 3.1415926535
 # define PI2 6.2831853071
-# define M_1_DEG_RAD 0.0174533
-# define M_05_DEG_RAD 0.00872665
-# define M_RAYS 60
-# define M_2RAYS 120
-# define M_HALF_RAYS 30
+# define M_1_DEG_RAD 0.017453293	// (2*pi)/360
 # define M_EAST 0
 # define M_NORTH 90
 # define M_WEST 180
@@ -39,7 +35,7 @@
 # define M_RAD_0 0
 # define M_RAD_90 1.57079632679		// = pi/2
 # define M_RAD_180 3.1415926535		// = pi
-# define M_RAD_270 4.71238898038	// = 3 * pi / 2
+# define M_RAD_270 4.71238898038	// = 3*pi/2
 
 /* MINIMAP */
 // player
@@ -48,23 +44,23 @@ void			new_pos(t_image *map, t_map *m, int color);
 void			new_fov(t_image *map, t_map *m);
 void			remove_prev_fov(t_image *map, t_map *m);
 
-
 /* RAYCASTING */
-// utils et rc_utils
-float			deg_to_rad(int angle);
-int				rad_to_deg(float angle);
-unsigned int	get_color_value(t_image *image, int x, int y);
-unsigned int	get_tex_color(t_img *tex, int x, int y);
-void			check_angle(float angle, int *deg);
-void			compare_dist(t_rays	*r);
-float			fix_fisheye(float angle);
-void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
-
-// rays
+// ray_dist
 void			ray_horizontal_check(t_map *m, t_rays *r);
 void			ray_vertical_check(t_map *m, t_rays *r);
-
-// 3d
+// raycasting
 void			raycasting(t_game *game);
+// rc_utils
+void			check_angle(float angle, int *deg);
+void			compare_dist(t_rays	*r);
+void			draw_v_line(t_image *image, t_rays *r, int color);
+float			fix_fisheye(float angle);
+void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
+// textures
+void			v_textures_init(t_rays *r, t_game *game);
+void			h_textures_init(t_rays *r, t_game *game);
+t_img			*ray_texture(float ray_a, t_rays *r);
+int				ray_color(float ray_a, t_rays *r);
+
 
 #endif

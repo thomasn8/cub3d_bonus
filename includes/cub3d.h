@@ -9,11 +9,12 @@
 # include <fcntl.h>
 
 /* dimensions */
-# define WIDTH 960
+# define FOV 60
+# define M_RAY_FACTOR 2
+# define WIDTH FOV * 10
 # define HEIGTH 668
 # define MARGIN 5
 # define MENU_HEIGTH 120
-# define CUBE_SIZE 256
 
 /* colors */
 # define WHITE 0x00FFFFFF
@@ -45,7 +46,6 @@ typedef struct s_parse
 	int				m_width;
 	unsigned long	hex_f;
 	unsigned long	hex_s;
-	//////////////////////////////
 	char			*c_f;
 	char			*c_s;
 	int				error;
@@ -75,9 +75,9 @@ typedef struct	s_img {
 	char			*path;
 	int				width;
 	int				heigth;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
+	int				bpp;
+	int				ll;
+	int				e;
 } 	t_img;
 
 
@@ -122,6 +122,10 @@ typedef struct s_map
 typedef struct s_rays
 {
 	int				rays;
+	int				r_1;
+	int				r_05;
+	double			r_ra;
+	double			fov_05;
 	float			atan;
 	float			ntan;
 	float			x;
@@ -227,6 +231,12 @@ void			print_map(char **grid);
 unsigned long	create_rgb(int t, int r, int g, int b);
 void			print_all(t_parse *p);
 
+// utils
+float			deg_to_rad(int angle);
+int				rad_to_deg(float angle);
+unsigned int	get_color_value(t_image *image, int x, int y);
+unsigned int	get_tex_color(t_img *tex, int x, int y);
+
 // init
 void			params_init(t_game *game);
 void			menu_init(t_game *game);
@@ -241,8 +251,6 @@ unsigned int	**copy_map(t_image *map, int width, int heigth);
 void			rotation(t_game *game, char dir);
 void			move(t_game *game, char move);
 void			draw_all(t_game *game, char t);
-
-
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
