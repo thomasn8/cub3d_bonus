@@ -10,12 +10,14 @@ void	check_angle(float angle, int *deg)
 	*deg = rad_to_deg(angle);
 }
 
-void	compare_dist(t_rays	*r)
+void	compare_dist(t_rays	*r, int m_size)
 {
 	if (r->dist_v != 0 && (r->dist_h == 0 || r->dist_v < r->dist_h))
 	{
 		r->x = r->vx;
 		r->y = r->vy;
+		r->wx = r->x / m_size;
+		r->wy = r->y / m_size;
 		r->dist = r->dist_v;
 		r->cross = 'v';
 	}
@@ -23,6 +25,8 @@ void	compare_dist(t_rays	*r)
 	{
 		r->x = r->hx;
 		r->y = r->hy;
+		r->wx = r->x / m_size;
+		r->wy = r->y / m_size;
 		r->dist = r->dist_h;
 		r->cross = 'h';
 	}

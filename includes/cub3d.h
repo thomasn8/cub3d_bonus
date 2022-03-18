@@ -11,7 +11,8 @@
 /* dimensions */
 # define FOV 60
 # define M_RAY_FACTOR 2
-# define WIDTH FOV * 10
+// # define WIDTH FOV * 12
+# define WIDTH 960
 # define HEIGTH 668
 # define MARGIN 5
 # define MENU_HEIGTH 120
@@ -142,6 +143,8 @@ typedef struct s_rays
 	float			hy;
 	float			vx;
 	float			vy;
+	float			wx;
+	float			wy;
 	float			dist_h;
 	float			dist_v;
 	float			dist;

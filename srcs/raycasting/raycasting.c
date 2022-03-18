@@ -28,9 +28,17 @@ static void	draw_tex(t_game *game, t_rays *r)
 		r->iy = -1;
 		r->ty = r->to * r->ty_step;
 		if (r->cross == 'h')
-			r->tx = (int)(r->x * r->lpr_cpy) % r->tex->width;
+		{
+			r->tx = (int)((r->wx - (int)r->wx) * r->tex->width);
+			if(game->m.a_deg > 180)
+				r->tx = r->tex->width - r->tx - 1;
+		}
 		else
-			r->tx = (int)(r->y * r->lpr_cpy) % r->tex->width;
+		{
+			r->tx = (int)((r->wy - (int)r->wy) * r->tex->width);
+			if(game->m.a_deg > 90 && game->m.a_deg < 270)
+				r->tx = r->tex->width - r->tx - 1;
+		}
 		while (++r->iy < r->w_bot)
 		{
 			r->c = get_tex_color(r->tex, r->tx, r->ty);
@@ -44,7 +52,7 @@ static void	draw_tex(t_game *game, t_rays *r)
 	}
 }
 
-static void	draw_3d(t_game *game, t_rays *r)
+static void	ray_to_3d(t_game *game, t_rays *r)
 {
 	r->dist *= fix_fisheye(game->m.player_angle - game->m.a_rad);
 	r->w_bot = game->world_h * game->m.m_size / r->dist;
@@ -65,6 +73,7 @@ static void	draw_3d(t_game *game, t_rays *r)
 	r->w_top = (game->world_h / 2) - (r->w_bot / 2);
 	r->lpr_cpy = (game->width / r->r_1) + 1;
 	r->lpr = r->lpr_cpy;
+	// printf("Lpr: %d, r.x=%f | r.y= %f\n", r->lpr, r->x, r->y);
 	if (r->tex)
 		draw_tex(game, r);
 	else 
@@ -90,8 +99,8 @@ void	raycasting(t_game *game)
 		game->r.ntan = -tan(-game->m.a_rad);
 		ray_horizontal_check(&game->m, &game->r);
 		ray_vertical_check(&game->m, &game->r);
-		compare_dist(&game->r);
-		draw_3d(game, &game->r);
+		compare_dist(&game->r, game->m.m_size);
+		ray_to_3d(game, &game->r);
 		game->m.a_rad -=  game->r.r_ra;
 		check_angle(game->m.a_rad, &game->m.a_deg);
 	}
