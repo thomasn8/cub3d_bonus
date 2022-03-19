@@ -20,9 +20,9 @@ static void	a_move(t_map *m)
 	m->delta_x = cos(-m->a_rad);
 	m->delta_y = sin(-m->a_rad);
 	collision_check(m, &g, 'a');
-	if (m->map[g.my][g.mx_add_xo] != '1')
+	if (m->map[g.my][g.mx_add_xo] == '0')
 		m->pos_x += m->delta_x * m->ad_fps;
-	if (m->map[g.my_add_yo][g.mx] != '1')
+	if (m->map[g.my_add_yo][g.mx] == '0')
 		m->pos_y += m->delta_y * m->ad_fps;
 	m->a_rad -= M_RAD_90;
 	if (m->a_rad < 0)
@@ -41,9 +41,9 @@ static void	d_move(t_map *m)
 	m->delta_x = cos(-m->a_rad);
 	m->delta_y = sin(-m->a_rad);
 	collision_check(m, &g, 'd');
-	if (m->map[g.my][g.mx_add_xo] != '1')
+	if (m->map[g.my][g.mx_add_xo] == '0')
 		m->pos_x += m->delta_x * m->ad_fps;
-	if (m->map[g.my_add_yo][g.mx] != '1')
+	if (m->map[g.my_add_yo][g.mx] == '0')
 		m->pos_y += m->delta_y * m->ad_fps;
 	m->a_rad += M_RAD_90;
 	if (m->a_rad > PI2)
@@ -59,17 +59,17 @@ void	move(t_game *game, char dir)
 	if (dir == 'w')
 	{
 		collision_check(&game->m, &game->g, 'w');
-		if (game->m.map[game->g.my][game->g.mx_add_xo] != '1')
+		if (game->m.map[game->g.my][game->g.mx_add_xo] == '0')
 			game->m.pos_x += game->m.delta_x * game->m.ws_fps;
-		if (game->m.map[game->g.my_add_yo][game->g.mx] != '1')
+		if (game->m.map[game->g.my_add_yo][game->g.mx] == '0')
 			game->m.pos_y += game->m.delta_y * game->m.ws_fps;
 	}
 	else if (dir == 's')
 	{
 		collision_check(&game->m, &game->g, 's');
-		if (game->m.map[game->g.my][game->g.mx_sub_xo] != '1')
+		if (game->m.map[game->g.my][game->g.mx_sub_xo] == '0')
 			game->m.pos_x -= game->m.delta_x * game->m.ws_fps;
-		if (game->m.map[game->g.my_sub_yo][game->g.mx] != '1')
+		if (game->m.map[game->g.my_sub_yo][game->g.mx] == '0')
 			game->m.pos_y -= game->m.delta_y * game->m.ws_fps;
 	}
 	else if (dir == 'a')

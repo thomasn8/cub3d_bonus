@@ -171,6 +171,7 @@ typedef struct s_rays
 	float			to;
 	float			tc;
 	unsigned int	c;
+	int				door;
 }	t_rays;
 
 typedef struct s_grid

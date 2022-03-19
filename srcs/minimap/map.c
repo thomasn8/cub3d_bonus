@@ -35,6 +35,8 @@ void	color_map(t_image *map, t_map *m)
 		{
 			if (m->map[m->y][m->x] == '1')
 				m->color = M_WALL_COLOR;
+			else if (m->map[m->y][m->x] == '2')
+				m->color = M_DOOR_COLOR;
 			else
 				m->color = M_SPACE_COLOR;
 			m->yo = (m->y + 1) * m->m_size;
