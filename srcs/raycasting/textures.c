@@ -40,7 +40,7 @@ void	v_textures_init(t_rays *r, t_game *game)
 	if (!r->tex_n.image)
 	{
 		r->tex_n.image = NULL;
-		ft_error(NULL, "loading NO_texture_xpm\n", NULL);
+		write_errors("loading NO_texture_xpm");
 	}
 	else
 		r->tex_n.addr = mlx_get_data_addr(
@@ -50,7 +50,7 @@ void	v_textures_init(t_rays *r, t_game *game)
 	if (!r->tex_s.image)
 	{
 		r->tex_s.image = NULL;
-		ft_error(NULL, "loading SO_texture_xpm\n", NULL);
+		write_errors("loading SO_texture_xpm");
 	}
 	else
 		r->tex_s.addr = mlx_get_data_addr(
@@ -64,7 +64,7 @@ void	h_textures_init(t_rays *r, t_game *game)
 	if (!r->tex_e.image)
 	{
 		r->tex_e.image = NULL;
-		ft_error(NULL, "loading NE_texture_xpm\n", NULL);
+		write_errors("loading EA_texture_xpm");
 	}
 	else
 		r->tex_e.addr = mlx_get_data_addr(
@@ -74,7 +74,7 @@ void	h_textures_init(t_rays *r, t_game *game)
 	if (!r->tex_w.image)
 	{
 		r->tex_w.image = NULL;
-		ft_error(NULL, "loading WE_texture_xpm\n", NULL);
+		write_errors("loading WE_texture_xpm");
 	}
 	else
 		r->tex_w.addr = mlx_get_data_addr(
