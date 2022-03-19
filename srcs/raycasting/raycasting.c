@@ -1,12 +1,38 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
+// static void wall_texture(t_game *game, t_rays *r)
+// {
+// 	r->iy = -1;
+// 	r->ty = r->to * r->ty_step;
+// 	if (r->cross == 'h')
+// 	{
+// 		r->tx = (int)((r->wx - (int)r->wx) * r->tex->width);
+// 		if (game->m.a_deg > 180)
+// 			r->tx = r->tex->width - r->tx - 1;
+// 	}
+// 	else
+// 	{
+// 		r->tx = (int)((r->wy - (int)r->wy) * r->tex->width);
+// 		if (game->m.a_deg > 90 && game->m.a_deg < 270)
+// 			r->tx = r->tex->width - r->tx - 1;
+// 	}
+// 	while (++r->iy < r->w_bot)
+// 	{
+// 		r->c = get_tex_color(r->tex, r->tx, r->ty);
+// 		my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);
+// 		r->ty += r->ty_step;
+// 	}
+// }
+
 static void wall_texture(t_game *game, t_rays *r)
 {
 	r->iy = -1;
 	r->ty = r->to * r->ty_step;
 	if (r->cross == 'h')
 	{
+		// if(r->spe == '2')
+			// printf("TEST 2\n");
 		r->tx = (int)((r->wx - (int)r->wx) * r->tex->width);
 		if (game->m.a_deg > 180)
 			r->tx = r->tex->width - r->tx - 1;
@@ -85,7 +111,7 @@ static void	ray_to_3d(t_game *game, t_rays *r)
 }
 
 // pour voir les rayons dans la minimap, ajouté après draw_3d() :
-// draw_ray(&game->map, &game->m, &r, RED);
+// draw_ray(&game->map, &game->m, &game->r, RED);
 void	raycasting(t_game *game)
 {
 	game->m.pos_x += M_HALF_PLAYER;
@@ -105,8 +131,9 @@ void	raycasting(t_game *game)
 		game->r.spe = '0';
 		ray_horizontal_check(&game->m, &game->r);
 		ray_vertical_check(&game->m, &game->r);
-		compare_dist(&game->r, game->m.m_size);
+		compare_dist(&game->m, &game->r, game->m.m_size);
 		ray_to_3d(game, &game->r);
+		draw_ray(&game->map, &game->m, &game->r, RED);
 		game->m.a_rad -=  game->r.r_ra;
 		check_angle(game->m.a_rad, &game->m.a_deg);
 	}

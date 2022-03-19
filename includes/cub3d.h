@@ -133,11 +133,14 @@ typedef struct s_rays
 	float			xo;
 	float			yo;
 	int				i;
-	int				shift;
+	int				v_shift;
+	int				h_shift;
 	int				rows;
 	int				cols;
-	int				mx;
-	int				my;
+	int				vmx;
+	int				vmy;
+	int				hmx;
+	int				hmy;
 	float			hx;
 	float			hy;
 	float			vx;

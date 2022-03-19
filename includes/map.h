@@ -53,7 +53,7 @@ void			ray_vertical_check(t_map *m, t_rays *r);
 void			raycasting(t_game *game);
 // rc_utils
 void			check_angle(float angle, int *deg);
-void			compare_dist(t_rays	*r, int m_size);
+void			compare_dist(t_map *m, t_rays	*r, int m_size);
 void			draw_v_line(t_image *image, t_rays *r, int color);
 float			fix_fisheye(float angle);
 void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
