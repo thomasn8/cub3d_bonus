@@ -41,16 +41,16 @@ int	ray_color(float ray_a, t_rays *r)
 	if (r->cross == 'v')					// faces W et E
 	{
 		if (ray_a > 90 && ray_a < 270)		// W
-			return (CV1);
+			return (DEF1);
 		else								// E
-			return (CV2);
+			return (DEF2);
 	}
 	else if (r->cross == 'h')				// faces N et S
 	{
 		if (ray_a > 0 && ray_a < 180)		// N
-			return (CH1);
+			return (DEF3);
 		else								// S
-			return (CH2);
+			return (DEF4);
 	}
 	return (WHITE);
 }

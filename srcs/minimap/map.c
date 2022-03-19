@@ -39,6 +39,7 @@ static int	color(char c)
 
 void	color_map(t_image *map, t_map *m)
 {
+	m->y = -1;
 	while (++m->y < m->rows)
 	{
 		m->x = -1;

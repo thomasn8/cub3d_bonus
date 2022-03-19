@@ -1,15 +1,16 @@
 #ifndef MAP_H
 # define MAP_H
 
+/* set de couleurs */
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
 # define GRAY_DARK 0x00202020
 # define GRAY_LIGHT 0x00505050
 # define PURPLE 0x006C0277
-# define CV1 0x00101010
-# define CV2 0x00202020
-# define CH1 0x00303030
-# define CH2 0x00000000
+# define DEF1 0x00101010
+# define DEF2 0x00202020
+# define DEF3 0x00303030
+# define DEF4 0x00000000
 # define SKY 0x006600FF
 # define GROUND 0x00505050
 # define RED 0x00FF0000
@@ -17,6 +18,7 @@
 # define BLUE 0x000000FF
 # define YELLOW 0x00FFFF00
 
+/* map controls */
 # define M_PLAYER_SIZE 3
 # define M_PS 3
 # define M_WALL_COLOR GRAY_LIGHT

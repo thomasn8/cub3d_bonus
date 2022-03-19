@@ -80,7 +80,6 @@ typedef struct	s_img {
 	int				e;
 } 	t_img;
 
-
 // update map
 typedef struct s_map
 {
@@ -217,6 +216,7 @@ typedef struct s_game
 	int				d;
 	int				left;
 	int				right;
+	int				interact;
 }	t_game;
 
 // parsing
@@ -264,6 +264,7 @@ void			rotation(t_game *game, char dir);
 void			move(t_game *game, char move);
 void			draw_all(t_game *game, char t);
 int				map_char(char c);
+void			interaction(t_game *t_game);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);

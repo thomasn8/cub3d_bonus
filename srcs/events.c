@@ -50,6 +50,8 @@ int	key_release(int keycode, t_game *game)
 		game->left = 0;
 	else if (keycode == K_RIGHT)
 		game->right = 0;
+	else if (keycode == K_E)
+		interaction(game);
 	else if (keycode == K_ESC)
 		quit_prog(game);
 	return (0);

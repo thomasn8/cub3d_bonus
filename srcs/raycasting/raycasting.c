@@ -101,7 +101,6 @@ void	raycasting(t_game *game)
 		game->r.dist_h = 0;
 		game->r.atan = -1 / tan(-game->m.a_rad);
 		game->r.ntan = -tan(-game->m.a_rad);
-		// game->r.cross = '0';
 		game->r.spe = '0';
 		ray_horizontal_check(&game->m, &game->r);
 		ray_vertical_check(&game->m, &game->r);

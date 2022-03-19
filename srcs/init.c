@@ -13,7 +13,6 @@ void	minimap_init(t_game *game, t_parse *parse)
 	door_textures_init(&game->r, game);
 	interuptor_textures_init(&game->r, game);
 	player_description(game, parse);
-	game->m.y = -1;
 	color_map(&game->map, &game->m);
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
 	draw_all(game, '1');
