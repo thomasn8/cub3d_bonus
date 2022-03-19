@@ -1,7 +1,7 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-static void	v_open_door(t_game *game, int x, int y)
+static void	v_door(t_game *game, int x, int y)
 {
 	if (game->m.map[y][x] == '4')
 	{
@@ -13,9 +13,19 @@ static void	v_open_door(t_game *game, int x, int y)
 		if (game->m.map[y - 1][x] == '9' || game->m.map[y + 1][x] == '9')
 			game->interact = 1;
 	}
+	else if (game->m.map[y][x] == '5')
+	{
+		game->m.map[y][x] = '4';
+		if (game->m.map[y - 1][x] == '9')
+			game->m.map[y - 1][x] = '3';
+		if (game->m.map[y + 1][x] == '9')
+			game->m.map[y + 1][x] = '3';
+		if (game->m.map[y - 1][x] == '3' || game->m.map[y + 1][x] == '3')
+			game->interact = 1;
+	}
 }
 
-static void	h_open_door(t_game *game, int x, int y)
+static void	h_door(t_game *game, int x, int y)
 {
 	if (game->m.map[y][x] == '4')
 	{
@@ -25,6 +35,16 @@ static void	h_open_door(t_game *game, int x, int y)
 		if (game->m.map[y][x + 1] == '3')
 			game->m.map[y][x + 1] = '9';
 		if (game->m.map[y][x - 1] == '9' || game->m.map[y][x + 1] == '9')
+			game->interact = 1;
+	}
+	else if (game->m.map[y][x] == '5')
+	{
+		game->m.map[y][x] = '4';
+		if (game->m.map[y][x - 1] == '9')
+			game->m.map[y][x - 1] = '3';
+		if (game->m.map[y][x + 1] == '9')
+			game->m.map[y][x + 1] = '3';
+		if (game->m.map[y][x - 1] == '3' || game->m.map[y][x + 1] == '3')
 			game->interact = 1;
 	}
 }
@@ -39,10 +59,8 @@ static void	get_ray(t_game *game)
 		game->r.wy = game->r.y / game->m.m_size;
 		game->r.dist = game->r.dist_v;
 		game->r.cross = 'v';
-		// tester si r.x,r.y est à moins d'une case de distance
-		// printf("dist: %f\n", game->r.dist / game->m.m_size);
 		if (game->r.dist / game->m.m_size < 1)
-			v_open_door(game, game->r.vmx + game->r.v_shift, game->r.vmy);
+			v_door(game, game->r.vmx + game->r.v_shift, game->r.vmy);
 	}
 	else
 	{
@@ -52,10 +70,8 @@ static void	get_ray(t_game *game)
 		game->r.wy = game->r.y / game->m.m_size;
 		game->r.dist = game->r.dist_h;
 		game->r.cross = 'h';
-		// tester si r.x,r.y est à moins d'une case de distance
-		// printf("dist: %f\n", game->r.dist / game->m.m_size);
 		if (game->r.dist / game->m.m_size < 1)
-			h_open_door(game, game->r.hmx + game->r.v_shift, game->r.hmy + game->r.h_shift);
+			h_door(game, game->r.hmx + game->r.v_shift, game->r.hmy + game->r.h_shift);
 	}
 }
 
@@ -78,5 +94,4 @@ void	interaction(t_game *game)
 		game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
 		draw_all(game, '1');
 	}
-	// my_mlx_pixel_put(&game->map, game->r.x, game->r.y, YELLOW);	// laisse une marque sur la minimap à l'impact du ray
 }
