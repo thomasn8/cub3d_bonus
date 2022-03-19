@@ -14,11 +14,6 @@ static void	horizontal_loop(t_map *m, t_rays *r)
 			r->hy = r->y;
 			r->dist_h = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->rows;
-			// if (m->map[r->hmy + r->h_shift][r->hmx] == '2')
-			// {
-			// 	printf("H - TEST 1\n");
-			// 	r->spe = '2';
-			// }
 		}
 		else
 		{
@@ -41,11 +36,6 @@ static void	vertical_loop(t_map *m, t_rays *r)
 			r->vy = r->y;
 			r->dist_v = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->cols;
-			// if (m->map[r->vmy][r->vmx + r->v_shift] == '2')
-			// {
-			// 	printf("V - TEST 1\n");
-			// 	r->spe = '2';
-			// }
 		}
 		else
 		{
@@ -109,4 +99,32 @@ void	ray_vertical_check(t_map *m, t_rays *r)
 		r->i = m->cols;
 	}
 	vertical_loop(m, r);
+}
+
+void	compare_rays(t_game *game)
+{
+	if (game->r.dist_v != 0 && (game->r.dist_h == 0 || game->r.dist_v < game->r.dist_h))
+	{
+		game->r.x = game->r.vx;
+		game->r.y = game->r.vy;
+		game->r.wx = game->r.x / game->m.m_size;
+		game->r.wy = game->r.y / game->m.m_size;
+		game->r.dist = game->r.dist_v;
+		game->r.cross = 'v';
+		game->r.char_map = game->m.map[game->r.vmy][game->r.vmx + game->r.v_shift];
+		if (game->r.char_map != '1')
+			game->r.spe = game->r.char_map;
+	}
+	else
+	{
+		game->r.x = game->r.hx;
+		game->r.y = game->r.hy;
+		game->r.wx = game->r.x / game->m.m_size;
+		game->r.wy = game->r.y / game->m.m_size;
+		game->r.dist = game->r.dist_h;
+		game->r.cross = 'h';
+		game->r.char_map = game->m.map[game->r.hmy + game->r.h_shift][game->r.hmx];
+		if (game->r.char_map != '1')
+			game->r.spe = game->r.char_map;
+	}
 }

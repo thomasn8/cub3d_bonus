@@ -46,21 +46,22 @@ void			new_fov(t_image *map, t_map *m);
 void			remove_prev_fov(t_image *map, t_map *m);
 
 /* RAYCASTING */
-// ray_dist
+// ray
 void			ray_horizontal_check(t_map *m, t_rays *r);
 void			ray_vertical_check(t_map *m, t_rays *r);
+void			compare_rays(t_game *game);
 // raycasting
 void			raycasting(t_game *game);
 // rc_utils
 void			check_angle(float angle, int *deg);
-void			compare_dist(t_map *m, t_rays	*r, int m_size);
 void			draw_v_line(t_image *image, t_rays *r, int color);
 float			fix_fisheye(float angle);
 void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 // textures
 void			v_textures_init(t_rays *r, t_game *game);
 void			h_textures_init(t_rays *r, t_game *game);
-void			bonus_textures_init(t_rays *r, t_game *game);
+void			door_textures_init(t_rays *r, t_game *game);
+void			interuptor_textures_init(t_rays *r, t_game *game);
 t_img			*ray_texture(float ray_a, t_rays *r);
 int				ray_color(float ray_a, t_rays *r);
 

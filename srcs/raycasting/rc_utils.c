@@ -10,35 +10,6 @@ void	check_angle(float angle, int *deg)
 	*deg = rad_to_deg(angle);
 }
 
-void	compare_dist(t_map *m, t_rays	*r, int m_size)
-{
-	if (r->dist_v != 0 && (r->dist_h == 0 || r->dist_v < r->dist_h))
-	{
-		r->x = r->vx;
-		r->y = r->vy;
-		r->wx = r->x / m_size;
-		r->wy = r->y / m_size;
-		r->dist = r->dist_v;
-		r->cross = 'v';
-
-		if (m->map[r->vmy][r->vmx + r->v_shift] == '2')
-			r->spe = '2';
-	}
-	else
-	{
-		r->x = r->hx;
-		r->y = r->hy;
-		r->wx = r->x / m_size;
-		r->wy = r->y / m_size;
-		r->dist = r->dist_h;
-		r->cross = 'h';
-
-
-		if (m->map[r->hmy + r->h_shift][r->hmx] == '2')
-			r->spe = '2';
-	}
-}
-
 float fix_fisheye(float angle)
 { 
 	if (angle < 0)

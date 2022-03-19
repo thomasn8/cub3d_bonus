@@ -4,7 +4,9 @@
 t_img  *ray_texture(float ray_a, t_rays *r)
 {
 	if (r->spe == '2')												// portes
-		return (&r->tex_door);
+		return (&r->tex_door1);
+	if (r->spe == '3')												// portes
+		return (&r->tex_door2);
 	if (r->cross == 'v')											// faces W et E
 	{
 		if (ray_a > 90 && ray_a < 270 && r->tex_w.image)			// W
@@ -77,15 +79,26 @@ void	h_textures_init(t_rays *r, t_game *game)
 			r->tex_w.image, &r->tex_w.bpp, &r->tex_w.ll, &r->tex_w.e);
 }
 
-void	bonus_textures_init(t_rays *r, t_game *game)
+void	door_textures_init(t_rays *r, t_game *game)
 {
-	r->tex_door.image = mlx_xpm_file_to_image(
-		game->mlx, "./textures/door.xpm", &r->tex_door.width, &r->tex_door.heigth);
-	if (!r->tex_door.image)
-		texture_error(r->tex_door.image, "error loading DO_texture_xpm\n");
+	r->tex_door1.image = mlx_xpm_file_to_image(
+		game->mlx, "./textures/flag.xpm", &r->tex_door1.width, &r->tex_door1.heigth);
+	if (!r->tex_door1.image)
+		texture_error(r->tex_door1.image, "error loading D1_texture_xpm\n");
 	else
-		r->tex_door.addr = mlx_get_data_addr(
-			r->tex_door.image, &r->tex_door.bpp, &r->tex_door.ll, &r->tex_door.e);
+		r->tex_door1.addr = mlx_get_data_addr(
+			r->tex_door1.image, &r->tex_door1.bpp, &r->tex_door1.ll, &r->tex_door1.e);
+	r->tex_door2.image = mlx_xpm_file_to_image(
+		game->mlx, "./textures/biblio.xpm", &r->tex_door2.width, &r->tex_door2.heigth);
+	if (!r->tex_door2.image)
+		texture_error(r->tex_door2.image, "error loading D2_texture_xpm\n");
+	else
+		r->tex_door2.addr = mlx_get_data_addr(
+			r->tex_door2.image, &r->tex_door2.bpp, &r->tex_door2.ll, &r->tex_door2.e);
+}
+
+void	interuptor_textures_init(t_rays *r, t_game *game)
+{
 	r->tex_iu.image = mlx_xpm_file_to_image(
 		game->mlx, "./textures/i_up.xpm", &r->tex_iu.width, &r->tex_iu.heigth);
 	if (!r->tex_iu.image)
