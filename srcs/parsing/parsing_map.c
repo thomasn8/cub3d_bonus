@@ -53,7 +53,7 @@ int	ft_is_map(char *line)
 			if (line[i] != '1' && line[i] != '0' && line[i] != '2' && \
 				line[i] != 'N' && line[i] != 'E' && line[i] != 'S' && \
 				line[i] != 'W' && line[i] != '\n' && line[i] != '\t' && \
-				line[i] != ' ')
+				line[i] != ' ' && line[i] != 'D')
 				return (2);
 			i++;
 		}
