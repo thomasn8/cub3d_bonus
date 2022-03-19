@@ -50,10 +50,10 @@ int	ft_is_map(char *line)
 	{
 		while (line[i])
 		{
-			if (line[i] != '1' && line[i] != '0' && line[i] != '2' && \
-				line[i] != 'N' && line[i] != 'E' && line[i] != 'S' && \
-				line[i] != 'W' && line[i] != '\n' && line[i] != '\t' && \
-				line[i] != ' ')
+			if (!(line[i] >= '0' && line[i] <= '9') && \
+				line[i] != 'N' && line[i] != 'E' && \
+				line[i] != 'S' && line[i] != 'W' && \
+				line[i] != '\n' && line[i] != '\t' && line[i] != ' ')
 				return (2);
 			i++;
 		}

@@ -33,10 +33,10 @@ void	color_map(t_image *map, t_map *m)
 		m->x = -1;
 		while (++m->x < m->cols)
 		{
-			if (m->map[m->y][m->x] == '1')
+			if (m->map[m->y][m->x] >= '1' && m->map[m->y][m->x] <= '4')
 				m->color = M_WALL_COLOR;
-			else if (m->map[m->y][m->x] == '2')
-				m->color = M_DOOR_COLOR;
+			// else if (m->map[m->y][m->x] == '2')
+			// 	m->color = M_DOOR_COLOR;
 			else
 				m->color = M_SPACE_COLOR;
 			m->yo = (m->y + 1) * m->m_size;

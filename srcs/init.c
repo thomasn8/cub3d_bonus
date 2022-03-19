@@ -5,7 +5,7 @@ void	minimap_init(t_game *game, t_parse *parse)
 {
 	game->m.ws_fps = 1.2;
 	game->m.ad_fps = 0.75;
-	game->m.rot_fps = 7;
+	game->m.rot_fps = 6;
 	game->parse = parse;
 	map_description(game, parse);
 	h_textures_init(&game->r, game);
