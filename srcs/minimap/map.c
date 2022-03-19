@@ -55,7 +55,7 @@ void	color_map(t_image *map, t_map *m)
 	}
 }
 
-// centrer la map dans menu du bas
+// centrer la minimap dans le menu
 static int	size(int cols, int rows)
 {
 	int max_w;
