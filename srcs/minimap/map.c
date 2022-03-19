@@ -58,8 +58,8 @@ void	color_map(t_image *map, t_map *m)
 // centrer la map dans menu du bas
 static int	size(int cols, int rows)
 {
-	int max_w;
-	int max_h;
+	int	max_w;
+	int	max_h;
 	int	m_size1;
 	int	m_size2;
 
@@ -76,7 +76,7 @@ void	map_description(t_game *game, t_parse *parse)
 {
 	game->m.map = parse->map;
 	game->m.cols = parse->m_width;
-	game->m.rows =  parse->m_height;
+	game->m.rows = parse->m_height;
 	game->m.m_size = size(game->m.cols, game->m.rows);
 	game->m.w = parse->m_width * game->m.m_size;
 	game->m.h = parse->m_height * game->m.m_size;
@@ -96,9 +96,9 @@ void	map_description(t_game *game, t_parse *parse)
 void	player_description(t_game *game, t_parse *parse)
 {
 	game->m.pos_x = (parse->start_x * game->m.m_size)
-			+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+		+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
 	game->m.pos_y = (parse->start_y * game->m.m_size)
-			+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+		+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
 	game->m.prev_x = game->m.pos_x;
 	game->m.prev_y = game->m.pos_y;
 	if (parse->view_player == 'E')

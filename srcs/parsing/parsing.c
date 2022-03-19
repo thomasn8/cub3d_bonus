@@ -19,7 +19,7 @@ static int	check_player2(int x, int y, t_parse *parse)
 	parse->view_player = parse->map[y][x];
 	parse->start_x = x;
 	parse->start_y = y;
-	return(0);
+	return (0);
 }
 
 static int	check_player(t_parse *parse)
@@ -63,6 +63,5 @@ int	parsing(int fd, const char *map, t_parse *parse)
 	check_missing(parse);
 	get_map(parse, map);
 	check_player(parse);
-	// print_all(parse);
 	return (0);
 }

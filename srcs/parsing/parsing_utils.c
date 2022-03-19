@@ -87,6 +87,7 @@ void	print_all(t_parse *p)
 	printf("hex_f = %lu\n", p->hex_f);
 	printf("hex_s = %lu\n", p->hex_s);
 }
+
 //permet de calculer la taille de la map pour la malloqué.
 int	ft_map(char *line, t_parse *parse)
 {
