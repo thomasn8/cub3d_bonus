@@ -1,6 +1,14 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
+/*
+	2 = flag ->	but décoratif
+	3 = biblio -> porte secrète
+	4 = interupteur non-activé (up) placé à côté d'une biblio -> ouvrir la porte secrète d'à côté
+	5 = interupteur activé (down) -> plus utilisable, car a déjà ouvert la porte
+	9 = espace vide comme 0 mais apparait en gris foncé sur la minimap
+*/
+
 t_img  *ray_texture(float ray_a, t_rays *r)
 {
 	if (r->spe == '2')
