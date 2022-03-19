@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: desa <desa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 10:47:58 by adeslarz          #+#    #+#             */
-/*   Updated: 2022/03/10 10:35:16 by desa             ###   ########.fr       */
+/*   Updated: 2022/03/19 10:09:49 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ char	*get_next_line(int fd);
 void	write_errors(char *str);
 int		ft_notblank(int c);
 int		ft_charinstr(const char *s, int c);
-void	ft_free_array(char **arr);
+void	ft_free_array(void **arr);
 long	ft_atol(const char *str);
 #endif

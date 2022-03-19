@@ -11,9 +11,11 @@ void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
 
 int	quit_prog(t_game *game)
 {
-	printf("Program left properly.\n");
+	ft_free_array((void **)game->m.clean_map);
+	free_all(game->parse);
 	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
+	printf("Program left properly.\n");
 	exit(0);
 }
 
