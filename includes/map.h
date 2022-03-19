@@ -60,6 +60,7 @@ void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 // textures
 void			v_textures_init(t_rays *r, t_game *game);
 void			h_textures_init(t_rays *r, t_game *game);
+void			bonus_textures_init(t_rays *r, t_game *game);
 t_img			*ray_texture(float ray_a, t_rays *r);
 int				ray_color(float ray_a, t_rays *r);
 

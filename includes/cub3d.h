@@ -163,6 +163,9 @@ typedef struct s_rays
 	t_img			tex_s;
 	t_img			tex_e;
 	t_img			tex_w;
+	t_img			tex_door;
+	t_img			tex_iu;
+	t_img			tex_id;
 	t_img			*tex;
 	float			tx;
 	float			ty;
@@ -171,7 +174,6 @@ typedef struct s_rays
 	float			to;
 	float			tc;
 	unsigned int	c;
-	int				door;
 }	t_rays;
 
 typedef struct s_grid
@@ -239,6 +241,7 @@ float			deg_to_rad(int angle);
 int				rad_to_deg(float angle);
 unsigned int	get_color_value(t_image *image, int x, int y);
 unsigned int	get_tex_color(t_img *tex, int x, int y);
+void			texture_error(void *image, char *msg);
 
 // init
 void			params_init(t_game *game);

@@ -26,3 +26,9 @@ unsigned int get_tex_color(t_img *tex, int x, int y)
 	ptr = tex->addr + (y * tex->ll + x * (tex->bpp / 8));
 	return (*(unsigned int*)ptr);
 }
+
+void	texture_error(void *image, char *msg)
+{
+	image = NULL;
+	write(2, msg, 29);
+}

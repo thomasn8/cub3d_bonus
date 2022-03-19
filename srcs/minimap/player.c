@@ -100,3 +100,12 @@ void	collision_check(t_map *m, t_grid *g, char k)
 	g->my_add_yo = (m->pos_y + g->vo + g->yo) / m->m_size;
 	g->my_sub_yo = (m->pos_y + g->vo - g->yo) / m->m_size;
 }
+
+void	draw_all(t_game *game, char t)
+{
+	if (t == '2')
+		remove_prev_fov(&game->map, &game->m);
+	new_pos(&game->map, &game->m, M_PLAYER_COLOR);
+	raycasting(game);
+	new_fov(&game->map, &game->m);
+}

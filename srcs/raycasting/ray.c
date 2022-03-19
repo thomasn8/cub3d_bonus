@@ -16,7 +16,7 @@ static void	horizontal_loop(t_map *m, t_rays *r)
 			r->dist_h = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->rows;
 			if (m->map[r->my + r->shift][r->mx] == '2')
-				r->door = 1;
+				r->cross = '2';
 		}
 		else
 		{
@@ -41,7 +41,7 @@ static void	vertical_loop(t_map *m, t_rays *r)
 			r->dist_v = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->cols;
 			if (m->map[r->my][r->mx + r->shift] == '2')
-				r->door = 1;
+				r->cross = '2';
 		}
 		else
 		{
