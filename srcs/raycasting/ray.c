@@ -7,16 +7,15 @@ static void	horizontal_loop(t_map *m, t_rays *r)
 	{
 		r->mx = ((int)r->x) / m->m_size;
 		r->my = ((int)r->y) / m->m_size;
-		if(r->x >= 0 && r->x < m->w && r->y >= 0 && r->y < m->h 
-			&& (m->map[r->my + r->shift][r->mx] == '1' ||
-				m->map[r->my + r->shift][r->mx] == '2'))
+		if (r->x >= 0 && r->x < m->w && r->y >= 0 && r->y < m->h 
+			&& !map_char(m->map[r->my + r->shift][r->mx]))
 		{
 			r->hx = r->x;
 			r->hy = r->y;
 			r->dist_h = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->rows;
 			if (m->map[r->my + r->shift][r->mx] == '2')
-				r->cross = '2';
+				r->spe = '2';
 		}
 		else
 		{
@@ -32,16 +31,15 @@ static void	vertical_loop(t_map *m, t_rays *r)
 	{
 		r->mx = ((int)r->x) / m->m_size;
 		r->my = ((int)r->y) / m->m_size;
-		if(r->x >= 0 && r->x < m->w && r->y >= 0 && r->y < m->h
-			&& (m->map[r->my][r->mx + r->shift] == '1' ||
-				m->map[r->my][r->mx + r->shift] == '2'))
+		if (r->x >= 0 && r->x < m->w && r->y >= 0 && r->y < m->h
+			&& !map_char(m->map[r->my][r->mx + r->shift]))
 		{
 			r->vx = r->x;
 			r->vy = r->y;
 			r->dist_v = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
 			r->i = m->cols;
 			if (m->map[r->my][r->mx + r->shift] == '2')
-				r->cross = '2';
+				r->spe = '2';
 		}
 		else
 		{

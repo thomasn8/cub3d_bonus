@@ -19,18 +19,16 @@ void	compare_dist(t_rays	*r, int m_size)
 		r->wx = r->x / m_size;
 		r->wy = r->y / m_size;
 		r->dist = r->dist_v;
-		if (r->cross =='0')
-			r->cross = 'v';
+		r->cross = 'v';
 	}
-	else if (r->dist_h != 0 && (r->dist_v == 0 || r->dist_h < r->dist_v))
+	else
 	{
 		r->x = r->hx;
 		r->y = r->hy;
 		r->wx = r->x / m_size;
 		r->wy = r->y / m_size;
 		r->dist = r->dist_h;
-		if (r->cross =='0')
-			r->cross = 'h';
+		r->cross = 'h';
 	}
 }
 

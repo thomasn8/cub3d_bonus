@@ -148,6 +148,7 @@ typedef struct s_rays
 	float			dist_v;
 	float			dist;
 	char			cross;
+	char			spe;
 	float			w_bot;
 	float			w_top;
 	int				lpr;
@@ -257,6 +258,7 @@ unsigned int	**copy_map(t_image *map, int width, int heigth);
 void			rotation(t_game *game, char dir);
 void			move(t_game *game, char move);
 void			draw_all(t_game *game, char t);
+int				map_char(char c);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);

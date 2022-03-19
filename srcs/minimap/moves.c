@@ -1,7 +1,7 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-static int	map_char(char c)
+int	map_char(char c)
 {
 	if (c <= '4' && c >= '1')
 		return (0);

@@ -3,6 +3,8 @@
 
 t_img  *ray_texture(float ray_a, t_rays *r)
 {
+	if (r->spe == '2')												// portes
+		return (&r->tex_door);
 	if (r->cross == 'v')											// faces W et E
 	{
 		if (ray_a > 90 && ray_a < 270 && r->tex_w.image)			// W
@@ -36,7 +38,7 @@ int	ray_color(float ray_a, t_rays *r)
 		else								// S
 			return (CH2);
 	}
-	return (0);
+	return (WHITE);
 }
 
 void	v_textures_init(t_rays *r, t_game *game)
