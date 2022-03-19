@@ -10,8 +10,9 @@ void	minimap_init(t_game *game, t_parse *parse)
 	map_description(game, parse);
 	h_textures_init(&game->r, game);
 	v_textures_init(&game->r, game);
-	door_textures_init(&game->r, game);
-	interuptor_textures_init(&game->r, game);
+	tex_door_create(&game->r, game);
+	tex_interuptor_create(&game->r, game);
+	tex_deco_create(&game->r, game);
 	player_description(game, parse);
 	color_map(&game->map, &game->m);
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);

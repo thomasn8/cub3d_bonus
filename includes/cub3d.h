@@ -167,6 +167,7 @@ typedef struct s_rays
 	t_img			tex_e;
 	t_img			tex_w;
 	t_img			tex_flag;
+	t_img			tex_steel;
 	t_img			tex_biblio;
 	t_img			tex_iu;
 	t_img			tex_id;

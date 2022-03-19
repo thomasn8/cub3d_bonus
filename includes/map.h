@@ -39,6 +39,7 @@
 # define M_RAD_90 1.57079632679		// = pi/2
 # define M_RAD_180 3.1415926535		// = pi
 # define M_RAD_270 4.71238898038	// = 3*pi/2
+# define W_TEX '6'
 
 /* MINIMAP */
 // player
@@ -63,8 +64,9 @@ void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 // textures
 void			v_textures_init(t_rays *r, t_game *game);
 void			h_textures_init(t_rays *r, t_game *game);
-void			door_textures_init(t_rays *r, t_game *game);
-void			interuptor_textures_init(t_rays *r, t_game *game);
+void			tex_door_create(t_rays *r, t_game *game);
+void			tex_interuptor_create(t_rays *r, t_game *game);
+void			tex_deco_create(t_rays *r, t_game *game);
 t_img			*ray_texture(float ray_a, t_rays *r);
 int				ray_color(float ray_a, t_rays *r);
 
