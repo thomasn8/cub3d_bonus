@@ -17,6 +17,8 @@ t_img  *ray_texture(float ray_a, t_rays *r)
 		return (&r->tex_biblio);
 	if (r->spe == '4')
 		return (&r->tex_iu);
+	if (r->spe == '5')
+		return (&r->tex_id);
 	if (r->cross == 'v')											// faces W et E
 	{
 		if (ray_a > 90 && ray_a < 270 && r->tex_w.image)			// W

@@ -1,44 +1,44 @@
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-// void	remove_prev_fov(t_image *map, t_map *m)
-// {
-// 	int	width;
-// 	int	height;
-// 	int x;
-// 	int y;
+void	remove_prev_fov(t_image *map, t_map *m)
+{
+	int	width;
+	int	height;
+	int x;
+	int y;
 
-// 	height = -2;
-// 	while (++height < m->m_size * 2 + 2)
-// 	{
-// 		width = -2;
-// 		while (++width < m->m_size * 2 + 2)
-// 		{
-// 			x = m->prev_x + width - m->m_size + M_HALF_PLAYER;
-// 			y = m->prev_y + height - m->m_size + M_HALF_PLAYER;
-// 			my_mlx_pixel_put(map, x, y, m->clean_map[y][x]);
-// 		}
-// 	}
-// }
+	height = -2;
+	while (++height < m->m_size * 2 + 2)
+	{
+		width = -2;
+		while (++width < m->m_size * 2 + 2)
+		{
+			x = m->prev_x + width - m->m_size + M_HALF_PLAYER;
+			y = m->prev_y + height - m->m_size + M_HALF_PLAYER;
+			my_mlx_pixel_put(map, x, y, m->clean_map[y][x]);
+		}
+	}
+}
 
 /* 
 redessine entièrement la minimap
 à utiliser lorsqu'on a besoin de projeter les rayons dans la minimap
 la fonction du dessus est + rapide car redessine le minium nécessaire 
 */
-void	remove_prev_fov(t_image *map, t_map *m)
-{
-	int	width;
-	int	height;
+// void	remove_prev_fov(t_image *map, t_map *m)
+// {
+// 	int	width;
+// 	int	height;
 
-	height = -1;
-	while (++height < m->h)
-	{
-		width = -1;
-		while (++width < m->w)
-			my_mlx_pixel_put(map, width, height, m->clean_map[height][width]);
-	}
-}
+// 	height = -1;
+// 	while (++height < m->h)
+// 	{
+// 		width = -1;
+// 		while (++width < m->w)
+// 			my_mlx_pixel_put(map, width, height, m->clean_map[height][width]);
+// 	}
+// }
 
 void	new_fov(t_image *map, t_map *m)
 {

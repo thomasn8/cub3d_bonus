@@ -3,7 +3,7 @@
 
 int	map_char(char c)
 {
-	if (c <= '4' && c >= '1')
+	if (c <= '5' && c >= '1')
 		return (0);
 	return (1);
 }

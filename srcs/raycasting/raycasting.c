@@ -107,7 +107,6 @@ void	raycasting(t_game *game)
 		ray_vertical_check(&game->m, &game->r);
 		compare_rays(game);
 		ray_to_3d(game, &game->r);
-		draw_ray(&game->map, &game->m, &game->r, RED);
 		game->m.a_rad -=  game->r.r_ra;
 		check_angle(game->m.a_rad, &game->m.a_deg);
 	}
