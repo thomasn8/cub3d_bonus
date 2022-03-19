@@ -30,7 +30,7 @@ static int	color(char c)
 {
 	if (c == '0')
 		return (M_SPACE_COLOR);
-	else if (c >= '1' && c <= '4')
+	else if (c >= '1' && c <= '5')
 		return (M_WALL_COLOR);
 	else if (c == '9')
 		return (M_DOOR_COLOR);
