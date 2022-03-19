@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: desa <desa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:44:23 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/14 14:10:19 by desa             ###   ########.fr       */
+/*   Updated: 2022/03/19 10:09:17 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_array(char **arr)
+void	ft_free_array(void **arr)
 {
 	int	i;
 

@@ -3,17 +3,20 @@
 
 t_img  *ray_texture(float ray_a, t_rays *r)
 {
-	if (r->cross == 'v')										// faces W et E
+	if (r->cross == 'v')											// faces W et E
 	{
-		if (ray_a > 90 && ray_a < 270 && r->tex_w.image)		// W
+		if (ray_a > 90 && ray_a < 270 && r->tex_w.image)			// W
 			return (&r->tex_w);
-		else if ((ray_a < 90 || ray_a > 270) && r->tex_e.image)	// E
+		else if ((ray_a < 90 || ray_a > 270) && r->tex_e.image)		// E
 			return (&r->tex_e);
-	}															// sinon faces N et S
-	if (ray_a > 0 && ray_a < 180 && r->tex_n.image)				// N
-		return (&r->tex_n);
-	else if (ray_a > 180 && r->tex_s.image)						// S
-		return (&r->tex_s);
+	}
+	else if (r->cross == 'h')										// sinon faces N et S
+	{
+		if (ray_a > 0 && ray_a < 180 && r->tex_n.image)				// N
+			return (&r->tex_n);
+		else if (ray_a > 180 && r->tex_s.image)						// S
+			return (&r->tex_s);
+	}
 	return (NULL);
 }
 
@@ -25,11 +28,14 @@ int	ray_color(float ray_a, t_rays *r)
 			return (CV1);
 		else								// E
 			return (CV2);
-	}										// faces N et S
-	if (ray_a > 0 && ray_a < 180)			// N
-		return (CH1);
-	else									// S
-		return (CH2);
+	}
+	else if (r->cross == 'h')				// faces N et S
+	{
+		if (ray_a > 0 && ray_a < 180)		// N
+			return (CH1);
+		else								// S
+			return (CH2);
+	}
 	return (0);
 }
 

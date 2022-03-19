@@ -198,6 +198,7 @@ typedef struct s_game
 	int				world_h;
 	t_image			world;
 	t_image			map;
+	t_parse			*parse;
 	t_map			m;
 	t_rays			r;
 	t_grid			g;
