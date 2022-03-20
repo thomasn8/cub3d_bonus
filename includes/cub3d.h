@@ -119,6 +119,7 @@ typedef struct s_map
 	int				c_ceil;
 }	t_map;
 
+// raycasting calculations
 typedef struct s_rays
 {
 	int				rays;
@@ -183,6 +184,7 @@ typedef struct s_rays
 	unsigned int	c;
 }	t_rays;
 
+// slide moves
 typedef struct s_grid
 {
 	int		of;

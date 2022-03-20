@@ -49,8 +49,8 @@ void	weapon_display(t_game *game)
 // def state
 	else if (game->state == 2 && game->weapon == 1)
 		mlx_put_image_to_window(game->mlx, game->win, game->tex_kat_def.image,
-		game->m.w_offset + 75, game->world_h - game->tex_kat_def.heigth);
+		game->m.w_offset - 175, game->world_h - game->tex_kat_def.heigth);
 	else if (game->state == 2 && game->weapon == 2)
 		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_def.image,
-		game->m.w_offset + 75, game->world_h - game->tex_gun_def.heigth);
+		game->m.w_offset - 175, game->world_h - game->tex_gun_def.heigth);
 }
