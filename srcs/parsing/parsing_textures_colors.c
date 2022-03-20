@@ -103,7 +103,7 @@ int	parse_textures_colors(char *line, t_parse *parse)
 	else if (parse_textures(line) == 6 && parse->c_s == NULL)
 	{
 		parse->c_s = save_args(line);
-		check_color(parse, parse->c_s, 'C');
+		check_color(parse, parse->c_s, 'S');
 	}
 	return (0);
 }
