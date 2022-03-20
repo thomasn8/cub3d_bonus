@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-static void	get_color(int nbr,int sum, t_parse *parse, char c)
+static void	get_color(int nbr, int sum, t_parse *parse, char c)
 {
 	if (nbr == 1)
 		parse->r = sum;
@@ -67,9 +67,8 @@ char	*save_args(char *line)
 	return (temp);
 }
 
-int	parse_textures(char *line, t_parse *parse)
+int	parse_textures(char *line)
 {
-	(void) parse;
 	if (line[0] == 'N' && (line[1] == 'O' || line[1] == ' '))
 		return (1);
 	else if (line[0] == 'S' && (line[1] == 'O' || line[1] == ' '))
@@ -88,20 +87,20 @@ int	parse_textures(char *line, t_parse *parse)
 // parsing des textures (images que l'on va afficher sur les murs)
 int	parse_textures_colors(char *line, t_parse *parse)
 {
-	if (parse_textures(line, parse) == 1 && parse->no == NULL)
+	if (parse_textures(line) == 1 && parse->no == NULL)
 		parse->no = save_args(line);
-	else if (parse_textures(line, parse) == 2 && parse->so == NULL)
+	else if (parse_textures(line) == 2 && parse->so == NULL)
 		parse->so = save_args(line);
-	else if (parse_textures(line, parse) == 3 && parse->we == NULL)
+	else if (parse_textures(line) == 3 && parse->we == NULL)
 		parse->we = save_args(line);
-	else if (parse_textures(line, parse) == 4 && parse->ea == NULL)
+	else if (parse_textures(line) == 4 && parse->ea == NULL)
 		parse->ea = save_args(line);
-	else if (parse_textures(line, parse) == 5 && parse->c_f == NULL)
+	else if (parse_textures(line) == 5 && parse->c_f == NULL)
 	{
 		parse->c_f = save_args(line);
 		check_color(parse, parse->c_f, 'F');
 	}
-	else if (parse_textures(line, parse) == 6 && parse->c_s == NULL)
+	else if (parse_textures(line) == 6 && parse->c_s == NULL)
 	{
 		parse->c_s = save_args(line);
 		check_color(parse, parse->c_s, 'C');

@@ -2,8 +2,8 @@
 
 static int	check_map(t_parse *parse, char **map)
 {
-		int	y;
-	int x;
+	int	y;
+	int	x;
 
 	y = -1;
 	while (map[++y])
@@ -70,14 +70,15 @@ static int	check_player(t_parse *parse)
 int	parsing(int fd, const char *map, t_parse *parse)
 {
 	char	*line;
+
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		check_missing(parse);
 		parse_textures_colors(line, parse);
 		if (parse->error == 0 && ((ft_charinstr(line, '1') == 1) || \
-			(ft_charinstr(line , '0') == 1)))
-				ft_map(line, parse);
+		(ft_charinstr(line, '0') == 1)))
+			ft_map(line, parse);
 		line = get_next_line(fd);
 	}
 	free(line);

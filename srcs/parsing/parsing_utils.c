@@ -60,7 +60,7 @@ void	free_all(t_parse *parse)
 void	print_map(char **map)
 {
 	int	y;
-	int x;
+	int	x;
 
 	y = -1;
 	while (map[++y])

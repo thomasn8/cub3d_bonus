@@ -63,8 +63,8 @@ void	get_map(t_parse *parse, const char *map)
 	i = -1;
 	while (line != NULL)
 	{
-		if (parse_textures(line, parse) == 0 && ((ft_charinstr(line, '1') == 1) || \
-			(ft_charinstr(line , '0') == 1)))
+		if (parse_textures(line) == 0 && \
+		((ft_charinstr(line, '1') == 1) || (ft_charinstr(line, '0') == 1)))
 		{
 			check_map_close(parse, line);
 			parse->map[++i] = malloc((parse->m_width + 2) * sizeof(char));
@@ -76,5 +76,4 @@ void	get_map(t_parse *parse, const char *map)
 		free(line);
 		line = get_next_line(fd);
 	}
-	print_map(parse->map);
 }

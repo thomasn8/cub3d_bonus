@@ -22,7 +22,6 @@ int	check_missing(t_parse *parse)
 	return (0);
 }
 
-
 int	ft_error(t_parse *parse, char *str, char *line)
 {
 	if (str)

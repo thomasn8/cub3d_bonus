@@ -224,7 +224,7 @@ int				ft_map(char *line, t_parse *parse);
 int				ft_is_map(t_parse *parse, char *line);
 void			free_all(t_parse *parse);
 int				ft_error(t_parse *parse, char *str, char *line);
-int				parse_textures(char *line, t_parse *parse);
+int				parse_textures(char *line);
 int				check_missing(t_parse *parse);
 void			check_color(t_parse *parse, char *color, char c);
 void			print_map(char **grid);
