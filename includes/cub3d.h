@@ -10,11 +10,12 @@
 
 /* dimensions */
 # define FOV 60
-# define M_RAY_FACTOR 16
+# define M_RAY_FACTOR 8
 # define WIDTH 960
 # define HEIGTH 668
 # define MARGIN 5
 # define MENU_HEIGTH 120
+# define W_TEX '6'
 
 /* colors */
 # define WHITE 0x00FFFFFF
@@ -80,7 +81,6 @@ typedef struct	s_img {
 	int				e;
 } 	t_img;
 
-
 // update map
 typedef struct s_map
 {
@@ -119,6 +119,7 @@ typedef struct s_map
 	int				c_ceil;
 }	t_map;
 
+// raycasting calculations
 typedef struct s_rays
 {
 	int				rays;
@@ -133,11 +134,14 @@ typedef struct s_rays
 	float			xo;
 	float			yo;
 	int				i;
-	int				shift;
+	int				v_shift;
+	int				h_shift;
 	int				rows;
 	int				cols;
-	int				mx;
-	int				my;
+	int				vmx;
+	int				vmy;
+	int				hmx;
+	int				hmy;
 	float			hx;
 	float			hy;
 	float			vx;
@@ -148,6 +152,7 @@ typedef struct s_rays
 	float			dist_v;
 	float			dist;
 	char			cross;
+	char			spe;
 	float			w_bot;
 	float			w_top;
 	int				lpr;
@@ -163,7 +168,13 @@ typedef struct s_rays
 	t_img			tex_s;
 	t_img			tex_e;
 	t_img			tex_w;
+	t_img			tex_flag;
+	t_img			tex_steel;
+	t_img			tex_biblio;
+	t_img			tex_iu;
+	t_img			tex_id;
 	t_img			*tex;
+	char			char_map;
 	float			tx;
 	float			ty;
 	float			tx_step;
@@ -173,6 +184,7 @@ typedef struct s_rays
 	unsigned int	c;
 }	t_rays;
 
+// slide moves
 typedef struct s_grid
 {
 	int		of;
@@ -208,6 +220,15 @@ typedef struct s_game
 	int				d;
 	int				left;
 	int				right;
+	int				interact;
+	int				weapon;
+	int				state;
+	t_img			tex_kat_run;
+	t_img			tex_kat_hit;
+	t_img			tex_kat_def;
+	t_img			tex_gun_run;
+	t_img			tex_gun_hit;
+	t_img			tex_gun_def;
 }	t_game;
 
 // parsing
@@ -238,12 +259,15 @@ float			deg_to_rad(int angle);
 int				rad_to_deg(float angle);
 unsigned int	get_color_value(t_image *image, int x, int y);
 unsigned int	get_tex_color(t_img *tex, int x, int y);
+void			texture_error(void *image, char *msg);
 
 // init
 void			params_init(t_game *game);
 void			menu_init(t_game *game);
 void			world_init(t_game *game);
 void			minimap_init(t_game *game, t_parse *parse);
+void			tex_kat_create(t_game *game);
+void			tex_gun_create(t_game *game);
 
 // minimap
 void			map_description(t_game *game, t_parse *parse);
@@ -253,12 +277,23 @@ unsigned int	**copy_map(t_image *map, int width, int heigth);
 void			rotation(t_game *game, char dir);
 void			move(t_game *game, char move);
 void			draw_all(t_game *game, char t);
+int				map_char(char c);
+
+// actions
+void			weapon_display(t_game *game);
+void			weapon_press(int k, t_game *game);
+void			weapon_release(int k, t_game *game);
+void			kat_attack(t_game *game, char k);
+void			kat_defense(t_game *game, char k);
+void			gun_attack(t_game *game, char k);
+void			gun_defense(t_game *game, char k);
+void			interaction(t_game *t_game);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
 int				quit_prog(t_game *game);
-int				key_release(int keycode, t_game *game);
-int				key_press(int keycode, t_game *game);
+int				key_release(int k, t_game *game);
+int				key_press(int k, t_game *game);
 int				events_loop(t_game *game);
 
 #endif

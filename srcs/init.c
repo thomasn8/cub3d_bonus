@@ -3,15 +3,17 @@
 
 void	minimap_init(t_game *game, t_parse *parse)
 {
-	game->m.ws_fps = 1.2;
+	game->m.ws_fps = 1;
 	game->m.ad_fps = 0.75;
-	game->m.rot_fps = 7;
+	game->m.rot_fps = 6;
 	game->parse = parse;
 	map_description(game, parse);
 	h_textures_init(&game->r, game);
 	v_textures_init(&game->r, game);
+	tex_door_create(&game->r, game);
+	tex_interuptor_create(&game->r, game);
+	tex_deco_create(&game->r, game);
 	player_description(game, parse);
-	game->m.y = -1;
 	color_map(&game->map, &game->m);
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
 	draw_all(game, '1');
@@ -36,6 +38,8 @@ void	world_init(t_game *game)
 	game->r.r_05 = game->r.r_1 / 2;
 	game->r.r_ra = (M_1_DEG_RAD / M_RAY_FACTOR);
 	game->r.fov_05 = game->r.r_05 * game->r.r_ra;
+	tex_kat_create(game);
+	tex_gun_create(game);
 }
 
 void	menu_init(t_game *game)
@@ -67,4 +71,6 @@ void	params_init(t_game *game)
 	game->d = 0;
 	game->left = 0;
 	game->right = 0;
+	game->weapon = 1;
+	game->state = 0;
 }
