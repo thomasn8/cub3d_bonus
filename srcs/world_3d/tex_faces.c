@@ -1,5 +1,4 @@
 /* 
-
 !!! Adapter le nombres de textures correspondant à des murs ... !!!
 	- ... soit dans map.h le define de W_TEX
 	- ... soit dans map.c, dans color() + dans moves.c, dans map_char()

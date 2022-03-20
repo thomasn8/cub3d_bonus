@@ -38,6 +38,8 @@ void	world_init(t_game *game)
 	game->r.r_05 = game->r.r_1 / 2;
 	game->r.r_ra = (M_1_DEG_RAD / M_RAY_FACTOR);
 	game->r.fov_05 = game->r.r_05 * game->r.r_ra;
+	tex_kat_create(game);
+	tex_gun_create(game);
 }
 
 void	menu_init(t_game *game)
@@ -71,6 +73,4 @@ void	params_init(t_game *game)
 	game->right = 0;
 	game->weapon = 1;
 	game->state = 0;
-	tex_weapon1_create(game);
-	tex_weapon2_create(game);
 }

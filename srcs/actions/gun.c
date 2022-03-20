@@ -107,6 +107,7 @@ void	gun_attack(t_game *game, char k)
 		game->state = 1;
 	else if (k == 'r')
 		game->state = 0;
+	
 	// game->interact = 0;
 	// game->m.player_angle = game->m.a_rad;
 	// game->r.dist_v = 0;

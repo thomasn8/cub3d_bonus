@@ -34,23 +34,23 @@ void	weapon_display(t_game *game)
 {
 // run state
 	if (game->state == 0 && game->weapon == 1)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon1_run.image,
-			game->m.w_offset + 75, game->world_h - game->tex_weapon1_run.heigth);
+		mlx_put_image_to_window(game->mlx, game->win, game->tex_kat_run.image,
+			game->m.w_offset + 75, game->world_h - game->tex_kat_run.heigth);
 	else if (game->state == 0 && game->weapon == 2)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon2_run.image, 
-			game->m.w_offset + 75, game->world_h - game->tex_weapon2_run.heigth);
+		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_run.image, 
+			game->m.w_offset + 75, game->world_h - game->tex_gun_run.heigth);
 // hit state
 	else if (game->state == 1 && game->weapon == 1)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon1_hit.image,
-		game->m.w_offset + 75, game->world_h - game->tex_weapon1_hit.heigth);
+		mlx_put_image_to_window(game->mlx, game->win, game->tex_kat_hit.image,
+		game->m.w_offset + 75, game->world_h - game->tex_kat_hit.heigth);
 	else if (game->state == 1 && game->weapon == 2)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon2_hit.image,
-		game->m.w_offset + 75, game->world_h - game->tex_weapon2_hit.heigth);
+		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_hit.image,
+		game->m.w_offset + 75, game->world_h - game->tex_gun_hit.heigth);
 // def state
 	else if (game->state == 2 && game->weapon == 1)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon1_def.image,
-		game->m.w_offset + 75, game->world_h - game->tex_weapon1_def.heigth);
+		mlx_put_image_to_window(game->mlx, game->win, game->tex_kat_def.image,
+		game->m.w_offset + 75, game->world_h - game->tex_kat_def.heigth);
 	else if (game->state == 2 && game->weapon == 2)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon2_def.image,
-		game->m.w_offset + 75, game->world_h - game->tex_weapon2_def.heigth);
+		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_def.image,
+		game->m.w_offset + 75, game->world_h - game->tex_gun_def.heigth);
 }

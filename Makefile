@@ -1,9 +1,8 @@
 SRCS		= 	${wildcard ./srcs/*.c} \
+				${wildcard ./srcs/parsing/*.c} \
 				${wildcard ./srcs/minimap/*.c} \
 				${wildcard ./srcs/actions/*.c} \
-				${wildcard ./srcs/minilibft/*.c} \
-				${wildcard ./srcs/raycasting/*.c} \
-				${wildcard ./srcs/parsing/*.c} \
+				${wildcard ./srcs/world_3d/*.c} \
 
 OBJS		= ${SRCS:.c=.o}
 CC			= gcc
