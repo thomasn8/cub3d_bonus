@@ -26,17 +26,26 @@ unsigned int	**copy_map(t_image *map, int width, int heigth)
 	return (copy);
 }
 
+static int	color(char c)
+{
+	if (c == '0')
+		return (M_SPACE_COLOR);
+	else if (c >= '1' && c <= W_TEX)
+		return (M_WALL_COLOR);
+	else if (c == '9')
+		return (M_DOOR_COLOR);
+	return (0);
+}
+
 void	color_map(t_image *map, t_map *m)
 {
+	m->y = -1;
 	while (++m->y < m->rows)
 	{
 		m->x = -1;
 		while (++m->x < m->cols)
 		{
-			if (m->map[m->y][m->x] == '1')
-				m->color = M_WALL_COLOR;
-			else
-				m->color = M_SPACE_COLOR;
+			m->color = color(m->map[m->y][m->x]);
 			m->yo = (m->y + 1) * m->m_size;
 			while (m->yo-- > m->y * m->m_size)
 			{
@@ -55,29 +64,12 @@ void	color_map(t_image *map, t_map *m)
 	}
 }
 
-// centrer la map dans menu du bas
-static int	size(int cols, int rows)
-{
-	int	max_w;
-	int	max_h;
-	int	m_size1;
-	int	m_size2;
-
-	max_w = (WIDTH / 2) - (2 * MARGIN);
-	max_h = MENU_HEIGTH - (2 * MARGIN);
-	m_size1 = max_w / cols;
-	m_size2 = max_h / rows;
-	if (m_size1 > m_size2)
-		return (m_size2);
-	return (m_size1);
-}
-
 void	map_description(t_game *game, t_parse *parse)
 {
 	game->m.map = parse->map;
 	game->m.cols = parse->m_width;
-	game->m.rows = parse->m_height;
-	game->m.m_size = size(game->m.cols, game->m.rows);
+	game->m.rows =  parse->m_height;
+	game->m.m_size = get_m_size(game->m.cols, game->m.rows);
 	game->m.w = parse->m_width * game->m.m_size;
 	game->m.h = parse->m_height * game->m.m_size;
 	game->m.h_offset = game->world_h + MARGIN + ((MENU_HEIGTH - (2 * MARGIN)) - game->m.h) / 2;

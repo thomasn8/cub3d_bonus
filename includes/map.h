@@ -1,15 +1,16 @@
 #ifndef MAP_H
 # define MAP_H
 
+/* set de couleurs */
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
 # define GRAY_DARK 0x00202020
 # define GRAY_LIGHT 0x00505050
 # define PURPLE 0x006C0277
-# define CV1 0x00101010
-# define CV2 0x00202020
-# define CH1 0x00303030
-# define CH2 0x00000000
+# define DEF1 0x00101010
+# define DEF2 0x00202020
+# define DEF3 0x00303030
+# define DEF4 0x00000000
 # define SKY 0x006600FF
 # define GROUND 0x00505050
 # define RED 0x00FF0000
@@ -17,9 +18,11 @@
 # define BLUE 0x000000FF
 # define YELLOW 0x00FFFF00
 
+/* map controls */
 # define M_PLAYER_SIZE 3
 # define M_PS 3
 # define M_WALL_COLOR GRAY_LIGHT
+# define M_DOOR_COLOR GRAY_DARK
 # define M_SPACE_COLOR BLACK
 # define M_GRID_COLOR PURPLE
 # define M_PLAYER_COLOR YELLOW
@@ -43,24 +46,27 @@ void			collision_check(t_map *m, t_grid *g, char k);
 void			new_pos(t_image *map, t_map *m, int color);
 void			new_fov(t_image *map, t_map *m);
 void			remove_prev_fov(t_image *map, t_map *m);
+int				get_m_size(int cols, int rows);
 
 /* RAYCASTING */
-// ray_dist
+// ray
 void			ray_horizontal_check(t_map *m, t_rays *r);
 void			ray_vertical_check(t_map *m, t_rays *r);
+void			compare_rays(t_game *game);
 // raycasting
 void			raycasting(t_game *game);
 // rc_utils
 void			check_angle(float angle, int *deg);
-void			compare_dist(t_rays	*r, int m_size);
 void			draw_v_line(t_image *image, t_rays *r, int color);
 float			fix_fisheye(float angle);
 void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
 // textures
 void			v_textures_init(t_rays *r, t_game *game);
 void			h_textures_init(t_rays *r, t_game *game);
+void			tex_door_create(t_rays *r, t_game *game);
+void			tex_interuptor_create(t_rays *r, t_game *game);
+void			tex_deco_create(t_rays *r, t_game *game);
 t_img			*ray_texture(float ray_a, t_rays *r);
 int				ray_color(float ray_a, t_rays *r);
-
 
 #endif

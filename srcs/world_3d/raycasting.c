@@ -8,13 +8,13 @@ static void wall_texture(t_game *game, t_rays *r)
 	if (r->cross == 'h')
 	{
 		r->tx = (int)((r->wx - (int)r->wx) * r->tex->width);
-		if(game->m.a_deg > 180)
+		if (game->m.a_deg > 180)
 			r->tx = r->tex->width - r->tx - 1;
 	}
 	else
 	{
 		r->tx = (int)((r->wy - (int)r->wy) * r->tex->width);
-		if(game->m.a_deg > 90 && game->m.a_deg < 270)
+		if (game->m.a_deg > 90 && game->m.a_deg < 270)
 			r->tx = r->tex->width - r->tx - 1;
 	}
 	while (++r->iy < r->w_bot)
@@ -85,7 +85,7 @@ static void	ray_to_3d(t_game *game, t_rays *r)
 }
 
 // pour voir les rayons dans la minimap, ajouté après draw_3d() :
-// draw_ray(&game->map, &game->m, &r, RED);
+// draw_ray(&game->map, &game->m, &game->r, RED);
 void	raycasting(t_game *game)
 {
 	game->m.pos_x += M_HALF_PLAYER;
@@ -101,9 +101,10 @@ void	raycasting(t_game *game)
 		game->r.dist_h = 0;
 		game->r.atan = -1 / tan(-game->m.a_rad);
 		game->r.ntan = -tan(-game->m.a_rad);
+		game->r.spe = '0';
 		ray_horizontal_check(&game->m, &game->r);
 		ray_vertical_check(&game->m, &game->r);
-		compare_dist(&game->r, game->m.m_size);
+		compare_rays(game);
 		ray_to_3d(game, &game->r);
 		game->m.a_rad -=  game->r.r_ra;
 		check_angle(game->m.a_rad, &game->m.a_deg);
