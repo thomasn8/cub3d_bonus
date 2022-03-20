@@ -16,7 +16,6 @@
 - Interactions ...
 	7 = non-attribué
 	8 = non-attribué
-
 */
 
 #include "../../includes/cub3d.h"

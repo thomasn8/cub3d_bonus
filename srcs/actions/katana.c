@@ -1,3 +1,8 @@
+/*
+	POUR L'INSTANT UNIQUEMENT ANIMATION VISUELLE MAIS N'ENREGISTRE PAS LE HIT OU LE DEF
+	à programmer, prendre interaction.c comme modèle pour gérer le point d'impact
+*/
+
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 

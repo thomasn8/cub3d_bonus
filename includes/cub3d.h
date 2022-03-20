@@ -10,7 +10,7 @@
 
 /* dimensions */
 # define FOV 60
-# define M_RAY_FACTOR 16
+# define M_RAY_FACTOR 8
 # define WIDTH 960
 # define HEIGTH 668
 # define MARGIN 5
