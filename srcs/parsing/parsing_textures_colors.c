@@ -35,7 +35,7 @@ void	check_color(t_parse *parse, char *color, char c)
 		if (sum >= 0 && sum <= 255)
 			nbr++;
 		if (nbr > 3)
-			ft_error(parse, "Max 3 values R,G,B", NULL);
+			ft_error(parse, "values colors (F) or (C)", NULL);
 		get_color(nbr, sum, parse, c);
 		sum = 0;
 		if (ft_isprint(color[i]))
@@ -69,45 +69,42 @@ char	*save_args(char *line)
 
 int	parse_textures(char *line, t_parse *parse)
 {
-	if (line[0] == 'N' && (line[1] == 'O' || line[1] == ' ') \
-		&& parse->no == NULL)
+	(void) parse;
+	if (line[0] == 'N' && (line[1] == 'O' || line[1] == ' '))
 		return (1);
-	else if (line[0] == 'S' && (line[1] == 'O' || line[1] == ' ') \
-			&& parse->so == NULL)
+	else if (line[0] == 'S' && (line[1] == 'O' || line[1] == ' '))
 		return (2);
-	else if (line[0] == 'W' && (line[1] == 'E' || line[1] == ' ') \
-			&& parse->we == NULL)
+	else if (line[0] == 'W' && (line[1] == 'E' || line[1] == ' '))
 		return (3);
-	else if (line[0] == 'E' && (line[1] == 'A' || line[1] == ' ') \
-			&& parse->ea == NULL)
+	else if (line[0] == 'E' && (line[1] == 'A' || line[1] == ' '))
 		return (4);
+	else if (line[0] == 'F')
+		return (5);
+	else if (line[0] == 'C')
+		return (6);
 	return (0);
 }
 
 // parsing des textures (images que l'on va afficher sur les murs)
 int	parse_textures_colors(char *line, t_parse *parse)
 {
-	if (parse_textures(line, parse) == 1 && \
-		check_error_texture(parse, line) == 1)
+	if (parse_textures(line, parse) == 1 && parse->no == NULL)
 		parse->no = save_args(line);
-	else if (parse_textures(line, parse) == 2 && \
-			check_error_texture(parse, line) == 1)
+	else if (parse_textures(line, parse) == 2 && parse->so == NULL)
 		parse->so = save_args(line);
-	else if (parse_textures(line, parse) == 3 && \
-			check_error_texture(parse, line) == 1)
+	else if (parse_textures(line, parse) == 3 && parse->we == NULL)
 		parse->we = save_args(line);
-	else if (parse_textures(line, parse) == 4 && \
-			check_error_texture(parse, line) == 1)
+	else if (parse_textures(line, parse) == 4 && parse->ea == NULL)
 		parse->ea = save_args(line);
-	else if (line[0] == 'F' && parse->c_f == NULL)
+	else if (parse_textures(line, parse) == 5 && parse->c_f == NULL)
 	{
 		parse->c_f = save_args(line);
 		check_color(parse, parse->c_f, 'F');
 	}
-	else if (line[0] == 'C' && parse->c_s == NULL)
+	else if (parse_textures(line, parse) == 6 && parse->c_s == NULL)
 	{
 		parse->c_s = save_args(line);
-		check_color(parse, parse->c_s, 'S');
+		check_color(parse, parse->c_s, 'C');
 	}
 	return (0);
 }

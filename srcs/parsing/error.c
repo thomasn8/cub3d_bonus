@@ -1,28 +1,27 @@
 #include "../../includes/cub3d.h"
 
+void	check_error(t_parse *parse)
+{
+	if (parse->error == 1)
+		ft_error(parse, "missing textures\n", NULL);
+	else if (parse->error == 2)
+		ft_error(parse, "missing colors\n", NULL);
+	else if (parse->error == 3)
+		ft_error(parse, "The map is not close.\n", NULL);
+}
+
 int	check_missing(t_parse *parse)
 {
 	if (parse->no == NULL || parse->so == NULL || \
 		parse->we == NULL || parse->ea == NULL)
-		ft_error(parse, "Il manque une texture.", NULL);
+		parse->error = 1;
 	else if (parse->c_f == NULL || parse->c_s == NULL)
-		ft_error(parse, "Il manque une couleur.", NULL);
+		parse->error = 2;
+	else
+		parse->error = 0;
 	return (0);
 }
 
-int	check_error_texture(t_parse *parse, char *textures)
-{
-	int		i;
-
-	i = 2;
-	while (!ft_notblank(textures[i]))
-		i++;
-	if (textures[i] != '.' && textures[i + 1] != '/')
-		ft_error(parse, "Is not a pass", NULL);
-	if (!check_name(textures, ".xpm\n"))
-		ft_error(parse, "Is not correct file (.xpm)", NULL);
-	return (1);
-}
 
 int	ft_error(t_parse *parse, char *str, char *line)
 {

@@ -17,7 +17,7 @@ static int	check_first_last_line_map(t_parse *parse, char *str)
 	return (1);
 }
 
-static int	check_map_close(t_parse *parse, char *str)
+int	check_map_close(t_parse *parse, char *str)
 {
 	int			i;
 	static int	j = 0;
@@ -36,30 +36,6 @@ static int	check_map_close(t_parse *parse, char *str)
 	}
 	else
 		return (1);
-}
-
-//check si la map contient que des valeurs voulues.
-int	ft_is_map(char *line)
-{
-	int	i;
-
-	i = 0;
-	if (!line)
-		return (0);
-	if ((ft_charinstr(line, '1') == 1) || (ft_charinstr(line, '0') == 1))
-	{
-		while (line[i])
-		{
-			if (line[i] != '1' && line[i] != '0' && line[i] != '2' && \
-				line[i] != 'N' && line[i] != 'E' && line[i] != 'S' && \
-				line[i] != 'W' && line[i] != '\n' && line[i] != '\t' && \
-				line[i] != ' ' && line[i] != 'D')
-				return (2);
-			i++;
-		}
-		return (1);
-	}
-	return (0);
 }
 
 void	get_map2(int l, int i, t_parse *parse)
@@ -84,17 +60,18 @@ void	get_map(t_parse *parse, const char *map)
 	line = get_next_line(fd);
 	parse->map = malloc(sizeof(char *) * (parse->m_height + 1));
 	parse->map[parse->m_height] = NULL;
-	i = 0;
+	i = -1;
 	while (line != NULL)
 	{
-		if (ft_is_map(line) == 1 && check_map_close(parse, line) == 1)
+		if (parse_textures(line, parse) == 0 && ((ft_charinstr(line, '1') == 1) || \
+			(ft_charinstr(line , '0') == 1)))
 		{
-			parse->map[i] = malloc((parse->m_width + 2) * sizeof(char));
+			check_map_close(parse, line);
+			parse->map[++i] = malloc((parse->m_width + 2) * sizeof(char));
 			l = ft_strlen(line);
 			ft_strlcpy(parse->map[i], line, l + 1);
 			replace_space_tab(parse->map[i]);
 			get_map2(l, i, parse);
-			i++;
 		}
 		free(line);
 		line = get_next_line(fd);

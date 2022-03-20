@@ -1,5 +1,25 @@
 #include "../../includes/cub3d.h"
 
+static int	check_map(t_parse *parse, char **map)
+{
+		int	y;
+	int x;
+
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if ((ft_isdigit(map[y][x]) != 1) && map[y][x] != 'N' && \
+			map[y][x] != 'E' && map[y][x] != 'S' && \
+			map[y][x] != 'W' && map[y][x] != '\n')
+				ft_error(parse, "wrong char in map\n", NULL);
+		}
+	}
+	return (0);
+}
+
 static int	check_missing_in_map(t_parse *parse)
 {
 	if (parse->wall == 0)
@@ -50,18 +70,21 @@ static int	check_player(t_parse *parse)
 int	parsing(int fd, const char *map, t_parse *parse)
 {
 	char	*line;
-
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		check_missing(parse);
 		parse_textures_colors(line, parse);
-		ft_map(line, parse);
+		if (parse->error == 0 && ((ft_charinstr(line, '1') == 1) || \
+			(ft_charinstr(line , '0') == 1)))
+				ft_map(line, parse);
 		line = get_next_line(fd);
 	}
 	free(line);
 	close(fd);
-	check_missing(parse);
+	check_error(parse);
 	get_map(parse, map);
+	check_map(parse, parse->map);
 	check_player(parse);
 	return (0);
 }

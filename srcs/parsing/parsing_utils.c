@@ -71,23 +71,6 @@ void	print_map(char **map)
 	}
 }
 
-void	print_all(t_parse *p)
-{
-	printf("no = %s\n", p->no);
-	printf("so = %s\n", p->so);
-	printf("we = %s\n", p->we);
-	printf("ea = %s\n", p->ea);
-	printf("view_player = %c\n", p->view_player);
-	printf("start_x = %i\n", p->start_x);
-	printf("start_y = %i\n", p->start_y);
-	printf("m_height = %i\n", p->m_height);
-	printf("m_width = %i\n", p->m_width);
-	printf("c_f = %s\n", p->c_f);
-	printf("c_s = %s\n", p->c_s);
-	printf("hex_f = %lu\n", p->hex_f);
-	printf("hex_s = %lu\n", p->hex_s);
-}
-
 //permet de calculer la taille de la map pour la malloqué.
 int	ft_map(char *line, t_parse *parse)
 {
@@ -96,13 +79,10 @@ int	ft_map(char *line, t_parse *parse)
 	static int	ssizeline = 0;
 
 	i = 0;
-	if (ft_is_map(line) == 1 && check_missing(parse) == 0)
-	{
-		nblines += 1;
-		i = ft_strlen(line);
-		if (i > ssizeline)
-			ssizeline = i;
-	}
+	nblines += 1;
+	i = ft_strlen(line);
+	if (i > ssizeline)
+		ssizeline = i;
 	parse->m_height = nblines;
 	parse->m_width = ssizeline - 1;
 	return (0);
