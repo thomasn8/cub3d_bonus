@@ -9,19 +9,16 @@ static int	check_map_space(t_parse *parse, char **map)
 	while (map[y])
 	{
 		x = 0;
-		while (map[y][x] != '\n')
+		while (map[y][x])
 		{
 			if (map[y][x] == ' ')
 			{
 				if (map[y][x + 1] == '0' || map[y][x - 1] == '0')
 					ft_error(parse, "map is not close. (1)", NULL);
-				else if (map[y - 1][x] == '0' || map[y + 1][x] == '0')
-					ft_error(parse, "The map is not close. (1.1)", NULL);
-				else
-					x++;
+				// else if (map[y - 1][x] == '0' || map[y + 1][x] == '0')
+				// 	ft_error(parse, "The map is not close. (1.1)", NULL);
 			}
-			else
-				x++;
+			x++;
 		}
 		y++;
 	}
@@ -103,7 +100,7 @@ void	get_map(t_parse *parse, const char *map)
 		free(line);
 		line = get_next_line(fd);
 	}
-	print_map(parse->map);
 	check_map_space(parse, parse->map);
-	replace_space_tab(parse->map[i]);
+	replace_space_tab(parse->map);
+	print_map(parse->map);
 }

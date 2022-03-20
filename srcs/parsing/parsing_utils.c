@@ -24,18 +24,20 @@ void	initialisation(t_parse *parse)
 	parse->rgb = -1;
 }
 
-void	replace_space_tab(char *str)
+void	replace_space_tab(char **map)
 {
-	int		i;
+	int	y;
+	int	x;
 
-	i = 0;
-	while (str[i])
+	y = -1;
+	while (map[++y])
 	{
-		if (str[i] == '\t')
-			str[i] = '1';
-		else if (str[i] == ' ')
-			str[i] = '1';
-		i++;
+		x = -1;
+		while (map[y][++x])
+		{
+			if (map[y][x] == ' ')
+				map[y][x] = '1';
+		}
 	}
 }
 

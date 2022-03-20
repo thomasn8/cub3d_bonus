@@ -238,7 +238,7 @@ int				parsing(int fd, const char *map, t_parse *parse);
 void			initialisation(t_parse *parse);
 int				parse_textures_colors(char *line, t_parse *parse);
 char			*save_args(char *line);
-void			replace_space_tab(char *str);
+void			replace_space_tab(char **map);
 void			get_map(t_parse *parse, const char *map);
 void			get_map2(int l, int i, t_parse *parse);
 int				ft_map(char *line, t_parse *parse);
