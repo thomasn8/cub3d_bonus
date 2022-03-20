@@ -1,18 +1,6 @@
 #include "../../includes/cub3d.h"
 
-static void	get_color(int nbr, int sum, t_parse *parse, char c)
-{
-	if (nbr == 1)
-		parse->r = sum;
-	else if (nbr == 2)
-		parse->g = sum;
-	else if (nbr == 3)
-		parse->b = sum;
-	if (parse->r != -1 && parse->g != -1 && parse->b != -1 && c == 'F')
-		parse->hex_f = create_rgb(0, parse->r, parse->g, parse->b);
-	else if (parse->r != -1 && parse->g != -1 && parse->b != -1 && c == 'S')
-		parse->hex_s = create_rgb(0, parse->r, parse->g, parse->b);
-}
+
 
 void	check_color(t_parse *parse, char *color, char c)
 {
@@ -34,13 +22,13 @@ void	check_color(t_parse *parse, char *color, char c)
 		}
 		if (sum >= 0 && sum <= 255)
 			nbr++;
-		if (nbr > 3)
-			ft_error(parse, "values colors (F) or (C)", NULL);
 		get_color(nbr, sum, parse, c);
 		sum = 0;
 		if (ft_isprint(color[i]))
 			i++;
 	}
+	if (nbr != 3)
+		ft_error(parse, "values colors (F) or (C)", NULL);
 }
 
 char	*save_args(char *line)
@@ -84,26 +72,53 @@ int	parse_textures(char *line)
 	return (0);
 }
 
-// parsing des textures (images que l'on va afficher sur les murs)
-int	parse_textures_colors(char *line, t_parse *parse)
+static int	parse_color(char *line, t_parse *parse)
 {
-	if (parse_textures(line) == 1 && parse->no == NULL)
-		parse->no = save_args(line);
-	else if (parse_textures(line) == 2 && parse->so == NULL)
-		parse->so = save_args(line);
-	else if (parse_textures(line) == 3 && parse->we == NULL)
-		parse->we = save_args(line);
-	else if (parse_textures(line) == 4 && parse->ea == NULL)
-		parse->ea = save_args(line);
-	else if (parse_textures(line) == 5 && parse->c_f == NULL)
+	if (parse_textures(line) == 5)
 	{
+		if (parse->c_f != NULL)
+			ft_error(parse, "to many F", NULL);
 		parse->c_f = save_args(line);
 		check_color(parse, parse->c_f, 'F');
 	}
-	else if (parse_textures(line) == 6 && parse->c_s == NULL)
+	else if (parse_textures(line) == 6)
 	{
+		if (parse->c_s != NULL)
+			ft_error(parse, "to many C", NULL);
 		parse->c_s = save_args(line);
 		check_color(parse, parse->c_s, 'S');
 	}
+	return (0);
+}
+
+// parsing des textures (images que l'on va afficher sur les murs)
+int	parse_textures_colors(char *line, t_parse *parse)
+{
+	if (parse_textures(line) == 1)
+	{
+		if (parse->no != NULL)
+			ft_error(parse, "to many NO", NULL);
+		parse->no = save_args(line);
+	}
+	else if (parse_textures(line) == 2)
+	{
+		if (parse->so != NULL)
+			ft_error(parse, "to many SO", NULL);
+		parse->so = save_args(line);
+	}
+	else if (parse_textures(line) == 3)
+	{
+		if (parse->we != NULL)
+			ft_error(parse, "to many WE", NULL);
+		parse->we = save_args(line);
+	}
+	else if (parse_textures(line) == 4)
+	{
+		if (parse->ea != NULL)
+			ft_error(parse, "to many EA", NULL);
+		parse->ea = save_args(line);
+	}
+	else
+		parse_color(line, parse);
 	return (0);
 }

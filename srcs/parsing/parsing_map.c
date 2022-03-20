@@ -1,5 +1,33 @@
 #include "../../includes/cub3d.h"
 
+static int	check_map_space(t_parse *parse, char **map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x] != '\n')
+		{
+			if (map[y][x] == ' ')
+			{
+				if (map[y][x + 1] == '0' || map[y][x - 1] == '0')
+					ft_error(parse, "map is not close. (1)", NULL);
+				else if (map[y - 1][x] == '0' || map[y + 1][x] == '0')
+					ft_error(parse, "The map is not close. (1.1)", NULL);
+				else
+					x++;
+			}
+			else
+				x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
 static int	check_first_last_line_map(t_parse *parse, char *str)
 {
 	size_t	i;
@@ -9,7 +37,7 @@ static int	check_first_last_line_map(t_parse *parse, char *str)
 	{
 		if (str[i] != '1' && str[i] != ' ')
 		{
-			ft_error(parse, "The map is not close.\n", NULL);
+			ft_error(parse, "The map is not close. (2)", NULL);
 			exit(0);
 		}
 		i++;
@@ -31,7 +59,7 @@ int	check_map_close(t_parse *parse, char *str)
 		i++;
 	if (str[i] != '1' || str[ft_strlen(str) - 2] != '1')
 	{
-		ft_error(parse, "The map is not close.\n", NULL);
+		ft_error(parse, "The map is not close. (3)", NULL);
 		exit(0);
 	}
 	else
@@ -42,7 +70,7 @@ void	get_map2(int l, int i, t_parse *parse)
 {
 	if (l != parse->m_width + 1)
 	{
-		ft_memset((void *)&parse->map[i][l - 1], '1', parse->m_width + 1 - l);
+		ft_memset((void *)&parse->map[i][l - 1], ' ', parse->m_width + 1 - l);
 		parse->map[i][parse->m_width] = '\n';
 		parse->map[i][parse->m_width + 1] = '\0';
 	}
@@ -70,10 +98,12 @@ void	get_map(t_parse *parse, const char *map)
 			parse->map[++i] = malloc((parse->m_width + 2) * sizeof(char));
 			l = ft_strlen(line);
 			ft_strlcpy(parse->map[i], line, l + 1);
-			replace_space_tab(parse->map[i]);
 			get_map2(l, i, parse);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	print_map(parse->map);
+	check_map_space(parse, parse->map);
+	replace_space_tab(parse->map[i]);
 }

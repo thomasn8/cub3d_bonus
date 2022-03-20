@@ -14,7 +14,7 @@ static int	check_map(t_parse *parse, char **map)
 			if ((ft_isdigit(map[y][x]) != 1) && map[y][x] != 'N' && \
 			map[y][x] != 'E' && map[y][x] != 'S' && \
 			map[y][x] != 'W' && map[y][x] != '\n')
-				ft_error(parse, "wrong char in map\n", NULL);
+				ft_error(parse, "wrong char in map", NULL);
 		}
 	}
 	return (0);
@@ -23,18 +23,18 @@ static int	check_map(t_parse *parse, char **map)
 static int	check_missing_in_map(t_parse *parse)
 {
 	if (parse->wall == 0)
-		ft_error(parse, "Missing wall (1)\n", NULL);
+		ft_error(parse, "Missing wall (1)", NULL);
 	else if (parse->free_space == 0)
-		ft_error(parse, "Missing free space (0)\n", NULL);
+		ft_error(parse, "Missing free space (0)", NULL);
 	else if (parse->check_player == 0)
-		ft_error(parse, "Missing player (N or E or S or W)\n", NULL);
+		ft_error(parse, "Missing player (N or E or S or W)", NULL);
 	return (0);
 }
 
 static int	check_player2(int x, int y, t_parse *parse)
 {
 	if (parse->check_player == 1)
-		ft_error(parse, "To many player\n", NULL);
+		ft_error(parse, "To many player", NULL);
 	parse->check_player = 1;
 	parse->view_player = parse->map[y][x];
 	parse->start_x = x;

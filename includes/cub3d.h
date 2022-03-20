@@ -266,6 +266,7 @@ unsigned long	create_rgb(int t, int r, int g, int b);
 void			print_all(t_parse *p);
 void			check_error(t_parse *parse);
 int				check_map_close(t_parse *parse, char *str);
+void			get_color(int nbr, int sum, t_parse *parse, char c);
 
 // utils
 float			deg_to_rad(int angle);
