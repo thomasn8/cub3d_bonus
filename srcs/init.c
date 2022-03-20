@@ -69,4 +69,8 @@ void	params_init(t_game *game)
 	game->d = 0;
 	game->left = 0;
 	game->right = 0;
+	game->weapon = 1;
+	game->state = 0;
+	tex_weapon1_create(game);
+	tex_weapon2_create(game);
 }

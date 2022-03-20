@@ -15,6 +15,7 @@
 # define HEIGTH 668
 # define MARGIN 5
 # define MENU_HEIGTH 120
+# define W_TEX '6'
 
 /* colors */
 # define WHITE 0x00FFFFFF
@@ -218,6 +219,14 @@ typedef struct s_game
 	int				left;
 	int				right;
 	int				interact;
+	int				weapon;
+	int				state;
+	t_img			tex_weapon1_run;
+	t_img			tex_weapon1_hit;
+	t_img			tex_weapon1_def;
+	t_img			tex_weapon2_run;
+	t_img			tex_weapon2_hit;
+	t_img			tex_weapon2_def;
 }	t_game;
 
 // parsing
@@ -255,6 +264,8 @@ void			params_init(t_game *game);
 void			menu_init(t_game *game);
 void			world_init(t_game *game);
 void			minimap_init(t_game *game, t_parse *parse);
+void			tex_weapon1_create(t_game *game);
+void			tex_weapon2_create(t_game *game);
 
 // minimap
 void			map_description(t_game *game, t_parse *parse);
@@ -266,6 +277,8 @@ void			move(t_game *game, char move);
 void			draw_all(t_game *game, char t);
 int				map_char(char c);
 void			interaction(t_game *t_game);
+void			attack(t_game *game);
+void			defense(t_game *game);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);

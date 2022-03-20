@@ -33,6 +33,10 @@ int	key_press(int keycode, t_game *game)
 		game->left = 1;
 	else if (keycode == K_RIGHT)
 		game->right = 1;
+	else if (keycode == K_UP)
+		attack(game);
+	else if (keycode == K_DOWN)
+		defense(game);
 	return (0);
 }
 
@@ -52,6 +56,10 @@ int	key_release(int keycode, t_game *game)
 		game->right = 0;
 	else if (keycode == K_E)
 		interaction(game);
+	else if (keycode == K_1)
+		game->weapon = 1;
+	else if (keycode == K_2)
+		game->weapon = 2;
 	else if (keycode == K_ESC)
 		quit_prog(game);
 	return (0);
@@ -76,5 +84,9 @@ int	events_loop(t_game *game)
 		rotation(game, 'r');
 	mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win, game->map.image, game->m.w_offset, game->m.h_offset);
+	if (game->weapon == 1 && game->state == 0)
+		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon1_run.image, game->m.w_offset + 75, game->world_h - game->tex_weapon1_run.heigth);
+	else if (game->weapon == 2 && game->state == 0)
+		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon2_run.image, game->m.w_offset + 75, game->world_h - game->tex_weapon2_run.heigth);
 	return (0);
 }

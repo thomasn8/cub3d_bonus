@@ -92,6 +92,6 @@ void	interaction(t_game *game)
 		color_map(&game->map, &game->m);
 		ft_free_array((void **)game->m.clean_map);
 		game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
-		draw_all(game, '1');
+		draw_all(game, '2');
 	}
 }

@@ -39,7 +39,6 @@
 # define M_RAD_90 1.57079632679		// = pi/2
 # define M_RAD_180 3.1415926535		// = pi
 # define M_RAD_270 4.71238898038	// = 3*pi/2
-# define W_TEX '6'
 
 /* MINIMAP */
 // player
