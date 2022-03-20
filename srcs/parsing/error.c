@@ -3,11 +3,11 @@
 void	check_error(t_parse *parse)
 {
 	if (parse->error == 1)
-		ft_error(parse, "missing textures\n", NULL);
+		ft_error(parse, "missing textures", NULL);
 	else if (parse->error == 2)
-		ft_error(parse, "missing colors\n", NULL);
+		ft_error(parse, "missing colors", NULL);
 	else if (parse->error == 3)
-		ft_error(parse, "The map is not close.\n", NULL);
+		ft_error(parse, "The map is not close.", NULL);
 }
 
 int	check_missing(t_parse *parse)
@@ -52,7 +52,7 @@ void	save_map(const char *map, t_parse *parse)
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
 	{
-		write_errors("The file is not open\n");
+		write_errors("The file is not open");
 		exit (0);
 	}
 	initialisation(parse);

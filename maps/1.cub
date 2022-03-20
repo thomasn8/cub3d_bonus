@@ -1,17 +1,20 @@
 NO ./path_to_the_north_texture1.xpm
 SO ./path_to_the_south_texture2
-SO ./path_to_the_south_texture2.xpm
 WE ./path_to_the_west_texture3.xpm
 EA ./path_to_the_east_texture4.xpm
 
-F 103,159,90
-C 0,127,255
+F 0,255,0
+C 0,255,0
 
 
 
-
-
-11111
-11E01
-11101
-11111
+11111111111
+11111110111
+111110101
+11E0111011
+1100111011
+110111011
+11000111011
+110111011
+11E0111011
+11111111
