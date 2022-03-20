@@ -276,15 +276,22 @@ void			rotation(t_game *game, char dir);
 void			move(t_game *game, char move);
 void			draw_all(t_game *game, char t);
 int				map_char(char c);
+
+// actions
+void			weapon_display(t_game *game);
+void			weapon_press(int k, t_game *game);
+void			weapon_release(int k, t_game *game);
+void			kat_attack(t_game *game, char k);
+void			kat_defense(t_game *game, char k);
+void			gun_attack(t_game *game, char k);
+void			gun_defense(t_game *game, char k);
 void			interaction(t_game *t_game);
-void			attack(t_game *game);
-void			defense(t_game *game);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
 int				quit_prog(t_game *game);
-int				key_release(int keycode, t_game *game);
-int				key_press(int keycode, t_game *game);
+int				key_release(int k, t_game *game);
+int				key_press(int k, t_game *game);
 int				events_loop(t_game *game);
 
 #endif

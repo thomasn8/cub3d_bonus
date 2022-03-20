@@ -1,5 +1,6 @@
 SRCS		= 	${wildcard ./srcs/*.c} \
 				${wildcard ./srcs/minimap/*.c} \
+				${wildcard ./srcs/actions/*.c} \
 				${wildcard ./srcs/minilibft/*.c} \
 				${wildcard ./srcs/raycasting/*.c} \
 				${wildcard ./srcs/parsing/*.c} \

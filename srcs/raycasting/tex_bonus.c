@@ -51,23 +51,25 @@ void	tex_deco_create(t_rays *r, t_game *game)
 void	tex_weapon1_create(t_game *game)
 {
 	game->tex_weapon1_run.image = mlx_xpm_file_to_image(
-		game->mlx, "./textures/katana.xpm", &game->tex_weapon1_run.width, &game->tex_weapon1_run.heigth);
+		game->mlx, "./weapons/katana_run", &game->tex_weapon1_run.width, &game->tex_weapon1_run.heigth);
 	if (!game->tex_weapon1_run.image)
-		texture_error(game->tex_weapon1_run.image, "error loading W1_texture_xpm\n");
+		texture_error(game->tex_weapon1_run.image, "error loading K0_texture_xpm\n");
 	else
 		game->tex_weapon1_run.addr = mlx_get_data_addr(
 			game->tex_weapon1_run.image, &game->tex_weapon1_run.bpp, &game->tex_weapon1_run.ll, &game->tex_weapon1_run.e);
+	
 	game->tex_weapon1_hit.image = mlx_xpm_file_to_image(
-		game->mlx, "./textures/katana_hit.xpm", &game->tex_weapon1_hit.width, &game->tex_weapon1_hit.heigth);
+		game->mlx, "./weapons/katana_hit", &game->tex_weapon1_hit.width, &game->tex_weapon1_hit.heigth);
 	if (!game->tex_weapon1_hit.image)
-		texture_error(game->tex_weapon1_hit.image, "error loading W2_texture_xpm\n");
+		texture_error(game->tex_weapon1_hit.image, "error loading K1_texture_xpm\n");
 	else
 		game->tex_weapon1_hit.addr = mlx_get_data_addr(
 			game->tex_weapon1_hit.image, &game->tex_weapon1_hit.bpp, &game->tex_weapon1_hit.ll, &game->tex_weapon1_hit.e);
+	
 	game->tex_weapon1_def.image = mlx_xpm_file_to_image(
-		game->mlx, "./textures/katana_hit.xpm", &game->tex_weapon1_def.width, &game->tex_weapon1_def.heigth);
+		game->mlx, "./weapons/katana_def", &game->tex_weapon1_def.width, &game->tex_weapon1_def.heigth);
 	if (!game->tex_weapon1_def.image)
-		texture_error(game->tex_weapon1_def.image, "error loading W2_texture_xpm\n");
+		texture_error(game->tex_weapon1_def.image, "error loading K2_texture_xpm\n");
 	else
 		game->tex_weapon1_def.addr = mlx_get_data_addr(
 			game->tex_weapon1_def.image, &game->tex_weapon1_def.bpp, &game->tex_weapon1_def.ll, &game->tex_weapon1_def.e);
@@ -76,23 +78,25 @@ void	tex_weapon1_create(t_game *game)
 void	tex_weapon2_create(t_game *game)
 {
 	game->tex_weapon2_run.image = mlx_xpm_file_to_image(
-		game->mlx, "./textures/hache.xpm", &game->tex_weapon2_run.width, &game->tex_weapon2_run.heigth);
+		game->mlx, "./weapons/hache_run", &game->tex_weapon2_run.width, &game->tex_weapon2_run.heigth);
 	if (!game->tex_weapon2_run.image)
-		texture_error(game->tex_weapon2_run.image, "error loading W3_texture_xpm\n");
+		texture_error(game->tex_weapon2_run.image, "error loading G0_texture_xpm\n");
 	else
 		game->tex_weapon2_run.addr = mlx_get_data_addr(
 			game->tex_weapon2_run.image, &game->tex_weapon2_run.bpp, &game->tex_weapon2_run.ll, &game->tex_weapon2_run.e);
+	
 	game->tex_weapon2_hit.image = mlx_xpm_file_to_image(
-		game->mlx, "./textures/hache_hit.xpm", &game->tex_weapon2_hit.width, &game->tex_weapon2_hit.heigth);
+		game->mlx, "./weapons/hache_hit", &game->tex_weapon2_hit.width, &game->tex_weapon2_hit.heigth);
 	if (!game->tex_weapon2_hit.image)
-		texture_error(game->tex_weapon2_hit.image, "error loading W4_texture_xpm\n");
+		texture_error(game->tex_weapon2_hit.image, "error loading G1_texture_xpm\n");
 	else
 		game->tex_weapon2_hit.addr = mlx_get_data_addr(
 			game->tex_weapon2_hit.image, &game->tex_weapon2_hit.bpp, &game->tex_weapon2_hit.ll, &game->tex_weapon2_hit.e);
+	
 	game->tex_weapon2_def.image = mlx_xpm_file_to_image(
-		game->mlx, "./textures/hache_hit.xpm", &game->tex_weapon2_def.width, &game->tex_weapon2_def.heigth);
+		game->mlx, "./weapons/hache_def", &game->tex_weapon2_def.width, &game->tex_weapon2_def.heigth);
 	if (!game->tex_weapon2_def.image)
-		texture_error(game->tex_weapon2_def.image, "error loading W4_texture_xpm\n");
+		texture_error(game->tex_weapon2_def.image, "error loading G2_texture_xpm\n");
 	else
 		game->tex_weapon2_def.addr = mlx_get_data_addr(
 			game->tex_weapon2_def.image, &game->tex_weapon2_def.bpp, &game->tex_weapon2_def.ll, &game->tex_weapon2_def.e);

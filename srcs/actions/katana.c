@@ -75,9 +75,13 @@
 // 	}
 // }
 
-void	defense(t_game *game)
+void	kat_defense(t_game *game, char k)
 {
-	(void) game;
+	if (k == 'p')
+		game->state = 2;
+	else if (k == 'r')
+		game->state = 0;
+
 	// game->interact = 0;
 	// game->m.player_angle = game->m.a_rad;
 	// game->r.dist_v = 0;
@@ -97,9 +101,12 @@ void	defense(t_game *game)
 	// }
 }
 
-void	attack(t_game *game)
+void	kat_attack(t_game *game, char k)
 {
-	(void) game;
+	if (k == 'p')
+		game->state = 1;
+	else if (k == 'r')
+		game->state = 0;
 	// game->interact = 0;
 	// game->m.player_angle = game->m.a_rad;
 	// game->r.dist_v = 0;
@@ -117,10 +124,4 @@ void	attack(t_game *game)
 	// 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
 	// 	draw_all(game, '2');
 	// }
-	game->state = 1;
-	if (game->weapon == 1)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon1_hit.image, game->m.w_offset + 75, game->world_h - game->tex_weapon1_hit.heigth);
-	else if (game->weapon == 2)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_weapon2_hit.image, game->m.w_offset + 75, game->world_h - game->tex_weapon2_hit.heigth);
-	game->state = 0;
 }
