@@ -5,22 +5,20 @@ static int	check_map_space(t_parse *parse, char **map)
 	int	y;
 	int	x;
 
-	y = 0;
-	while (map[y])
+	y = -1;
+	while (map[++y])
 	{
-		x = 0;
-		while (map[y][x])
+		x = -1;
+		while (map[y][++x])
 		{
 			if (map[y][x] == ' ')
 			{
-				if (map[y][x + 1] == '0' || map[y][x - 1] == '0')
+				if ((x > 0 && x < parse->m_width) && (map[y][x + 1] == '0' || map[y][x - 1] == '0'))
 					ft_error(parse, "map is not close. (1)", NULL);
-				// else if (map[y - 1][x] == '0' || map[y + 1][x] == '0')
-				// 	ft_error(parse, "The map is not close. (1.1)", NULL);
+				// if (((y > 0 && y < parse->m_height) && (map[y - 1][x] == '0' || map[y + 1][x] == '0')))
+				// 	ft_error(parse, "map is not close. (1.1)", NULL);
 			}
-			x++;
 		}
-		y++;
 	}
 	return (0);
 }
