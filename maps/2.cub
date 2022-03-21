@@ -1,7 +1,7 @@
-NO ./textures/redstone.xpm
-SO ./textures/redstone.xpm
-WE ./textures/redstone.xpm
-EA ./textures/redstone.xpm
+NO ./textures/42logo.xpm
+SO ./textures/imac.xpm
+WE ./textures/kali.xpm
+EA ./textures/plinux.xpm
 
 F 1,1,1
 C 0,255,0
