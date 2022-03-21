@@ -238,9 +238,9 @@ typedef struct s_game
 	t_img			tex_kat_hit;
 	t_img			tex_kat_def;
 	t_img			tex_gun_run;
-	t_img			tex_gun_1;
-	t_img			tex_gun_2;
-	t_img			tex_gun_3;
+	// t_img			tex_gun_1;
+	// t_img			tex_gun_2;
+	// t_img			tex_gun_3;
 	t_point			p;
 }	t_game;
 

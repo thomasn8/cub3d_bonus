@@ -31,6 +31,7 @@
 # define PI 3.1415926535
 # define PI2 6.2831853071
 # define M_1_DEG_RAD 0.017453293	// (2*pi)/360
+# define M_05_DEG_RAD  0.0087266465
 # define M_EAST 0
 # define M_NORTH 90
 # define M_WEST 180
