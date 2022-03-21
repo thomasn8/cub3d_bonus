@@ -201,6 +201,17 @@ typedef struct s_grid
 	int		my_sub_yo;
 }	t_grid;
 
+// pour dessiner viseur
+typedef struct s_point
+{
+	int				i;
+	int				o;
+	int				x1;
+	int				y1;
+	int				x2;
+	int				y2;
+}	t_point;
+
 // game
 typedef struct s_game
 {
@@ -228,8 +239,10 @@ typedef struct s_game
 	t_img			tex_kat_hit;
 	t_img			tex_kat_def;
 	t_img			tex_gun_run;
-	t_img			tex_gun_hit;
-	t_img			tex_gun_def;
+	t_img			tex_gun_1;
+	t_img			tex_gun_2;
+	t_img			tex_gun_3;
+	t_point			p;
 }	t_game;
 
 // parsing
@@ -285,10 +298,10 @@ int				map_char(char c);
 void			weapon_display(t_game *game);
 void			weapon_press(int k, t_game *game);
 void			weapon_release(int k, t_game *game);
+void			draw_viewfinder(t_game *game);
 void			kat_attack(t_game *game, char k);
 void			kat_defense(t_game *game, char k);
-void			gun_attack(t_game *game, char k);
-void			gun_defense(t_game *game, char k);
+void			gun_shoot(t_game *game, char k);
 void			interaction(t_game *t_game);
 
 // events

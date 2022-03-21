@@ -80,38 +80,12 @@
 // 	}
 // }
 
-void	gun_defense(t_game *game, char k)
+void	gun_shoot(t_game *game, char k)
 {
-	if (k == 'p')
+	if (k == 'p' && game->state == 0)			// run : shuriken en bas
+		game->state = 1;						// press : shuriken en haut, chargé
+	else if (k == 'r' && game->state == 1)		// released : shuriken lancé, vrille vers cible
 		game->state = 2;
-	else if (k == 'r')
-		game->state = 0;
-
-	// game->interact = 0;
-	// game->m.player_angle = game->m.a_rad;
-	// game->r.dist_v = 0;
-	// game->r.dist_h = 0;
-	// game->r.atan = -1 / tan(-game->m.a_rad);
-	// game->r.ntan = -tan(-game->m.a_rad);
-	// game->r.spe = '0';
-	// ray_horizontal_check(&game->m, &game->r);
-	// ray_vertical_check(&game->m, &game->r);
-	// get_ray(game);
-	// if (game->interact)
-	// {
-	// 	color_map(&game->map, &game->m);
-	// 	ft_free_array((void **)game->m.clean_map);
-	// 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
-	// 	draw_all(game, '2');
-	// }
-}
-
-void	gun_attack(t_game *game, char k)
-{
-	if (k == 'p')
-		game->state = 1;
-	else if (k == 'r')
-		game->state = 0;
 	
 	// game->interact = 0;
 	// game->m.player_angle = game->m.a_rad;
@@ -130,4 +104,7 @@ void	gun_attack(t_game *game, char k)
 	// 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
 	// 	draw_all(game, '2');
 	// }
+
+	if (k == 'r' && game->state == 2)		
+		game->state = 0;						// run : shuriken en bas
 }
