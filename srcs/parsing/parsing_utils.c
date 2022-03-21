@@ -70,7 +70,6 @@ void	print_map(char **map)
 		x = -1;
 		while (map[y][++x])
 			write(1, &map[y][x], 1);
-		write(1, "\n", 1);
 	}
 }
 
@@ -87,6 +86,6 @@ int	ft_map(char *line, t_parse *parse)
 	if (i > ssizeline)
 		ssizeline = i;
 	parse->m_height = nblines;
-	parse->m_width = ssizeline - 1;
+	parse->m_width = ssizeline;
 	return (0);
 }

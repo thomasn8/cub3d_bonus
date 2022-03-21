@@ -67,6 +67,7 @@ void	get_map2(int l, int i, t_parse *parse)
 	if (l < parse->m_width)
 	{
 		ft_memset((void *)&parse->map[i][l - 1], ' ', parse->m_width + 1 - l);
+		parse->map[i][parse->m_width] = '\n';
 		parse->map[i][parse->m_width + 1] = '\0';
 	}
 }
@@ -90,9 +91,9 @@ void	get_map(t_parse *parse, const char *map)
 		((ft_charinstr(line, '1') == 1) || (ft_charinstr(line, '0') == 1)))
 		{
 			check_map_close(parse, line);
-			parse->map[++i] = malloc((parse->m_width + 2) * sizeof(char));
+			parse->map[++i] = malloc((parse->m_width + 1) * sizeof(char));
 			l = ft_strlen(line);
-			ft_strlcpy(parse->map[i], line, l);
+			ft_strlcpy(parse->map[i], line, l + 1);
 			get_map2(l, i, parse);
 		}
 		free(line);
