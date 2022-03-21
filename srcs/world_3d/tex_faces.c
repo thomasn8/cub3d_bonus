@@ -13,9 +13,12 @@
 	5 = interupteur activé (vert-down) placé à côté d'une biblio -> fermet la porte précédement ouverte
 	9 = porte ouverte devenu un espace vide (mur -> espace). Apparait en gris foncé sur la minimap
 
-- Interactions ...
-	7 = non-attribué
-	8 = non-attribué
+- Ennemies
+	8 = enemy
+
+- Non-attribués
+	7 ;
+
 */
 
 #include "../../includes/cub3d.h"

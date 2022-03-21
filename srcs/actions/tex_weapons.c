@@ -15,7 +15,6 @@ void	tex_kat_create(t_game *game)
 	else
 		game->tex_kat_run.addr = mlx_get_data_addr(
 			game->tex_kat_run.image, &game->tex_kat_run.bpp, &game->tex_kat_run.ll, &game->tex_kat_run.e);
-	
 	game->tex_kat_hit.image = mlx_xpm_file_to_image(
 		game->mlx, "./weapons/kat_hit", &game->tex_kat_hit.width, &game->tex_kat_hit.heigth);
 	if (!game->tex_kat_hit.image)
@@ -23,7 +22,6 @@ void	tex_kat_create(t_game *game)
 	else
 		game->tex_kat_hit.addr = mlx_get_data_addr(
 			game->tex_kat_hit.image, &game->tex_kat_hit.bpp, &game->tex_kat_hit.ll, &game->tex_kat_hit.e);
-	
 	game->tex_kat_def.image = mlx_xpm_file_to_image(
 		game->mlx, "./weapons/kat_def", &game->tex_kat_def.width, &game->tex_kat_def.heigth);
 	if (!game->tex_kat_def.image)

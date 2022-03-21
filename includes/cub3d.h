@@ -211,6 +211,18 @@ typedef struct s_point
 	int				y2;
 }	t_point;
 
+// enemies
+typedef struct s_enemy
+{
+	int				mx;
+	int				my;
+	t_img			tex_sheepl;
+	int				state;
+	int				x;
+	int				y;
+	int				z;
+}	t_enemy;
+
 // game
 typedef struct s_game
 {
@@ -242,6 +254,7 @@ typedef struct s_game
 	// t_img			tex_gun_2;
 	// t_img			tex_gun_3;
 	t_point			p;
+	t_enemy			sheeps[1];
 }	t_game;
 
 // parsing
@@ -301,6 +314,10 @@ void			kat_attack(t_game *game, char k);
 void			kat_defense(t_game *game, char k);
 void			gun_shoot(t_game *game, char k);
 void			interaction(t_game *t_game);
+
+// enemies
+void			enemies_init(t_game *game, t_map *m);
+void			tex_enemies_create(t_game *game);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);

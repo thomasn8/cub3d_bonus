@@ -58,9 +58,10 @@ void			compare_rays(t_game *game);
 void			raycasting(t_game *game);
 // rc_utils
 void			check_angle(float angle, int *deg);
-void			draw_v_line(t_image *image, t_rays *r, int color);
 float			fix_fisheye(float angle);
+void			draw_v_line(t_image *image, t_rays *r, int color);
 void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
+void			draw_line(t_game *game, t_image *image, t_point *p, int color);
 // textures
 void			v_textures_init(t_rays *r, t_game *game);
 void			h_textures_init(t_rays *r, t_game *game);
