@@ -70,6 +70,7 @@ void	print_map(char **map)
 		x = -1;
 		while (map[y][++x])
 			write(1, &map[y][x], 1);
+		write(1, "\n", 1);
 	}
 }
 

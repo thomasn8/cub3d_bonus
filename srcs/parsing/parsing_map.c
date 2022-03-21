@@ -6,17 +6,18 @@ static int	check_map_space(t_parse *parse, char **map)
 	int	x;
 
 	y = -1;
+	// setvbuf(stdout, NULL, _IONBF, 0);
 	while (map[++y])
 	{
 		x = -1;
 		while (map[y][++x])
 		{
-			if (map[y][x] == ' ')
+			if (map[y][x] == '0')
 			{
-				if ((x > 0 && x < parse->m_width) && (map[y][x + 1] == '0' || map[y][x - 1] == '0'))
+				if (map[y][x + 1] == ' ' || map[y][x - 1] == ' ')
 					ft_error(parse, "map is not close. (1)", NULL);
-				// if (((y > 0 && y < parse->m_height) && (map[y - 1][x] == '0' || map[y + 1][x] == '0')))
-				// 	ft_error(parse, "map is not close. (1.1)", NULL);
+				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ')
+					ft_error(parse, "map is not close. (1.1)", NULL);
 			}
 		}
 	}
@@ -63,10 +64,9 @@ int	check_map_close(t_parse *parse, char *str)
 
 void	get_map2(int l, int i, t_parse *parse)
 {
-	if (l != parse->m_width + 1)
+	if (l < parse->m_width)
 	{
 		ft_memset((void *)&parse->map[i][l - 1], ' ', parse->m_width + 1 - l);
-		parse->map[i][parse->m_width] = '\n';
 		parse->map[i][parse->m_width + 1] = '\0';
 	}
 }
@@ -92,7 +92,7 @@ void	get_map(t_parse *parse, const char *map)
 			check_map_close(parse, line);
 			parse->map[++i] = malloc((parse->m_width + 2) * sizeof(char));
 			l = ft_strlen(line);
-			ft_strlcpy(parse->map[i], line, l + 1);
+			ft_strlcpy(parse->map[i], line, l);
 			get_map2(l, i, parse);
 		}
 		free(line);

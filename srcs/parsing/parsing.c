@@ -13,7 +13,7 @@ static int	check_map(t_parse *parse, char **map)
 		{
 			if ((ft_isdigit(map[y][x]) != 1) && map[y][x] != 'N' && \
 			map[y][x] != 'E' && map[y][x] != 'S' && \
-			map[y][x] != 'W' && map[y][x] != '\n')
+			map[y][x] != 'W')
 				ft_error(parse, "wrong char in map", NULL);
 		}
 	}
