@@ -4,8 +4,8 @@ WE ./textures/kali.xpm
 EA ./textures/plinux.xpm
 
 
-F 1,1,1
-C 0,255,0
+F 0,0,0
+C 0,120,200
 
 
         1111111111111111111111111
