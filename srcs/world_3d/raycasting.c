@@ -13,7 +13,7 @@ static void wall_texture(t_game *game, t_rays *r)
 	}
 }
 
-static void	use_textures(t_game *game, t_rays *r)
+static void	use_texture(t_game *game, t_rays *r)
 {
 	if (r->cross == 'h')
 	{
