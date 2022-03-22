@@ -11,9 +11,32 @@
 // 	return (0);
 // }
 
+int	mouse_move(int mx, int my, t_game *game)
+{
+	static int x;
+	// static int y;
+	(void)	my;
+	game->left = 0;
+	game->right = 0;
+	if (x != 0)
+	{
+		if (x - mx < 0)
+			rotation(game, 'l');
+		if (x - mx > 0)
+			rotation(game, 'r');
+	}
+	printf("x = %i mx = %i\n", x, mx);
+
+	x = mx;
+	//if (y == 0)
+	//	y = my;
+
+	return (0);
+}
+
 int	mouse_press(int button, int x, int y, t_game *game)
 {
-	// printf("button = %i x = %i et y = %i\n", button, x, y);
+	printf("button = %i x = %i et y = %i\n", button, x, y);
 	if (y >= 0)
 	{
 		if (button == M_R)
@@ -26,7 +49,7 @@ int	mouse_press(int button, int x, int y, t_game *game)
 
 int	mouse_release(int button, int x, int y, t_game *game)
 {
-	// printf("button2 = %i x2 = %i et y2 = %i\n", button, x, y);
+	printf("button2 = %i x2 = %i et y2 = %i\n", button, x, y);
 	if (button == M_R)
 		game->left = 0;
 	else if (button == M_L)

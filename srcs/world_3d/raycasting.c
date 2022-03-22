@@ -81,7 +81,7 @@ static void	ray_to_3d(t_game *game, t_rays *r)
 	r->lpr = r->lpr_cpy;
 	if (r->tex)
 		use_texture(game, r);
-	else 
+	else
 		use_color(game, r);
 }
 
