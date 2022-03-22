@@ -85,9 +85,3 @@ int	events_loop(t_game *game)
 	weapon_display(game);
 	return (0);
 }
-
-int	mouse_hook(t_game *game)
-{
-	(void) game;
-	return (0);
-}

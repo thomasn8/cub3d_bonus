@@ -212,6 +212,14 @@ typedef struct s_point
 	int				y2;
 }	t_point;
 
+typedef struct s_mouse
+{
+	int			m_x;
+	int			m_y;
+	int			button;
+}	t_mouse;
+
+
 // game
 typedef struct s_game
 {
@@ -243,6 +251,7 @@ typedef struct s_game
 	t_img			tex_gun_2;
 	t_img			tex_gun_3;
 	t_point			p;
+	t_mouse			mo;
 }	t_game;
 
 // parsing
@@ -313,5 +322,6 @@ int				events_loop(t_game *game);
 
 // TEST
 int	mouse_hook(t_game *game);
+int	mouse_event(int button, int x, int y, t_game *game);
 
 #endif
