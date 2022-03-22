@@ -216,23 +216,16 @@ typedef struct s_point
 // enemies
 typedef struct s_enemy
 {
-	int				pos_x;
-	int				pos_y;
+	float			pos_x;
+	float			pos_y;
 	t_img			tex_sheepl;
 	int				state;
 	int				z;
-
-	// 3d project matrix
-	float sx;
-	float sy;
-	float sz;
-	float cos;
-	float sin;
-
-	float x1;
-	float y1;
-	float x2;
-	float y2;
+	float 			sx;
+	float 			sy;
+	float 			sz;
+	float 			cos;
+	float 			sin;
 }	t_enemy;
 
 // game
