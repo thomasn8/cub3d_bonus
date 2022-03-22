@@ -31,7 +31,7 @@ static void	a_move(t_map *m)
 
 static void	d_move(t_map *m)
 {
-	t_grid g;
+	t_grid	g;
 
 	m->a_rad -= M_RAD_90;
 	if (m->a_rad < 0)

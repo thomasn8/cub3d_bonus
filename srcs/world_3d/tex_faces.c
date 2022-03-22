@@ -94,35 +94,35 @@ float	color_shade(float ray_a, t_rays *r)
 void	v_textures_init(t_rays *r, t_game *game)
 {
 	r->tex_n.image = mlx_xpm_file_to_image(
-		game->mlx, game->m.no, &r->tex_n.width, &r->tex_n.heigth);
+			game->mlx, game->m.no, &r->tex_n.width, &r->tex_n.heigth);
 	if (!r->tex_n.image)
 		texture_error(r->tex_n.image, "error loading NO_texture_xpm\n");
 	else
 		r->tex_n.addr = mlx_get_data_addr(
-			r->tex_n.image, &r->tex_n.bpp, &r->tex_n.ll, &r->tex_n.e);
+				r->tex_n.image, &r->tex_n.bpp, &r->tex_n.ll, &r->tex_n.e);
 	r->tex_s.image = mlx_xpm_file_to_image(
-		game->mlx, game->m.so, &r->tex_s.width, &r->tex_s.heigth);
+			game->mlx, game->m.so, &r->tex_s.width, &r->tex_s.heigth);
 	if (!r->tex_s.image)
 		texture_error(r->tex_s.image, "error loading SO_texture_xpm\n");
 	else
 		r->tex_s.addr = mlx_get_data_addr(
-			r->tex_s.image, &r->tex_s.bpp, &r->tex_s.ll, &r->tex_s.e);
+				r->tex_s.image, &r->tex_s.bpp, &r->tex_s.ll, &r->tex_s.e);
 }
 
 void	h_textures_init(t_rays *r, t_game *game)
 {
 	r->tex_e.image = mlx_xpm_file_to_image(
-		game->mlx, game->m.ea, &r->tex_e.width, &r->tex_e.heigth);
+			game->mlx, game->m.ea, &r->tex_e.width, &r->tex_e.heigth);
 	if (!r->tex_e.image)
 		texture_error(r->tex_e.image, "error loading EA_texture_xpm\n");
 	else
 		r->tex_e.addr = mlx_get_data_addr(
-			r->tex_e.image, &r->tex_e.bpp, &r->tex_e.ll, &r->tex_e.e);
+				r->tex_e.image, &r->tex_e.bpp, &r->tex_e.ll, &r->tex_e.e);
 	r->tex_w.image = mlx_xpm_file_to_image(
-		game->mlx, game->m.we, &r->tex_w.width, &r->tex_w.heigth);
+			game->mlx, game->m.we, &r->tex_w.width, &r->tex_w.heigth);
 	if (!r->tex_w.image)
 		texture_error(r->tex_w.image, "error loading WE_texture_xpm\n");
 	else
 		r->tex_w.addr = mlx_get_data_addr(
-			r->tex_w.image, &r->tex_w.bpp, &r->tex_w.ll, &r->tex_w.e);
+				r->tex_w.image, &r->tex_w.bpp, &r->tex_w.ll, &r->tex_w.e);
 }

@@ -7,7 +7,7 @@ SRCS		= 	${wildcard ./srcs/*.c} \
 
 OBJS		= ${SRCS:.c=.o}
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -g -Wall -Wextra -Werror
 NAME		= cub3D
 RM			= rm -f
 

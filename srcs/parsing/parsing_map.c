@@ -1,5 +1,29 @@
 #include "../../includes/cub3d.h"
 
+static int	check_map_space(t_parse *parse, char **map)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	// setvbuf(stdout, NULL, _IONBF, 0);
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (map[y][x] == '0')
+			{
+				if (map[y][x + 1] == ' ' || map[y][x - 1] == ' ')
+					ft_error(parse, "map is not close. (1)", NULL);
+				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ')
+					ft_error(parse, "map is not close. (1.1)", NULL);
+			}
+		}
+	}
+	return (0);
+}
+
 static int	check_first_last_line_map(t_parse *parse, char *str)
 {
 	size_t	i;
@@ -9,7 +33,7 @@ static int	check_first_last_line_map(t_parse *parse, char *str)
 	{
 		if (str[i] != '1' && str[i] != ' ')
 		{
-			ft_error(parse, "The map is not close.\n", NULL);
+			ft_error(parse, "The map is not close. (2)", NULL);
 			exit(0);
 		}
 		i++;
@@ -17,7 +41,7 @@ static int	check_first_last_line_map(t_parse *parse, char *str)
 	return (1);
 }
 
-static int	check_map_close(t_parse *parse, char *str)
+int	check_map_close(t_parse *parse, char *str)
 {
 	int			i;
 	static int	j = 0;
@@ -31,44 +55,23 @@ static int	check_map_close(t_parse *parse, char *str)
 		i++;
 	if (str[i] != '1' || str[ft_strlen(str) - 2] != '1')
 	{
-		ft_error(parse, "The map is not close.\n", NULL);
+		ft_error(parse, "The map is not close. (3)", NULL);
 		exit(0);
 	}
 	else
 		return (1);
 }
 
-//check si la map contient que des valeurs voulues.
-int	ft_is_map(char *line)
-{
-	int	i;
-
-	i = 0;
-	if (!line)
-		return (0);
-	if ((ft_charinstr(line, '1') == 1) || (ft_charinstr(line, '0') == 1))
-	{
-		while (line[i])
-		{
-			if (!(line[i] >= '0' && line[i] <= '9') && \
-				line[i] != 'N' && line[i] != 'E' && \
-				line[i] != 'S' && line[i] != 'W' && \
-				line[i] != '\n' && line[i] != '\t' && line[i] != ' ')
-				return (2);
-			i++;
-		}
-		return (1);
-	}
-	return (0);
-}
-
 void	get_map2(int l, int i, t_parse *parse)
 {
-	if (l != parse->m_width + 1)
+	if (l < parse->m_width + 1)														// +1
 	{
-		ft_memset((void *)&parse->map[i][l - 1], '1', parse->m_width + 1 - l);
-		parse->map[i][parse->m_width] = '\n';
-		parse->map[i][parse->m_width + 1] = '\0';
+		// printf("MEMSET line %d: len=%zu, start:%d, until:%d, ", i+1, ft_strlen(parse->map[i]), l - 1,  parse->m_width - l);
+		ft_memset((void *)&parse->map[i][l - 1], ' ', parse->m_width - l);		// ?
+		// parse->map[i][parse->m_width - l + 1] = '\n';
+		// printf("newline:%d\n", parse->m_width - 1);
+		parse->map[i][parse->m_width - 1] = '\n';
+		parse->map[i][parse->m_width] = '\0';
 	}
 }
 
@@ -80,24 +83,29 @@ void	get_map(t_parse *parse, const char *map)
 	char	*line;
 	int		l;
 
-	fd = open(map, O_RDONLY);
+	// printf("width:%d\n", parse->m_width);										// quand j'ai retapé ta fonction j'ai gardé le \n dans le width
+	fd = open(map, O_RDONLY);														// donc tous les compteurs que j'avais mis en place sont basé sur ça
 	line = get_next_line(fd);
 	parse->map = malloc(sizeof(char *) * (parse->m_height + 1));
 	parse->map[parse->m_height] = NULL;
 	i = 0;
 	while (line != NULL)
 	{
-		if (ft_is_map(line) == 1 && check_map_close(parse, line) == 1)
+		if (parse_textures(line) == 0 && \
+		((ft_charinstr(line, '1') == 1) || (ft_charinstr(line, '0') == 1)))
 		{
-			parse->map[i] = malloc((parse->m_width + 2) * sizeof(char));
+			check_map_close(parse, line);
+			parse->map[i] = malloc((parse->m_width + 2) * sizeof(char));			// +2, pas 1
 			l = ft_strlen(line);
 			ft_strlcpy(parse->map[i], line, l + 1);
-			replace_space_tab(parse->map[i]);
 			get_map2(l, i, parse);
 			i++;
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	check_map_space(parse, parse->map);
+	replace_space_tab(parse->map);
 	print_map(parse->map);
+	parse->m_width -= 1;															// et je le retirais de la width à la fin, après traitement
 }

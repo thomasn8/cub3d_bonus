@@ -88,9 +88,9 @@ void	map_description(t_game *game, t_parse *parse)
 void	player_description(t_game *game, t_parse *parse)
 {
 	game->m.pos_x = (parse->start_x * game->m.m_size)
-			+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+		+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
 	game->m.pos_y = (parse->start_y * game->m.m_size)
-			+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+		+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
 	game->m.prev_x = game->m.pos_x;
 	game->m.prev_y = game->m.pos_y;
 	if (parse->view_player == 'E')

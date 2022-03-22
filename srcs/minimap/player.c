@@ -5,8 +5,8 @@ void	remove_prev_fov(t_image *map, t_map *m)
 {
 	int	width;
 	int	height;
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	height = -2;
 	while (++height < m->m_size * 2 + 2)
@@ -21,10 +21,10 @@ void	remove_prev_fov(t_image *map, t_map *m)
 	}
 }
 
-/* 
+/*
 redessine entièrement la minimap
 à utiliser lorsqu'on a besoin de projeter les rayons dans la minimap
-la fonction du dessus est + rapide car redessine le minium nécessaire 
+la fonction du dessus est + rapide car redessine le minium nécessaire
 */
 // void	remove_prev_fov(t_image *map, t_map *m)
 // {
@@ -45,7 +45,7 @@ void	new_fov(t_image *map, t_map *m)
 	float	pixel_x;
 	float	pixel_y;
 	int		pixels;
-	
+
 	pixel_x = m->pos_x;
 	pixel_y = m->pos_y;
 	pixels = m->m_size;
@@ -93,10 +93,10 @@ void	collision_check(t_map *m, t_grid *g, char k)
 		g->vo += M_PS;
 	if (m->a_deg < 90 || m->a_deg > 270)
 		g->ho += M_PS;
-	g->mx		 = (m->pos_x + g->ho) / m->m_size;
+	g->mx = (m->pos_x + g->ho) / m->m_size;
 	g->mx_add_xo = (m->pos_x + g->ho + g->xo) / m->m_size;
 	g->mx_sub_xo = (m->pos_x + g->ho - g->xo) / m->m_size;
-	g->my		 = (m->pos_y + g->vo) / m->m_size;
+	g->my = (m->pos_y + g->vo) / m->m_size;
 	g->my_add_yo = (m->pos_y + g->vo + g->yo) / m->m_size;
 	g->my_sub_yo = (m->pos_y + g->vo - g->yo) / m->m_size;
 }
