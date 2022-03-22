@@ -2,6 +2,33 @@
 #include "../../includes/map.h"
 #include "../../includes/event.h"
 
+static void	draw_cross(t_game *game, t_image *image, t_point *p, int color)
+{
+	float	d_x;
+	float	d_y;
+	int		pix;
+	float	p_x;
+	float	p_y;
+
+	d_x = p->x2 - p->x1;
+	d_y = p->y2 - p->y1;
+	pix = sqrt((d_x * d_x) + (d_y * d_y));
+	d_x /= pix;
+	d_y /= pix;
+	p_x = p->x1;
+	p_y = p->y1;
+	while (pix)
+	{
+		if ((p_x != game->width / 2 && p_x != game->width / 2 - 1 &&
+			p_x != game->width / 2 + 1) || (p_y != game->world_h / 2 &&
+			p_y != game->world_h / 2 - 1 && p_y != game->world_h / 2 + 1))
+			my_mlx_pixel_put(image, p_x, p_y, color);
+		p_x += d_x;
+		p_y += d_y;
+		--pix;
+	}
+}
+
 void	draw_viewfinder(t_game *game)
 {
 	game->p.i = 3;
@@ -14,7 +41,7 @@ void	draw_viewfinder(t_game *game)
 		game->p.x2 = game->width / 2 + 5 + game->p.o;
 		game->p.y1 = game->world_h / 2 - 1 + game->p.i;
 		game->p.y2 = game->world_h / 2 - 1 + game->p.i;
-		draw_line(game, &game->world, &game->p, YELLOW);
+		draw_cross(game, &game->world, &game->p, YELLOW);
 	}
 	game->p.i = 3;
 	while (game->p.i--)
@@ -26,7 +53,7 @@ void	draw_viewfinder(t_game *game)
 		game->p.y2 = game->world_h / 2 + 5 + game->p.o;
 		game->p.x1 = game->width / 2 - 1 + game->p.i;
 		game->p.x2 = game->width / 2 - 1 + game->p.i;
-		draw_line(game, &game->world, &game->p, YELLOW);
+		draw_cross(game, &game->world, &game->p, YELLOW);
 	}
 }
 

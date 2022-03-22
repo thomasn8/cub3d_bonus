@@ -228,8 +228,6 @@ typedef struct s_enemy
 	float sz;
 	float cos;
 	float sin;
-	float a;
-	float b;
 
 	float x1;
 	float y1;
