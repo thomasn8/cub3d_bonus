@@ -13,15 +13,20 @@
 
 int	mouse_press(int button, int x, int y, t_game *game)
 {
-	if (button == M_R)
-		game->left = 1;
-	else if (button == M_L)
-		game->right = 1;
+	// printf("button = %i x = %i et y = %i\n", button, x, y);
+	if (y >= 0)
+	{
+		if (button == M_R)
+			game->left = 1;
+		else if (button == M_L)
+			game->right = 1;
+	}
 	return (0);
 }
 
 int	mouse_release(int button, int x, int y, t_game *game)
 {
+	// printf("button2 = %i x2 = %i et y2 = %i\n", button, x, y);
 	if (button == M_R)
 		game->left = 0;
 	else if (button == M_L)
