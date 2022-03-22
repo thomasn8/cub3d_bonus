@@ -55,20 +55,3 @@ int	mouse_release(int button, int x, int y, t_game *game)
 		kat_defense(game, 'r');
 	return (0);
 }
-
-// int	event_mouse(t_game *game)
-// {
-// 		int map_offset;
-
-// 	map_offset = ((MENU_HEIGTH - 2 * MARGIN) - game->m.h) / 2;
-// 	if (game->left == 1)
-// 		rotation(game, 'l');
-// 	if (game->right == 1)
-// 		rotation(game, 'r');
-// 	if (game->weapon == 2)
-// 		draw_viewfinder(game);
-// 	mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);
-// 	mlx_put_image_to_window(game->mlx, game->win, game->map.image, game->m.w_offset, game->m.h_offset);
-// 	weapon_display(game);
-// 	return (0);
-// }
