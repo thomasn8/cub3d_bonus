@@ -67,7 +67,7 @@ void	color_map(t_image *map, t_map *m)
 void	map_description(t_game *game, t_parse *parse)
 {
 	game->m.map = parse->map;
-	game->m.cols = (parse->m_width - 1);
+	game->m.cols = parse->m_width - 1;
 	game->m.rows =  parse->m_height;
 	game->m.m_size = get_m_size(game->m.cols, game->m.rows);
 	game->m.w = parse->m_width * game->m.m_size;

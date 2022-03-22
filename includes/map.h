@@ -31,6 +31,7 @@
 # define PI 3.1415926535
 # define PI2 6.2831853071
 # define M_1_DEG_RAD 0.017453293	// (2*pi)/360
+# define M_05_DEG_RAD  0.0087266465
 # define M_EAST 0
 # define M_NORTH 90
 # define M_WEST 180
@@ -57,9 +58,10 @@ void			compare_rays(t_game *game);
 void			raycasting(t_game *game);
 // rc_utils
 void			check_angle(float angle, int *deg);
-void			draw_v_line(t_image *image, t_rays *r, int color);
 float			fix_fisheye(float angle);
+void			draw_v_line(t_image *image, t_rays *r, int color);
 void			draw_ray(t_image *image, t_map *m, t_rays *r, int color);
+void			draw_line(t_game *game, t_image *image, t_point *p, int color);
 // textures
 void			v_textures_init(t_rays *r, t_game *game);
 void			h_textures_init(t_rays *r, t_game *game);
@@ -68,5 +70,6 @@ void			tex_interuptor_create(t_rays *r, t_game *game);
 void			tex_deco_create(t_rays *r, t_game *game);
 t_img			*ray_texture(float ray_a, t_rays *r);
 int				ray_color(float ray_a, t_rays *r);
+float			color_shade(float ray_a, t_rays *r);
 
 #endif

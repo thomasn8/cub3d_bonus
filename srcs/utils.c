@@ -19,12 +19,21 @@ unsigned int get_color_value(t_image *image, int x, int y)
 	return (*(unsigned int*)ptr);
 }
 
-unsigned int get_tex_color(t_img *tex, int x, int y)
+unsigned int get_tex_color(t_img *tex, int x, int y, float shade)
 {
-	char *ptr;
+	unsigned int	clr;
+	int 			t;
+	int				r;
+	int				g;
+	int				b;
 
-	ptr = tex->addr + (y * tex->ll + x * (tex->bpp / 8));
-	return (*(unsigned int*)ptr);
+	clr = *(unsigned int*)(tex->addr + (y * tex->ll + x * (tex->bpp / 8)));
+	t = ((clr >> 24) & 0xFF);
+	r = ((clr >> 16) & 0xFF) * shade;
+	g = ((clr >> 8)  & 0xFF) * shade;
+	b = (clr         & 0xFF) * shade;
+	return (((t & 0xFF) << 24) + ((r & 0xFF) << 16) +
+		((g & 0xFF) << 8) + (b & 0xFF));
 }
 
 void	texture_error(void *image, char *msg)

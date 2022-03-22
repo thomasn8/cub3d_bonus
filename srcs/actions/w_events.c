@@ -2,33 +2,6 @@
 #include "../../includes/map.h"
 #include "../../includes/event.h"
 
-static void	draw_line(t_game *game, t_image *image, t_point *p, int color)
-{
-	float	d_x;
-	float	d_y;
-	int		pix;
-	float	p_x;
-	float	p_y;
-
-	d_x = p->x2 - p->x1;
-	d_y = p->y2 - p->y1;
-	pix = sqrt((d_x * d_x) + (d_y * d_y));
-	d_x /= pix;
-	d_y /= pix;
-	p_x = p->x1;
-	p_y = p->y1;
-	while (pix)
-	{
-		if ((p_x != game->width / 2 && p_x != game->width / 2 - 1 &&
-			p_x != game->width / 2 + 1) || (p_y != game->world_h / 2 &&
-			p_y != game->world_h / 2 - 1 && p_y != game->world_h / 2 + 1))
-			my_mlx_pixel_put(image, p_x, p_y, color);
-		p_x += d_x;
-		p_y += d_y;
-		--pix;
-	}
-}
-
 void	draw_viewfinder(t_game *game)
 {
 	game->p.i = 3;
@@ -102,6 +75,6 @@ void	weapon_display(t_game *game)
 		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_run.image,
 		game->m.w_offset + 75, game->world_h - game->tex_gun_run.heigth - 100);
 	// else if (game->weapon == 2 && game->state == 2)
-	// 	mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_def.image,
-	// 	game->m.w_offset - 175, game->world_h - game->tex_gun_def.heigth);
+	// 	mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_3.image,
+	// 	game->m.w_offset + 88, game->world_h - game->tex_gun_3.heigth - 260);
 }
