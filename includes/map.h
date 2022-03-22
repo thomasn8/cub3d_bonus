@@ -70,5 +70,6 @@ void			tex_interuptor_create(t_rays *r, t_game *game);
 void			tex_deco_create(t_rays *r, t_game *game);
 t_img			*ray_texture(float ray_a, t_rays *r);
 int				ray_color(float ray_a, t_rays *r);
+float			color_shade(float ray_a, t_rays *r);
 
 #endif

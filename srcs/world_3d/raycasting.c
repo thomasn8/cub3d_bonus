@@ -5,6 +5,16 @@ static void wall_texture(t_game *game, t_rays *r)
 {
 	r->iy = -1;
 	r->ty = r->to * r->ty_step;
+	while (++r->iy < r->w_bot)
+	{
+		r->c = get_tex_color(r->tex, r->tx, r->ty, r->shade);
+		my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);
+		r->ty += r->ty_step;
+	}
+}
+
+static void	use_textures(t_game *game, t_rays *r)
+{
 	if (r->cross == 'h')
 	{
 		r->tx = (int)((r->wx - (int)r->wx) * r->tex->width);
@@ -17,16 +27,7 @@ static void wall_texture(t_game *game, t_rays *r)
 		if (game->m.a_deg > 90 && game->m.a_deg < 270)
 			r->tx = r->tex->width - r->tx - 1;
 	}
-	while (++r->iy < r->w_bot)
-	{
-		r->c = get_tex_color(r->tex, r->tx, r->ty);
-		my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);
-		r->ty += r->ty_step;
-	}
-}
-
-static void	use_textures(t_game *game, t_rays *r)
-{
+	r->shade = color_shade(game->m.a_deg, r);
 	while (--r->lpr)
 	{
 		r->y1 = 0;

@@ -158,6 +158,7 @@ typedef struct s_rays
 	int				lpr;
 	int				lpr_cpy;
 	int				color;
+	float			shade;
 	int				ix;
 	int				iy;
 	int				x1;
@@ -214,13 +215,25 @@ typedef struct s_point
 // enemies
 typedef struct s_enemy
 {
-	int				mx;
-	int				my;
+	int				pos_x;
+	int				pos_y;
 	t_img			tex_sheepl;
 	int				state;
-	int				x;
-	int				y;
 	int				z;
+
+	// 3d project matrix
+	float sx;
+	float sy;
+	float sz;
+	float cos;
+	float sin;
+	float a;
+	float b;
+
+	float x1;
+	float y1;
+	float x2;
+	float y2;
 }	t_enemy;
 
 // game
@@ -284,7 +297,7 @@ void			print_all(t_parse *p);
 float			deg_to_rad(int angle);
 int				rad_to_deg(float angle);
 unsigned int	get_color_value(t_image *image, int x, int y);
-unsigned int	get_tex_color(t_img *tex, int x, int y);
+unsigned int	get_tex_color(t_img *tex, int x, int y, float shade);
 void			texture_error(void *image, char *msg);
 
 // init
@@ -318,6 +331,7 @@ void			interaction(t_game *t_game);
 // enemies
 void			enemies_init(t_game *game, t_map *m);
 void			tex_enemies_create(t_game *game);
+void			draw_enemies(t_game *game, t_enemy *e, t_map *m);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);

@@ -56,7 +56,7 @@ void	menu_init(t_game *game)
 			mlx_pixel_put(game->mlx, game->win, x, y, MENU_COLOR);
 	}
 	// mlx_string_put(game->mlx, game->win, game->width - 60, HEIGTH - 30, MENU_TEXT_COLOR, "CUB3D");
-	mlx_string_put(game->mlx, game->win, game->width - 200, HEIGTH - 30, YELLOW, "by adrien et thomas");
+	mlx_string_put(game->mlx, game->win, game->width - 200, HEIGTH - 30, PURPLE, "by adrien et thomas");
 }
 
 void	params_init(t_game *game)

@@ -72,6 +72,25 @@ int	ray_color(float ray_a, t_rays *r)
 	return (WHITE);
 }
 
+float	color_shade(float ray_a, t_rays *r)
+{
+	if (r->cross == 'v')					// faces W et E
+	{
+		if (ray_a > 90 && ray_a < 270)		// W
+			return (0.5);
+		else								// E
+			return (1);
+	}
+	else if (r->cross == 'h')				// faces N et S
+	{
+		if (ray_a > 0 && ray_a < 180)		// N
+			return (0.8);
+		else								// S
+			return (0.6);
+	}
+	return (1);
+}
+
 void	v_textures_init(t_rays *r, t_game *game)
 {
 	r->tex_n.image = mlx_xpm_file_to_image(
