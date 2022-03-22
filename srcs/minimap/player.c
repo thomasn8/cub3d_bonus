@@ -109,5 +109,5 @@ void	draw_all(t_game *game, char t)
 	raycasting(game);
 	new_fov(&game->map, &game->m);
 	
-	draw_enemies(game, &game->sheeps[0], &game->m);	// DRAW ENEMY
+	// draw_enemies(game, &game->sheeps[0], &game->m);	// DRAW ENEMY
 }
