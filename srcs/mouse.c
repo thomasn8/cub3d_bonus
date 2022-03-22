@@ -5,18 +5,17 @@ int	mouse_move(int mx, int my, t_game *game)
 {
 	static int x;
 
-	(void)	my;
 	game->left = 0;
 	game->right = 0;
 	mx = mx / 13;
 	if (x != 0)
 	{
-		if (x - mx < 0)
+		if ((mx >= 0 && mx < 72) && (my >= 0 && my < 670) && (x - mx) < 0)
 			rotation(game, 'l');
-		if (x - mx > 0)
+		if ((mx >= 0 && mx < 72) && (my >= 0 && my < 670) && (x - mx) > 0)
 			rotation(game, 'r');
 	}
-	printf("x = %i mx = %i\n", x, mx);
+	printf("my = %i mx = %i\n", my, mx);
 	x = mx;
 	return (0);
 }
