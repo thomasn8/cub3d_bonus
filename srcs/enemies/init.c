@@ -79,27 +79,3 @@ void	enemies_init(t_game *game, t_map *m)
 		}
 	}
 }
-
-// void	draw_e_line(t_game *game, t_image *image, t_enemy *s, int color)
-// {
-// 	float	d_x;
-// 	float	d_y;
-// 	int		pix;
-// 	float	p_x;
-// 	float	p_y;
-
-// 	d_x = s->x2 - s->x1;
-// 	d_y = s->y2 - s->y1;
-// 	pix = sqrt((d_x * d_x) + (d_y * d_y));
-// 	d_x /= pix;
-// 	d_y /= pix;
-// 	p_x = s->x1;
-// 	p_y = s->y1;
-// 	while (pix)
-// 	{
-// 		my_mlx_pixel_put(image, p_x, p_y, color);
-// 		p_x += d_x;
-// 		p_y += d_y;
-// 		--pix;
-// 	}
-// }
