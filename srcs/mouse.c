@@ -18,6 +18,7 @@ int	mouse_move(int mx, int my, t_game *game)
 	(void)	my;
 	game->left = 0;
 	game->right = 0;
+	mx = mx / 10;
 	if (x != 0)
 	{
 		if (x - mx < 0)
