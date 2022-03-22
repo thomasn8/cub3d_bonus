@@ -294,6 +294,7 @@ void			print_all(t_parse *p);
 void			check_error(t_parse *parse);
 int				check_map_close(t_parse *parse, char *str);
 void			get_color(int nbr, int sum, t_parse *parse, char c);
+void			get_map3(t_parse *parse);
 
 // utils
 float			deg_to_rad(int angle);
