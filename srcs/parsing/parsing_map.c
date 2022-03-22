@@ -6,7 +6,6 @@ static int	check_map_space(t_parse *parse, char **map)
 	int	x;
 
 	y = -1;
-	// setvbuf(stdout, NULL, _IONBF, 0);
 	while (map[++y])
 	{
 		x = -1;

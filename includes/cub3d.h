@@ -311,4 +311,7 @@ int				key_release(int k, t_game *game);
 int				key_press(int k, t_game *game);
 int				events_loop(t_game *game);
 
+// TEST
+int	mouse_hook(t_game *game);
+
 #endif
