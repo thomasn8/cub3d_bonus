@@ -59,11 +59,11 @@ void	draw_viewfinder(t_game *game)
 
 void	weapon_press(int k, t_game *game)
 {
-	if (k == K_UP && game->weapon == 1)
+	if ((k == K_UP || k == M_R) && game->weapon == 1)
 		kat_attack(game, 'p');
-	else if (k == K_DOWN && game->weapon == 1)
+	else if ((k == K_DOWN || k == M_L) && game->weapon == 1)
 		kat_defense(game, 'p');
-	else if (k == K_UP && game->weapon == 2)
+	else if ((k == K_UP || k == M_R)&& game->weapon == 2)
 		gun_shoot(game, 'p');
 }
 
@@ -73,11 +73,11 @@ void	weapon_release(int k, t_game *game)
 		game->weapon = 1;
 	else if (k == K_2)
 		game->weapon = 2;
-	else if (k == K_UP && game->weapon == 1)
+	else if ((k == K_UP || k == M_R) && game->weapon == 1)
 		kat_attack(game, 'r');
-	else if (k == K_DOWN && game->weapon == 1)
+	else if ((k == K_DOWN || k == M_L) && game->weapon == 1)
 		kat_defense(game, 'r');
-	else if (k == K_UP && game->weapon == 2)
+	else if ((k == K_UP || k == M_R) && game->weapon == 2)
 		gun_shoot(game, 'r');
 }
 

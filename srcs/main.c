@@ -17,6 +17,9 @@ int	main(int ac, char **av)
 	minimap_init(&game, &parse);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_press, &game);
 	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 0, key_release, &game);
+	mlx_hook(game.win, X_EVENT_MOUSE_PRESS, 0, mouse_press, &game);
+	mlx_hook(game.win, X_EVENT_MOUSE_RELEASE, 0, mouse_release, &game);
+	mlx_hook(game.win, 6, 1L << 8, mouse_move, &game);
 	mlx_hook(game.win, X_EVENT_EXIT, 0, quit_prog, &game);
 	mlx_loop_hook(game.mlx, events_loop, &game);
 	mlx_loop(game.mlx);

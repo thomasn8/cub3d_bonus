@@ -333,4 +333,9 @@ int				key_release(int k, t_game *game);
 int				key_press(int k, t_game *game);
 int				events_loop(t_game *game);
 
+// mouse
+int				mouse_press(int button, int x, int y, t_game *game);
+int				mouse_release(int button, int x, int y, t_game *game);
+int				mouse_move(int mx, int my, t_game *game);
+
 #endif
