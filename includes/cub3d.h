@@ -159,6 +159,7 @@ typedef struct s_rays
 	int				lpr;
 	int				lpr_cpy;
 	int				color;
+	float			shade;
 	int				ix;
 	int				iy;
 	int				x1;
@@ -212,13 +213,29 @@ typedef struct s_point
 	int				y2;
 }	t_point;
 
-typedef struct s_mouse
+// enemies
+typedef struct s_enemy
 {
-	int			m_x;
-	int			m_y;
-	int			button;
-}	t_mouse;
+	int				pos_x;
+	int				pos_y;
+	t_img			tex_sheepl;
+	int				state;
+	int				z;
 
+	// 3d project matrix
+	float sx;
+	float sy;
+	float sz;
+	float cos;
+	float sin;
+	float a;
+	float b;
+
+	float x1;
+	float y1;
+	float x2;
+	float y2;
+}	t_enemy;
 
 // game
 typedef struct s_game
@@ -247,11 +264,11 @@ typedef struct s_game
 	t_img			tex_kat_hit;
 	t_img			tex_kat_def;
 	t_img			tex_gun_run;
-	t_img			tex_gun_1;
-	t_img			tex_gun_2;
-	t_img			tex_gun_3;
+	// t_img			tex_gun_1;
+	// t_img			tex_gun_2;
+	// t_img			tex_gun_3;
 	t_point			p;
-	t_mouse			mo;
+	t_enemy			sheeps[1];
 }	t_game;
 
 // parsing
@@ -282,7 +299,7 @@ void			get_color(int nbr, int sum, t_parse *parse, char c);
 float			deg_to_rad(int angle);
 int				rad_to_deg(float angle);
 unsigned int	get_color_value(t_image *image, int x, int y);
-unsigned int	get_tex_color(t_img *tex, int x, int y);
+unsigned int	get_tex_color(t_img *tex, int x, int y, float shade);
 void			texture_error(void *image, char *msg);
 
 // init
@@ -312,6 +329,11 @@ void			kat_attack(t_game *game, char k);
 void			kat_defense(t_game *game, char k);
 void			gun_shoot(t_game *game, char k);
 void			interaction(t_game *t_game);
+
+// enemies
+void			enemies_init(t_game *game, t_map *m);
+void			tex_enemies_create(t_game *game);
+void			draw_enemies(t_game *game, t_enemy *e, t_map *m);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);

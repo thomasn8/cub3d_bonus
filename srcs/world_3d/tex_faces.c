@@ -13,9 +13,12 @@
 	5 = interupteur activé (vert-down) placé à côté d'une biblio -> fermet la porte précédement ouverte
 	9 = porte ouverte devenu un espace vide (mur -> espace). Apparait en gris foncé sur la minimap
 
-- Interactions ...
-	7 = non-attribué
-	8 = non-attribué
+- Ennemies
+	8 = enemy
+
+- Non-attribués
+	7 ;
+
 */
 
 #include "../../includes/cub3d.h"
@@ -67,6 +70,25 @@ int	ray_color(float ray_a, t_rays *r)
 			return (DEF4);
 	}
 	return (WHITE);
+}
+
+float	color_shade(float ray_a, t_rays *r)
+{
+	if (r->cross == 'v')					// faces W et E
+	{
+		if (ray_a > 90 && ray_a < 270)		// W
+			return (0.5);
+		else								// E
+			return (1);
+	}
+	else if (r->cross == 'h')				// faces N et S
+	{
+		if (ray_a > 0 && ray_a < 180)		// N
+			return (0.8);
+		else								// S
+			return (0.6);
+	}
+	return (1);
 }
 
 void	v_textures_init(t_rays *r, t_game *game)

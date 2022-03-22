@@ -63,11 +63,14 @@ int	check_map_close(t_parse *parse, char *str)
 
 void	get_map2(int l, int i, t_parse *parse)
 {
-	if (l < parse->m_width)
+	if (l < parse->m_width + 1)														// +1
 	{
-		ft_memset((void *)&parse->map[i][l - 1], ' ', parse->m_width + 1 - l);
-		parse->map[i][parse->m_width] = '\n';
-		parse->map[i][parse->m_width + 1] = '\0';
+		// printf("MEMSET line %d: len=%zu, start:%d, until:%d, ", i+1, ft_strlen(parse->map[i]), l - 1,  parse->m_width - l);
+		ft_memset((void *)&parse->map[i][l - 1], ' ', parse->m_width - l);		// ?
+		// parse->map[i][parse->m_width - l + 1] = '\n';
+		// printf("newline:%d\n", parse->m_width - 1);
+		parse->map[i][parse->m_width - 1] = '\n';
+		parse->map[i][parse->m_width] = '\0';
 	}
 }
 
@@ -79,21 +82,23 @@ void	get_map(t_parse *parse, const char *map)
 	char	*line;
 	int		l;
 
-	fd = open(map, O_RDONLY);
+	// printf("width:%d\n", parse->m_width);										// quand j'ai retapé ta fonction j'ai gardé le \n dans le width
+	fd = open(map, O_RDONLY);														// donc tous les compteurs que j'avais mis en place sont basé sur ça
 	line = get_next_line(fd);
 	parse->map = malloc(sizeof(char *) * (parse->m_height + 1));
 	parse->map[parse->m_height] = NULL;
-	i = -1;
+	i = 0;
 	while (line != NULL)
 	{
 		if (parse_textures(line) == 0 && \
 		((ft_charinstr(line, '1') == 1) || (ft_charinstr(line, '0') == 1)))
 		{
 			check_map_close(parse, line);
-			parse->map[++i] = malloc((parse->m_width + 1) * sizeof(char));
+			parse->map[i] = malloc((parse->m_width + 2) * sizeof(char));			// +2, pas 1
 			l = ft_strlen(line);
 			ft_strlcpy(parse->map[i], line, l + 1);
 			get_map2(l, i, parse);
+			i++;
 		}
 		free(line);
 		line = get_next_line(fd);
@@ -101,4 +106,5 @@ void	get_map(t_parse *parse, const char *map)
 	check_map_space(parse, parse->map);
 	replace_space_tab(parse->map);
 	print_map(parse->map);
+	parse->m_width -= 1;															// et je le retirais de la width à la fin, après traitement
 }
