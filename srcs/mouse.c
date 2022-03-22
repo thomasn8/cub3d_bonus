@@ -3,7 +3,7 @@
 
 int	mouse_move(int mx, int my, t_game *game)
 {
-	static int x;
+	static int	x;
 
 	game->left = 0;
 	game->right = 0;
