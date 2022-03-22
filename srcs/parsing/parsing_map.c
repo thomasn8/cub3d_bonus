@@ -66,10 +66,10 @@ void	get_map2(int l, int i, t_parse *parse)
 {
 	if (l < parse->m_width + 1)														// +1
 	{
-		printf("MEMSET line %d: len=%zu, start:%d, until:%d, ", i+1, ft_strlen(parse->map[i]), l - 1,  parse->m_width - l);
+		// printf("MEMSET line %d: len=%zu, start:%d, until:%d, ", i+1, ft_strlen(parse->map[i]), l - 1,  parse->m_width - l);
 		ft_memset((void *)&parse->map[i][l - 1], ' ', parse->m_width - l);		// ?
 		// parse->map[i][parse->m_width - l + 1] = '\n';
-		printf("newline:%d\n", parse->m_width - 1);
+		// printf("newline:%d\n", parse->m_width - 1);
 		parse->map[i][parse->m_width - 1] = '\n';
 		parse->map[i][parse->m_width] = '\0';
 	}
@@ -107,5 +107,5 @@ void	get_map(t_parse *parse, const char *map)
 	check_map_space(parse, parse->map);
 	replace_space_tab(parse->map);
 	print_map(parse->map);
-	parse->m_width -= 1;															// et je le retirais à la fin, après traitement
+	parse->m_width -= 1;															// et je le retirais de la width à la fin, après traitement
 }
