@@ -321,7 +321,9 @@ int				key_press(int k, t_game *game);
 int				events_loop(t_game *game);
 
 // TEST
-int	mouse_hook(t_game *game);
+int	mouse_press(int button, int x, int y, t_game *game);
+int	mouse_release(int button, int x, int y, t_game *game);
 int	mouse_event(int button, int x, int y, t_game *game);
+int	event_mouse(t_game *game);
 
 #endif

@@ -18,8 +18,11 @@ int	main(int ac, char **av)
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_press, &game);
 	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 0, key_release, &game);
 	mlx_hook(game.win, X_EVENT_EXIT, 0, quit_prog, &game);
-	mlx_mouse_hook(game.win, mouse_event, &game);
-	mlx_loop_hook(game.mlx, mouse_hook, &game);
+	mlx_hook(game.win, X_EVENT_MOUSE_PRESS, 0, mouse_press, &game);
+	mlx_hook(game.win, X_EVENT_MOUSE_RELEASE, 0, mouse_release, &game);
+	// mlx_mouse_hook(game.win, mouse_press, &game);
+	// mlx_mouse_hook(game.win, mouse_release, &game);
+	// mlx_loop_hook(game.mlx, event_mouse, &game);
 	mlx_loop_hook(game.mlx, events_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
