@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_map_2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: desa <desa@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 16:40:32 by desa              #+#    #+#             */
+/*   Updated: 2022/03/23 16:41:38 by desa             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static int	check_map_space(t_parse *parse, char **map)
@@ -28,5 +40,5 @@ void	get_map3(t_parse *parse)
 	check_map_space(parse, parse->map);
 	replace_space_tab(parse->map);
 	print_map(parse->map);
-	parse->m_width -= 1;											// et je le retirais de la width à la fin, après traitement
+	parse->m_width -= 1;
 }

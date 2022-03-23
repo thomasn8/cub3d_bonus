@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: desa <desa@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 16:52:21 by desa              #+#    #+#             */
+/*   Updated: 2022/03/23 16:52:23 by desa             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static int	check_first_last_line_map(t_parse *parse, char *str)
@@ -45,12 +57,9 @@ void	get_map2(int l, int i, t_parse *parse)
 		if (parse->map[parse->m_height - 1][l - 1] != '\n')
 			l += 1;
 	}
-	if (l < parse->m_width + 1)														// +1
+	if (l < parse->m_width + 1)
 	{
-		// printf("MEMSET line %d: len=%zu, start:%d, until:%d, ", i+1, ft_strlen(parse->map[i]), l - 1,  parse->m_width - l);
-		ft_memset((void *)&parse->map[i][l - 1], ' ', parse->m_width - l);		// ?
-		// parse->map[i][parse->m_width - l + 1] = '\n';
-		// printf("newline:%d\n", parse->m_width - 1);
+		ft_memset((void *)&parse->map[i][l - 1], ' ', parse->m_width - l);
 		parse->map[i][parse->m_width - 1] = '\n';
 		parse->map[i][parse->m_width] = '\0';
 	}
@@ -64,8 +73,7 @@ void	get_map(t_parse *parse, const char *map)
 	char	*line;
 	int		l;
 
-	// printf("width:%d\n", parse->m_width);										// quand j'ai retapé ta fonction j'ai gardé le \n dans le width
-	fd = open(map, O_RDONLY);														// donc tous les compteurs que j'avais mis en place sont basé sur ça
+	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
 	parse->map = malloc(sizeof(char *) * (parse->m_height + 1));
 	parse->map[parse->m_height] = NULL;
@@ -76,7 +84,7 @@ void	get_map(t_parse *parse, const char *map)
 		((ft_charinstr(line, '1') == 1) || (ft_charinstr(line, '0') == 1)))
 		{
 			check_map_close(parse, line);
-			parse->map[++i] = malloc((parse->m_width + 2) * sizeof(char));			// +2, pas 1
+			parse->map[++i] = malloc((parse->m_width + 2) * sizeof(char));
 			l = ft_strlen(line);
 			ft_strlcpy(parse->map[i], line, l + 1);
 			get_map2(l, i, parse);

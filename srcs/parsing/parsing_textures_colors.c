@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_textures_colors.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: desa <desa@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 16:49:00 by desa              #+#    #+#             */
+/*   Updated: 2022/03/23 16:49:27 by desa             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
-
-
 
 void	check_color(t_parse *parse, char *color, char c)
 {
@@ -74,7 +84,13 @@ int	parse_textures(char *line)
 
 static int	parse_color(char *line, t_parse *parse)
 {
-	if (parse_textures(line) == 5)
+	if (parse_textures(line) == 4)
+	{
+		if (parse->ea != NULL)
+			ft_error(parse, "to many EA", NULL);
+		parse->ea = save_args(line);
+	}
+	else if (parse_textures(line) == 5)
 	{
 		if (parse->c_f != NULL)
 			ft_error(parse, "to many F", NULL);
@@ -111,12 +127,6 @@ int	parse_textures_colors(char *line, t_parse *parse)
 		if (parse->we != NULL)
 			ft_error(parse, "to many WE", NULL);
 		parse->we = save_args(line);
-	}
-	else if (parse_textures(line) == 4)
-	{
-		if (parse->ea != NULL)
-			ft_error(parse, "to many EA", NULL);
-		parse->ea = save_args(line);
 	}
 	else
 		parse_color(line, parse);
