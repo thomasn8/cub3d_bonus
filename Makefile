@@ -3,7 +3,6 @@ SRCS		= 	${wildcard ./srcs/*.c} \
 				${wildcard ./srcs/minimap/*.c} \
 				${wildcard ./srcs/actions/*.c} \
 				${wildcard ./srcs/world_3d/*.c} \
-				${wildcard ./srcs/enemies/*.c} \
 
 OBJS		= ${SRCS:.c=.o}
 CC			= gcc

@@ -13,7 +13,7 @@
 # define FOV 60
 # define M_RAY_FACTOR 8
 # define WIDTH 960
-# define HEIGTH 668
+# define HEIGTH 800
 # define MARGIN 5
 # define MENU_HEIGTH 120
 # define W_TEX '6'
@@ -213,21 +213,6 @@ typedef struct s_point
 	int				y2;
 }	t_point;
 
-// enemies
-typedef struct s_enemy
-{
-	float			pos_x;
-	float			pos_y;
-	t_img			tex_sheepl;
-	int				state;
-	int				z;
-	float 			sx;
-	float 			sy;
-	float 			sz;
-	float 			cos;
-	float 			sin;
-}	t_enemy;
-
 // game
 typedef struct s_game
 {
@@ -255,11 +240,7 @@ typedef struct s_game
 	t_img			tex_kat_hit;
 	t_img			tex_kat_def;
 	t_img			tex_gun_run;
-	// t_img			tex_gun_1;
-	// t_img			tex_gun_2;
-	// t_img			tex_gun_3;
 	t_point			p;
-	t_enemy			sheeps[1];
 }	t_game;
 
 // parsing
@@ -272,6 +253,7 @@ char			*save_args(char *line);
 void			replace_space_tab(char **map);
 void			get_map(t_parse *parse, const char *map);
 void			get_map2(int l, int i, t_parse *parse);
+void			get_map3(t_parse *parse);
 int				ft_map(char *line, t_parse *parse);
 int				ft_is_map(t_parse *parse, char *line);
 void			free_all(t_parse *parse);
@@ -324,7 +306,6 @@ void			interaction(t_game *t_game);
 // enemies
 void			enemies_init(t_game *game, t_map *m);
 void			tex_enemies_create(t_game *game);
-void			draw_enemies(t_game *game, t_enemy *e, t_map *m);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
