@@ -11,6 +11,25 @@
 // 	return (0);
 // }
 
+<<<<<<< HEAD
+=======
+int	mouse_press(int button, int x, int y, t_game *game)
+{
+	(void) x;
+	(void) y;
+	weapon_press(button, game);
+	return (0);
+}
+
+int	mouse_release(int button, int x, int y, t_game *game)
+{
+	(void) x;
+	(void) y;
+	weapon_release(button, game);
+	return (0);
+}
+
+>>>>>>> origin/master
 int	mouse_move(int mx, int my, t_game *game)
 {
 	static int	x;
@@ -25,12 +44,17 @@ int	mouse_move(int mx, int my, t_game *game)
 		if ((mx >= 0 && mx < 72) && (my >= 0 && my < 670) && (x - mx) > 0)
 			rotation(game, 'r');
 	}
+<<<<<<< HEAD
 	printf("my = %i mx = %i\n", my, mx);
+=======
+	// printf("my = %i mx = %i\n", my, mx);
+>>>>>>> origin/master
 	x = mx;
 	return (0);
 
 	return (0);
 }
+<<<<<<< HEAD
 
 int	mouse_press(int button, int x, int y, t_game *game)
 {
@@ -55,3 +79,5 @@ int	mouse_release(int button, int x, int y, t_game *game)
 		kat_defense(game, 'r');
 	return (0);
 }
+=======
+>>>>>>> origin/master

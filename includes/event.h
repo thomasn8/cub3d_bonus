@@ -24,9 +24,16 @@
 # define K_UP		126
 
 /* mouse-keys */
+<<<<<<< HEAD
 # define M_L			1
 # define M_R			2
 # define M_SCROLL_UP	4
 # define M_SCROLL_DOWN	5
+=======
+# define M_R 1
+# define M_L 2
+# define M_SCROLL_UP 4
+# define M_SCROLL_DOWN 5
+>>>>>>> origin/master
 
 #endif

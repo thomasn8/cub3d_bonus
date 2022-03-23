@@ -216,25 +216,16 @@ typedef struct s_point
 // enemies
 typedef struct s_enemy
 {
-	int				pos_x;
-	int				pos_y;
+	float			pos_x;
+	float			pos_y;
 	t_img			tex_sheepl;
 	int				state;
 	int				z;
-
-	// 3d project matrix
-	float sx;
-	float sy;
-	float sz;
-	float cos;
-	float sin;
-	float a;
-	float b;
-
-	float x1;
-	float y1;
-	float x2;
-	float y2;
+	float 			sx;
+	float 			sy;
+	float 			sz;
+	float 			cos;
+	float 			sin;
 }	t_enemy;
 
 // game
@@ -344,10 +335,8 @@ int				key_press(int k, t_game *game);
 int				events_loop(t_game *game);
 
 // mouse
-int	mouse_press(int button, int x, int y, t_game *game);
-int	mouse_release(int button, int x, int y, t_game *game);
-int	mouse_event(int button, int x, int y, t_game *game);
-int	event_mouse(t_game *game);
-int	mouse_move(int mx, int my, t_game *game);
+int				mouse_press(int button, int x, int y, t_game *game);
+int				mouse_release(int button, int x, int y, t_game *game);
+int				mouse_move(int mx, int my, t_game *game);
 
 #endif

@@ -20,27 +20,26 @@ void	tex_enemies_create(t_game *game)
 
 void	draw_enemies(t_game *game, t_enemy *e, t_map *m)
 {
-	// matrix
+	float a;
+	float b;
+
+	// matrice
 	e->sx = e->pos_x - m->pos_x;
 	e->sy = e->pos_y - m->pos_y;
 	e->sz = e->z;
-
-	// rotation matrix
 	e->cos = cos(m->a_rad);
 	e->sin = sin(m->a_rad);
-	e->a = e->sy * e->cos + e->sx * e->sin;
-	e->b = e->sx * e->cos - e->sy * e->sin;
-	e->sx = e->a;
-	e->sy = e->b;
-	e->sx = (e->sx * 108 / e->sy) + (game->width / 2);	// convert to screen
-	e->sy = (e->sz * 108 / e->sy) + (game->world_h / 2);
-	
-	// if (e->sx < 0)
-	// 	e->sx *= -1;
-	// if (e->sy < 0) 
-	// 	e->sy *= -1; 
-	printf("Enemy 3d enemy pos: (%d, %d)\n", (int)e->sx, (int)e->sy);
 
+	// rotation matrice
+	// a = e->sx * e->cos - e->sy * e->sin;		// classic formula
+	// b = e->sx * e->sin + e->sy * e->cos;
+	a = e->sy * e->cos + e->sx * e->sin;	// 3dSage
+	b = e->sx * e->cos - e->sy * e->sin;
+	e->sx = a;
+	e->sy = b;
+	e->sx = (e->sx * 108.0 / e->sy) + (game->width / 2);	// convert to screen
+	e->sy = (e->sz * 108.0 / e->sy) + (game->world_h / 2);
+	// printf("Enemy 3d enemy pos: (%d, %d) vs player (%d, %d) | rot: (%f, %f) vs player (%f, %f)\n", (int)e->sx, (int)e->sy, (int)m->pos_x, (int)m->pos_y, e->cos, e->sin, m->delta_x, m->delta_y);
 	int h = 10;
 	int w = 10;
 	while (h--)
@@ -48,8 +47,8 @@ void	draw_enemies(t_game *game, t_enemy *e, t_map *m)
 		w = 10;
 		while (w--)
 		{
-			if (e->sx > 0 && e->sx < game->world_h && e->sy > 0 && e->sy < game->width)
-			my_mlx_pixel_put(&game->world, (int)e->sx + w, (int)e->sy + h, GREEN);
+			if (e->sx > 0 && e->sx < game->width && e->sy > 0 && e->sy < game->world_h)
+				my_mlx_pixel_put(&game->world, (int)e->sx + w, (int)e->sy + h, GREEN);
 		}
 	}
 }
@@ -59,7 +58,7 @@ void	enemies_init(t_game *game, t_map *m)
 	int	i;
 	float shift;
 
-	shift = (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+	shift = (0.5 * m->m_size) - (0.5 * M_PLAYER_SIZE);
 	tex_enemies_create(game);
 	i = 0;
 	m->y = -1;
@@ -73,33 +72,9 @@ void	enemies_init(t_game *game, t_map *m)
 				game->sheeps[i].pos_x = m->x * m->m_size + shift;
 				game->sheeps[i].pos_y = m->y * m->m_size + shift;
 				game->sheeps[i].z = 20;
-				// printf("Enemy en pos (%d, %d)\n", m->x, m->y);
+				// printf("Enemy en pos (%d, %d)\n", m->x* m->m_size, m->y* m->m_size);
 				i++;
 			}
 		}
 	}
 }
-
-// void	draw_e_line(t_game *game, t_image *image, t_enemy *s, int color)
-// {
-// 	float	d_x;
-// 	float	d_y;
-// 	int		pix;
-// 	float	p_x;
-// 	float	p_y;
-
-// 	d_x = s->x2 - s->x1;
-// 	d_y = s->y2 - s->y1;
-// 	pix = sqrt((d_x * d_x) + (d_y * d_y));
-// 	d_x /= pix;
-// 	d_y /= pix;
-// 	p_x = s->x1;
-// 	p_y = s->y1;
-// 	while (pix)
-// 	{
-// 		my_mlx_pixel_put(image, p_x, p_y, color);
-// 		p_x += d_x;
-// 		p_y += d_y;
-// 		--pix;
-// 	}
-// }
