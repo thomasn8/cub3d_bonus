@@ -14,7 +14,6 @@ void	minimap_init(t_game *game, t_parse *parse)
 	tex_interuptor_create(&game->r, game);
 	tex_deco_create(&game->r, game);
 	player_description(game, parse);
-	enemies_init(game, &game->m);
 	color_map(&game->map, &game->m);
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
 	draw_all(game, '1');
@@ -55,8 +54,7 @@ void	menu_init(t_game *game)
 		while (++x < game->width)
 			mlx_pixel_put(game->mlx, game->win, x, y, MENU_COLOR);
 	}
-	// mlx_string_put(game->mlx, game->win, game->width - 60, HEIGTH - 30, MENU_TEXT_COLOR, "CUB3D");
-	mlx_string_put(game->mlx, game->win, game->width - 200, HEIGTH - 30, PURPLE, "by adrien et thomas");
+	mlx_string_put(game->mlx, game->win, game->width - 60, HEIGTH - 30, MENU_TEXT_COLOR, "CUB3D");
 }
 
 void	params_init(t_game *game)
