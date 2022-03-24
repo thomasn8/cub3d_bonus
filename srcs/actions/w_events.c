@@ -81,8 +81,6 @@ void	weapon_release(int k, t_game *game)
 		gun_shoot(game, 'r');
 }
 
-// weapon katana :	state 0 = run	|	state 1 = hit		|	state 2 = defense
-// weapon gun :		state 0 = run	|	state 1 = chargé	|	state 2 = lancé
 void	weapon_display(t_game *game)
 {
 	if (game->weapon == 1 && game->state == 0)
@@ -101,7 +99,4 @@ void	weapon_display(t_game *game)
 	else if (game->weapon == 2 && game->state == 1)
 		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_run.image,
 		game->m.w_offset + 75, game->world_h - game->tex_gun_run.heigth - 100);
-	// else if (game->weapon == 2 && game->state == 2)
-	// 	mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_3.image,
-	// 	game->m.w_offset + 88, game->world_h - game->tex_gun_3.heigth - 260);
 }
