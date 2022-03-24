@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:22:06 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 20:44:28 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 21:08:27 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ void	gun_shoot(t_game *game, char k)
 	if (k == 'r' && game->state == 2)
 		game->state = 0;
 }
-

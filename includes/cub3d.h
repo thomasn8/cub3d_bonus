@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:34:35 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 21:01:28 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 21:09:07 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,48 +228,48 @@ typedef struct s_point
 // game
 typedef struct s_game
 {
-	void			*mlx;
-	void			*win;
+	void				*mlx;
+	void				*win;
 	CGDirectDisplayID	display;
-	int				win_w;
-	int				win_h;
-	int				margin_w;
-	int				margin_h;
-	int				width;
-	int				heigth;
-	int				world_h;
-	t_image			world;
-	t_image			map;
-	t_parse			*parse;
-	t_map			m;
-	t_rays			r;
-	t_grid			g;
-	int				w;
-	int				s;
-	int				a;
-	int				d;
-	int				mouse_x;
-	int				mouse_y;
-	int				left;
-	int				right;
-	int				interact;
-	int				weapon;
-	int				state;
-	t_img			tex_kat_run;
-	int				kat_run_mw;
-	int				kat_run_mh;
-	t_img			tex_kat_hit;
-	int				kat_hit_mw;
-	int				kat_hit_mh;
-	t_img			tex_kat_def;
-	int				kat_def_mw;
-	int				kat_def_mh;
-	t_img			tex_gun_run;
-	int				gun_run_mw;
-	int				gun_run_mh;
-	int				gun_shoot_mw;
-	int				gun_shoot_mh;
-	t_point			p;
+	int					win_w;
+	int					win_h;
+	int					margin_w;
+	int					margin_h;
+	int					width;
+	int					heigth;
+	int					world_h;
+	t_image				world;
+	t_image				map;
+	t_parse				*parse;
+	t_map				m;
+	t_rays				r;
+	t_grid				g;
+	int					w;
+	int					s;
+	int					a;
+	int					d;
+	int					mouse_x;
+	int					mouse_y;
+	int					left;
+	int					right;
+	int					interact;
+	int					weapon;
+	int					state;
+	t_img				tex_kat_run;
+	int					kat_run_mw;
+	int					kat_run_mh;
+	t_img				tex_kat_hit;
+	int					kat_hit_mw;
+	int					kat_hit_mh;
+	t_img				tex_kat_def;
+	int					kat_def_mw;
+	int					kat_def_mh;
+	t_img				tex_gun_run;
+	int					gun_run_mw;
+	int					gun_run_mh;
+	int					gun_shoot_mw;
+	int					gun_shoot_mh;
+	t_point				p;
 }	t_game;
 
 // parsing
