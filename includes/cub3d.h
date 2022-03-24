@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:34:35 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 20:44:58 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 21:01:28 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,8 @@ typedef struct s_game
 	int				s;
 	int				a;
 	int				d;
+	int				mouse_x;
+	int				mouse_y;
 	int				left;
 	int				right;
 	int				interact;
