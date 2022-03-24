@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 08:15:01 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:19:28 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
@@ -51,7 +63,8 @@ void	new_fov(t_image *map, t_map *m)
 	pixels = m->m_size;
 	while (pixels)
 	{
-		my_mlx_pixel_put(map, pixel_x + M_HALF_PLAYER, pixel_y + M_HALF_PLAYER, M_FOV_COLOR);
+		my_mlx_pixel_put(map, pixel_x + M_HALF_PLAYER,
+			pixel_y + M_HALF_PLAYER, M_FOV_COLOR);
 		pixel_x += m->delta_x;
 		pixel_y += m->delta_y;
 		pixels--;
@@ -68,7 +81,8 @@ void	new_pos(t_image *map, t_map *m, int color)
 	{
 		width = -1;
 		while (++width < M_PLAYER_SIZE)
-			my_mlx_pixel_put(map, (int)m->pos_x + width, (int)m->pos_y + height, color);
+			my_mlx_pixel_put(map, (int)m->pos_x + width,
+				(int)m->pos_y + height, color);
 	}
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   w_events.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 08:22:33 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:26:52 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 #include "../../includes/event.h"
@@ -19,9 +31,10 @@ static void	draw_cross(t_game *game, t_image *image, t_point *p, int color)
 	p_y = p->y1;
 	while (pix)
 	{
-		if ((p_x != game->width / 2 && p_x != game->width / 2 - 1 &&
-			p_x != game->width / 2 + 1) || (p_y != game->world_h / 2 &&
-			p_y != game->world_h / 2 - 1 && p_y != game->world_h / 2 + 1))
+		if ((p_x != game->width / 2 && p_x != game->width / 2 - 1
+				&& p_x != game->width / 2 + 1) || (p_y != game->world_h / 2
+				&& p_y != game->world_h / 2 - 1
+				&& p_y != game->world_h / 2 + 1))
 			my_mlx_pixel_put(image, p_x, p_y, color);
 		p_x += d_x;
 		p_y += d_y;
@@ -63,7 +76,7 @@ void	weapon_press(int k, t_game *game)
 		kat_attack(game, 'p');
 	else if ((k == K_DOWN || k == M_L) && game->weapon == 1)
 		kat_defense(game, 'p');
-	else if ((k == K_UP || k == M_R)&& game->weapon == 2)
+	else if ((k == K_UP || k == M_R) && game->weapon == 2)
 		gun_shoot(game, 'p');
 }
 
@@ -88,15 +101,15 @@ void	weapon_display(t_game *game)
 			game->m.w_offset + 75, game->world_h - game->tex_kat_run.heigth);
 	else if (game->weapon == 1 && game->state == 1)
 		mlx_put_image_to_window(game->mlx, game->win, game->tex_kat_hit.image,
-		game->m.w_offset + 75, game->world_h - game->tex_kat_hit.heigth);
+			game->m.w_offset + 75, game->world_h - game->tex_kat_hit.heigth);
 	else if (game->weapon == 1 && game->state == 2)
 		mlx_put_image_to_window(game->mlx, game->win, game->tex_kat_def.image,
-		game->m.w_offset - 175, game->world_h - game->tex_kat_def.heigth);
-	
+			game->m.w_offset - 175, game->world_h - game->tex_kat_def.heigth);
 	else if (game->weapon == 2 && game->state == 0)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_run.image, 
+		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_run.image,
 			game->m.w_offset + 75, game->world_h - game->tex_gun_run.heigth);
 	else if (game->weapon == 2 && game->state == 1)
 		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_run.image,
-		game->m.w_offset + 75, game->world_h - game->tex_gun_run.heigth - 100);
+			game->m.w_offset + 75,
+			game->world_h - game->tex_gun_run.heigth - 100);
 }

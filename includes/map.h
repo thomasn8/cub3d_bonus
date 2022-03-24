@@ -47,7 +47,6 @@ void			collision_check(t_map *m, t_grid *g, char k);
 void			new_pos(t_image *map, t_map *m, int color);
 void			new_fov(t_image *map, t_map *m);
 void			remove_prev_fov(t_image *map, t_map *m);
-int				get_m_size(int cols, int rows);
 
 /* RAYCASTING */
 // ray

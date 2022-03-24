@@ -280,12 +280,12 @@ void			params_init(t_game *game);
 void			menu_init(t_game *game);
 void			world_init(t_game *game);
 void			minimap_init(t_game *game, t_parse *parse);
-void			tex_kat_create(t_game *game);
+void			tex_kat_create1(t_game *game);
+void			tex_kat_create2(t_game *game);
 void			tex_gun_create(t_game *game);
 
 // minimap
 void			map_description(t_game *game, t_parse *parse);
-void			player_description(t_game *game, t_parse *parse);
 void			color_map(t_image *map, t_map *m);
 unsigned int	**copy_map(t_image *map, int width, int heigth);
 void			rotation(t_game *game, char dir);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   interaction.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 08:32:26 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:33:10 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
@@ -51,7 +63,8 @@ static void	h_door(t_game *game, int x, int y)
 
 static void	get_ray(t_game *game)
 {
-	if (game->r.dist_v != 0 && (game->r.dist_h == 0 || game->r.dist_v < game->r.dist_h))
+	if (game->r.dist_v != 0 && (game->r.dist_h == 0
+			|| game->r.dist_v < game->r.dist_h))
 	{
 		game->r.x = game->r.vx;
 		game->r.y = game->r.vy;
@@ -71,7 +84,8 @@ static void	get_ray(t_game *game)
 		game->r.dist = game->r.dist_h;
 		game->r.cross = 'h';
 		if (game->r.dist / game->m.m_size < 1)
-			h_door(game, game->r.hmx + game->r.v_shift, game->r.hmy + game->r.h_shift);
+			h_door(game, game->r.hmx + game->r.v_shift,
+				game->r.hmy + game->r.h_shift);
 	}
 }
 

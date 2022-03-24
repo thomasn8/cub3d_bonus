@@ -6,12 +6,33 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 07:49:55 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 07:51:33 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 08:30:34 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/map.h"
+
+static void	player_description(t_game *game, t_parse *parse)
+{
+	game->m.pos_x = (parse->start_x * game->m.m_size)
+		+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+	game->m.pos_y = (parse->start_y * game->m.m_size)
+		+ (0.5 * game->m.m_size) - (0.5 * M_PLAYER_SIZE);
+	game->m.prev_x = game->m.pos_x;
+	game->m.prev_y = game->m.pos_y;
+	if (parse->view_player == 'E')
+		game->m.a_rad = deg_to_rad(M_EAST);
+	else if (parse->view_player == 'N')
+		game->m.a_rad = deg_to_rad(M_NORTH);
+	else if (parse->view_player == 'W')
+		game->m.a_rad = deg_to_rad(M_WEST);
+	else if (parse->view_player == 'S')
+		game->m.a_rad = deg_to_rad(M_SOUTH);
+	game->m.a_deg = rad_to_deg(game->m.a_rad);
+	game->m.delta_x = cos(-game->m.a_rad);
+	game->m.delta_y = sin(-game->m.a_rad);
+}
 
 void	minimap_init(t_game *game, t_parse *parse)
 {
@@ -52,7 +73,8 @@ void	world_init(t_game *game)
 	game->r.r_05 = game->r.r_1 / 2;
 	game->r.r_ra = (M_1_DEG_RAD / M_RAY_FACTOR);
 	game->r.fov_05 = game->r.r_05 * game->r.r_ra;
-	tex_kat_create(game);
+	tex_kat_create1(game);
+	tex_kat_create2(game);
 	tex_gun_create(game);
 }
 

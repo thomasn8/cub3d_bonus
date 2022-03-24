@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 08:15:21 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:16:47 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
@@ -10,7 +22,7 @@ int	map_char(char c)
 
 static void	a_move(t_map *m)
 {
-	t_grid g;
+	t_grid	g;
 
 	m->a_rad += M_RAD_90;
 	if (m->a_rad > PI2)
