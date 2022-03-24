@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:03:19 by desa              #+#    #+#             */
-/*   Updated: 2022/03/24 21:03:25 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 21:07:11 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	mouse_move(int mx, int my, t_game *game)
 	mx = mx / 15;
 	if (x != 0)
 	{
-		printf("mx: %d / my: %d\n", mx, my);
 		if ((mx >= 0 && mx < game->mouse_x) && (my >= 0 && my < game->mouse_y) && (x - mx) < 0)
 			rotation(game, 'l');
 		if ((mx >= 0 && mx < game->mouse_x) && (my >= 0 && my < game->mouse_y) && (x - mx) > 0)
