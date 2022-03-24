@@ -1,19 +1,20 @@
-NO ./textures/redstone.xpm
-SO ./textures/redstone.xpm
-WE ./textures/redstone.xpm
-EA ./textures/redstone.xpm
+NO ./invalid_path.xpm
+SO ./invalid_path.xpm
+WE ./invalid_path.xpm
+EA ./invalid_path.xpm
 
-F 80,80,80
-C 46,0,108
+F 0,255,0
+C 0,255,0
 
 
-1111111
-1000001
-1004001
-1030001
-1000001
-10N0201
-1002001
-1000001
-1666661
-1111111
+
+11111111111
+11111110111
+111110101
+1100111011
+11E01 1011
+110111111
+11000111011
+110111011
+1100111011
+11111111

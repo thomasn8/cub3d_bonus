@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 08:34:35 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:35:45 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -70,7 +82,7 @@ typedef struct s_image
 }	t_image;
 
 // for xpm images
-typedef struct	s_img {
+typedef struct s_img {
 	void			*image;
 	char			*addr;
 	char			*path;
@@ -79,7 +91,7 @@ typedef struct	s_img {
 	int				bpp;
 	int				ll;
 	int				e;
-} 	t_img;
+}	t_img;
 
 // update map
 typedef struct s_map
@@ -92,10 +104,10 @@ typedef struct s_map
 	int				rows;
 	int				x;
 	int				y;
-	int 			xo;
+	int				xo;
 	int				yo;
-	int 			color;
-	int 			w;
+	int				color;
+	int				w;
 	int				h;
 	int				h_offset;
 	int				w_offset;

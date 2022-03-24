@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 08:34:29 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:37:42 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_H
 # define MAP_H
 
@@ -27,7 +39,7 @@
 # define M_GRID_COLOR PURPLE
 # define M_PLAYER_COLOR YELLOW
 # define M_FOV_COLOR GREEN
-# define M_HALF_PLAYER (M_PLAYER_SIZE / 2)
+# define M_HALF_PLAYER 1.5
 # define PI 3.1415926535
 # define PI2 6.2831853071
 # define M_1_DEG_RAD 0.017453293	// (2*pi)/360

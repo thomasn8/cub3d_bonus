@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 07:49:55 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 08:30:34 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 08:44:18 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static void	player_description(t_game *game, t_parse *parse)
 
 void	minimap_init(t_game *game, t_parse *parse)
 {
-	game->m.ws_fps = 0.75;
+	game->m.ws_fps = 1;
 	game->m.ad_fps = 0.75;
-	game->m.rot_fps = 15;
+	game->m.rot_fps = 10;
 	game->parse = parse;
 	map_description(game, parse);
 	h_textures_init(&game->r, game);
