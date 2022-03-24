@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*   By: desa <desa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:52:21 by desa              #+#    #+#             */
-/*   Updated: 2022/03/24 07:41:34 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:04:16 by desa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	check_first_last_line_map(t_parse *parse, char *str)
 int	check_map_close(t_parse *parse, char *str)
 {
 	int			i;
+	int			l;
 	static int	j = 0;
 
 	i = 0;
@@ -41,7 +42,8 @@ int	check_map_close(t_parse *parse, char *str)
 		check_first_last_line_map(parse, str);
 	while (str[i] == ' ')
 		i++;
-	if (str[i] != '1' || str[ft_strlen(str) - 2] != '1')
+	l = ft_strlen(str);
+	if (str[i] != '1' || str[l - 2] != '1')
 	{
 		ft_error(parse, "The map is not close. (3)", NULL);
 		exit(0);
