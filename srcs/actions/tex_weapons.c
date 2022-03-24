@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:27:02 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 08:31:17 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:44:33 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,23 @@ void	tex_gun_create(t_game *game)
 		game->tex_gun_run.addr = mlx_get_data_addr(
 				game->tex_gun_run.image, &game->tex_gun_run.bpp,
 				&game->tex_gun_run.ll, &game->tex_gun_run.e);
+}
+
+void	weapons_dimensions(t_game *game)
+{
+	game->kat_run_mw = game->margin_w + game->m.w_offset + 75;
+	game->kat_run_mh = game->margin_h + game->world_h
+		- game->tex_kat_run.heigth;
+	game->kat_hit_mw = game->margin_w + game->m.w_offset + 75;
+	game->kat_hit_mh = game->margin_h + game->world_h
+		- game->tex_kat_hit.heigth;
+	game->kat_def_mw = game->margin_w + game->m.w_offset - 175;
+	game->kat_def_mh = game->margin_h + game->world_h
+		- game->tex_kat_def.heigth;
+	game->gun_run_mw = game->margin_w + game->m.w_offset + 75;
+	game->gun_run_mh = game->margin_h + game->world_h
+		- game->tex_gun_run.heigth;
+	game->gun_shoot_mw = game->margin_w + game->m.w_offset + 75;
+	game->gun_shoot_mh = game->margin_h + game->world_h
+		- game->tex_gun_run.heigth - 100;
 }
