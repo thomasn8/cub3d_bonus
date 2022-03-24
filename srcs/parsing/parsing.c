@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: desa <desa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adeslarz <adeslarz@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:39:50 by desa              #+#    #+#             */
-/*   Updated: 2022/03/23 16:39:52 by desa             ###   ########.fr       */
+/*   Updated: 2022/03/24 13:52:41 by adeslarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ int	parsing(int fd, const char *map, t_parse *parse)
 		if (parse->error == 0 && ((ft_charinstr(line, '1') == 1) || \
 		(ft_charinstr(line, '0') == 1)))
 			ft_map(line, parse);
+		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	close(fd);
 	check_error(parse);
 	get_map(parse, map);
