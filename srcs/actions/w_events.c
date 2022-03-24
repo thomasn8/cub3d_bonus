@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:22:33 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 08:26:52 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:29:51 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,18 @@ void	weapon_release(int k, t_game *game)
 void	weapon_display(t_game *game)
 {
 	if (game->weapon == 1 && game->state == 0)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_kat_run.image,
-			game->m.w_offset + 75, game->world_h - game->tex_kat_run.heigth);
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->tex_kat_run.image, game->kat_run_mw, game->kat_run_mh);
 	else if (game->weapon == 1 && game->state == 1)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_kat_hit.image,
-			game->m.w_offset + 75, game->world_h - game->tex_kat_hit.heigth);
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->tex_kat_hit.image, game->kat_hit_mw, game->kat_hit_mh);
 	else if (game->weapon == 1 && game->state == 2)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_kat_def.image,
-			game->m.w_offset - 175, game->world_h - game->tex_kat_def.heigth);
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->tex_kat_def.image, game->kat_def_mw, game->kat_def_mh);
 	else if (game->weapon == 2 && game->state == 0)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_run.image,
-			game->m.w_offset + 75, game->world_h - game->tex_gun_run.heigth);
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->tex_gun_run.image, game->gun_run_mw, game->gun_run_mh);
 	else if (game->weapon == 2 && game->state == 1)
-		mlx_put_image_to_window(game->mlx, game->win, game->tex_gun_run.image,
-			game->m.w_offset + 75,
-			game->world_h - game->tex_gun_run.heigth - 100);
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->tex_gun_run.image, game->gun_shoot_mw, game->gun_shoot_mh);
 }

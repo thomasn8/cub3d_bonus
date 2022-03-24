@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:22:06 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 08:46:04 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:33:25 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,23 @@ void	gun_shoot(t_game *game, char k)
 		game->state = 2;
 	if (k == 'r' && game->state == 2)
 		game->state = 0;
+}
+
+void	weapons_dimensions(t_game *game)
+{
+	game->kat_run_mw = game->margin_w + game->m.w_offset + 75;
+	game->kat_run_mh = game->margin_h + game->world_h
+		- game->tex_kat_run.heigth;
+	game->kat_hit_mw = game->margin_w + game->m.w_offset + 75;
+	game->kat_hit_mh = game->margin_h + game->world_h
+		- game->tex_kat_hit.heigth;
+	game->kat_def_mw = game->margin_w + game->m.w_offset - 175;
+	game->kat_def_mh = game->margin_h + game->world_h
+		- game->tex_kat_def.heigth;
+	game->gun_run_mw = game->margin_w + game->m.w_offset + 75;
+	game->gun_run_mh = game->margin_h + game->world_h
+		- game->tex_gun_run.heigth;
+	game->gun_shoot_mw = game->margin_w + game->m.w_offset + 75;
+	game->gun_shoot_mh = game->margin_h + game->world_h
+		- game->tex_gun_run.heigth - 100;
 }

@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 07:54:48 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 07:54:49 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:59:24 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(int ac, char **av)
 	if (!check_name(av[1], ".cub"))
 		ft_error(NULL, "Nom de la map invalid\n ext == [.cub]\n", NULL);
 	save_map(av[1], &parse);
-	params_init(&game);
-	menu_init(&game);
+	window_init(&game);
+	game_init(&game);
 	world_init(&game);
 	minimap_init(&game, &parse);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_press, &game);

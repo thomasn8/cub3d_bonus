@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:34:35 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 08:35:45 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:16:39 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
+# include <CoreGraphics/CGDisplayConfiguration.h>
 
 /* dimensions */
 # define FOV 60
@@ -229,6 +230,11 @@ typedef struct s_game
 {
 	void			*mlx;
 	void			*win;
+	CGDirectDisplayID	display;
+	int				win_w;
+	int				win_h;
+	int				margin_w;
+	int				margin_h;
 	int				width;
 	int				heigth;
 	int				world_h;
@@ -248,9 +254,19 @@ typedef struct s_game
 	int				weapon;
 	int				state;
 	t_img			tex_kat_run;
+	int				kat_run_mw;
+	int				kat_run_mh;
 	t_img			tex_kat_hit;
+	int				kat_hit_mw;
+	int				kat_hit_mh;
 	t_img			tex_kat_def;
+	int				kat_def_mw;
+	int				kat_def_mh;
 	t_img			tex_gun_run;
+	int				gun_run_mw;
+	int				gun_run_mh;
+	int				gun_shoot_mw;
+	int				gun_shoot_mh;
 	t_point			p;
 }	t_game;
 
@@ -288,8 +304,8 @@ unsigned int	get_tex_color(t_img *tex, int x, int y, float shade);
 void			texture_error(void *image, char *msg);
 
 // init
-void			params_init(t_game *game);
-void			menu_init(t_game *game);
+void			window_init(t_game *game);
+void			game_init(t_game *game);
 void			world_init(t_game *game);
 void			minimap_init(t_game *game, t_parse *parse);
 void			tex_kat_create1(t_game *game);
@@ -306,6 +322,7 @@ void			draw_all(t_game *game, char t);
 int				map_char(char c);
 
 // actions
+void			weapons_dimensions(t_game *game);
 void			weapon_display(t_game *game);
 void			weapon_press(int k, t_game *game);
 void			weapon_release(int k, t_game *game);

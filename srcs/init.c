@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 07:49:55 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 08:44:18 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:30:27 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	minimap_init(t_game *game, t_parse *parse)
 	tex_door_create(&game->r, game);
 	tex_interuptor_create(&game->r, game);
 	tex_deco_create(&game->r, game);
+	weapons_dimensions(game);
 	player_description(game, parse);
 	color_map(&game->map, &game->m);
 	game->m.clean_map = copy_map(&game->map, game->m.w, game->m.h);
@@ -78,29 +79,11 @@ void	world_init(t_game *game)
 	tex_gun_create(game);
 }
 
-void	menu_init(t_game *game)
+void	game_init(t_game *game)
 {
-	int	x;
-	int	y;
-
-	y = -1 + game->world_h;
-	while (++y < game->heigth)
-	{
-		x = -1;
-		while (++x < game->width)
-			mlx_pixel_put(game->mlx, game->win, x, y, MENU_COLOR);
-	}
-	mlx_string_put(game->mlx, game->win, game->width - 60,
-		HEIGTH - 30, MENU_TEXT_COLOR, "CUB3D");
-}
-
-void	params_init(t_game *game)
-{
-	game->mlx = mlx_init();
 	game->width = WIDTH;
 	game->heigth = HEIGTH;
 	game->world_h = HEIGTH - MENU_HEIGTH;
-	game->win = mlx_new_window(game->mlx, game->width, game->heigth, "cub3d");
 	game->w = 0;
 	game->s = 0;
 	game->a = 0;
@@ -109,4 +92,29 @@ void	params_init(t_game *game)
 	game->right = 0;
 	game->weapon = 1;
 	game->state = 0;
+}
+
+void	window_init(t_game *game)
+{
+	game->mlx = mlx_init();
+	game->display = CGMainDisplayID();
+	game->win_w = 0;
+	game->win_h = 0;
+	game->win_w = CGDisplayPixelsWide(game->display);
+	game->win_h = CGDisplayPixelsHigh(game->display);
+	if (game->win_w > 0 && game->win_h > 0)
+	{
+		game->margin_w = (game->win_w - WIDTH) / 2;
+		game->margin_h = (game->win_h - HEIGTH) / 2;
+	}
+	else
+	{
+		game->win_w = WIDTH;
+		game->win_h = HEIGTH;
+		game->margin_w = 0;
+		game->margin_h = 0;
+	}
+	game->win = mlx_new_window(game->mlx, game->win_w, game->win_h, "cub3d");
+	mlx_string_put(game->mlx, game->win, game->win_w / 2 - 30,
+		game->margin_h - 30, MENU_TEXT_COLOR, "CUB3D");
 }

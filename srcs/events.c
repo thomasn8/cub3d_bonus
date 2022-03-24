@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 07:46:30 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 07:49:24 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:32:38 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,10 @@ int	events_loop(t_game *game)
 	if (game->right == 1)
 		rotation(game, 'r');
 	draw_viewfinder(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->win,
-		game->map.image, game->m.w_offset, game->m.h_offset);
+	mlx_put_image_to_window(game->mlx, game->win, game->world.image,
+		game->margin_w, game->margin_h);
+	mlx_put_image_to_window(game->mlx, game->win, game->map.image,
+		game->margin_w + game->m.w_offset, game->margin_h + game->m.h_offset);
 	weapon_display(game);
 	return (0);
 }
