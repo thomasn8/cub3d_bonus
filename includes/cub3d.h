@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:34:35 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 20:16:39 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:44:58 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,7 @@ void			minimap_init(t_game *game, t_parse *parse);
 void			tex_kat_create1(t_game *game);
 void			tex_kat_create2(t_game *game);
 void			tex_gun_create(t_game *game);
+void			weapons_dimensions(t_game *game);
 
 // minimap
 void			map_description(t_game *game, t_parse *parse);
@@ -322,7 +323,6 @@ void			draw_all(t_game *game, char t);
 int				map_char(char c);
 
 // actions
-void			weapons_dimensions(t_game *game);
 void			weapon_display(t_game *game);
 void			weapon_press(int k, t_game *game);
 void			weapon_release(int k, t_game *game);
