@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:40:32 by desa              #+#    #+#             */
-/*   Updated: 2022/03/24 07:40:30 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/24 07:42:10 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,5 @@ void	get_map3(t_parse *parse)
 	check_map_space(parse, parse->map);
 	replace_space_tab(parse->map);
 	print_map(parse->map);
-<<<<<<< HEAD
 	parse->m_width -= 1;
-=======
-	parse->m_width -= 1;											// et je le retirais de la width à la fin, après traitement
->>>>>>> origin/thomas
 }

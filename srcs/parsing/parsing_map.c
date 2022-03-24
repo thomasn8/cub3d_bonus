@@ -1,18 +1,15 @@
-<<<<<<< HEAD
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: desa <desa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:52:21 by desa              #+#    #+#             */
-/*   Updated: 2022/03/23 16:52:23 by desa             ###   ########.fr       */
+/*   Updated: 2022/03/24 07:41:34 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-=======
->>>>>>> origin/thomas
 #include "../../includes/cub3d.h"
 
 static int	check_first_last_line_map(t_parse *parse, char *str)
