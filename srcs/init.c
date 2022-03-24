@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 07:49:55 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 07:51:33 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 #include "../includes/map.h"
 
@@ -22,11 +34,13 @@ void	minimap_init(t_game *game, t_parse *parse)
 // + on augmente ray_factor, + on lance de rayon, + on a des textures détaillées
 void	world_init(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	game->world.image = mlx_new_image(game->mlx, game->width, game->world_h);
-	game->world.addr = mlx_get_data_addr(game->world.image, &game->world.bits_per_pixel, &game->world.line_length, &game->world.endian);
+	game->world.addr = mlx_get_data_addr(game->world.image,
+			&game->world.bits_per_pixel, &game->world.line_length,
+			&game->world.endian);
 	y = -1;
 	while (++y < game->world_h)
 	{
@@ -44,8 +58,8 @@ void	world_init(t_game *game)
 
 void	menu_init(t_game *game)
 {
-	int 	x;
-	int 	y;
+	int	x;
+	int	y;
 
 	y = -1 + game->world_h;
 	while (++y < game->heigth)
@@ -54,7 +68,8 @@ void	menu_init(t_game *game)
 		while (++x < game->width)
 			mlx_pixel_put(game->mlx, game->win, x, y, MENU_COLOR);
 	}
-	mlx_string_put(game->mlx, game->win, game->width - 60, HEIGTH - 30, MENU_TEXT_COLOR, "CUB3D");
+	mlx_string_put(game->mlx, game->win, game->width - 60,
+		HEIGTH - 30, MENU_TEXT_COLOR, "CUB3D");
 }
 
 void	params_init(t_game *game)

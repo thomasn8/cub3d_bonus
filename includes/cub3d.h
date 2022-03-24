@@ -7,7 +7,6 @@
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
-#include <string.h> // a supprimer
 
 /* dimensions */
 # define FOV 60

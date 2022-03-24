@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 08:09:27 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:10:10 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /* 
 !!! Adapter le nombres de textures correspondant à des murs ... !!!
 	- ... soit dans map.h le define de W_TEX
@@ -9,22 +21,21 @@
 
 - Interactions portes
 	3 = biblio -> porte secrète
-	4 = interupteur non-activé (rouge-up) placé à côté d'une biblio -> ouvrir la porte secrète d'à côté
-	5 = interupteur activé (vert-down) placé à côté d'une biblio -> fermet la porte précédement ouverte
-	9 = porte ouverte devenu un espace vide (mur -> espace). Apparait en gris foncé sur la minimap
+	4 = interupteur non-activé (rouge-up)
+	5 = interupteur activé (vert-down)
+	9 = porte ouverte devenu un espace vide
 
 - Ennemies
 	8 = enemy
 
 - Non-attribués
 	7 ;
-
 */
 
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-t_img  *ray_texture(float ray_a, t_rays *r)
+t_img	*ray_texture(float ray_a, t_rays *r)
 {
 	if (r->spe == '2')
 		return (&r->tex_flag);
@@ -36,18 +47,18 @@ t_img  *ray_texture(float ray_a, t_rays *r)
 		return (&r->tex_id);
 	else if (r->spe == '6')
 		return (&r->tex_steel);
-	if (r->cross == 'v')											// faces W et E
+	if (r->cross == 'v')
 	{
-		if (ray_a > 90 && ray_a < 270 && r->tex_w.image)			// W
+		if (ray_a > 90 && ray_a < 270 && r->tex_w.image)
 			return (&r->tex_w);
-		else if ((ray_a < 90 || ray_a > 270) && r->tex_e.image)		// E
+		else if ((ray_a < 90 || ray_a > 270) && r->tex_e.image)
 			return (&r->tex_e);
 	}
-	else if (r->cross == 'h')										// sinon faces N et S
+	else if (r->cross == 'h')
 	{
-		if (ray_a > 0 && ray_a < 180 && r->tex_n.image)				// N
+		if (ray_a > 0 && ray_a < 180 && r->tex_n.image)
 			return (&r->tex_n);
-		else if (ray_a > 180 && r->tex_s.image)						// S
+		else if (ray_a > 180 && r->tex_s.image)
 			return (&r->tex_s);
 	}
 	return (NULL);
@@ -55,18 +66,18 @@ t_img  *ray_texture(float ray_a, t_rays *r)
 
 int	ray_color(float ray_a, t_rays *r)
 {
-	if (r->cross == 'v')					// faces W et E
+	if (r->cross == 'v')
 	{
-		if (ray_a > 90 && ray_a < 270)		// W
+		if (ray_a > 90 && ray_a < 270)
 			return (DEF1);
-		else								// E
+		else
 			return (DEF2);
 	}
-	else if (r->cross == 'h')				// faces N et S
+	else if (r->cross == 'h')
 	{
-		if (ray_a > 0 && ray_a < 180)		// N
+		if (ray_a > 0 && ray_a < 180)
 			return (DEF3);
-		else								// S
+		else
 			return (DEF4);
 	}
 	return (WHITE);
@@ -74,18 +85,18 @@ int	ray_color(float ray_a, t_rays *r)
 
 float	color_shade(float ray_a, t_rays *r)
 {
-	if (r->cross == 'v')					// faces W et E
+	if (r->cross == 'v')
 	{
-		if (ray_a > 90 && ray_a < 270)		// W
+		if (ray_a > 90 && ray_a < 270)
 			return (0.5);
-		else								// E
+		else
 			return (1);
 	}
-	else if (r->cross == 'h')				// faces N et S
+	else if (r->cross == 'h')
 	{
-		if (ray_a > 0 && ray_a < 180)		// N
+		if (ray_a > 0 && ray_a < 180)
 			return (0.8);
-		else								// S
+		else
 			return (0.6);
 	}
 	return (1);

@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 08:04:26 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:04:50 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
-static void wall_texture(t_game *game, t_rays *r)
+static void	wall_texture(t_game *game, t_rays *r)
 {
 	r->iy = -1;
 	r->ty = r->to * r->ty_step;
@@ -51,7 +63,7 @@ static void	use_color(t_game *game, t_rays *r)
 		r->iy = -1;
 		while (++r->iy < r->w_bot)
 			my_mlx_pixel_put(&game->world, r->ix, r->iy + r->w_top, r->c);
-		r->y1 =  r->w_bot + r->w_top;
+		r->y1 = r->w_bot + r->w_top;
 		r->y2 = game->world_h;
 		draw_v_line(&game->world, r, game->m.c_floor);
 		r->ix++;
@@ -107,7 +119,7 @@ void	raycasting(t_game *game)
 		ray_vertical_check(&game->m, &game->r);
 		compare_rays(game);
 		ray_to_3d(game, &game->r);
-		game->m.a_rad -=  game->r.r_ra;
+		game->m.a_rad -= game->r.r_ra;
 		check_angle(game->m.a_rad, &game->m.a_deg);
 	}
 	game->m.pos_x -= M_HALF_PLAYER;

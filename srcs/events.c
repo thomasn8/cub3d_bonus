@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 07:46:30 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 07:49:24 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 #include "../includes/event.h"
 
@@ -5,7 +17,8 @@ void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
 {
 	char	*pixel;
 
-	pixel = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
+	pixel = image->addr + (y * image->line_length
+			+ x * (image->bits_per_pixel / 8));
 	*(unsigned int *)pixel = color;
 }
 
@@ -63,7 +76,7 @@ int	key_release(int k, t_game *game)
 
 int	events_loop(t_game *game)
 {
-	int map_offset;
+	int	map_offset;
 
 	map_offset = ((MENU_HEIGTH - 2 * MARGIN) - game->m.h) / 2;
 	if (game->w == 1)
@@ -80,7 +93,8 @@ int	events_loop(t_game *game)
 		rotation(game, 'r');
 	draw_viewfinder(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->world.image, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->win, game->map.image, game->m.w_offset, game->m.h_offset);
+	mlx_put_image_to_window(game->mlx, game->win,
+		game->map.image, game->m.w_offset, game->m.h_offset);
 	weapon_display(game);
 	return (0);
 }

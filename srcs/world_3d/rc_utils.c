@@ -19,6 +19,12 @@ float fix_fisheye(float angle)
 	return (cos(angle));
 }
 
+void	check_char_map(t_game *game)
+{
+	if (game->r.char_map != '1')
+		game->r.spe = game->r.char_map;
+}
+
 void	draw_v_line(t_image *image, t_rays *r, int color)
 {
 	float	d_x;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 07:55:47 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:04:05 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
@@ -7,12 +19,13 @@ static void	horizontal_loop(t_map *m, t_rays *r)
 	{
 		r->hmx = ((int)r->x) / m->m_size;
 		r->hmy = ((int)r->y) / m->m_size;
-		if (r->x >= 0 && r->x < m->w && r->y >= 0 && r->y < m->h 
+		if (r->x >= 0 && r->x < m->w && r->y >= 0 && r->y < m->h
 			&& !map_char(m->map[r->hmy + r->h_shift][r->hmx]))
 		{
 			r->hx = r->x;
 			r->hy = r->y;
-			r->dist_h = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
+			r->dist_h = sqrt(powf((r->x - m->pos_x), 2)
+					+ powf((r->y - m->pos_y), 2));
 			r->i = m->rows;
 		}
 		else
@@ -34,7 +47,8 @@ static void	vertical_loop(t_map *m, t_rays *r)
 		{
 			r->vx = r->x;
 			r->vy = r->y;
-			r->dist_v = sqrt(powf((r->x - m->pos_x), 2) + powf((r->y - m->pos_y), 2));
+			r->dist_v = sqrt(powf((r->x - m->pos_x), 2)
+					+ powf((r->y - m->pos_y), 2));
 			r->i = m->cols;
 		}
 		else
@@ -49,7 +63,7 @@ void	ray_horizontal_check(t_map *m, t_rays *r)
 {
 	r->i = -1;
 	r->h_shift = 0;
-	if (m->a_deg > 0 && m->a_deg < 180) 							// player regarde en haut
+	if (m->a_deg > 0 && m->a_deg < 180)
 	{
 		r->y = ((int)(m->pos_y / m->m_size)) * m->m_size;
 		r->x = (m->pos_y - r->y) * r->atan + m->pos_x;
@@ -57,14 +71,14 @@ void	ray_horizontal_check(t_map *m, t_rays *r)
 		r->xo = -r->yo * r->atan;
 		r->h_shift = -1;
 	}
-	else if (m->a_deg > 180) 										// player regarde en bas
+	else if (m->a_deg > 180)
 	{
 		r->y = ((int)(m->pos_y / m->m_size)) * m->m_size + m->m_size;
 		r->x = (m->pos_y - r->y) * r->atan + m->pos_x;
 		r->yo = m->m_size;
 		r->xo = -r->yo * r->atan;
 	}
-	else															// player regarde en horizontal
+	else
 	{
 		r->y = m->pos_y;
 		r->x = m->pos_x;
@@ -77,7 +91,7 @@ void	ray_vertical_check(t_map *m, t_rays *r)
 {
 	r->i = -1;
 	r->v_shift = 0;
-	if (m->a_deg > 90 && m->a_deg < 270) 							// player regarde à gauche
+	if (m->a_deg > 90 && m->a_deg < 270)
 	{
 		r->x = ((int)(m->pos_x / m->m_size)) * m->m_size;
 		r->y = (m->pos_x - r->x) * r->ntan + m->pos_y;
@@ -85,14 +99,14 @@ void	ray_vertical_check(t_map *m, t_rays *r)
 		r->yo = -r->xo * r->ntan;
 		r->v_shift = -1;
 	}
-	else if (m->a_deg < 90 || m->a_deg > 270) 						// player regarde à droite
+	else if (m->a_deg < 90 || m->a_deg > 270)
 	{
 		r->x = ((int)(m->pos_x / m->m_size)) * m->m_size + m->m_size;
 		r->y = (m->pos_x - r->x) * r->ntan + m->pos_y;
 		r->xo = m->m_size;
 		r->yo = -r->xo * r->ntan;
 	}
-	else															// player regarde en vertical
+	else
 	{
 		r->y = m->pos_y;
 		r->x = m->pos_x;
@@ -103,7 +117,8 @@ void	ray_vertical_check(t_map *m, t_rays *r)
 
 void	compare_rays(t_game *game)
 {
-	if (game->r.dist_v != 0 && (game->r.dist_h == 0 || game->r.dist_v < game->r.dist_h))
+	if (game->r.dist_v != 0
+		&& (game->r.dist_h == 0 || game->r.dist_v < game->r.dist_h))
 	{
 		game->r.x = game->r.vx;
 		game->r.y = game->r.vy;
@@ -111,9 +126,9 @@ void	compare_rays(t_game *game)
 		game->r.wy = game->r.y / game->m.m_size;
 		game->r.dist = game->r.dist_v;
 		game->r.cross = 'v';
-		game->r.char_map = game->m.map[game->r.vmy][game->r.vmx + game->r.v_shift];
-		if (game->r.char_map != '1')
-			game->r.spe = game->r.char_map;
+		game->r.char_map
+			= game->m.map[game->r.vmy][game->r.vmx + game->r.v_shift];
+		check_char_map(game);
 	}
 	else
 	{
@@ -123,8 +138,8 @@ void	compare_rays(t_game *game)
 		game->r.wy = game->r.y / game->m.m_size;
 		game->r.dist = game->r.dist_h;
 		game->r.cross = 'h';
-		game->r.char_map = game->m.map[game->r.hmy + game->r.h_shift][game->r.hmx];
-		if (game->r.char_map != '1')
-			game->r.spe = game->r.char_map;
+		game->r.char_map
+			= game->m.map[game->r.hmy + game->r.h_shift][game->r.hmx];
+		check_char_map(game);
 	}
 }
