@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rc_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 08:45:33 by tnanchen          #+#    #+#             */
+/*   Updated: 2022/03/24 08:45:54 by tnanchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 #include "../../includes/map.h"
 
@@ -10,8 +22,8 @@ void	check_angle(float angle, int *deg)
 	*deg = rad_to_deg(angle);
 }
 
-float fix_fisheye(float angle)
-{ 
+float	fix_fisheye(float angle)
+{
 	if (angle < 0)
 		angle += PI2;
 	if (angle > PI2)
