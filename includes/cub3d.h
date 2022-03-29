@@ -6,7 +6,7 @@
 /*   By: tnanchen <thomasnanchen@hotmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:34:35 by tnanchen          #+#    #+#             */
-/*   Updated: 2022/03/24 21:09:07 by tnanchen         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:03:22 by tnanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,10 +333,6 @@ void			kat_attack(t_game *game, char k);
 void			kat_defense(t_game *game, char k);
 void			gun_shoot(t_game *game, char k);
 void			interaction(t_game *t_game);
-
-// enemies
-void			enemies_init(t_game *game, t_map *m);
-void			tex_enemies_create(t_game *game);
 
 // events
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
